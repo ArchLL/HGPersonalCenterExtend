@@ -7,6 +7,7 @@
 //
 
 #import "CenterTouchTableView.h"
+#define segmentMenuHeight 41  //分页菜单栏的高度
 
 @implementation CenterTouchTableView
 
@@ -14,7 +15,7 @@
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
     //分页列表高度
     CGFloat naviBarHeight = NaviBarHeight;
-    CGFloat listHeight = kScreenHeight - naviBarHeight;
+    CGFloat listHeight = kScreenHeight - naviBarHeight - segmentMenuHeight;
     CGPoint currentPoint = [gestureRecognizer locationInView:self];
     if (CGRectContainsPoint(CGRectMake(0, self.contentSize.height - listHeight, kScreenWidth, listHeight), currentPoint) ) {
         return YES;

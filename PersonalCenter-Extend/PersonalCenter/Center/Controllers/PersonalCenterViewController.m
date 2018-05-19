@@ -56,13 +56,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    self.automaticallyAdjustsScrollViewInsets = NO;
     //接收宏定义的值，因为下面要做运算，这个宏含有三目运算不能直接拿来运算,会出错
     _naviBarHeight = NaviBarHeight;
     //如果使用自定义的按钮去替换系统默认返回按钮，会出现滑动返回手势失效的情况，解决方法如下：
     self.navigationController.interactivePopGestureRecognizer.delegate = self;
     [self setUI];
-//    [self requestData];
     //注册允许外层tableView滚动通知-解决和分页视图的上下滑动冲突问题
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(acceptMsg:) name:@"leaveTop" object:nil];
     //注册允许外层tableView滚动通知-解决子视图左右滑动和外层tableView上下滑动的冲突问题
@@ -111,18 +109,6 @@
         make.height.mas_equalTo(25);
         make.bottom.mas_equalTo(-40);
     }];
-}
-
-//请求数据
-- (void)requestData {
-    [MBProgressHUD showOnlyLoadToView:self.view];
-    //模拟数据请求
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [NSThread sleepForTimeInterval:2];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [MBProgressHUD hideHUDForView:self.view animated:YES];
-        });
-    });
 }
 
 //接收通知
