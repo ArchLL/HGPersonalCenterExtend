@@ -56,6 +56,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    if (@available(iOS 11.0, *)) {
+        [[UIScrollView appearance] setContentInsetAdjustmentBehavior:UIScrollViewContentInsetAdjustmentNever];
+    }else {
+        self.automaticallyAdjustsScrollViewInsets = NO;
+    }
     //接收宏定义的值，因为下面要做运算，这个宏含有三目运算不能直接拿来运算,会出错
     _naviBarHeight = NaviBarHeight;
     //如果使用自定义的按钮去替换系统默认返回按钮，会出现滑动返回手势失效的情况，解决方法如下：
