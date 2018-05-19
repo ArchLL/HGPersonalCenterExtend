@@ -1,0 +1,35 @@
+//
+//  PrefixHeader.pch
+//  PersonalCenter
+//
+//  Created by 赛驰 on 2017/9/15.
+//  Copyright © 2017年 mint_bin. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+#import <Masonry.h>
+#import "MBProgressHUD.h"
+#import "MBProgressHUD+NHAdd.h"
+#import "BaseViewController.h"
+
+#define kScreenHeight     [[UIScreen mainScreen] bounds].size.height
+#define kScreenWidth      [[UIScreen mainScreen] bounds].size.width
+#define kRGBA(r, g, b, a) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a]
+
+//尺寸
+#define kScreenHeight     [[UIScreen mainScreen] bounds].size.height
+#define kScreenWidth      [[UIScreen mainScreen] bounds].size.width
+//导航栏的高度
+#define NaviBarHeight  kScreenHeight == 812 ? 88 : 64
+//是否是iPhoneX
+#define isIphoneX  kScreenHeight == 812 ? 1 : 0
+//RGB色
+#define kRGBA(r, g, b, a) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a]
+
+
+
+#endif /* PrefixHeader_pch */
