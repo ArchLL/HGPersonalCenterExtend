@@ -36,11 +36,10 @@ static NSString * const reuseIdentifier = @"collectionCell";
     //设置代理
     _collectionView.delegate = self;
     _collectionView.dataSource = self;
-    _collectionView.alwaysBounceVertical = YES;
+//    _collectionView.alwaysBounceVertical = YES;
     _collectionView.showsVerticalScrollIndicator = NO;
     _collectionView.showsHorizontalScrollIndicator = NO;
     _collectionView.backgroundColor = [UIColor colorWithRed:242/255. green:242/255. blue:242/255. alpha:1.];
-    _collectionView.directionalLockEnabled = YES;
     [self.view addSubview:_collectionView];
 }
 
@@ -59,7 +58,7 @@ static NSString * const reuseIdentifier = @"collectionCell";
 {
     UICollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     [cell sizeToFit];
-    cell.backgroundColor = [UIColor yellowColor];
+    cell.backgroundColor = [UIColor blueColor];
     return cell;
 }
 

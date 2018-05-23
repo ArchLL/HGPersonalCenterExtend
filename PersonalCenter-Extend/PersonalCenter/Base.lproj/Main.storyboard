@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--首页-->
+        <!--Root View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="RootViewController" sceneMemberID="viewController">
@@ -43,7 +43,7 @@
                             <constraint firstItem="Azb-T1-7gh" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="SsD-33-YRo"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="首页" id="iNy-EN-fAM"/>
+                    <navigationItem key="navigationItem" id="iNy-EN-fAM"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

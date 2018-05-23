@@ -35,6 +35,8 @@
         if ([canScroll isEqualToString:@"1"]) {
             _canScroll = YES;
             self.scrollView.showsVerticalScrollIndicator = YES;
+        }else {
+            _canScroll = NO;
         }
     }else if([notificationName isEqualToString:@"leaveTop"]){
         _canScroll = NO;

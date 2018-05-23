@@ -30,7 +30,6 @@
 @property (nonatomic, strong) UIView                 * footerView;
 
 
-
 @property (nonatomic, assign) BOOL canScroll;//mainTableView是否可以滚动
 @property (nonatomic, assign) BOOL isTopIsCanNotMoveTabView;//到达顶部(临界点)不能移动mainTableView
 @property (nonatomic, assign) BOOL isTopIsCanNotMoveTabViewPre;//到达顶部(临界点)不能移动子控制器的tableView
@@ -48,8 +47,8 @@
     self.naviView.hidden = NO;
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
     [self.navigationController setNavigationBarHidden:NO];
     self.naviView.hidden = YES;
 }
@@ -142,10 +141,8 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     //当前偏移量
     CGFloat yOffset  = scrollView.contentOffset.y;
-    //分页高度
-    CGFloat footerHeight = kScreenHeight - _naviBarHeight;
     //临界点偏移量(吸顶临界点)
-    CGFloat tabyOffset = scrollView.contentSize.height - footerHeight - _naviBarHeight;
+    CGFloat tabyOffset = scrollView.contentSize.height - kScreenHeight;
     
     //第一部分：
     //更改导航栏的背景图的透明度
@@ -156,16 +153,6 @@
         alpha = 1;
     }
     self.naviView.backgroundColor = kRGBA(255,126,15,alpha);
-    
-    //第二部分：
-    //注意：先解决mainTableView的bance问题，如果不用下拉头部刷新/下拉头部放大/为了实现subTableView下拉刷新
-    //1. 不用下拉顶部刷新、不用下拉头部放大、使用subTableView下拉顶部刷新， 可在mainTableView初始化时禁用bance；
-    //2. 如果做下拉顶部刷新、下拉头部放大，就需要对bance做处理，不然当视图滑动到底部后，内外层的scrollView的bance都会起作用，导致视觉上的幻觉(刚滑动到底部/触发内部scrollView的bance的时候，再去点击cell/item/button, 你会发现竟然不管用，再次点就好了，刚开始还以为是点击事件和滑动事件的冲突，后来通过offset的log，发现当内部bance触发的时候，你感觉不到外层bance的变化，并且你会看见，当前列表已经停止滚动了，但是外层scrollView的offset还在变，所以导致首次点击事件失效)
-    if (yOffset > 0) {
-        scrollView.bounces = NO;
-    }else {
-        scrollView.bounces = YES;
-    }
     
     //利用contentOffset处理内外层scrollView的滑动冲突问题
     if (yOffset >= tabyOffset) {
@@ -189,6 +176,8 @@
         if (!_canScroll) {
             NSLog(@"分页选择部分保持在顶端");
             _mainTableView.contentOffset = CGPointMake(0, tabyOffset);
+        }else {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"goTop" object:nil userInfo:@{@"canScroll":@"0"}];
         }
     }
 }
@@ -265,7 +254,7 @@
         UIButton *backButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
         [backButton setImage:[UIImage imageNamed:@"back"] forState:(UIControlStateNormal)];
         backButton.frame = CGRectMake(5, 28 + _naviBarHeight - 64, 28, 25);
-        backButton.adjustsImageWhenHighlighted = NO;
+        backButton.adjustsImageWhenHighlighted = YES;
         [backButton addTarget:self action:@selector(backAction) forControlEvents:(UIControlEventTouchUpInside)];
         [_naviView addSubview:backButton];
         
@@ -273,7 +262,7 @@
         UIButton *messageButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
         [messageButton setImage:[UIImage imageNamed:@"message"] forState:(UIControlStateNormal)];
         messageButton.frame = CGRectMake(kScreenWidth-35, 28 + _naviBarHeight - 64, 25, 25);
-        messageButton.adjustsImageWhenHighlighted = NO;
+        messageButton.adjustsImageWhenHighlighted = YES;
         [messageButton addTarget:self action:@selector(checkMessage) forControlEvents:(UIControlEventTouchUpInside)];
         [_naviView addSubview:messageButton];
     }
@@ -357,7 +346,7 @@
         SecondViewController  * fourthVC = [[SecondViewController alloc]init];
         NSArray *controllers = @[firstVC,secondVC,thirdVC,fourthVC];
         NSArray *titleArray  = @[@"普吉岛",@"夏威夷",@"洛杉矶",@"新泽西"];
-        CenterSegmentView *segmentView = [[CenterSegmentView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight -_naviBarHeight) controllers:controllers titleArray:(NSArray *)titleArray ParentController:self selectBtnIndex:(NSInteger)index lineWidth:kScreenWidth/5 lineHeight:3];
+        CenterSegmentView *segmentView = [[CenterSegmentView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight -_naviBarHeight) controllers:controllers titleArray:(NSArray *)titleArray ParentController:self selectBtnIndex:_selectIndex?:0 lineWidth:kScreenWidth/5 lineHeight:3];
         _segmentView = segmentView;
     }
     return _segmentView;
