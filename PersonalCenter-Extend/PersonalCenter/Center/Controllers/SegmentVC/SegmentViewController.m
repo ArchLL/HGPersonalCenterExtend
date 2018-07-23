@@ -2,16 +2,15 @@
 //  SegmentViewController.m
 //  PersonalCenter
 //
-//  Created by 中资北方 on 2017/6/16.
+//  Created by Arch on 2017/6/16.
 //  Copyright © 2017年 mint_bin. All rights reserved.
 //
 
 #import "SegmentViewController.h"
 
-@interface SegmentViewController () <UIGestureRecognizerDelegate,UIScrollViewDelegate>
-
-@property (strong, nonatomic) UIScrollView * scrollView;
-@property (nonatomic, assign) BOOL canScroll;//是否可以滚动
+@interface SegmentViewController () <UIGestureRecognizerDelegate, UIScrollViewDelegate>
+@property (nonatomic, strong) UIScrollView *scrollView;
+@property (nonatomic, assign) BOOL canScroll;
 
 @end
 
@@ -26,7 +25,11 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(acceptMsg:) name:@"leaveTop" object:nil];
 }
 
-//接收信息，处理通知
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+//处理通知
 - (void)acceptMsg:(NSNotification *)notification {
     NSString *notificationName = notification.name;
     if ([notificationName isEqualToString:@"goTop"]) {
@@ -67,10 +70,5 @@
     }
     return NO;
 }
-
-- (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
 
 @end

@@ -2,7 +2,7 @@
 //  FirstViewController.m
 //  PersonalCenter
 //
-//  Created by 中资北方 on 2017/6/16.
+//  Created by Arch on 2017/6/16.
 //  Copyright © 2017年 mint_bin. All rights reserved.
 //
 
@@ -11,9 +11,9 @@
 
 @interface FirstViewController () < UITableViewDelegate, UITableViewDataSource>
 
-@property (nonatomic , strong) UITableView  * tableView;
-@property (nonatomic , assign) NSInteger      page;
-@property (nonatomic , assign) BOOL           isHeader;
+@property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, assign) NSInteger page;
+@property (nonatomic, assign) BOOL isHeader;
 
 @end
 
@@ -23,8 +23,9 @@
     [super viewDidLoad];
     [self creatTableView];
 }
+
 - (void)creatTableView {
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight-self.topHeight-segmentMenuHeight)];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - self.topHeight - segmentMenuHeight)];
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.showsVerticalScrollIndicator = NO;
@@ -34,7 +35,7 @@
     [self.view addSubview:_tableView];
 }
 
-#pragma mark - TableView delegate
+#pragma mark - UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
@@ -53,12 +54,11 @@
     return cell;
 }
 
+#pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];//取消选中
-    MyMessageViewController *myMesageVC = [[MyMessageViewController alloc]init];
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    MyMessageViewController *myMesageVC = [[MyMessageViewController alloc] init];
     [self.navigationController pushViewController:myMesageVC animated:YES];
 }
-
-
 
 @end

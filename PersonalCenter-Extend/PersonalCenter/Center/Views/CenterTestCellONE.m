@@ -2,7 +2,7 @@
 //  CenterTestCellONE.m
 //  PersonalCenter
 //
-//  Created by 黑色幽默 on 2018/5/19.
+//  Created by Arch on 2018/5/19.
 //  Copyright © 2018年 mint_bin. All rights reserved.
 //
 
@@ -10,7 +10,6 @@
 #import "CenterTestOneCollectionViewCell.h"
 
 @interface CenterTestCellONE ()
-
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
 @end
@@ -35,12 +34,6 @@
 #pragma mark FlowLayoutDelegate
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     return CGSizeMake(150, 180);
-}
-
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-    // Configure the view for the selected state
 }
 
 @end

@@ -2,15 +2,14 @@
 //  SecondViewController.m
 //  PersonalCenter
 //
-//  Created by 中资北方 on 2017/6/16.
+//  Created by Arch on 2017/6/16.
 //  Copyright © 2017年 mint_bin. All rights reserved.
 //
 
 #import "SecondViewController.h"
 
-@interface SecondViewController () < UITableViewDelegate,UITableViewDataSource>
-
-@property(nonatomic ,strong)UITableView * tableView;
+@interface SecondViewController () <UITableViewDelegate, UITableViewDataSource>
+@property(nonatomic, strong) UITableView *tableView;
 
 @end
 
@@ -22,7 +21,7 @@
 }
 
 - (void)creatTableView {
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight-self.topHeight-segmentMenuHeight)];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - self.topHeight - segmentMenuHeight)];
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.showsVerticalScrollIndicator = NO;
@@ -32,7 +31,7 @@
     [self.view addSubview:_tableView];
 }
 
-#pragma mark - TableView delegate
+#pragma mark - UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }

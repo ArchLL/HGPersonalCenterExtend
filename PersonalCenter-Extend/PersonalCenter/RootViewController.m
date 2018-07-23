@@ -2,7 +2,7 @@
 //  RootViewController.m
 //  PersonalCenter
 //
-//  Created by 中资北方 on 2017/6/16.
+//  Created by Arch on 2017/6/16.
 //  Copyright © 2017年 mint_bin. All rights reserved.
 //
 
@@ -22,7 +22,6 @@
 //进入个人中心
 - (IBAction)intoCenterAction:(UIButton *)sender {
     PersonalCenterViewController *personalCenterVC = [[PersonalCenterViewController alloc]init];
-    personalCenterVC.isRefreshOfdownPull = NO;
     personalCenterVC.selectIndex = 0;
     [self.navigationController pushViewController:personalCenterVC animated:YES];
 }

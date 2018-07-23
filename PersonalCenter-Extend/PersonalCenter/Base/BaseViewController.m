@@ -2,28 +2,18 @@
 //  BaseViewController.m
 //  PersonalCenter
 //
-//  Created by 中资北方 on 2017/6/19.
+//  Created by Arch on 2017/6/19.
 //  Copyright © 2017年 mint_bin. All rights reserved.
 //
 
 #import "BaseViewController.h"
 
 @interface BaseViewController ()
-
-@property (nonatomic, strong) UIView  * naviView;  //自定义导航栏背景
+@property (nonatomic, strong) UIView *naviView;
 
 @end
 
 @implementation BaseViewController
-
-#pragma maek - 懒加载
-- (UIView *)naviView {
-    if (!_naviView) {
-        _naviView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, NaviBarHeight)];
-        _naviView.backgroundColor = kRGBA(0, 255, 143, 1.0);
-    }
-    return _naviView;
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -46,7 +36,7 @@
     [self.view addSubview:self.naviView];
 }
 
-#pragma mark ---根据透明度绘制图片
+#pragma mark - 根据透明度绘制图片
 - (UIImage *)drawPngImageWithAlpha:(CGFloat)alpha{
     //透明色(可设置初始颜色，当alpha=0时，为透明色)
     UIColor *color = kRGBA(255, 126, 15, alpha);
@@ -65,6 +55,14 @@
     //结束绘制
     UIGraphicsEndImageContext();
     return image;
+}
+
+- (UIView *)naviView {
+    if (!_naviView) {
+        _naviView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, NaviBarHeight)];
+        _naviView.backgroundColor = kRGBA(0, 255, 143, 1.0);
+    }
+    return _naviView;
 }
 
 @end

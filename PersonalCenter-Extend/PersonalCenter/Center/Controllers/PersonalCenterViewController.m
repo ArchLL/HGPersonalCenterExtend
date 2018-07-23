@@ -2,7 +2,7 @@
 //  PersonalCenterViewController.m
 //  PersonalCenter
 //
-//  Created by 中资北方 on 2017/6/16.
+//  Created by Arch on 2017/6/16.
 //  Copyright © 2017年 mint_bin. All rights reserved.
 //
 
@@ -16,20 +16,17 @@
 #import "CenterTouchTableView.h"
 #import "MyMessageViewController.h"
 
-#define headimageHeight   240.0 //头部视图的高度
+#define headimageHeight 240.0
 
 @interface PersonalCenterViewController () <UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate>
-
-@property (nonatomic, strong) CenterTouchTableView   * mainTableView;
-@property (nonatomic, strong) CenterSegmentView      * segmentView;//分栏视图，头部视图下方区域
-@property (nonatomic, strong) UIView                 * naviView;//自定义导航栏
-@property (nonatomic, strong) UIImageView            * headImageView; //头部背景视图
-@property (nonatomic, strong) UIView                 * headContentView;//头部内容视图，放置用户信息，如：姓名，昵称、座右铭等(作用：背景放大不会影响内容的位置)
-@property (nonatomic, strong) UIImageView            * avatarImage;//头像
-@property (nonatomic,   copy) UILabel                * nickNameLB;//昵称
-@property (nonatomic, strong) UIView                 * footerView;
-
-
+@property (nonatomic, strong) CenterTouchTableView *mainTableView;
+@property (nonatomic, strong) CenterSegmentView *segmentView;//分栏
+@property (nonatomic, strong) UIView *naviView;
+@property (nonatomic, strong) UIImageView *headImageView;//头部背景视图
+@property (nonatomic, strong) UIView *headContentView;
+@property (nonatomic, strong) UIImageView *avatarImage;
+@property (nonatomic, strong) UILabel *nickNameLB;
+@property (nonatomic, strong) UIView *footerView;
 @property (nonatomic, assign) BOOL canScroll;//mainTableView是否可以滚动
 @property (nonatomic, assign) BOOL isTopIsCanNotMoveTabView;//到达顶部(临界点)不能移动mainTableView
 @property (nonatomic, assign) BOOL isTopIsCanNotMoveTabViewPre;//到达顶部(临界点)不能移动子控制器的tableView
@@ -39,18 +36,6 @@
 @implementation PersonalCenterViewController
 {
     NSInteger _naviBarHeight;//导航栏的高度+状态栏的高度
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:YES];
-    self.naviView.hidden = NO;
-}
-
-- (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
-    [self.navigationController setNavigationBarHidden:NO];
-    self.naviView.hidden = YES;
 }
 
 - (void)viewDidLoad {
@@ -71,32 +56,39 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(acceptMsgOfSubView:) name:@"isScroll" object:nil];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES];
+    self.naviView.hidden = NO;
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    [self.navigationController setNavigationBarHidden:NO];
+    self.naviView.hidden = YES;
+}
+
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-#pragma mark -- 设置界面
+#pragma mark - 设置界面
 - (void)setUI {
     self.title = @"个人中心";
     self.view.backgroundColor = [UIColor whiteColor];
-    //添加tableView
-    [self.view addSubview:self.mainTableView];
     
-    //添加头部背景视图
+    [self.view addSubview:self.mainTableView];
+    [self.view addSubview:self.naviView];
     [_mainTableView addSubview:self.headImageView];
     
-    //添加自定义导航栏
-    [self.view addSubview:self.naviView];
-    
-    //添加头部内容视图
     [_headImageView addSubview:self.headContentView];
     [_headContentView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(_headImageView).offset(0);
-        make.centerX.mas_equalTo(_headImageView.mas_centerX);
+        make.centerX.mas_equalTo(_headImageView);
         make.width.mas_equalTo(kScreenWidth);
         make.height.mas_equalTo(headimageHeight);
     }];
-    //添加头像
+    
     [_headContentView addSubview:self.avatarImage];
     [_avatarImage mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(_headContentView);
@@ -105,8 +97,7 @@
         make.bottom.mas_equalTo(-70);
     }];
     
-    //添加昵称
-    [_headImageView addSubview:self.nickNameLB];
+    [_headContentView addSubview:self.nickNameLB];
     [_nickNameLB mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(_headContentView);
         make.width.mas_equalTo(200);
@@ -156,25 +147,19 @@
     
     //利用contentOffset处理内外层scrollView的滑动冲突问题
     if (yOffset >= tabyOffset) {
-        //当分页视图滑动至导航栏时，禁止外层tableView滑动
         scrollView.contentOffset = CGPointMake(0, tabyOffset);
         _isTopIsCanNotMoveTabView = YES;
     }else{
-        //当分页视图和顶部导航栏分离时，允许外层tableView滑动
         _isTopIsCanNotMoveTabView = NO;
     }
     
-    //取反
     _isTopIsCanNotMoveTabViewPre = !_isTopIsCanNotMoveTabView;
     
     if (!_isTopIsCanNotMoveTabViewPre) {
-        NSLog(@"分页选择部分滑动到顶端");
         [[NSNotificationCenter defaultCenter] postNotificationName:@"goTop" object:nil userInfo:@{@"canScroll":@"1"}];
         _canScroll = NO;
     }else {
-        NSLog(@"页面滑动到底部后开始下拉");
         if (!_canScroll) {
-            NSLog(@"分页选择部分保持在顶端");
             _mainTableView.contentOffset = CGPointMake(0, tabyOffset);
         }else {
             [[NSNotificationCenter defaultCenter] postNotificationName:@"goTop" object:nil userInfo:@{@"canScroll":@"0"}];
@@ -189,21 +174,31 @@
 
 #pragma mark - 查看消息
 - (void)checkMessage {
-    NSLog(@"查看消息");
     MyMessageViewController *myMessageVC = [[MyMessageViewController alloc]init];
     [self.navigationController pushViewController:myMessageVC animated:YES];
 }
 
-#pragma mark - tableDelegate
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+#pragma mark - UITableViewDataSource
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 2;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 1;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row % 2 == 0) {
+        CenterTestCellONE *cell = [tableView dequeueReusableCellWithIdentifier:@"CenterTestCellONE"];
+        return cell;
+    }else {
+        CenterTestCellTWO *cell = [tableView dequeueReusableCellWithIdentifier:@"CenterTestCellTWO"];
+        return cell;
+    }
+}
+
+#pragma mark - UITableViewDelegate
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
         return 180;
     }else {
@@ -211,14 +206,8 @@
     }
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.row % 2 == 0) {
-        CenterTestCellONE * cell = [tableView dequeueReusableCellWithIdentifier:@"CenterTestCellONE"];
-        return cell;
-    }else {
-        CenterTestCellTWO * cell = [tableView dequeueReusableCellWithIdentifier:@"CenterTestCellTWO"];
-        return cell;
-    }
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 40;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -233,22 +222,18 @@
     }
     [headerView addSubview:titleLB];
     [titleLB mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.offset(10);
-        make.left.offset(15);
-        make.bottom.offset(-10);
-        make.width.offset(150);
+        make.top.mas_equalTo(10);
+        make.left.mas_equalTo(15);
+        make.bottom.mas_equalTo(-10);
+        make.width.mas_equalTo(150);
     }];
     return headerView;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 40;
-}
-
-#pragma mark - 懒加载
+#pragma mark - Lazy
 - (UIView *)naviView {
     if (!_naviView) {
-        _naviView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth,_naviBarHeight)];
+        _naviView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, _naviBarHeight)];
         _naviView.backgroundColor = [UIColor colorWithWhite:1 alpha:0];//该透明色设置不会影响子视图
         //添加返回按钮
         UIButton *backButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
@@ -261,7 +246,7 @@
         //添加消息按钮
         UIButton *messageButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
         [messageButton setImage:[UIImage imageNamed:@"message"] forState:(UIControlStateNormal)];
-        messageButton.frame = CGRectMake(kScreenWidth-35, 28 + _naviBarHeight - 64, 25, 25);
+        messageButton.frame = CGRectMake(kScreenWidth - 35, 28 + _naviBarHeight - 64, 25, 25);
         messageButton.adjustsImageWhenHighlighted = YES;
         [messageButton addTarget:self action:@selector(checkMessage) forControlEvents:(UIControlEventTouchUpInside)];
         [_naviView addSubview:messageButton];
@@ -305,7 +290,7 @@
         _avatarImage.userInteractionEnabled = YES;
         _avatarImage.layer.masksToBounds = YES;
         _avatarImage.layer.borderWidth = 1;
-        _avatarImage.layer.borderColor = kRGBA(255, 253, 253, 1.).CGColor;
+        _avatarImage.layer.borderColor = kRGBA(255, 253, 253, 1).CGColor;
         _avatarImage.layer.cornerRadius = 40;
     }
     return _avatarImage;
@@ -314,7 +299,7 @@
 - (UILabel *)nickNameLB {
     if (!_nickNameLB) {
         _nickNameLB = [[UILabel alloc] init];
-        _nickNameLB.font = [UIFont systemFontOfSize:16.];
+        _nickNameLB.font = [UIFont systemFontOfSize:16];
         _nickNameLB.textColor = [UIColor whiteColor];
         _nickNameLB.textAlignment = NSTextAlignmentCenter;
         _nickNameLB.lineBreakMode = NSLineBreakByWordWrapping;
@@ -326,7 +311,7 @@
 
 - (UIImageView *)headImageView {
     if (!_headImageView) {
-        _headImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"center_bg.jpg"]];
+        _headImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"center_bg.jpg"]];
         _headImageView.backgroundColor = [UIColor greenColor];
         _headImageView.userInteractionEnabled = YES;
         _headImageView.frame = CGRectMake(0, -headimageHeight, kScreenWidth, headimageHeight);
@@ -340,13 +325,13 @@
 -(UIView *)setPageViewControllers {
     if (!_segmentView) {
         //设置子控制器
-        FirstViewController   * firstVC  = [[FirstViewController alloc]init];
-        SecondViewController  * secondVC = [[SecondViewController alloc]init];
-        ThirdViewController   * thirdVC  = [[ThirdViewController alloc]init];
-        SecondViewController  * fourthVC = [[SecondViewController alloc]init];
-        NSArray *controllers = @[firstVC,secondVC,thirdVC,fourthVC];
-        NSArray *titleArray  = @[@"普吉岛",@"夏威夷",@"洛杉矶",@"新泽西"];
-        CenterSegmentView *segmentView = [[CenterSegmentView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight -_naviBarHeight) controllers:controllers titleArray:(NSArray *)titleArray ParentController:self selectBtnIndex:_selectIndex?:0 lineWidth:kScreenWidth/5 lineHeight:3];
+        FirstViewController *firstVC  = [[FirstViewController alloc] init];
+        SecondViewController *secondVC = [[SecondViewController alloc] init];
+        ThirdViewController *thirdVC  = [[ThirdViewController alloc] init];
+        SecondViewController *fourthVC = [[SecondViewController alloc] init];
+        NSArray *controllers = @[firstVC, secondVC, thirdVC, fourthVC];
+        NSArray *titleArray = @[@"普吉岛", @"夏威夷", @"洛杉矶", @"新泽西"];
+        CenterSegmentView *segmentView = [[CenterSegmentView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - _naviBarHeight) controllers:controllers titleArray:(NSArray *)titleArray ParentController:self selectBtnIndex:self.selectIndex ?: 0 lineWidth:kScreenWidth / 5 lineHeight:3];
         _segmentView = segmentView;
     }
     return _segmentView;
