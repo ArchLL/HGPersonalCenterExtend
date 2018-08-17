@@ -30,6 +30,7 @@
 @property (nonatomic, assign) BOOL canScroll;//mainTableView是否可以滚动
 @property (nonatomic, assign) BOOL isTopIsCanNotMoveTabView;//到达顶部(临界点)不能移动mainTableView
 @property (nonatomic, assign) BOOL isTopIsCanNotMoveTabViewPre;//到达顶部(临界点)不能移动子控制器的tableView
+@property (nonatomic, assign) BOOL isBacking;
 
 @end
 
@@ -60,6 +61,18 @@
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES];
     self.naviView.hidden = NO;
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    self.isBacking = NO;
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"PersonalCenterVCBackingStatus" object:nil userInfo:@{@"isBacking" : @(self.isBacking)}];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    self.isBacking = YES;
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"PersonalCenterVCBackingStatus" object:nil userInfo:@{@"isBacking" : @(self.isBacking)}];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {

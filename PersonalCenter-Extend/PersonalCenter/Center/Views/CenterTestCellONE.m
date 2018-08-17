@@ -9,7 +9,7 @@
 #import "CenterTestCellONE.h"
 #import "CenterTestOneCollectionViewCell.h"
 
-@interface CenterTestCellONE ()
+@interface CenterTestCellONE ()<UICollectionViewDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
 @end
@@ -19,6 +19,25 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     [_collectionView registerNib:[UINib nibWithNibName:@"CenterTestOneCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"CenterTestOneCollectionViewCell"];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(acceptMsg:) name:@"PersonalCenterVCBackingStatus" object:nil];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+//处理通知
+- (void)acceptMsg:(NSNotification *)notification {
+    NSString *notificationName = notification.name;
+    if ([notificationName isEqualToString:@"PersonalCenterVCBackingStatus"]) {
+        NSDictionary *userInfo = notification.userInfo;
+        NSNumber *isBacking = userInfo[@"isBacking"];
+        if (isBacking.boolValue) {
+            _collectionView.scrollEnabled = NO;
+        } else {
+            _collectionView.scrollEnabled = YES;
+        }
+    }
 }
 
 #pragma mark CollectionView Delegate

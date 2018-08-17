@@ -12,6 +12,5 @@
 
 //子控制器的父类
 @interface SegmentViewController : UIViewController
-@property (nonatomic, assign) NSInteger topHeight;
-
+@property (nonatomic, assign) CGFloat topHeight;
 @end

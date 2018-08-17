@@ -11,6 +11,7 @@
 @interface SegmentViewController () <UIGestureRecognizerDelegate, UIScrollViewDelegate>
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, assign) BOOL canScroll;
+@property (nonatomic, strong) NSNumber *selectedVCIndex;
 
 @end
 
@@ -23,6 +24,15 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(acceptMsg:) name:@"goTop" object:nil];
     //子控制器视图离开顶部的通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(acceptMsg:) name:@"leaveTop" object:nil];
+    //切换分页选项的通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(acceptMsg:) name:@"SelectVC" object:nil];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    if([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+        self.navigationController.interactivePopGestureRecognizer.delegate = self;
+    }
 }
 
 - (void)dealloc {
@@ -45,6 +55,9 @@
         _canScroll = NO;
         self.scrollView.contentOffset = CGPointZero;
         self.scrollView.showsVerticalScrollIndicator = NO;
+    }else if ([notificationName isEqualToString:@"SelectVC"]) {
+        NSDictionary *userInfo = notification.userInfo;
+        self.selectedVCIndex = userInfo[@"selectedVCIndex"];
     }
 }
 
@@ -59,14 +72,9 @@
     _scrollView = scrollView;
 }
 
-//处理左滑右滑，解决系统右划手势与ScrollView右划手势冲突
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
-    // 首先判断otherGestureRecognizer是不是系统pop手势
-    if ([otherGestureRecognizer.view isKindOfClass:NSClassFromString(@"UILayoutContainerView")]) {
-        // 再判断系统手势的state是began还是fail，同时判断scrollView的位置是不是正好在最左边
-        if (otherGestureRecognizer.state == UIGestureRecognizerStateBegan && self.scrollView.contentOffset.x == 0) {
-            return YES;
-        }
+    if ([self.selectedVCIndex isEqualToNumber:@0]) {
+        return YES;
     }
     return NO;
 }

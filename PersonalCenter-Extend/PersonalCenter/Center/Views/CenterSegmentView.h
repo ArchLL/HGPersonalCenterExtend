@@ -16,8 +16,8 @@
 @property (nonatomic, strong) UILabel *line;
 @property (nonatomic, strong) UIButton *seleBtn;
 @property (nonatomic, strong) UILabel *down;
-@property (nonatomic, copy) void (^pageBlock)(NSInteger);//页面切换的回调，依次是 0 1 2 。。。
+@property (nonatomic, copy) void (^pageBlock)(NSUInteger);//页面切换的回调，依次是 0 1 2 。。。
 
-- (instancetype)initWithFrame:(CGRect)frame controllers:(NSArray *)controllers titleArray:(NSArray *)titleArray ParentController:(UIViewController *)parentC selectBtnIndex:(NSInteger)index lineWidth:(float)lineW lineHeight:(float)lineH;
+- (instancetype)initWithFrame:(CGRect)frame controllers:(NSArray *)controllers titleArray:(NSArray *)titleArray ParentController:(UIViewController *)parentC selectBtnIndex:(NSUInteger)index lineWidth:(float)lineW lineHeight:(float)lineH;
 
 @end
