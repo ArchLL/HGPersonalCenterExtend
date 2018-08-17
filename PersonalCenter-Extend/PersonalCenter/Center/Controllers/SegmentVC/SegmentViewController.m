@@ -30,7 +30,7 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    if([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
         self.navigationController.interactivePopGestureRecognizer.delegate = self;
     }
 }
@@ -48,14 +48,14 @@
         if ([canScroll isEqualToString:@"1"]) {
             _canScroll = YES;
             self.scrollView.showsVerticalScrollIndicator = YES;
-        }else {
+        } else {
             _canScroll = NO;
         }
-    }else if([notificationName isEqualToString:@"leaveTop"]){
+    } else if ([notificationName isEqualToString:@"leaveTop"]){
         _canScroll = NO;
         self.scrollView.contentOffset = CGPointZero;
         self.scrollView.showsVerticalScrollIndicator = NO;
-    }else if ([notificationName isEqualToString:@"SelectVC"]) {
+    } else if ([notificationName isEqualToString:@"SelectVC"]) {
         NSDictionary *userInfo = notification.userInfo;
         self.selectedVCIndex = userInfo[@"selectedVCIndex"];
     }

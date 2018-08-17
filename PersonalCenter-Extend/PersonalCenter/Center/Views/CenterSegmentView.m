@@ -129,6 +129,14 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"SelectVC" object:nil userInfo:@{@"selectedVCIndex" : @(sender.tag - 100)}];
 }
 
+//增加分页视图左右滑动和外界tableView上下滑动互斥处理
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    [[NSNotificationCenter defaultCenter] postNotificationName:IsEnableScrollPersonalCenterVCMainTableView object:nil userInfo:@{@"canScroll" : @"0"}];
+}
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    [[NSNotificationCenter defaultCenter] postNotificationName:IsEnableScrollPersonalCenterVCMainTableView object:nil userInfo:@{@"canScroll" : @"1"}];
+}
+
 //滑动下方分页View时的事件处理
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     [UIView animateWithDuration:0.1 animations:^{

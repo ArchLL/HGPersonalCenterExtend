@@ -53,8 +53,8 @@
     [self setUI];
     //注册允许外层tableView滚动通知-解决和分页视图的上下滑动冲突问题
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(acceptMsg:) name:@"leaveTop" object:nil];
-    //注册允许外层tableView滚动通知-解决子视图左右滑动和外层tableView上下滑动的冲突问题
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(acceptMsgOfSubView:) name:@"isScroll" object:nil];
+    //分页的scrollView左右滑动的时候禁止mainTableView滑动，停止滑动的时候允许mainTableView滑动
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(acceptMsg:) name:IsEnableScrollPersonalCenterVCMainTableView object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -119,22 +119,22 @@
     }];
 }
 
-//接收通知
-- (void)acceptMsg:(NSNotification *)notification{
+#pragma mark -  接收通知消息
+- (void)acceptMsg:(NSNotification *)notification {
     NSDictionary *userInfo = notification.userInfo;
-    NSString *canScroll = userInfo[@"canScroll"];
-    if ([canScroll isEqualToString:@"1"]) {
-        _canScroll = YES;
-    }
-}
 
-- (void)acceptMsgOfSubView:(NSNotification *)notification{
-    NSDictionary *userInfo = notification.userInfo;
-    NSString *canScroll = userInfo[@"canScroll"];
-    if ([canScroll isEqualToString:@"1"]) {
-        _mainTableView.scrollEnabled = YES;
-    }else if([canScroll isEqualToString:@"0"]) {
-        _mainTableView.scrollEnabled = NO;
+    if ([notification.name isEqualToString:@"leaveTop"]) {
+        NSString *canScroll = userInfo[@"canScroll"];
+        if ([canScroll isEqualToString:@"1"]) {
+            _canScroll = YES;
+        }
+    } else if ([notification.name isEqualToString:IsEnableScrollPersonalCenterVCMainTableView]) {
+        NSString *canScroll = userInfo[@"canScroll"];
+        if ([canScroll isEqualToString:@"1"]) {
+            _mainTableView.scrollEnabled = YES;
+        }else if([canScroll isEqualToString:@"0"]) {
+            _mainTableView.scrollEnabled = NO;
+        }
     }
 }
 
