@@ -9,10 +9,6 @@
 #import "RootViewController.h"
 #import "PersonalCenterViewController.h"
 
-@interface RootViewController ()
-
-@end
-
 @implementation RootViewController
 
 - (void)viewDidLoad {
@@ -20,12 +16,10 @@
 }
 
 //进入个人中心
-- (IBAction)intoCenterAction:(UIButton *)sender {
+- (IBAction)enterCenterAction:(UIButton *)sender {
     PersonalCenterViewController *personalCenterVC = [[PersonalCenterViewController alloc]init];
-    personalCenterVC.selectIndex = 0;
+    personalCenterVC.selectedIndex = 0;
     [self.navigationController pushViewController:personalCenterVC animated:YES];
 }
-
-
 
 @end

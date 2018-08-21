@@ -5,19 +5,15 @@
 //  Created by Arch on 2017/6/16.
 //  Copyright © 2017年 mint_bin. All rights reserved.
 //
-
 #import "CenterTouchTableView.h"
-#define segmentMenuHeight 41
+#import "SegmentHeaderView.h"
 
 @implementation CenterTouchTableView
-
-//目的是判断是否让外层tableView的手势透传到子视图
+//是否让外层tableView的手势透传到子视图
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
-    //分页列表高度
-    CGFloat naviBarHeight = NaviBarHeight;
-    CGFloat listHeight = kScreenHeight - naviBarHeight - segmentMenuHeight;
+    CGFloat segmentViewContentScrollViewHeight = SCREEN_HEIGHT - STATUS_BAR_HEIGHT - NAVIGATION_BAR_HEIGHT - SegmentHeaderViewHeight;
     CGPoint currentPoint = [gestureRecognizer locationInView:self];
-    if (CGRectContainsPoint(CGRectMake(0, self.contentSize.height - listHeight, kScreenWidth, listHeight), currentPoint) ) {
+    if (CGRectContainsPoint(CGRectMake(0, self.contentSize.height - segmentViewContentScrollViewHeight, SCREEN_WIDTH, segmentViewContentScrollViewHeight), currentPoint) ) {
         return YES;
     }
     return NO;

@@ -1,35 +1,33 @@
 //
-//  CenterTestCellONE.m
+//  CenterTestCellmoveLine.m
 //  PersonalCenter
 //
 //  Created by Arch on 2018/5/19.
 //  Copyright © 2018年 mint_bin. All rights reserved.
 //
 
-#import "CenterTestCellONE.h"
-#import "CenterTestOneCollectionViewCell.h"
+#import "CenterTestCollectionView.h"
+#import "CenterTestCollectionViewCell.h"
 
-@interface CenterTestCellONE ()<UICollectionViewDelegate>
+@interface CenterTestCollectionView ()<UICollectionViewDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
 @end
 
-@implementation CenterTestCellONE
-
+@implementation CenterTestCollectionView
 - (void)awakeFromNib {
     [super awakeFromNib];
-    [_collectionView registerNib:[UINib nibWithNibName:@"CenterTestOneCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"CenterTestOneCollectionViewCell"];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(acceptMsg:) name:@"PersonalCenterVCBackingStatus" object:nil];
+    [_collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([CenterTestCollectionViewCell class]) bundle:nil] forCellWithReuseIdentifier:NSStringFromClass([CenterTestCollectionViewCell class])];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(acceptMsg:) name:PersonalCenterVCBackingStatus object:nil];
 }
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-//处理通知
 - (void)acceptMsg:(NSNotification *)notification {
     NSString *notificationName = notification.name;
-    if ([notificationName isEqualToString:@"PersonalCenterVCBackingStatus"]) {
+    if ([notificationName isEqualToString:PersonalCenterVCBackingStatus]) {
         NSDictionary *userInfo = notification.userInfo;
         NSNumber *isBacking = userInfo[@"isBacking"];
         if (isBacking.boolValue) {
@@ -46,7 +44,7 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    CenterTestOneCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CenterTestOneCollectionViewCell" forIndexPath:indexPath];
+    CenterTestCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CenterTestCollectionViewCell" forIndexPath:indexPath];
     return cell;
 }
 

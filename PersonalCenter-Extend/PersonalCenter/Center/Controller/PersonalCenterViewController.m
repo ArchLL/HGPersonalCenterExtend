@@ -7,54 +7,52 @@
 //
 
 #import "PersonalCenterViewController.h"
-#import "CenterTestCellONE.h"
-#import "CenterTestCellTWO.h"
-#import "CenterSegmentView.h"
+#import "CenterTestCollectionView.h"
+#import "SegmentView.h"
 #import "FirstViewController.h"
 #import "SecondViewController.h"
 #import "ThirdViewController.h"
 #import "CenterTouchTableView.h"
 #import "MyMessageViewController.h"
 
-#define headimageHeight 240.0
+static CGFloat const HeaderImageViewHeight = 240;
 
 @interface PersonalCenterViewController () <UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate>
 @property (nonatomic, strong) CenterTouchTableView *mainTableView;
-@property (nonatomic, strong) CenterSegmentView *segmentView;//分栏
+@property (nonatomic, strong) SegmentView *segmentView;
 @property (nonatomic, strong) UIView *naviView;
-@property (nonatomic, strong) UIImageView *headImageView;//头部背景视图
-@property (nonatomic, strong) UIView *headContentView;
+@property (nonatomic, strong) UIImageView *headerImageView;
+@property (nonatomic, strong) UIView *headerContentView;
 @property (nonatomic, strong) UIImageView *avatarImage;
 @property (nonatomic, strong) UILabel *nickNameLB;
 @property (nonatomic, strong) UIView *footerView;
-@property (nonatomic, assign) BOOL canScroll;//mainTableView是否可以滚动
-@property (nonatomic, assign) BOOL isTopIsCanNotMoveTabView;//到达顶部(临界点)不能移动mainTableView
-@property (nonatomic, assign) BOOL isTopIsCanNotMoveTabViewPre;//到达顶部(临界点)不能移动子控制器的tableView
+/**mainTableView是否可以滚动*/
+@property (nonatomic, assign) BOOL canScroll;
+ /**segmentHeaderView到达顶部, mainTableView不能移动*/
+@property (nonatomic, assign) BOOL isTopIsCanNotMoveTabView;
+/**segmentHeaderView离开顶部,childViewController的滚动视图不能移动*/
+@property (nonatomic, assign) BOOL isTopIsCanNotMoveTabViewPre;
+/**是否正在pop*/
 @property (nonatomic, assign) BOOL isBacking;
 
 @end
 
 @implementation PersonalCenterViewController
-{
-    NSInteger _naviBarHeight;//导航栏的高度+状态栏的高度
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"个人中心";
     if (@available(iOS 11.0, *)) {
         [[UIScrollView appearance] setContentInsetAdjustmentBehavior:UIScrollViewContentInsetAdjustmentNever];
     }else {
         self.automaticallyAdjustsScrollViewInsets = NO;
     }
-    //接收宏定义的值，因为下面要做运算，这个宏含有三目运算不能直接拿来运算,会出错
-    _naviBarHeight = NaviBarHeight;
-    //如果使用自定义的按钮去替换系统默认返回按钮，会出现滑动返回手势失效的情况，解决方法如下：
+    //如果使用自定义的按钮去替换系统默认返回按钮，会出现滑动返回手势失效的情况
     self.navigationController.interactivePopGestureRecognizer.delegate = self;
-    [self setUI];
+    [self setupSubViews];
     //注册允许外层tableView滚动通知-解决和分页视图的上下滑动冲突问题
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(acceptMsg:) name:@"leaveTop" object:nil];
     //分页的scrollView左右滑动的时候禁止mainTableView滑动，停止滑动的时候允许mainTableView滑动
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(acceptMsg:) name:IsEnableScrollPersonalCenterVCMainTableView object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(acceptMsg:) name:IsEnablePersonalCenterVCMainTableViewScroll object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -66,13 +64,13 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     self.isBacking = NO;
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"PersonalCenterVCBackingStatus" object:nil userInfo:@{@"isBacking" : @(self.isBacking)}];
+    [[NSNotificationCenter defaultCenter] postNotificationName:PersonalCenterVCBackingStatus object:nil userInfo:@{@"isBacking" : @(self.isBacking)}];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     self.isBacking = YES;
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"PersonalCenterVCBackingStatus" object:nil userInfo:@{@"isBacking" : @(self.isBacking)}];
+    [[NSNotificationCenter defaultCenter] postNotificationName:PersonalCenterVCBackingStatus object:nil userInfo:@{@"isBacking" : @(self.isBacking)}];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -86,58 +84,51 @@
 }
 
 #pragma mark - 设置界面
-- (void)setUI {
-    self.title = @"个人中心";
-    self.view.backgroundColor = [UIColor whiteColor];
-    
+- (void)setupSubViews {
     [self.view addSubview:self.mainTableView];
     [self.view addSubview:self.naviView];
-    [_mainTableView addSubview:self.headImageView];
+    [self.headerImageView addSubview:self.headerContentView];
+    [self.headerContentView addSubview:self.avatarImage];
+    [self.headerContentView addSubview:self.nickNameLB];
+    [self.mainTableView addSubview:self.headerImageView];
     
-    [_headImageView addSubview:self.headContentView];
-    [_headContentView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(_headImageView).offset(0);
-        make.centerX.mas_equalTo(_headImageView);
-        make.width.mas_equalTo(kScreenWidth);
-        make.height.mas_equalTo(headimageHeight);
+    [self.headerContentView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.centerX.mas_equalTo(self.headerImageView);
+        make.width.mas_equalTo(SCREEN_WIDTH);
+        make.height.mas_equalTo(HeaderImageViewHeight);
     }];
-    
-    [_headContentView addSubview:self.avatarImage];
-    [_avatarImage mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(_headContentView);
-        make.width.mas_equalTo(80);
-        make.height.mas_equalTo(80);
+    [self.avatarImage mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.headerContentView);
+        make.size.mas_equalTo(CGSizeMake(80, 80));
         make.bottom.mas_equalTo(-70);
     }];
-    
-    [_headContentView addSubview:self.nickNameLB];
-    [_nickNameLB mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(_headContentView);
-        make.width.mas_equalTo(200);
-        make.height.mas_equalTo(25);
+    [self.nickNameLB mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.headerContentView);
+        make.width.mas_lessThanOrEqualTo(200);
         make.bottom.mas_equalTo(-40);
     }];
 }
 
-#pragma mark -  接收通知消息
+#pragma mark -  Notification
 - (void)acceptMsg:(NSNotification *)notification {
     NSDictionary *userInfo = notification.userInfo;
-
+    
     if ([notification.name isEqualToString:@"leaveTop"]) {
         NSString *canScroll = userInfo[@"canScroll"];
         if ([canScroll isEqualToString:@"1"]) {
-            _canScroll = YES;
+            self.canScroll = YES;
         }
-    } else if ([notification.name isEqualToString:IsEnableScrollPersonalCenterVCMainTableView]) {
+    } else if ([notification.name isEqualToString:IsEnablePersonalCenterVCMainTableViewScroll]) {
         NSString *canScroll = userInfo[@"canScroll"];
         if ([canScroll isEqualToString:@"1"]) {
-            _mainTableView.scrollEnabled = YES;
+            self.mainTableView.scrollEnabled = YES;
         }else if([canScroll isEqualToString:@"0"]) {
-            _mainTableView.scrollEnabled = NO;
+            self.mainTableView.scrollEnabled = NO;
         }
     }
 }
 
+#pragma mark - UITableViewDelegate
 /**
  * 处理联动
  * 因为要实现下拉头部放大的问题，tableView设置了contentInset，所以试图刚加载的时候会调用一遍这个方法，所以要做一些特殊处理，
@@ -146,13 +137,12 @@
     //当前偏移量
     CGFloat yOffset  = scrollView.contentOffset.y;
     //临界点偏移量(吸顶临界点)
-    CGFloat tabyOffset = scrollView.contentSize.height - kScreenHeight;
+    CGFloat tabyOffset = scrollView.contentSize.height - SCREEN_HEIGHT;
     
-    //第一部分：
     //更改导航栏的背景图的透明度
     CGFloat alpha = 0;
-    if (yOffset < headimageHeight - _naviBarHeight) {
-        alpha = yOffset/(headimageHeight - _naviBarHeight);
+    if (yOffset < HeaderImageViewHeight - STATUS_BAR_HEIGHT - NAVIGATION_BAR_HEIGHT) {
+        alpha = yOffset/(HeaderImageViewHeight - STATUS_BAR_HEIGHT - NAVIGATION_BAR_HEIGHT);
     }else {
         alpha = 1;
     }
@@ -161,19 +151,19 @@
     //利用contentOffset处理内外层scrollView的滑动冲突问题
     if (yOffset >= tabyOffset) {
         scrollView.contentOffset = CGPointMake(0, tabyOffset);
-        _isTopIsCanNotMoveTabView = YES;
+        self.isTopIsCanNotMoveTabView = YES;
     }else{
-        _isTopIsCanNotMoveTabView = NO;
+        self.isTopIsCanNotMoveTabView = NO;
     }
     
-    _isTopIsCanNotMoveTabViewPre = !_isTopIsCanNotMoveTabView;
+    self.isTopIsCanNotMoveTabViewPre = !self.isTopIsCanNotMoveTabView;
     
-    if (!_isTopIsCanNotMoveTabViewPre) {
+    if (!self.isTopIsCanNotMoveTabViewPre) {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"goTop" object:nil userInfo:@{@"canScroll":@"1"}];
-        _canScroll = NO;
+        self.canScroll = NO;
     }else {
-        if (!_canScroll) {
-            _mainTableView.contentOffset = CGPointMake(0, tabyOffset);
+        if (!self.canScroll) {
+            self.mainTableView.contentOffset = CGPointMake(0, tabyOffset);
         }else {
             [[NSNotificationCenter defaultCenter] postNotificationName:@"goTop" object:nil userInfo:@{@"canScroll":@"0"}];
         }
@@ -201,22 +191,13 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row % 2 == 0) {
-        CenterTestCellONE *cell = [tableView dequeueReusableCellWithIdentifier:@"CenterTestCellONE"];
-        return cell;
-    }else {
-        CenterTestCellTWO *cell = [tableView dequeueReusableCellWithIdentifier:@"CenterTestCellTWO"];
-        return cell;
-    }
+    CenterTestCollectionView *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([CenterTestCollectionView class]) forIndexPath:indexPath];
+    return cell;
 }
 
 #pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0) {
-        return 180;
-    }else {
-        return 200;
-    }
+    return 180;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -224,7 +205,7 @@
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    UIView *headerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 40)];
+    UIView *headerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 40)];
     headerView.backgroundColor = [UIColor yellowColor];
     UILabel *titleLB = [UILabel new];
     titleLB.font = [UIFont boldSystemFontOfSize:18];
@@ -246,12 +227,12 @@
 #pragma mark - Lazy
 - (UIView *)naviView {
     if (!_naviView) {
-        _naviView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, _naviBarHeight)];
-        _naviView.backgroundColor = [UIColor colorWithWhite:1 alpha:0];//该透明色设置不会影响子视图
+        _naviView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, STATUS_BAR_HEIGHT + NAVIGATION_BAR_HEIGHT)];
+        _naviView.backgroundColor = [UIColor colorWithWhite:1 alpha:0];
         //添加返回按钮
         UIButton *backButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
         [backButton setImage:[UIImage imageNamed:@"back"] forState:(UIControlStateNormal)];
-        backButton.frame = CGRectMake(5, 28 + _naviBarHeight - 64, 28, 25);
+        backButton.frame = CGRectMake(5, 8 + STATUS_BAR_HEIGHT, 28, 25);
         backButton.adjustsImageWhenHighlighted = YES;
         [backButton addTarget:self action:@selector(backAction) forControlEvents:(UIControlEventTouchUpInside)];
         [_naviView addSubview:backButton];
@@ -259,7 +240,7 @@
         //添加消息按钮
         UIButton *messageButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
         [messageButton setImage:[UIImage imageNamed:@"message"] forState:(UIControlStateNormal)];
-        messageButton.frame = CGRectMake(kScreenWidth - 35, 28 + _naviBarHeight - 64, 25, 25);
+        messageButton.frame = CGRectMake(SCREEN_WIDTH - 35, 8 + STATUS_BAR_HEIGHT, 25, 25);
         messageButton.adjustsImageWhenHighlighted = YES;
         [messageButton addTarget:self action:@selector(checkMessage) forControlEvents:(UIControlEventTouchUpInside)];
         [_naviView addSubview:messageButton];
@@ -271,29 +252,27 @@
     if (!_mainTableView) {
         //⚠️这里的属性初始化一定要放在mainTableView.contentInset的设置滚动之前, 不然首次进来视图就会偏移到临界位置，contentInset会调用scrollViewDidScroll这个方法。
         //初始化变量
-        _canScroll = YES;
-        _isTopIsCanNotMoveTabView = NO;
+        self.canScroll = YES;
+        self.isTopIsCanNotMoveTabView = NO;
         
-        _mainTableView = [[CenterTouchTableView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight) style:UITableViewStylePlain];
+        _mainTableView = [[CenterTouchTableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) style:UITableViewStyleGrouped];
         _mainTableView.delegate = self;
         _mainTableView.dataSource = self;
-        _mainTableView.tableHeaderView = self.headImageView;
+        _mainTableView.tableHeaderView = self.headerImageView;
         _mainTableView.tableFooterView = self.setPageViewControllers;
         _mainTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _mainTableView.showsVerticalScrollIndicator = NO;
-        //注册cell
-        [_mainTableView registerNib:[UINib nibWithNibName:@"CenterTestCellONE" bundle:nil] forCellReuseIdentifier:@"CenterTestCellONE"];
-        [_mainTableView registerNib:[UINib nibWithNibName:@"CenterTestCellTWO" bundle:nil] forCellReuseIdentifier:@"CenterTestCellTWO"];
+        [_mainTableView registerNib:[UINib nibWithNibName:NSStringFromClass([CenterTestCollectionView class]) bundle:nil] forCellReuseIdentifier:NSStringFromClass([CenterTestCollectionView class])];
     }
     return _mainTableView;
 }
 
-- (UIView *)headContentView {
-    if (!_headContentView) {
-        _headContentView = [[UIView alloc]init];
-        _headContentView.backgroundColor = [UIColor clearColor];
+- (UIView *)headerContentView {
+    if (!_headerContentView) {
+        _headerContentView = [[UIView alloc]init];
+        _headerContentView.backgroundColor = [UIColor clearColor];
     }
-    return _headContentView;
+    return _headerContentView;
 }
 
 - (UIImageView *)avatarImage {
@@ -322,29 +301,36 @@
     return _nickNameLB;
 }
 
-- (UIImageView *)headImageView {
-    if (!_headImageView) {
-        _headImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"center_bg.jpg"]];
-        _headImageView.backgroundColor = [UIColor greenColor];
-        _headImageView.userInteractionEnabled = YES;
-        _headImageView.frame = CGRectMake(0, -headimageHeight, kScreenWidth, headimageHeight);
+- (UIImageView *)headerImageView {
+    if (!_headerImageView) {
+        _headerImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"center_bg.jpg"]];
+        _headerImageView.backgroundColor = [UIColor greenColor];
+        _headerImageView.userInteractionEnabled = YES;
+        _headerImageView.frame = CGRectMake(0, -HeaderImageViewHeight, SCREEN_WIDTH, HeaderImageViewHeight);
     }
-    return _headImageView;
+    return _headerImageView;
 }
 
 /*
  * 这里可以设置替换你喜欢的segmentView
  */
--(UIView *)setPageViewControllers {
+- (UIView *)setPageViewControllers {
     if (!_segmentView) {
         //设置子控制器
         FirstViewController *firstVC  = [[FirstViewController alloc] init];
         SecondViewController *secondVC = [[SecondViewController alloc] init];
         ThirdViewController *thirdVC  = [[ThirdViewController alloc] init];
         SecondViewController *fourthVC = [[SecondViewController alloc] init];
-        NSArray *controllers = @[firstVC, secondVC, thirdVC, fourthVC];
-        NSArray *titleArray = @[@"普吉岛", @"夏威夷", @"洛杉矶", @"新泽西"];
-        CenterSegmentView *segmentView = [[CenterSegmentView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - _naviBarHeight) controllers:controllers titleArray:(NSArray *)titleArray ParentController:self selectBtnIndex:self.selectIndex ?: 0 lineWidth:kScreenWidth / 5 lineHeight:3];
+        FirstViewController *fifthVC  = [[FirstViewController alloc] init];
+        SecondViewController *sixthVC = [[SecondViewController alloc] init];
+        FirstViewController *seventhVC  = [[FirstViewController alloc] init];
+        ThirdViewController *eighthVC  = [[ThirdViewController alloc] init];
+        SecondViewController *ninthVC = [[SecondViewController alloc] init];
+        NSArray *controllers = @[firstVC, secondVC, thirdVC, fourthVC, fifthVC, sixthVC, seventhVC, eighthVC, ninthVC];
+        NSArray *titleArray = @[@"华盛顿", @"夏威夷", @"拉斯维加斯", @"纽约", @"西雅图", @"底特律", @"费城", @"旧金山", @"芝加哥"];
+        SegmentView *segmentView = [[SegmentView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - STATUS_BAR_HEIGHT - NAVIGATION_BAR_HEIGHT) controllers:controllers titleArray:(NSArray *)titleArray parentController:self];
+        //注意：不能通过初始化方法传递selectedIndex的初始值，因为内部使用的是Masonry布局的方式, 否则设置selectedIndex不起作用
+        segmentView.selectedIndex = self.selectedIndex;
         _segmentView = segmentView;
     }
     return _segmentView;

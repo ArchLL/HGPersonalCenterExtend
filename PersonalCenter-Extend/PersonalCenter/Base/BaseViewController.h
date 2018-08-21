@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface BaseViewController : UIViewController
-
-@property (nonatomic, assign) CGFloat naviBarHeight;
+@property (nonatomic, readonly, assign) CGFloat naviViewHeight;
 
 @end

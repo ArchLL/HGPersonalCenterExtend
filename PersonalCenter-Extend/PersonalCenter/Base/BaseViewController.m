@@ -10,7 +10,7 @@
 
 @interface BaseViewController ()
 @property (nonatomic, strong) UIView *naviView;
-
+@property (nonatomic, assign) CGFloat naviViewHeight;
 @end
 
 @implementation BaseViewController
@@ -18,13 +18,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    //接收宏定义的值，因为下面要做运算，这个宏含有三目运算不能直接拿来运算,会出错
-    self.naviBarHeight = NaviBarHeight;
-    if (@available(iOS 11.0, *)) {
-        [[UIScrollView appearance] setContentInsetAdjustmentBehavior:UIScrollViewContentInsetAdjustmentNever];
-    }else {
-        self.automaticallyAdjustsScrollViewInsets = NO;
-    }
+    self.naviViewHeight = STATUS_BAR_HEIGHT + 44;
+    [self setupNaviView];
+}
+
+- (void)setupNaviView {
     //设置透明的背景图
     [self.navigationController.navigationBar setBackgroundImage:[self drawPngImageWithAlpha:0] forBarMetrics:(UIBarMetricsDefault)];
     //消除导航栏底部的黑线
@@ -59,7 +57,7 @@
 
 - (UIView *)naviView {
     if (!_naviView) {
-        _naviView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, NaviBarHeight)];
+        _naviView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.naviViewHeight)];
         _naviView.backgroundColor = kRGBA(0, 255, 143, 1.0);
     }
     return _naviView;

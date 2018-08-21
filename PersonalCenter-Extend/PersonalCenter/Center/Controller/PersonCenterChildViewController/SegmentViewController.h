@@ -7,10 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SegmentHeaderView.h"
 
-#define segmentMenuHeight 41
-
-//子控制器的父类
 @interface SegmentViewController : UIViewController
-@property (nonatomic, assign) CGFloat topHeight;
+
 @end

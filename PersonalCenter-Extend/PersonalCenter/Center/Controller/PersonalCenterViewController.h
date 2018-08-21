@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PersonalCenterViewController : UIViewController
-@property (nonatomic, assign) NSUInteger selectIndex;//当前选中的分页视图
+@interface PersonalCenterViewController : BaseViewController
+@property (nonatomic, assign) NSUInteger selectedIndex;
 @property (nonatomic, readonly, assign) BOOL isBacking;
 
 @end

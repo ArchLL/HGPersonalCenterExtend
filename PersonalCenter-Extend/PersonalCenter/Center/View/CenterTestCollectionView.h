@@ -1,5 +1,5 @@
 //
-//  CenterTestCellTWO.h
+//  CenterTestCellmoveLine.h
 //  PersonalCenter
 //
 //  Created by Arch on 2018/5/19.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CenterTestCellTWO : UITableViewCell
+@interface CenterTestCollectionView : UITableViewCell
 
 @end

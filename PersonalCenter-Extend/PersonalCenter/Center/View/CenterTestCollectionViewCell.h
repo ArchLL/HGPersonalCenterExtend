@@ -1,5 +1,5 @@
 //
-//  CenterTestCellONE.h
+//  CenterTestCollectionViewCell.h
 //  PersonalCenter
 //
 //  Created by Arch on 2018/5/19.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CenterTestCellONE : UITableViewCell
+@interface CenterTestCollectionViewCell : UICollectionViewCell
 
 @end
