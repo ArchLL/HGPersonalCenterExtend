@@ -1,6 +1,7 @@
 # PersonalCenter-Extend
 完美解决UIScrollView嵌套滑动手势冲突，适用于更为复杂的个人主页，电商首页，淘宝/天猫店铺页等    
 
+主要内容： 
 1.适配iphoneX；    
 2.解决外层和内层滚动视图的上下滑动冲突问题；  
 3.解决外层tableView的子视图左右滚动不能和外层tableView上下滑动互斥的问题；  
