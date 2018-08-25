@@ -1,5 +1,5 @@
 //
-//  MyMessageViewController.h
+//  MessageViewController.h
 //  PersonalCenter
 //
 //  Created by Arch on 2017/6/19.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MyMessageViewController : BaseViewController
+@interface MessageViewController : BaseViewController
 
 @end

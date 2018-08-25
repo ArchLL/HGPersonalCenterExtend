@@ -13,7 +13,7 @@
 #import "SecondViewController.h"
 #import "ThirdViewController.h"
 #import "CenterTouchTableView.h"
-#import "MyMessageViewController.h"
+#import "MessageViewController.h"
 
 static CGFloat const HeaderImageViewHeight = 240;
 
@@ -23,8 +23,8 @@ static CGFloat const HeaderImageViewHeight = 240;
 @property (nonatomic, strong) UIView *naviView;
 @property (nonatomic, strong) UIImageView *headerImageView;
 @property (nonatomic, strong) UIView *headerContentView;
-@property (nonatomic, strong) UIImageView *avatarImage;
-@property (nonatomic, strong) UILabel *nickNameLB;
+@property (nonatomic, strong) UIImageView *avatarImageView;
+@property (nonatomic, strong) UILabel *nickNameLabel;
 @property (nonatomic, strong) UIView *footerView;
 /**mainTableView是否可以滚动*/
 @property (nonatomic, assign) BOOL canScroll;
@@ -88,8 +88,8 @@ static CGFloat const HeaderImageViewHeight = 240;
     [self.view addSubview:self.mainTableView];
     [self.view addSubview:self.naviView];
     [self.headerImageView addSubview:self.headerContentView];
-    [self.headerContentView addSubview:self.avatarImage];
-    [self.headerContentView addSubview:self.nickNameLB];
+    [self.headerContentView addSubview:self.avatarImageView];
+    [self.headerContentView addSubview:self.nickNameLabel];
     [self.mainTableView addSubview:self.headerImageView];
     
     [self.headerContentView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -97,12 +97,12 @@ static CGFloat const HeaderImageViewHeight = 240;
         make.width.mas_equalTo(SCREEN_WIDTH);
         make.height.mas_equalTo(HeaderImageViewHeight);
     }];
-    [self.avatarImage mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.avatarImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.headerContentView);
         make.size.mas_equalTo(CGSizeMake(80, 80));
         make.bottom.mas_equalTo(-70);
     }];
-    [self.nickNameLB mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.nickNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.headerContentView);
         make.width.mas_lessThanOrEqualTo(200);
         make.bottom.mas_equalTo(-40);
@@ -176,8 +176,8 @@ static CGFloat const HeaderImageViewHeight = 240;
 }
 
 #pragma mark - 查看消息
-- (void)checkMessage {
-    MyMessageViewController *myMessageVC = [[MyMessageViewController alloc]init];
+- (void)gotoMessagePage {
+    MessageViewController *myMessageVC = [[MessageViewController alloc]init];
     [self.navigationController pushViewController:myMessageVC animated:YES];
 }
 
@@ -242,7 +242,7 @@ static CGFloat const HeaderImageViewHeight = 240;
         [messageButton setImage:[UIImage imageNamed:@"message"] forState:(UIControlStateNormal)];
         messageButton.frame = CGRectMake(SCREEN_WIDTH - 35, 8 + STATUS_BAR_HEIGHT, 25, 25);
         messageButton.adjustsImageWhenHighlighted = YES;
-        [messageButton addTarget:self action:@selector(checkMessage) forControlEvents:(UIControlEventTouchUpInside)];
+        [messageButton addTarget:self action:@selector(gotoMessagePage) forControlEvents:(UIControlEventTouchUpInside)];
         [_naviView addSubview:messageButton];
     }
     return _naviView;
@@ -275,30 +275,30 @@ static CGFloat const HeaderImageViewHeight = 240;
     return _headerContentView;
 }
 
-- (UIImageView *)avatarImage {
-    if (!_avatarImage) {
-        _avatarImage = [[UIImageView alloc] init];
-        _avatarImage.image = [UIImage imageNamed:@"center_avatar.jpeg"];
-        _avatarImage.userInteractionEnabled = YES;
-        _avatarImage.layer.masksToBounds = YES;
-        _avatarImage.layer.borderWidth = 1;
-        _avatarImage.layer.borderColor = kRGBA(255, 253, 253, 1).CGColor;
-        _avatarImage.layer.cornerRadius = 40;
+- (UIImageView *)avatarImageView {
+    if (!_avatarImageView) {
+        _avatarImageView = [[UIImageView alloc] init];
+        _avatarImageView.image = [UIImage imageNamed:@"center_avatar.jpeg"];
+        _avatarImageView.userInteractionEnabled = YES;
+        _avatarImageView.layer.masksToBounds = YES;
+        _avatarImageView.layer.borderWidth = 1;
+        _avatarImageView.layer.borderColor = kRGBA(255, 253, 253, 1).CGColor;
+        _avatarImageView.layer.cornerRadius = 40;
     }
-    return _avatarImage;
+    return _avatarImageView;
 }
 
-- (UILabel *)nickNameLB {
-    if (!_nickNameLB) {
-        _nickNameLB = [[UILabel alloc] init];
-        _nickNameLB.font = [UIFont systemFontOfSize:16];
-        _nickNameLB.textColor = [UIColor whiteColor];
-        _nickNameLB.textAlignment = NSTextAlignmentCenter;
-        _nickNameLB.lineBreakMode = NSLineBreakByWordWrapping;
-        _nickNameLB.numberOfLines = 0;
-        _nickNameLB.text = @"撒哈拉下雪了";
+- (UILabel *)nickNameLabel {
+    if (!_nickNameLabel) {
+        _nickNameLabel = [[UILabel alloc] init];
+        _nickNameLabel.font = [UIFont systemFontOfSize:16];
+        _nickNameLabel.textColor = [UIColor whiteColor];
+        _nickNameLabel.textAlignment = NSTextAlignmentCenter;
+        _nickNameLabel.lineBreakMode = NSLineBreakByWordWrapping;
+        _nickNameLabel.numberOfLines = 0;
+        _nickNameLabel.text = @"撒哈拉下雪了";
     }
-    return _nickNameLB;
+    return _nickNameLabel;
 }
 
 - (UIImageView *)headerImageView {

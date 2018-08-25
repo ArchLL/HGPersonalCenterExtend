@@ -35,7 +35,7 @@
 		D277E1F11EF78889001C0DC1 /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = D277E1F01EF78889001C0DC1 /* back.png */; };
 		D277E1F31EF78BA6001C0DC1 /* message.png in Resources */ = {isa = PBXBuildFile; fileRef = D277E1F21EF78BA6001C0DC1 /* message.png */; };
 		D277E1F51EF78C3C001C0DC1 /* cartoon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D277E1F41EF78C3C001C0DC1 /* cartoon.jpg */; };
-		D277E1F81EF78CA3001C0DC1 /* MyMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D277E1F71EF78CA3001C0DC1 /* MyMessageViewController.m */; };
+		D277E1F81EF78CA3001C0DC1 /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D277E1F71EF78CA3001C0DC1 /* MessageViewController.m */; };
 		D277E1FC1EF78DA3001C0DC1 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D277E1FB1EF78DA3001C0DC1 /* BaseViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -86,8 +86,8 @@
 		D277E1F01EF78889001C0DC1 /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
 		D277E1F21EF78BA6001C0DC1 /* message.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = message.png; sourceTree = "<group>"; };
 		D277E1F41EF78C3C001C0DC1 /* cartoon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = cartoon.jpg; sourceTree = "<group>"; };
-		D277E1F61EF78CA3001C0DC1 /* MyMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyMessageViewController.h; sourceTree = "<group>"; };
-		D277E1F71EF78CA3001C0DC1 /* MyMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyMessageViewController.m; sourceTree = "<group>"; };
+		D277E1F61EF78CA3001C0DC1 /* MessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageViewController.h; sourceTree = "<group>"; };
+		D277E1F71EF78CA3001C0DC1 /* MessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageViewController.m; sourceTree = "<group>"; };
 		D277E1FA1EF78DA3001C0DC1 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		D277E1FB1EF78DA3001C0DC1 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		D8C0A4C5A30C82D2D3EF880E /* Pods-PersonalCenter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PersonalCenter.release.xcconfig"; path = "Pods/Target Support Files/Pods-PersonalCenter/Pods-PersonalCenter.release.xcconfig"; sourceTree = "<group>"; };
@@ -216,8 +216,8 @@
 			children = (
 				D24F5E441EF3D9FA0011AB07 /* PersonalCenterViewController.h */,
 				D24F5E451EF3D9FA0011AB07 /* PersonalCenterViewController.m */,
-				D277E1F61EF78CA3001C0DC1 /* MyMessageViewController.h */,
-				D277E1F71EF78CA3001C0DC1 /* MyMessageViewController.m */,
+				D277E1F61EF78CA3001C0DC1 /* MessageViewController.h */,
+				D277E1F71EF78CA3001C0DC1 /* MessageViewController.m */,
 				D24F5E461EF3D9FA0011AB07 /* PersonCenterChildViewController */,
 			);
 			path = Controller;
@@ -421,7 +421,7 @@
 				A921769320B01C8500F2AD46 /* CenterTestCollectionViewCell.m in Sources */,
 				D24F5E301EF3D9CD0011AB07 /* AppDelegate.m in Sources */,
 				53137B961F70F556002A95D8 /* MBProgressHUD+NHAdd.m in Sources */,
-				D277E1F81EF78CA3001C0DC1 /* MyMessageViewController.m in Sources */,
+				D277E1F81EF78CA3001C0DC1 /* MessageViewController.m in Sources */,
 				D24F5E651EF3D9FA0011AB07 /* RootViewController.m in Sources */,
 				D24F5E2D1EF3D9CD0011AB07 /* main.m in Sources */,
 				D24F5E601EF3D9FA0011AB07 /* SegmentView.m in Sources */,

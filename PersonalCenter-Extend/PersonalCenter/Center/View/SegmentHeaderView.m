@@ -51,10 +51,10 @@
 
 CGFloat const SegmentHeaderViewHeight = 41;
 static NSString * const SegmentHeaderViewCollectionViewCellIdentifier = @"SegmentHeaderViewCollectionViewCell";
-static CGFloat const moveLineHeight = 2;
-static CGFloat const separatorHeight = 0.5;
-static CGFloat const cellSpacing = 15;
-static CGFloat const collectionViewHeight = SegmentHeaderViewHeight - separatorHeight;
+static CGFloat const MoveLineHeight = 2;
+static CGFloat const SeparatorHeight = 0.5;
+static CGFloat const CellSpacing = 15;
+static CGFloat const CollectionViewHeight = SegmentHeaderViewHeight - SeparatorHeight;
 
 @implementation SegmentHeaderView
 
@@ -92,16 +92,16 @@ static CGFloat const collectionViewHeight = SegmentHeaderViewHeight - separatorH
     
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.mas_equalTo(0);
-        make.height.mas_equalTo(collectionViewHeight);
+        make.height.mas_equalTo(CollectionViewHeight);
     }];
     [self.moveLine mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(collectionViewHeight - moveLineHeight);
-        make.height.mas_equalTo(moveLineHeight);
+        make.top.mas_equalTo(CollectionViewHeight - MoveLineHeight);
+        make.height.mas_equalTo(MoveLineHeight);
     }];
     [self.separator mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.collectionView.mas_bottom);
         make.left.right.mas_equalTo(0);
-        make.height.mas_equalTo(separatorHeight);
+        make.height.mas_equalTo(SeparatorHeight);
     }];
 }
 
@@ -130,7 +130,7 @@ static CGFloat const collectionViewHeight = SegmentHeaderViewHeight - separatorH
     CGFloat firstCellWidth = [self getWidthWithContent:self.titleArray[0]];
     [self.moveLine mas_updateConstraints:^(MASConstraintMaker *make) {
         make.width.mas_equalTo(firstCellWidth);
-        make.left.mas_equalTo(cellSpacing);
+        make.left.mas_equalTo(CellSpacing);
     }];
 }
 
@@ -138,8 +138,8 @@ static CGFloat const collectionViewHeight = SegmentHeaderViewHeight - separatorH
     SegmentHeaderViewCollectionViewCell *cell = [self getCell:_selectedIndex];
     [UIView animateWithDuration:0.25 animations:^{
         [self.moveLine mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(collectionViewHeight - moveLineHeight);
-            make.height.mas_equalTo(moveLineHeight);
+            make.top.mas_equalTo(CollectionViewHeight - MoveLineHeight);
+            make.height.mas_equalTo(MoveLineHeight);
             make.width.centerX.equalTo(cell.titleLabel);
         }];
         [self.collectionView setNeedsLayout];
@@ -148,7 +148,7 @@ static CGFloat const collectionViewHeight = SegmentHeaderViewHeight - separatorH
 }
 
 - (CGFloat)getWidthWithContent:(NSString *)content {
-    CGRect rect = [content boundingRectWithSize:CGSizeMake(MAXFLOAT, collectionViewHeight)
+    CGRect rect = [content boundingRectWithSize:CGSizeMake(MAXFLOAT, CollectionViewHeight)
                                         options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading
                                      attributes:@{NSFontAttributeName:NORMAL_FONT}
                                         context:nil
@@ -211,10 +211,10 @@ static CGFloat const collectionViewHeight = SegmentHeaderViewHeight - separatorH
         UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
         flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         flowLayout.minimumLineSpacing = 0;
-        flowLayout.minimumInteritemSpacing = cellSpacing;
-        flowLayout.sectionInset = UIEdgeInsetsMake(0, cellSpacing, 0, cellSpacing);
+        flowLayout.minimumInteritemSpacing = CellSpacing;
+        flowLayout.sectionInset = UIEdgeInsetsMake(0, CellSpacing, 0, CellSpacing);
         
-        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, kWidth, collectionViewHeight) collectionViewLayout:flowLayout];
+        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, kWidth, CollectionViewHeight) collectionViewLayout:flowLayout];
         _collectionView.showsHorizontalScrollIndicator = NO;
         _collectionView.backgroundColor = [UIColor yellowColor];
         _collectionView.delegate = self;
