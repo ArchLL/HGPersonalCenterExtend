@@ -23,7 +23,7 @@
     if ( self = [super initWithFrame:frame]) {
         self.frame = frame;
         
-        self.headerView = [[SegmentHeaderView alloc] initWithFrame:CGRectZero titleArray:titleArray];
+        self.headerView = [[SegmentHeaderView alloc] initWithFrame:CGRectMake(0, 0, kWidth, SegmentHeaderViewHeight) titleArray:titleArray];
         [self addSubview:self.headerView];
         [self.headerView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.left.right.mas_equalTo(0);

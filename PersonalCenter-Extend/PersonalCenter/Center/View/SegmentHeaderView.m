@@ -8,6 +8,7 @@
 
 #import "SegmentHeaderView.h"
 
+#define kWidth self.frame.size.width
 #define NORMAL_FONT [UIFont systemFontOfSize:18]
 #define NORMAL_COLOR [UIColor blackColor]
 #define SELECTED_COLOR [UIColor orangeColor]
@@ -20,6 +21,7 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
+        self.frame = frame;
         [self.contentView addSubview:self.titleLabel];
         [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.mas_equalTo(0);
@@ -52,7 +54,7 @@ static NSString * const SegmentHeaderViewCollectionViewCellIdentifier = @"Segmen
 static CGFloat const moveLineHeight = 2;
 static CGFloat const separatorHeight = 0.5;
 static CGFloat const cellSpacing = 15;
-static CGFloat const collectionViewHeight = SegmentHeaderViewHeight - moveLineHeight - separatorHeight;
+static CGFloat const collectionViewHeight = SegmentHeaderViewHeight - separatorHeight;
 
 @implementation SegmentHeaderView
 
@@ -85,19 +87,20 @@ static CGFloat const collectionViewHeight = SegmentHeaderViewHeight - moveLineHe
 #pragma mark - Private Method
 - (void)setupSubViews {
     [self addSubview:self.collectionView];
-    [self addSubview:self.moveLine];
+    [self.collectionView addSubview:self.moveLine];
     [self addSubview:self.separator];
     
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.mas_equalTo(0);
-        make.bottom.equalTo(self.separator.mas_top).offset(0);
+        make.height.mas_equalTo(collectionViewHeight);
     }];
     [self.moveLine mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self.separator.mas_top).offset(0);
+        make.top.mas_equalTo(collectionViewHeight - moveLineHeight);
         make.height.mas_equalTo(moveLineHeight);
     }];
     [self.separator mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.left.right.mas_equalTo(0);
+        make.top.equalTo(self.collectionView.mas_bottom);
+        make.left.right.mas_equalTo(0);
         make.height.mas_equalTo(separatorHeight);
     }];
 }
@@ -135,12 +138,12 @@ static CGFloat const collectionViewHeight = SegmentHeaderViewHeight - moveLineHe
     SegmentHeaderViewCollectionViewCell *cell = [self getCell:_selectedIndex];
     [UIView animateWithDuration:0.25 animations:^{
         [self.moveLine mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.bottom.equalTo(self.separator.mas_top).offset(0);
+            make.top.mas_equalTo(collectionViewHeight - moveLineHeight);
             make.height.mas_equalTo(moveLineHeight);
             make.width.centerX.equalTo(cell.titleLabel);
         }];
-        [self setNeedsLayout];
-        [self layoutIfNeeded];
+        [self.collectionView setNeedsLayout];
+        [self.collectionView layoutIfNeeded];
     }];
 }
 
@@ -211,7 +214,7 @@ static CGFloat const collectionViewHeight = SegmentHeaderViewHeight - moveLineHe
         flowLayout.minimumInteritemSpacing = cellSpacing;
         flowLayout.sectionInset = UIEdgeInsetsMake(0, cellSpacing, 0, cellSpacing);
         
-        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flowLayout];
+        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, kWidth, collectionViewHeight) collectionViewLayout:flowLayout];
         _collectionView.showsHorizontalScrollIndicator = NO;
         _collectionView.backgroundColor = [UIColor yellowColor];
         _collectionView.delegate = self;

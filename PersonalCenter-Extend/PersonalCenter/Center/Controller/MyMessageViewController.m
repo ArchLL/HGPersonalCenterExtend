@@ -9,7 +9,6 @@
 #import "MyMessageViewController.h"
 
 @implementation MyMessageViewController
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"我的消息";
