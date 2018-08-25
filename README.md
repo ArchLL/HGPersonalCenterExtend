@@ -12,6 +12,7 @@
 最新更新内容： 
 
 1.优化代码，增加可读性；  
-2.菜单栏由scrollView改为CollectionVIew，体验更好, 菜单栏这一部分已封装好，需要的小伙伴很方便移植到自己的项目中使用；  
+2.菜单栏由scrollView改为CollectionVIew，体验更好, 菜单栏这一部分已封装好，需要的小伙伴很方便移植到自己的项目中使用； 
+3.后面我会将菜单栏部分单独拿出来，做一些优化和增加几种动画的样式；
 
 ![image](https://github.com/ArchLL/PersonalCenter-Extend/blob/master/show.gif)
