@@ -73,7 +73,7 @@
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    NSUInteger selectedIndex = (NSUInteger)self.contentScrollView.contentOffset.x / kWidth;
+    NSUInteger selectedIndex = (NSUInteger)(self.contentScrollView.contentOffset.x / kWidth);
     [self.headerView changeItemWithTargetIndex:selectedIndex];
     [[NSNotificationCenter defaultCenter] postNotificationName:CurrentSelectedChildViewControllerIndex object:nil userInfo:@{@"selectedPageIndex" : @(selectedIndex)}];
 }

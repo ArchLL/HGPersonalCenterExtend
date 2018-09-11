@@ -47,6 +47,7 @@
 @property (nonatomic, copy) NSArray *titleArray;
 @property (nonatomic, strong) UIView *moveLine;
 @property (nonatomic, strong) UIView *separator;
+@property (nonatomic, assign) BOOL selectedCellExist;
 @end
 
 CGFloat const SegmentHeaderViewHeight = 41;
@@ -75,9 +76,13 @@ static CGFloat const CollectionViewHeight = SegmentHeaderViewHeight - SeparatorH
     }
     
     SegmentHeaderViewCollectionViewCell *selectedCell = [self getCell:_selectedIndex];
-    selectedCell.titleLabel.textColor = NORMAL_COLOR;
+    if (selectedCell) {
+        selectedCell.titleLabel.textColor = NORMAL_COLOR;
+    }
     SegmentHeaderViewCollectionViewCell *targetCell = [self getCell:targetIndex];
-    targetCell.titleLabel.textColor = SELECTED_COLOR;
+    if (targetCell) {
+        targetCell.titleLabel.textColor = SELECTED_COLOR;
+    }
     
     _selectedIndex = targetIndex;
     
@@ -114,15 +119,19 @@ static CGFloat const CollectionViewHeight = SegmentHeaderViewHeight - SeparatorH
     [self.collectionView setNeedsLayout];
     [self.collectionView layoutIfNeeded];
     
-    //方法一:
-    [self.collectionView selectItemAtIndexPath:[NSIndexPath indexPathForItem:_selectedIndex inSection:0] animated:YES scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
-    //方法二：
-    //        [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:_selectedIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
-    
-    [self updateMoveLineLocation];
-    
+    [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:_selectedIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
+
     if (self.selectedItemHelper) {
         self.selectedItemHelper(_selectedIndex);
+    }
+    
+    SegmentHeaderViewCollectionViewCell *selectedCell = [self getCell:_selectedIndex];
+    if (selectedCell) {
+        self.selectedCellExist = YES;
+        [self updateMoveLineLocation];
+    } else {
+        self.selectedCellExist = NO;
+        //这种情况下updateMoveLineLocation将在self.collectionView滚动结束后执行（代理方法scrollViewDidEndScrollingAnimation）
     }
 }
 
@@ -178,6 +187,12 @@ static CGFloat const CollectionViewHeight = SegmentHeaderViewHeight - SeparatorH
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
     [self changeItemWithTargetIndex:indexPath.row];
+}
+
+- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
+    if (!self.selectedCellExist) {
+        [self updateMoveLineLocation];
+    }
 }
 
 #pragma mark - Setter
