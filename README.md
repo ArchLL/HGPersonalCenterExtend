@@ -3,6 +3,9 @@
 
 ### 关于头部背景视图放大的效果可移步：[ARPersonalCenter](https://github.com/ArchLL/ARPersonalCenter)
 
+### 博客地址：[简书]https://www.jianshu.com/p/8b87837d9e3a
+如有疑问或者建议可在Issues下评论或者给我发简信
+
 ### 主要内容： 
 
 #### 1.适配iphoneX；  
