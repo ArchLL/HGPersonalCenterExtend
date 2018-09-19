@@ -55,7 +55,7 @@ static NSString * const SegmentHeaderViewCollectionViewCellIdentifier = @"Segmen
 static CGFloat const MoveLineHeight = 2;
 static CGFloat const SeparatorHeight = 0.5;
 static CGFloat const CellSpacing = 15;
-static CGFloat const CollectionViewHeight = SegmentHeaderViewHeight - SeparatorHeight;
+#define CollectionViewHeight (SegmentHeaderViewHeight - SeparatorHeight)
 
 @implementation SegmentHeaderView
 

@@ -8,6 +8,7 @@
 
 #import "SegmentViewController.h"
 @interface SegmentViewController () <UIGestureRecognizerDelegate, UIScrollViewDelegate>
+
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, assign) BOOL canScroll;
 @property (nonatomic, strong) NSNumber *selectedPageIndex;
@@ -24,6 +25,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(acceptMsg:) name:@"leaveTop" object:nil];
     //切换分页选项的通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(acceptMsg:) name:CurrentSelectedChildViewControllerIndex object:nil];
+    //返回顶部的通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(acceptMsg:) name:SegementViewChildVCBackToTop object:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -56,6 +59,8 @@
     } else if ([notificationName isEqualToString:CurrentSelectedChildViewControllerIndex]) {
         NSDictionary *userInfo = notification.userInfo;
         self.selectedPageIndex = userInfo[@"selectedPageIndex"];
+    } else if ([notificationName isEqualToString:SegementViewChildVCBackToTop]) {
+        [self.scrollView setContentOffset:CGPointZero];
     }
 }
 

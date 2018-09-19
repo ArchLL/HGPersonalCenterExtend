@@ -18,6 +18,7 @@
 static CGFloat const HeaderImageViewHeight = 240;
 
 @interface PersonalCenterViewController () <UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate>
+
 @property (nonatomic, strong) CenterTouchTableView *mainTableView;
 @property (nonatomic, strong) SegmentView *segmentView;
 @property (nonatomic, strong) UIView *naviView;
@@ -26,14 +27,8 @@ static CGFloat const HeaderImageViewHeight = 240;
 @property (nonatomic, strong) UIImageView *avatarImageView;
 @property (nonatomic, strong) UILabel *nickNameLabel;
 @property (nonatomic, strong) UIView *footerView;
-/**mainTableView是否可以滚动*/
-@property (nonatomic, assign) BOOL canScroll;
- /**segmentHeaderView到达顶部, mainTableView不能移动*/
-@property (nonatomic, assign) BOOL isTopIsCanNotMoveTabView;
-/**segmentHeaderView离开顶部,childViewController的滚动视图不能移动*/
-@property (nonatomic, assign) BOOL isTopIsCanNotMoveTabViewPre;
-/**是否正在pop*/
-@property (nonatomic, assign) BOOL isBacking;
+@property (nonatomic, assign) BOOL canScroll; //mainTableView是否可以滚动
+@property (nonatomic, assign) BOOL isBacking; //是否正在pop
 
 @end
 
@@ -48,10 +43,11 @@ static CGFloat const HeaderImageViewHeight = 240;
     }
     //如果使用自定义的按钮去替换系统默认返回按钮，会出现滑动返回手势失效的情况
     self.navigationController.interactivePopGestureRecognizer.delegate = self;
+    
     [self setupSubViews];
     //注册允许外层tableView滚动通知-解决和分页视图的上下滑动冲突问题
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(acceptMsg:) name:@"leaveTop" object:nil];
-    //分页的scrollView左右滑动的时候禁止mainTableView滑动，停止滑动的时候允许mainTableView滑动
+    //切换分页时禁止mainTableView上下滑动，停止分页左右滑动的时候允许mainTableView滑动
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(acceptMsg:) name:IsEnablePersonalCenterVCMainTableViewScroll object:nil];
 }
 
@@ -131,41 +127,57 @@ static CGFloat const HeaderImageViewHeight = 240;
 #pragma mark - UITableViewDelegate
 /**
  * 处理联动
- * 因为要实现下拉头部放大的问题，tableView设置了contentInset，所以试图刚加载的时候会调用一遍这个方法，所以要做一些特殊处理，
  */
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     //当前偏移量
-    CGFloat yOffset  = scrollView.contentOffset.y;
-    //临界点偏移量(吸顶临界点)
-    CGFloat tabyOffset = scrollView.contentSize.height - SCREEN_HEIGHT;
+    CGFloat currentOffsetY = scrollView.contentOffset.y;
+    //吸顶临界点(此时的临界点不是感官上导航栏的底部，而是屏幕的顶部)
+    CGFloat criticalPointOffsetY = scrollView.contentSize.height - SCREEN_HEIGHT;
     
     //更改导航栏的背景图的透明度
     CGFloat alpha = 0;
-    if (yOffset < HeaderImageViewHeight - STATUS_BAR_HEIGHT - NAVIGATION_BAR_HEIGHT) {
-        alpha = yOffset/(HeaderImageViewHeight - STATUS_BAR_HEIGHT - NAVIGATION_BAR_HEIGHT);
+    if (currentOffsetY < HeaderImageViewHeight - STATUS_BAR_HEIGHT - NAVIGATION_BAR_HEIGHT) {
+        alpha = currentOffsetY / (HeaderImageViewHeight - STATUS_BAR_HEIGHT - NAVIGATION_BAR_HEIGHT);
     }else {
         alpha = 1;
     }
-    self.naviView.backgroundColor = kRGBA(255,126,15,alpha);
+    self.naviView.backgroundColor = kRGBA(255, 126, 15, alpha);
     
     //利用contentOffset处理内外层scrollView的滑动冲突问题
-    if (yOffset >= tabyOffset) {
-        scrollView.contentOffset = CGPointMake(0, tabyOffset);
-        self.isTopIsCanNotMoveTabView = YES;
-    }else{
-        self.isTopIsCanNotMoveTabView = NO;
-    }
-    
-    self.isTopIsCanNotMoveTabViewPre = !self.isTopIsCanNotMoveTabView;
-    
-    if (!self.isTopIsCanNotMoveTabViewPre) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"goTop" object:nil userInfo:@{@"canScroll":@"1"}];
+    /* 主要规则：
+     * ⚠️ 这里的”吸顶状态“和”到达临界点状态“不能完全划等号，这里一下子确实有点难以理解，我会在下方尽可能的简单   化表达出来
+     * 一、吸顶状态: segmentView到达临界点(这里设置的临界点是导航栏底部，可以自定义))
+          mainTableView不能滚动(固定mainTableView的位置-通过设置contentOffset的方式),segmentView的子控制器的tableView或collectionView在竖直方向上可以滚动；
+       二、未吸顶状态:
+          mainTableView能滚动,segmentView的子控制器的tableView或collectionView在竖直方向上不可以滚动；
+     */
+    if (currentOffsetY >= criticalPointOffsetY) {
+        /*
+         * 到达临界点 ：此状态下有两种情况
+         * 1.未吸顶状态 -> 吸顶状态
+         * 2.维持吸顶状态 (segmentView的子控制器的tableView或collectionView在竖直方向上的contentOffsetY大于0)
+         */
+        
+        //进入吸顶状态
         self.canScroll = NO;
-    }else {
-        if (!self.canScroll) {
-            self.mainTableView.contentOffset = CGPointMake(0, tabyOffset);
-        }else {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"goTop" object:nil userInfo:@{@"canScroll":@"1"}];
+        //下面这行代码是“维持吸顶状态”和“进入吸顶状态”的共同代码
+        scrollView.contentOffset = CGPointMake(0, criticalPointOffsetY);
+    } else {
+        /*
+         * 未达到临界点 ：此状态下有两种情况，且这两种情况完全相反，这也是引入一个canScroll属性的重要原因
+         * 1.吸顶状态 -> 不吸顶状态
+         * 2.维持吸顶状态 (segmentView的子控制器的tableView或collectionView在竖直方向上的contentOffsetY大于0)
+         */
+        
+        if (self.canScroll) {
+            /* 吸顶状态 -> 不吸顶状态
+             * segmentView的子控制器的tableView或collectionView在竖直方向上的contentOffsetY小于等于0时，会通过通知的方式改变self.canScroll的值；
+             */
             [[NSNotificationCenter defaultCenter] postNotificationName:@"goTop" object:nil userInfo:@{@"canScroll":@"0"}];
+        } else {
+            //维持吸顶状态
+            scrollView.contentOffset = CGPointMake(0, criticalPointOffsetY);
         }
     }
 }
@@ -224,6 +236,12 @@ static CGFloat const HeaderImageViewHeight = 240;
     return headerView;
 }
 
+- (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView {
+    //通知分页子控制器列表返回顶部
+    [[NSNotificationCenter defaultCenter] postNotificationName:SegementViewChildVCBackToTop object:nil];
+    return YES;
+}
+
 #pragma mark - Lazy
 - (UIView *)naviView {
     if (!_naviView) {
@@ -253,7 +271,6 @@ static CGFloat const HeaderImageViewHeight = 240;
         //⚠️这里的属性初始化一定要放在mainTableView.contentInset的设置滚动之前, 不然首次进来视图就会偏移到临界位置，contentInset会调用scrollViewDidScroll这个方法。
         //初始化变量
         self.canScroll = YES;
-        self.isTopIsCanNotMoveTabView = NO;
         
         _mainTableView = [[CenterTouchTableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) style:UITableViewStyleGrouped];
         _mainTableView.delegate = self;
@@ -296,7 +313,7 @@ static CGFloat const HeaderImageViewHeight = 240;
         _nickNameLabel.textAlignment = NSTextAlignmentCenter;
         _nickNameLabel.lineBreakMode = NSLineBreakByWordWrapping;
         _nickNameLabel.numberOfLines = 0;
-        _nickNameLabel.text = @"撒哈拉下雪了";
+        _nickNameLabel.text = @"下雪天";
     }
     return _nickNameLabel;
 }

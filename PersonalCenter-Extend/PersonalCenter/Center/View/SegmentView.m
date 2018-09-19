@@ -36,7 +36,7 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:CurrentSelectedChildViewControllerIndex object:nil userInfo:@{@"selectedPageIndex" : @(index)}];
         };
         
-        self.contentScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, SegmentHeaderViewHeight, kWidth, kHeight-SegmentHeaderViewHeight)];
+        self.contentScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, SegmentHeaderViewHeight, kWidth, kHeight - SegmentHeaderViewHeight)];
         self.contentScrollView.contentSize = CGSizeMake(kWidth * controllers.count, 0);
         self.contentScrollView.delegate = self;
         self.contentScrollView.showsHorizontalScrollIndicator = NO;
