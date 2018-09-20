@@ -60,13 +60,13 @@ static CGFloat const HeaderImageViewHeight = 240;
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     self.isBacking = NO;
-    [[NSNotificationCenter defaultCenter] postNotificationName:PersonalCenterVCBackingStatus object:nil userInfo:@{@"isBacking" : @(self.isBacking)}];
+    [[NSNotificationCenter defaultCenter] postNotificationName:PersonalCenterVCBackingStatus object:nil userInfo:@{@"isBacking":@(self.isBacking)}];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     self.isBacking = YES;
-    [[NSNotificationCenter defaultCenter] postNotificationName:PersonalCenterVCBackingStatus object:nil userInfo:@{@"isBacking" : @(self.isBacking)}];
+    [[NSNotificationCenter defaultCenter] postNotificationName:PersonalCenterVCBackingStatus object:nil userInfo:@{@"isBacking":@(self.isBacking)}];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -118,13 +118,19 @@ static CGFloat const HeaderImageViewHeight = 240;
         NSString *canScroll = userInfo[@"canScroll"];
         if ([canScroll isEqualToString:@"1"]) {
             self.mainTableView.scrollEnabled = YES;
-        }else if([canScroll isEqualToString:@"0"]) {
+        } else if ([canScroll isEqualToString:@"0"]) {
             self.mainTableView.scrollEnabled = NO;
         }
     }
 }
 
 #pragma mark - UITableViewDelegate
+- (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView {
+    //通知分页子控制器列表返回顶部
+    [[NSNotificationCenter defaultCenter] postNotificationName:SegementViewChildVCBackToTop object:nil];
+    return YES;
+}
+
 /**
  * 处理联动
  */
@@ -158,11 +164,11 @@ static CGFloat const HeaderImageViewHeight = 240;
          * 2.维持吸顶状态 (segmentView的子控制器的tableView或collectionView在竖直方向上的contentOffsetY大于0)
          */
         
-        //进入吸顶状态
-        self.canScroll = NO;
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"goTop" object:nil userInfo:@{@"canScroll":@"1"}];
         //下面这行代码是“维持吸顶状态”和“进入吸顶状态”的共同代码
         scrollView.contentOffset = CGPointMake(0, criticalPointOffsetY);
+        //进入吸顶状态
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"goTop" object:nil userInfo:@{@"canScroll":@"1"}];
+        self.canScroll = NO;
     } else {
         /*
          * 未达到临界点 ：此状态下有两种情况，且这两种情况完全相反，这也是引入一个canScroll属性的重要原因
@@ -170,14 +176,14 @@ static CGFloat const HeaderImageViewHeight = 240;
          * 2.维持吸顶状态 (segmentView的子控制器的tableView或collectionView在竖直方向上的contentOffsetY大于0)
          */
         
-        if (self.canScroll) {
-            /* 吸顶状态 -> 不吸顶状态
-             * segmentView的子控制器的tableView或collectionView在竖直方向上的contentOffsetY小于等于0时，会通过通知的方式改变self.canScroll的值；
-             */
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"goTop" object:nil userInfo:@{@"canScroll":@"0"}];
-        } else {
+        if (!self.canScroll) {
             //维持吸顶状态
             scrollView.contentOffset = CGPointMake(0, criticalPointOffsetY);
+        } else {
+            /* 吸顶状态 -> 不吸顶状态
+             * segmentView的子控制器的tableView或collectionView在竖直方向上的contentOffsetY小于等于0时，会通过通知的方式改变self.canScroll的值；
+             * 这里不再做多余处理，已经在SegmentViewController中做了处理-发送name为“leaveTop”的通知
+             */
         }
     }
 }
@@ -223,7 +229,7 @@ static CGFloat const HeaderImageViewHeight = 240;
     titleLB.font = [UIFont boldSystemFontOfSize:18];
     if (section == 0) {
         titleLB.text = @"第一分区";
-    }else {
+    } else {
         titleLB.text = @"第二分区";
     }
     [headerView addSubview:titleLB];
@@ -234,12 +240,6 @@ static CGFloat const HeaderImageViewHeight = 240;
         make.width.mas_equalTo(150);
     }];
     return headerView;
-}
-
-- (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView {
-    //通知分页子控制器列表返回顶部
-    [[NSNotificationCenter defaultCenter] postNotificationName:SegementViewChildVCBackToTop object:nil];
-    return YES;
 }
 
 #pragma mark - Lazy
