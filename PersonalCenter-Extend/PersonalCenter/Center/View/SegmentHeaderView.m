@@ -59,7 +59,7 @@ static CGFloat const CellSpacing = 15;
 
 @implementation SegmentHeaderView
 
-#pragma mark - Life
+#pragma mark - Life Cycle
 - (instancetype)initWithFrame:(CGRect)frame titleArray:(NSArray *)titleArray {
     if (self = [super initWithFrame:frame]) {
         [self setupSubViews];

@@ -16,7 +16,7 @@
 @end
 
 @implementation SegmentViewController
-#pragma mark - Life
+#pragma mark - Life Cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
     //子控制器视图到达顶部的通知
@@ -40,7 +40,7 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-#pragma mark - Notification
+#pragma mark - Private Methods
 - (void)acceptMsg:(NSNotification *)notification {
     NSString *notificationName = notification.name;
     if ([notificationName isEqualToString:@"goTop"]) {
@@ -64,6 +64,7 @@
     }
 }
 
+#pragma mark - UIScrollViewDelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     if (!self.canScroll) {
         [scrollView setContentOffset:CGPointZero];
@@ -75,6 +76,7 @@
     self.scrollView = scrollView;
 }
 
+#pragma mark - UIGestureRecognizerDelegate
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
     if ([self.selectedPageIndex isEqualToNumber:@0]) {
         return YES;

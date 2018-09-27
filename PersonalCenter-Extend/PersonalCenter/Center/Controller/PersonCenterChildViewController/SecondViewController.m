@@ -12,7 +12,6 @@ static NSString *const SecondViewControllerTableVIewCellIdentifier = @"SecondVie
 
 @interface SecondViewController () <UITableViewDelegate, UITableViewDataSource>
 @property(nonatomic, strong) UITableView *tableView;
-
 @end
 
 @implementation SecondViewController

@@ -33,6 +33,8 @@ static CGFloat const HeaderImageViewHeight = 240;
 @end
 
 @implementation PersonalCenterViewController
+
+#pragma mark - Life Cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"个人中心";
@@ -79,7 +81,7 @@ static CGFloat const HeaderImageViewHeight = 240;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-#pragma mark - 设置界面
+#pragma mark - Private Methods
 - (void)setupSubViews {
     [self.view addSubview:self.mainTableView];
     [self.view addSubview:self.naviView];
@@ -105,7 +107,15 @@ static CGFloat const HeaderImageViewHeight = 240;
     }];
 }
 
-#pragma mark -  Notification
+- (void)backAction {
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
+- (void)gotoMessagePage {
+    MessageViewController *myMessageVC = [[MessageViewController alloc]init];
+    [self.navigationController pushViewController:myMessageVC animated:YES];
+}
+
 - (void)acceptMsg:(NSNotification *)notification {
     NSDictionary *userInfo = notification.userInfo;
     
@@ -186,17 +196,6 @@ static CGFloat const HeaderImageViewHeight = 240;
              */
         }
     }
-}
-
-#pragma mark - 返回上一界面
-- (void)backAction {
-    [self.navigationController popToRootViewControllerAnimated:YES];
-}
-
-#pragma mark - 查看消息
-- (void)gotoMessagePage {
-    MessageViewController *myMessageVC = [[MessageViewController alloc]init];
-    [self.navigationController pushViewController:myMessageVC animated:YES];
 }
 
 #pragma mark - UITableViewDataSource
