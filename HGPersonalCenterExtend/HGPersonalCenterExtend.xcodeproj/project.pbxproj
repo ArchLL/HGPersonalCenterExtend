@@ -1,0 +1,515 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3E4C03C4CA0E5F97CD522012 /* libPods-HGPersonalCenterExtend.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3379ED4F74FC9D400EBAF696 /* libPods-HGPersonalCenterExtend.a */; };
+		5313760F1F6A7FCA00D646AF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5313760E1F6A7FCA00D646AF /* Foundation.framework */; };
+		531376111F6A7FD300D646AF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 531376101F6A7FD300D646AF /* UIKit.framework */; };
+		A9F80B8321DF0113000334BE /* HGBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9F80B6421DF0113000334BE /* HGBaseViewController.m */; };
+		A9F80B8421DF0113000334BE /* HGMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9F80B6521DF0113000334BE /* HGMessageViewController.m */; };
+		A9F80B8521DF0113000334BE /* HGPersonalCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9F80B6921DF0113000334BE /* HGPersonalCenterViewController.m */; };
+		A9F80B8621DF0113000334BE /* HGPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9F80B6B21DF0113000334BE /* HGPageViewController.m */; };
+		A9F80B8721DF0113000334BE /* HGFirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9F80B6C21DF0113000334BE /* HGFirstViewController.m */; };
+		A9F80B8821DF0113000334BE /* HGThirdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9F80B6E21DF0113000334BE /* HGThirdViewController.m */; };
+		A9F80B8921DF0113000334BE /* HGSecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9F80B7021DF0113000334BE /* HGSecondViewController.m */; };
+		A9F80B8A21DF0113000334BE /* HGSegmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9F80B7321DF0113000334BE /* HGSegmentViewController.m */; };
+		A9F80B8B21DF0113000334BE /* HGDoraemonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9F80B7821DF0113000334BE /* HGDoraemonCell.xib */; };
+		A9F80B8C21DF0113000334BE /* HGCenterBaseTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = A9F80B7A21DF0113000334BE /* HGCenterBaseTableView.m */; };
+		A9F80B8D21DF0113000334BE /* HGDoraemonCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A9F80B7C21DF0113000334BE /* HGDoraemonCollectionViewCell.m */; };
+		A9F80B8E21DF0113000334BE /* HGDoraemonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A9F80B7D21DF0113000334BE /* HGDoraemonCell.m */; };
+		A9F80B8F21DF0113000334BE /* HGDoraemonCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9F80B7E21DF0113000334BE /* HGDoraemonCollectionViewCell.xib */; };
+		A9F80B9021DF0113000334BE /* HGCategoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = A9F80B7F21DF0113000334BE /* HGCategoryView.m */; };
+		A9F80B9121DF0113000334BE /* HGHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9F80B8221DF0113000334BE /* HGHomeViewController.m */; };
+		D24F5E2D1EF3D9CD0011AB07 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D24F5E2C1EF3D9CD0011AB07 /* main.m */; };
+		D24F5E301EF3D9CD0011AB07 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D24F5E2F1EF3D9CD0011AB07 /* AppDelegate.m */; };
+		D24F5E361EF3D9CD0011AB07 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D24F5E341EF3D9CD0011AB07 /* Main.storyboard */; };
+		D24F5E381EF3D9CD0011AB07 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D24F5E371EF3D9CD0011AB07 /* Assets.xcassets */; };
+		D24F5E3B1EF3D9CD0011AB07 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D24F5E391EF3D9CD0011AB07 /* LaunchScreen.storyboard */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		3379ED4F74FC9D400EBAF696 /* libPods-HGPersonalCenterExtend.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HGPersonalCenterExtend.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5313760E1F6A7FCA00D646AF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		531376101F6A7FD300D646AF /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		53F1415C1F6BB05F00AB9BEF /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		A9F80B6221DF0113000334BE /* HGHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HGHomeViewController.h; sourceTree = "<group>"; };
+		A9F80B6321DF0113000334BE /* HGBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HGBaseViewController.h; sourceTree = "<group>"; };
+		A9F80B6421DF0113000334BE /* HGBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HGBaseViewController.m; sourceTree = "<group>"; };
+		A9F80B6521DF0113000334BE /* HGMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HGMessageViewController.m; sourceTree = "<group>"; };
+		A9F80B6621DF0113000334BE /* HGMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HGMessageViewController.h; sourceTree = "<group>"; };
+		A9F80B6921DF0113000334BE /* HGPersonalCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HGPersonalCenterViewController.m; sourceTree = "<group>"; };
+		A9F80B6B21DF0113000334BE /* HGPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HGPageViewController.m; sourceTree = "<group>"; };
+		A9F80B6C21DF0113000334BE /* HGFirstViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HGFirstViewController.m; sourceTree = "<group>"; };
+		A9F80B6D21DF0113000334BE /* HGSecondViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HGSecondViewController.h; sourceTree = "<group>"; };
+		A9F80B6E21DF0113000334BE /* HGThirdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HGThirdViewController.m; sourceTree = "<group>"; };
+		A9F80B6F21DF0113000334BE /* HGPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HGPageViewController.h; sourceTree = "<group>"; };
+		A9F80B7021DF0113000334BE /* HGSecondViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HGSecondViewController.m; sourceTree = "<group>"; };
+		A9F80B7121DF0113000334BE /* HGFirstViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HGFirstViewController.h; sourceTree = "<group>"; };
+		A9F80B7221DF0113000334BE /* HGThirdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HGThirdViewController.h; sourceTree = "<group>"; };
+		A9F80B7321DF0113000334BE /* HGSegmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HGSegmentViewController.m; sourceTree = "<group>"; };
+		A9F80B7421DF0113000334BE /* HGPersonalCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HGPersonalCenterViewController.h; sourceTree = "<group>"; };
+		A9F80B7521DF0113000334BE /* HGSegmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HGSegmentViewController.h; sourceTree = "<group>"; };
+		A9F80B7821DF0113000334BE /* HGDoraemonCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HGDoraemonCell.xib; sourceTree = "<group>"; };
+		A9F80B7921DF0113000334BE /* HGDoraemonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HGDoraemonCell.h; sourceTree = "<group>"; };
+		A9F80B7A21DF0113000334BE /* HGCenterBaseTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HGCenterBaseTableView.m; sourceTree = "<group>"; };
+		A9F80B7B21DF0113000334BE /* HGCategoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HGCategoryView.h; sourceTree = "<group>"; };
+		A9F80B7C21DF0113000334BE /* HGDoraemonCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HGDoraemonCollectionViewCell.m; sourceTree = "<group>"; };
+		A9F80B7D21DF0113000334BE /* HGDoraemonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HGDoraemonCell.m; sourceTree = "<group>"; };
+		A9F80B7E21DF0113000334BE /* HGDoraemonCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HGDoraemonCollectionViewCell.xib; sourceTree = "<group>"; };
+		A9F80B7F21DF0113000334BE /* HGCategoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HGCategoryView.m; sourceTree = "<group>"; };
+		A9F80B8021DF0113000334BE /* HGCenterBaseTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HGCenterBaseTableView.h; sourceTree = "<group>"; };
+		A9F80B8121DF0113000334BE /* HGDoraemonCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HGDoraemonCollectionViewCell.h; sourceTree = "<group>"; };
+		A9F80B8221DF0113000334BE /* HGHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HGHomeViewController.m; sourceTree = "<group>"; };
+		D24F5E281EF3D9CD0011AB07 /* HGPersonalCenterExtend.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HGPersonalCenterExtend.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D24F5E2C1EF3D9CD0011AB07 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		D24F5E2E1EF3D9CD0011AB07 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		D24F5E2F1EF3D9CD0011AB07 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		D24F5E351EF3D9CD0011AB07 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		D24F5E371EF3D9CD0011AB07 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D24F5E3A1EF3D9CD0011AB07 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		D24F5E3C1EF3D9CD0011AB07 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D8C0A4C5A30C82D2D3EF880E /* Pods-HGPersonalCenterExtend.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HGPersonalCenterExtend.release.xcconfig"; path = "Pods/Target Support Files/Pods-HGPersonalCenterExtend/Pods-HGPersonalCenterExtend.release.xcconfig"; sourceTree = "<group>"; };
+		EEC61715961AFF357FFAE7F5 /* Pods-HGPersonalCenterExtend.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HGPersonalCenterExtend.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HGPersonalCenterExtend/Pods-HGPersonalCenterExtend.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D24F5E251EF3D9CD0011AB07 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				531376111F6A7FD300D646AF /* UIKit.framework in Frameworks */,
+				5313760F1F6A7FCA00D646AF /* Foundation.framework in Frameworks */,
+				3E4C03C4CA0E5F97CD522012 /* libPods-HGPersonalCenterExtend.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		145BFB7591872D7542A16C6F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				EEC61715961AFF357FFAE7F5 /* Pods-HGPersonalCenterExtend.debug.xcconfig */,
+				D8C0A4C5A30C82D2D3EF880E /* Pods-HGPersonalCenterExtend.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		5DAD1D0165BB0A2CAF75501A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				531376101F6A7FD300D646AF /* UIKit.framework */,
+				5313760E1F6A7FCA00D646AF /* Foundation.framework */,
+				3379ED4F74FC9D400EBAF696 /* libPods-HGPersonalCenterExtend.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A9F80B6721DF0113000334BE /* HGPersonalCenter */ = {
+			isa = PBXGroup;
+			children = (
+				A9F80B6821DF0113000334BE /* Controller */,
+				A9F80B7621DF0113000334BE /* View */,
+			);
+			path = HGPersonalCenter;
+			sourceTree = "<group>";
+		};
+		A9F80B6821DF0113000334BE /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				A9F80B7421DF0113000334BE /* HGPersonalCenterViewController.h */,
+				A9F80B6921DF0113000334BE /* HGPersonalCenterViewController.m */,
+				A9F80B7521DF0113000334BE /* HGSegmentViewController.h */,
+				A9F80B7321DF0113000334BE /* HGSegmentViewController.m */,
+				A9F80B6A21DF0113000334BE /* PageViewControllers */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		A9F80B6A21DF0113000334BE /* PageViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				A9F80B6F21DF0113000334BE /* HGPageViewController.h */,
+				A9F80B6B21DF0113000334BE /* HGPageViewController.m */,
+				A9F80B7121DF0113000334BE /* HGFirstViewController.h */,
+				A9F80B6C21DF0113000334BE /* HGFirstViewController.m */,
+				A9F80B6D21DF0113000334BE /* HGSecondViewController.h */,
+				A9F80B7021DF0113000334BE /* HGSecondViewController.m */,
+				A9F80B7221DF0113000334BE /* HGThirdViewController.h */,
+				A9F80B6E21DF0113000334BE /* HGThirdViewController.m */,
+			);
+			path = PageViewControllers;
+			sourceTree = "<group>";
+		};
+		A9F80B7621DF0113000334BE /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A9F80B7B21DF0113000334BE /* HGCategoryView.h */,
+				A9F80B7F21DF0113000334BE /* HGCategoryView.m */,
+				A9F80B7A21DF0113000334BE /* HGCenterBaseTableView.m */,
+				A9F80B8021DF0113000334BE /* HGCenterBaseTableView.h */,
+				A9F80B7921DF0113000334BE /* HGDoraemonCell.h */,
+				A9F80B7D21DF0113000334BE /* HGDoraemonCell.m */,
+				A9F80B7821DF0113000334BE /* HGDoraemonCell.xib */,
+				A9F80B8121DF0113000334BE /* HGDoraemonCollectionViewCell.h */,
+				A9F80B7C21DF0113000334BE /* HGDoraemonCollectionViewCell.m */,
+				A9F80B7E21DF0113000334BE /* HGDoraemonCollectionViewCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D24F5E1F1EF3D9CD0011AB07 = {
+			isa = PBXGroup;
+			children = (
+				D24F5E2A1EF3D9CD0011AB07 /* HGPersonalCenterExtend */,
+				D24F5E291EF3D9CD0011AB07 /* Products */,
+				145BFB7591872D7542A16C6F /* Pods */,
+				5DAD1D0165BB0A2CAF75501A /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		D24F5E291EF3D9CD0011AB07 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D24F5E281EF3D9CD0011AB07 /* HGPersonalCenterExtend.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D24F5E2A1EF3D9CD0011AB07 /* HGPersonalCenterExtend */ = {
+			isa = PBXGroup;
+			children = (
+				A9F80B6321DF0113000334BE /* HGBaseViewController.h */,
+				A9F80B6421DF0113000334BE /* HGBaseViewController.m */,
+				A9F80B6221DF0113000334BE /* HGHomeViewController.h */,
+				A9F80B8221DF0113000334BE /* HGHomeViewController.m */,
+				A9F80B6621DF0113000334BE /* HGMessageViewController.h */,
+				A9F80B6521DF0113000334BE /* HGMessageViewController.m */,
+				A9F80B6721DF0113000334BE /* HGPersonalCenter */,
+				D24F5E2B1EF3D9CD0011AB07 /* Supporting Files */,
+			);
+			path = HGPersonalCenterExtend;
+			sourceTree = "<group>";
+		};
+		D24F5E2B1EF3D9CD0011AB07 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D24F5E371EF3D9CD0011AB07 /* Assets.xcassets */,
+				D24F5E341EF3D9CD0011AB07 /* Main.storyboard */,
+				D24F5E391EF3D9CD0011AB07 /* LaunchScreen.storyboard */,
+				D24F5E2E1EF3D9CD0011AB07 /* AppDelegate.h */,
+				D24F5E2F1EF3D9CD0011AB07 /* AppDelegate.m */,
+				D24F5E2C1EF3D9CD0011AB07 /* main.m */,
+				D24F5E3C1EF3D9CD0011AB07 /* Info.plist */,
+				53F1415C1F6BB05F00AB9BEF /* PrefixHeader.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D24F5E271EF3D9CD0011AB07 /* HGPersonalCenterExtend */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D24F5E3F1EF3D9CD0011AB07 /* Build configuration list for PBXNativeTarget "HGPersonalCenterExtend" */;
+			buildPhases = (
+				D925C69D94FFF40FCB2D437E /* [CP] Check Pods Manifest.lock */,
+				D24F5E241EF3D9CD0011AB07 /* Sources */,
+				D24F5E251EF3D9CD0011AB07 /* Frameworks */,
+				D24F5E261EF3D9CD0011AB07 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HGPersonalCenterExtend;
+			productName = HGPersonalCenterExtend;
+			productReference = D24F5E281EF3D9CD0011AB07 /* HGPersonalCenterExtend.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D24F5E201EF3D9CD0011AB07 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0900;
+				ORGANIZATIONNAME = mint_bin;
+				TargetAttributes = {
+					D24F5E271EF3D9CD0011AB07 = {
+						CreatedOnToolsVersion = 8.3.2;
+						ProvisioningStyle = Manual;
+					};
+				};
+			};
+			buildConfigurationList = D24F5E231EF3D9CD0011AB07 /* Build configuration list for PBXProject "HGPersonalCenterExtend" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = D24F5E1F1EF3D9CD0011AB07;
+			productRefGroup = D24F5E291EF3D9CD0011AB07 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D24F5E271EF3D9CD0011AB07 /* HGPersonalCenterExtend */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D24F5E261EF3D9CD0011AB07 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D24F5E3B1EF3D9CD0011AB07 /* LaunchScreen.storyboard in Resources */,
+				A9F80B8B21DF0113000334BE /* HGDoraemonCell.xib in Resources */,
+				A9F80B8F21DF0113000334BE /* HGDoraemonCollectionViewCell.xib in Resources */,
+				D24F5E381EF3D9CD0011AB07 /* Assets.xcassets in Resources */,
+				D24F5E361EF3D9CD0011AB07 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		D925C69D94FFF40FCB2D437E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-HGPersonalCenterExtend-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D24F5E241EF3D9CD0011AB07 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A9F80B8421DF0113000334BE /* HGMessageViewController.m in Sources */,
+				A9F80B8C21DF0113000334BE /* HGCenterBaseTableView.m in Sources */,
+				A9F80B8D21DF0113000334BE /* HGDoraemonCollectionViewCell.m in Sources */,
+				A9F80B8A21DF0113000334BE /* HGSegmentViewController.m in Sources */,
+				D24F5E301EF3D9CD0011AB07 /* AppDelegate.m in Sources */,
+				A9F80B8321DF0113000334BE /* HGBaseViewController.m in Sources */,
+				A9F80B8721DF0113000334BE /* HGFirstViewController.m in Sources */,
+				A9F80B9021DF0113000334BE /* HGCategoryView.m in Sources */,
+				A9F80B8921DF0113000334BE /* HGSecondViewController.m in Sources */,
+				A9F80B8621DF0113000334BE /* HGPageViewController.m in Sources */,
+				A9F80B8821DF0113000334BE /* HGThirdViewController.m in Sources */,
+				A9F80B9121DF0113000334BE /* HGHomeViewController.m in Sources */,
+				D24F5E2D1EF3D9CD0011AB07 /* main.m in Sources */,
+				A9F80B8E21DF0113000334BE /* HGDoraemonCell.m in Sources */,
+				A9F80B8521DF0113000334BE /* HGPersonalCenterViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		D24F5E341EF3D9CD0011AB07 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D24F5E351EF3D9CD0011AB07 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		D24F5E391EF3D9CD0011AB07 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D24F5E3A1EF3D9CD0011AB07 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		D24F5E3D1EF3D9CD0011AB07 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D24F5E3E1EF3D9CD0011AB07 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D24F5E401EF3D9CD0011AB07 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = EEC61715961AFF357FFAE7F5 /* Pods-HGPersonalCenterExtend.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
+				GCC_PREFIX_HEADER = "$(SRCROOT)/HGPersonalCenterExtend/PrefixHeader.pch";
+				INFOPLIST_FILE = HGPersonalCenterExtend/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mint.HGPersonalCenterExtend;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+			};
+			name = Debug;
+		};
+		D24F5E411EF3D9CD0011AB07 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D8C0A4C5A30C82D2D3EF880E /* Pods-HGPersonalCenterExtend.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
+				GCC_PREFIX_HEADER = "$(SRCROOT)/HGPersonalCenterExtend/PrefixHeader.pch";
+				INFOPLIST_FILE = HGPersonalCenterExtend/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mint.HGPersonalCenterExtend;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D24F5E231EF3D9CD0011AB07 /* Build configuration list for PBXProject "HGPersonalCenterExtend" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D24F5E3D1EF3D9CD0011AB07 /* Debug */,
+				D24F5E3E1EF3D9CD0011AB07 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D24F5E3F1EF3D9CD0011AB07 /* Build configuration list for PBXNativeTarget "HGPersonalCenterExtend" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D24F5E401EF3D9CD0011AB07 /* Debug */,
+				D24F5E411EF3D9CD0011AB07 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D24F5E201EF3D9CD0011AB07 /* Project object */;
+}
