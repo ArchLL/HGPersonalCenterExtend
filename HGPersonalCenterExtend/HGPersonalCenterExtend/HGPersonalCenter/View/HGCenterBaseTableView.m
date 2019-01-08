@@ -11,7 +11,7 @@
 @implementation HGCenterBaseTableView
 //是否让外层tableView的手势透传到子视图
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
-    CGFloat segmentViewContentScrollViewHeight = SCREEN_HEIGHT - STATUS_BAR_HEIGHT - NAVIGATION_BAR_HEIGHT - HGCategoryViewHeight;
+    CGFloat segmentViewContentScrollViewHeight = SCREEN_HEIGHT - NAVIGATION_BAR_HEIGHT - HGCategoryViewHeight;
     CGPoint currentPoint = [gestureRecognizer locationInView:self];
     if (CGRectContainsPoint(CGRectMake(0, self.contentSize.height - segmentViewContentScrollViewHeight, SCREEN_WIDTH, segmentViewContentScrollViewHeight), currentPoint) ) {
         return YES;

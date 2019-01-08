@@ -60,6 +60,7 @@ static CGFloat const CellSpacing = 15;
 #pragma mark - Life Cycle
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
+        _selectedIndex = self.originalIndex;
         [self setupSubViews];
     }
     return self;

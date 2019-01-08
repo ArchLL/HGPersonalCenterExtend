@@ -26,7 +26,7 @@
     [self.view addSubview:self.navigationBar];
     [self.navigationBar mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.equalTo(self.view);
-        make.height.mas_equalTo(STATUS_BAR_HEIGHT + NAVIGATION_BAR_HEIGHT);
+        make.height.mas_equalTo(NAVIGATION_BAR_HEIGHT);
     }];
 }
 
@@ -38,10 +38,6 @@
     } else {
         self.cancelButton.hidden = YES;
     }
-}
-
-- (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - Private Methods
@@ -70,6 +66,7 @@
         [self.cancelButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(10);
             make.bottom.mas_equalTo(-10);
+            make.size.mas_equalTo(CGSizeMake(25, 25));
         }];
     }
     return _navigationBar;
@@ -78,6 +75,7 @@
 - (UIButton *)cancelButton {
     if (!_cancelButton) {
         _cancelButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
+        _cancelButton.contentMode = UIViewContentModeScaleAspectFit;
         [_cancelButton setImage:[UIImage imageNamed:@"back"] forState:(UIControlStateNormal)];
         _cancelButton.adjustsImageWhenHighlighted = YES;
         [_cancelButton addTarget:self action:@selector(cancel) forControlEvents:(UIControlEventTouchUpInside)];

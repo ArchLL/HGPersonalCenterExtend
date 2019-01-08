@@ -17,14 +17,9 @@
 #define SCREEN_HEIGHT [[UIScreen mainScreen] bounds].size.height
 #define SCREEN_WIDTH [[UIScreen mainScreen] bounds].size.width
 #define STATUS_BAR_HEIGHT [UIApplication sharedApplication].statusBarFrame.size.height
-static CGFloat const NAVIGATION_BAR_HEIGHT = 44;
+#define IS_IPAD ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad)
+#define NAVIGATION_BAR_HEIGHT ((IS_IPAD ? 50 : 44) + STATUS_BAR_HEIGHT)
 
 #define kRGBA(r, g, b, a) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a]
-
-//notificationName
-#define IsEnablePersonalCenterVCMainTableViewScroll @"IsEnablePersonalCenterVCMainTableViewScroll"
-#define CurrentSelectedChildViewControllerIndex @"CurrentSelectedChildViewControllerIndex"
-#define PersonalCenterVCBackingStatus @"PersonalCenterVCBackingStatus"
-#define SegementViewChildVCBackToTop @"segementViewChildVCBackToTop"
 
 #endif /* PrefixHeader_pch */

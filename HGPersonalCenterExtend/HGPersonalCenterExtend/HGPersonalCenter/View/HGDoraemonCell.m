@@ -11,31 +11,16 @@
 
 @interface HGDoraemonCell ()<UICollectionViewDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
-
 @end
 
 @implementation HGDoraemonCell
 - (void)awakeFromNib {
     [super awakeFromNib];
     [self.collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([HGDoraemonCollectionViewCell class]) bundle:nil] forCellWithReuseIdentifier:NSStringFromClass([HGDoraemonCollectionViewCell class])];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(acceptMsg:) name:PersonalCenterVCBackingStatus object:nil];
 }
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
-- (void)acceptMsg:(NSNotification *)notification {
-    NSString *notificationName = notification.name;
-    if ([notificationName isEqualToString:PersonalCenterVCBackingStatus]) {
-        NSDictionary *userInfo = notification.userInfo;
-        NSNumber *isBacking = userInfo[@"isBacking"];
-        if (isBacking.boolValue) {
-            self.collectionView.scrollEnabled = NO;
-        } else {
-            self.collectionView.scrollEnabled = YES;
-        }
-    }
 }
 
 #pragma mark CollectionView Delegate

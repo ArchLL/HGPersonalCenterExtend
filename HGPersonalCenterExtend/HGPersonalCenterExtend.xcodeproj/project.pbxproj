@@ -17,7 +17,7 @@
 		A9F80B8721DF0113000334BE /* HGFirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9F80B6C21DF0113000334BE /* HGFirstViewController.m */; };
 		A9F80B8821DF0113000334BE /* HGThirdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9F80B6E21DF0113000334BE /* HGThirdViewController.m */; };
 		A9F80B8921DF0113000334BE /* HGSecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9F80B7021DF0113000334BE /* HGSecondViewController.m */; };
-		A9F80B8A21DF0113000334BE /* HGSegmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9F80B7321DF0113000334BE /* HGSegmentViewController.m */; };
+		A9F80B8A21DF0113000334BE /* HGSegmentedPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9F80B7321DF0113000334BE /* HGSegmentedPageViewController.m */; };
 		A9F80B8B21DF0113000334BE /* HGDoraemonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9F80B7821DF0113000334BE /* HGDoraemonCell.xib */; };
 		A9F80B8C21DF0113000334BE /* HGCenterBaseTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = A9F80B7A21DF0113000334BE /* HGCenterBaseTableView.m */; };
 		A9F80B8D21DF0113000334BE /* HGDoraemonCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A9F80B7C21DF0113000334BE /* HGDoraemonCollectionViewCell.m */; };
@@ -51,9 +51,9 @@
 		A9F80B7021DF0113000334BE /* HGSecondViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HGSecondViewController.m; sourceTree = "<group>"; };
 		A9F80B7121DF0113000334BE /* HGFirstViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HGFirstViewController.h; sourceTree = "<group>"; };
 		A9F80B7221DF0113000334BE /* HGThirdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HGThirdViewController.h; sourceTree = "<group>"; };
-		A9F80B7321DF0113000334BE /* HGSegmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HGSegmentViewController.m; sourceTree = "<group>"; };
+		A9F80B7321DF0113000334BE /* HGSegmentedPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HGSegmentedPageViewController.m; sourceTree = "<group>"; };
 		A9F80B7421DF0113000334BE /* HGPersonalCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HGPersonalCenterViewController.h; sourceTree = "<group>"; };
-		A9F80B7521DF0113000334BE /* HGSegmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HGSegmentViewController.h; sourceTree = "<group>"; };
+		A9F80B7521DF0113000334BE /* HGSegmentedPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HGSegmentedPageViewController.h; sourceTree = "<group>"; };
 		A9F80B7821DF0113000334BE /* HGDoraemonCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HGDoraemonCell.xib; sourceTree = "<group>"; };
 		A9F80B7921DF0113000334BE /* HGDoraemonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HGDoraemonCell.h; sourceTree = "<group>"; };
 		A9F80B7A21DF0113000334BE /* HGCenterBaseTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HGCenterBaseTableView.m; sourceTree = "<group>"; };
@@ -124,8 +124,8 @@
 			children = (
 				A9F80B7421DF0113000334BE /* HGPersonalCenterViewController.h */,
 				A9F80B6921DF0113000334BE /* HGPersonalCenterViewController.m */,
-				A9F80B7521DF0113000334BE /* HGSegmentViewController.h */,
-				A9F80B7321DF0113000334BE /* HGSegmentViewController.m */,
+				A9F80B7521DF0113000334BE /* HGSegmentedPageViewController.h */,
+				A9F80B7321DF0113000334BE /* HGSegmentedPageViewController.m */,
 				A9F80B6A21DF0113000334BE /* PageViewControllers */,
 			);
 			path = Controller;
@@ -151,8 +151,8 @@
 			children = (
 				A9F80B7B21DF0113000334BE /* HGCategoryView.h */,
 				A9F80B7F21DF0113000334BE /* HGCategoryView.m */,
-				A9F80B7A21DF0113000334BE /* HGCenterBaseTableView.m */,
 				A9F80B8021DF0113000334BE /* HGCenterBaseTableView.h */,
+				A9F80B7A21DF0113000334BE /* HGCenterBaseTableView.m */,
 				A9F80B7921DF0113000334BE /* HGDoraemonCell.h */,
 				A9F80B7D21DF0113000334BE /* HGDoraemonCell.m */,
 				A9F80B7821DF0113000334BE /* HGDoraemonCell.xib */,
@@ -243,7 +243,8 @@
 				TargetAttributes = {
 					D24F5E271EF3D9CD0011AB07 = {
 						CreatedOnToolsVersion = 8.3.2;
-						ProvisioningStyle = Manual;
+						DevelopmentTeam = KS7QAPBMXA;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -309,7 +310,7 @@
 				A9F80B8421DF0113000334BE /* HGMessageViewController.m in Sources */,
 				A9F80B8C21DF0113000334BE /* HGCenterBaseTableView.m in Sources */,
 				A9F80B8D21DF0113000334BE /* HGDoraemonCollectionViewCell.m in Sources */,
-				A9F80B8A21DF0113000334BE /* HGSegmentViewController.m in Sources */,
+				A9F80B8A21DF0113000334BE /* HGSegmentedPageViewController.m in Sources */,
 				D24F5E301EF3D9CD0011AB07 /* AppDelegate.m in Sources */,
 				A9F80B8321DF0113000334BE /* HGBaseViewController.m in Sources */,
 				A9F80B8721DF0113000334BE /* HGFirstViewController.m in Sources */,
@@ -457,8 +458,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = KS7QAPBMXA;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/HGPersonalCenterExtend/PrefixHeader.pch";
 				INFOPLIST_FILE = HGPersonalCenterExtend/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -476,8 +477,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = KS7QAPBMXA;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/HGPersonalCenterExtend/PrefixHeader.pch";
 				INFOPLIST_FILE = HGPersonalCenterExtend/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;

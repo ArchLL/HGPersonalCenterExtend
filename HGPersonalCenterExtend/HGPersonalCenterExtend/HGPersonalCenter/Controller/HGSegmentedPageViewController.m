@@ -1,25 +1,31 @@
 //
-//  HGSegmentViewController.m
+//  HGSegmentedPageViewController.m
 //  HGPersonalCenterExtend
 //
 //  Created by Arch on 2019/1/3.
 //  Copyright © 2019 mint_bin. All rights reserved.
 //
 
-#import "HGSegmentViewController.h"
+#import "HGSegmentedPageViewController.h"
 #import "HGCategoryView.h"
+#import "HGPageViewController.h"
 
 #define kWidth self.view.frame.size.width
 
-@interface HGSegmentViewController () <UIScrollViewDelegate>
+@interface HGSegmentedPageViewController () <UIScrollViewDelegate, UIGestureRecognizerDelegate>
 @property (nonatomic, strong) HGCategoryView *categoryView;
 @property (nonatomic, strong) UIScrollView *scrollView;
+@property (nonatomic, strong) HGPageViewController *currentPageViewController;
+@property (nonatomic) NSInteger selectedIndex;
 @end
 
-@implementation HGSegmentViewController
+@implementation HGSegmentedPageViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.currentPageViewController = self.pageViewControllers[self.categoryView.originalIndex];
+    self.selectedIndex = self.categoryView.originalIndex;
+    
     [self.view addSubview:self.categoryView];
     [self.view addSubview:self.scrollView];
     
@@ -45,26 +51,37 @@
     __weak typeof(self) weakSelf = self;
     weakSelf.categoryView.selectedItemHelper = ^(NSUInteger index) {
         __strong typeof(weakSelf) strongSelf = weakSelf;
-        //滚动到指定子控制器
         [strongSelf.scrollView setContentOffset:CGPointMake(index * kWidth, 0) animated:NO];
-        [[NSNotificationCenter defaultCenter] postNotificationName:CurrentSelectedChildViewControllerIndex object:nil userInfo:@{@"selectedPageIndex": @(index)}];
+        strongSelf.currentPageViewController = strongSelf.pageViewControllers[index];
+        self.selectedIndex = index;
     };
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+        self.navigationController.interactivePopGestureRecognizer.delegate = self;
+    }
+}
+
 #pragma mark - UIScrollViewDelegate
-//增加分页视图左右滑动和外界tableView上下滑动互斥处理
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
-    [[NSNotificationCenter defaultCenter] postNotificationName:IsEnablePersonalCenterVCMainTableViewScroll object:nil userInfo:@{@"canScroll": @"0"}];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(segmentedPageViewControllerWillBeginDragging)]) {
+        [self.delegate segmentedPageViewControllerWillBeginDragging];
+    }
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
-    [[NSNotificationCenter defaultCenter] postNotificationName:IsEnablePersonalCenterVCMainTableViewScroll object:nil userInfo:@{@"canScroll": @"1"}];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(segmentedPageViewControllerDidEndDragging)]) {
+        [self.delegate segmentedPageViewControllerDidEndDragging];
+    }
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    NSUInteger selectedIndex = (NSUInteger)(self.scrollView.contentOffset.x / kWidth);
-    [self.categoryView changeItemWithTargetIndex:selectedIndex];
-    [[NSNotificationCenter defaultCenter] postNotificationName:CurrentSelectedChildViewControllerIndex object:nil userInfo:@{@"selectedPageIndex": @(selectedIndex)}];
+    NSUInteger index = (NSUInteger)(self.scrollView.contentOffset.x / kWidth);
+    [self.categoryView changeItemWithTargetIndex:index];
+    self.currentPageViewController = self.pageViewControllers[index];
+    self.selectedIndex = index;
 }
 
 #pragma mark - Getters
@@ -86,4 +103,13 @@
     }
     return _scrollView;
 }
+
+#pragma mark - UIGestureRecognizerDelegate
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    if (self.selectedIndex == 0) {
+        return YES;
+    }
+    return NO;
+}
+
 @end
