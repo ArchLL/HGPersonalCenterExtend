@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-UIKIT_EXTERN CGFloat const HGCategoryViewHeight;
+extern CGFloat const HGCategoryViewHeight;
 
 @interface HGCategoryViewCollectionViewCell : UICollectionViewCell
 @property (nonatomic, readonly, strong) UILabel *titleLabel;

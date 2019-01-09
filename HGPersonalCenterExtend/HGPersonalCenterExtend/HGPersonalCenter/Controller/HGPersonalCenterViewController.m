@@ -24,7 +24,7 @@ static CGFloat const HeaderImageViewHeight = 240;
 @property (nonatomic, strong) UIImageView *headerImageView;
 @property (nonatomic, strong) UIImageView *avatarImageView;
 @property (nonatomic, strong) UILabel *nickNameLabel;
-@property (nonatomic, strong) HGSegmentedPageViewController *segmentViewController;
+@property (nonatomic, strong) HGSegmentedPageViewController *segmentedPageViewController;
 @property (nonatomic) BOOL canScroll;
 @end
 
@@ -54,9 +54,9 @@ static CGFloat const HeaderImageViewHeight = 240;
     [self.navigationBar addSubview:self.messageButton];
     [self.headerImageView addSubview:self.avatarImageView];
     [self.headerImageView addSubview:self.nickNameLabel];
-    [self addChildViewController:self.segmentViewController];
-    [self.footerView addSubview:self.segmentViewController.view];
-    [self.segmentViewController didMoveToParentViewController:self];
+    [self addChildViewController:self.segmentedPageViewController];
+    [self.footerView addSubview:self.segmentedPageViewController.view];
+    [self.segmentedPageViewController didMoveToParentViewController:self];
     
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
@@ -76,7 +76,7 @@ static CGFloat const HeaderImageViewHeight = 240;
         make.width.mas_lessThanOrEqualTo(200);
         make.bottom.mas_equalTo(-40);
     }];
-    [self.segmentViewController.view mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.segmentedPageViewController.view mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.footerView);
     }];
 }
@@ -98,7 +98,7 @@ static CGFloat const HeaderImageViewHeight = 240;
 
 #pragma mark - UIScrollViewDelegate
 - (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView {
-    [self.segmentViewController.currentPageViewController makePageViewControllerScrollToTop];
+    [self.segmentedPageViewController.currentPageViewController makePageViewControllerScrollToTop];
     return YES;
 }
 
@@ -124,7 +124,7 @@ static CGFloat const HeaderImageViewHeight = 240;
         //“进入吸顶状态”以及“维持吸顶状态”
         self.canScroll = NO;
         scrollView.contentOffset = CGPointMake(0, criticalPointOffsetY);
-        [self.segmentViewController.currentPageViewController makePageViewControllerScroll:YES];
+        [self.segmentedPageViewController.currentPageViewController makePageViewControllerScroll:YES];
     } else {
         /*
          * 未达到临界点 ：此状态下有两种情况，且这两种情况完全相反，这也是引入一个canScroll属性的重要原因
@@ -253,8 +253,8 @@ static CGFloat const HeaderImageViewHeight = 240;
     return _headerImageView;
 }
 
-- (HGSegmentedPageViewController *)segmentViewController {
-    if (!_segmentViewController) {
+- (HGSegmentedPageViewController *)segmentedPageViewController {
+    if (!_segmentedPageViewController) {
         NSMutableArray *controllers = [NSMutableArray array];
         for (int i = 0; i < 9; i ++) {
             HGPageViewController *controller;
@@ -268,13 +268,13 @@ static CGFloat const HeaderImageViewHeight = 240;
             controller.delegate = self;
             [controllers addObject:controller];
         }
-        _segmentViewController = [[HGSegmentedPageViewController alloc] init];
-        _segmentViewController.pageViewControllers = controllers.copy;
-        _segmentViewController.categoryView.titles = @[@"华盛顿", @"夏威夷", @"拉斯维加斯", @"纽约", @"西雅图", @"底特律", @"费城", @"旧金山", @"芝加哥"];;
-        _segmentViewController.categoryView.originalIndex = self.selectedIndex;
-        _segmentViewController.delegate = self;
+        _segmentedPageViewController = [[HGSegmentedPageViewController alloc] init];
+        _segmentedPageViewController.pageViewControllers = controllers.copy;
+        _segmentedPageViewController.categoryView.titles = @[@"华盛顿", @"夏威夷", @"拉斯维加斯", @"纽约", @"西雅图", @"底特律", @"费城", @"旧金山", @"芝加哥"];;
+        _segmentedPageViewController.categoryView.originalIndex = self.selectedIndex;
+        _segmentedPageViewController.delegate = self;
     }
-    return _segmentViewController;
+    return _segmentedPageViewController;
 }
 
 - (UIView *)footerView {

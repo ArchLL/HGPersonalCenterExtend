@@ -10,6 +10,4 @@
 
 @interface HGPersonalCenterViewController : HGBaseViewController
 @property (nonatomic, assign) NSUInteger selectedIndex;
-@property (nonatomic, readonly, assign) BOOL isBacking;
-
 @end

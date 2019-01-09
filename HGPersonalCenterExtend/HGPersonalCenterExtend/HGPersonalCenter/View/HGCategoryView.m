@@ -90,7 +90,6 @@ static CGFloat const CellSpacing = 15;
         targetCell.titleLabel.textColor = SELECTED_COLOR;
     }
     self.selectedIndex = targetIndex;
-    [self layoutAndScrollToSelectedItem];
 }
 
 #pragma mark - Private Method
@@ -149,7 +148,7 @@ static CGFloat const CellSpacing = 15;
 
 - (void)updateMoveLineLocation {
     HGCategoryViewCollectionViewCell *cell = [self getCell:self.selectedIndex];
-    [UIView animateWithDuration:0.25 animations:^{
+    [UIView animateWithDuration:0.15 animations:^{
         [self.moveLine mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(HGCategoryViewHeight - SeparatorHeight - MoveLineHeight);
             make.height.mas_equalTo(MoveLineHeight);
