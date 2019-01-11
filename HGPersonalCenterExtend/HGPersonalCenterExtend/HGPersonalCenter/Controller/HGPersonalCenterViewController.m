@@ -25,7 +25,7 @@ static CGFloat const HeaderImageViewHeight = 240;
 @property (nonatomic, strong) UIImageView *avatarImageView;
 @property (nonatomic, strong) UILabel *nickNameLabel;
 @property (nonatomic, strong) HGSegmentedPageViewController *segmentedPageViewController;
-@property (nonatomic) BOOL canScroll;
+@property (nonatomic) BOOL cannotScroll;
 @end
 
 @implementation HGPersonalCenterViewController
@@ -40,6 +40,7 @@ static CGFloat const HeaderImageViewHeight = 240;
     }
     //如果使用自定义的按钮去替换系统默认返回按钮，会出现滑动返回手势失效的情况
     self.navigationController.interactivePopGestureRecognizer.delegate = self;
+    
     [self setupSubViews];
 }
 
@@ -106,32 +107,32 @@ static CGFloat const HeaderImageViewHeight = 240;
  * 处理联动
  */
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    
+    //第一部分：更改导航栏颜色
     [self updateNavigationBarBackgroundColor];
     
-    //当前偏移量
-    CGFloat currentOffsetY = scrollView.contentOffset.y;
+    //第二部分：处理scrollView滑动冲突
+    CGFloat contentOffsetY = scrollView.contentOffset.y;
     //吸顶临界点(此时的临界点不是视觉感官上导航栏的底部，而是当前屏幕的顶部相对scrollViewContentView的位置)
     CGFloat criticalPointOffsetY = scrollView.contentSize.height - SCREEN_HEIGHT;
     
     //利用contentOffset处理内外层scrollView的滑动冲突问题
-    if (currentOffsetY >= criticalPointOffsetY) {
+    if (contentOffsetY >= criticalPointOffsetY) {
         /*
-         * 到达临界点 ：此状态下有两种情况
+         * 到达临界点：
          * 1.未吸顶状态 -> 吸顶状态
-         * 2.维持吸顶状态 (categoryView的子控制器的tableView或collectionView在竖直方向上的contentOffsetY大于0)
+         * 2.维持吸顶状态 (pageViewController.scrollView.contentOffsetY > 0)
          */
         //“进入吸顶状态”以及“维持吸顶状态”
-        self.canScroll = NO;
+        self.cannotScroll = YES;
         scrollView.contentOffset = CGPointMake(0, criticalPointOffsetY);
         [self.segmentedPageViewController.currentPageViewController makePageViewControllerScroll:YES];
     } else {
         /*
-         * 未达到临界点 ：此状态下有两种情况，且这两种情况完全相反，这也是引入一个canScroll属性的重要原因
-         * 1.吸顶状态 -> 不吸顶状态
-         * 2.维持吸顶状态 (categoryView的子控制器的tableView或collectionView在竖直方向上的contentOffsetY大于0)
+         * 未达到临界点：
+         * 1.维持吸顶状态 (pageViewController.scrollView.contentOffsetY > 0)
+         * 2.吸顶状态 -> 不吸顶状态
          */
-        if (!self.canScroll) {
+        if (self.cannotScroll) {
             //“维持吸顶状态”
             scrollView.contentOffset = CGPointMake(0, criticalPointOffsetY);
         } else {
@@ -143,10 +144,6 @@ static CGFloat const HeaderImageViewHeight = 240;
 }
 
 #pragma mark - UITableViewDataSource
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 1;
 }
@@ -190,15 +187,12 @@ static CGFloat const HeaderImageViewHeight = 240;
 
 #pragma mark - HGPageViewControllerDelegate
 - (void)pageViewControllerLeaveTop {
-    self.canScroll = YES;
+    self.cannotScroll = NO;
 }
 
 #pragma mark - Lazy
 - (UITableView *)tableView {
     if (!_tableView) {
-        //⚠️这里的属性初始化一定要放在mainTableView.contentInset的设置之前, 不然首次进来视图就会偏移到临界位置，contentInset会调用scrollViewDidScroll这个方法。
-        self.canScroll = YES;
-        
         _tableView = [[HGCenterBaseTableView alloc] init];
         _tableView.delegate = self;
         _tableView.dataSource = self;
@@ -256,7 +250,8 @@ static CGFloat const HeaderImageViewHeight = 240;
 - (HGSegmentedPageViewController *)segmentedPageViewController {
     if (!_segmentedPageViewController) {
         NSMutableArray *controllers = [NSMutableArray array];
-        for (int i = 0; i < 9; i ++) {
+        NSArray *titles = @[@"华盛顿", @"夏威夷", @"拉斯维加斯", @"纽约", @"西雅图", @"底特律", @"费城", @"旧金山", @"芝加哥"];
+        for (int i = 0; i < titles.count; i ++) {
             HGPageViewController *controller;
             if (i % 3 == 0) {
                  controller = [[HGThirdViewController alloc] init];
@@ -270,7 +265,7 @@ static CGFloat const HeaderImageViewHeight = 240;
         }
         _segmentedPageViewController = [[HGSegmentedPageViewController alloc] init];
         _segmentedPageViewController.pageViewControllers = controllers.copy;
-        _segmentedPageViewController.categoryView.titles = @[@"华盛顿", @"夏威夷", @"拉斯维加斯", @"纽约", @"西雅图", @"底特律", @"费城", @"旧金山", @"芝加哥"];;
+        _segmentedPageViewController.categoryView.titles = titles;
         _segmentedPageViewController.categoryView.originalIndex = self.selectedIndex;
         _segmentedPageViewController.delegate = self;
     }
