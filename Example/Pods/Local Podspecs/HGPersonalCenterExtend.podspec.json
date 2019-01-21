@@ -1,0 +1,27 @@
+{
+  "name": "HGPersonalCenterExtend",
+  "version": "0.1.0",
+  "summary": "Resolve scrollView nested sliding conflicts.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/mint_bin@163.com/HGPersonalCenterExtend",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "Arch": "mint_bin@163.com"
+  },
+  "source": {
+    "git": "https://github.com/mint_bin@163.com/HGPersonalCenterExtend.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "HGPersonalCenterExtend/Classes/**/*",
+  "dependencies": {
+    "Masonry": [
+      "~> 1.1.0"
+    ]
+  }
+}

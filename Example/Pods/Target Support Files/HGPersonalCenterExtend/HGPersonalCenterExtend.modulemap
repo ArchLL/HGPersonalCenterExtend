@@ -1,0 +1,6 @@
+framework module HGPersonalCenterExtend {
+  umbrella header "HGPersonalCenterExtend-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,17 +1,29 @@
-### HGPersonalCenterExtend
+# HGPersonalCenterExtend
 
-#### 解决UIScrollView嵌套滑动手势冲突问题，适用于更为复杂的个人主页，淘宝、天猫店铺页等  
+[![CI Status](https://img.shields.io/travis/ArchLL/HGPersonalCenterExtend.svg?style=flat)](https://travis-ci.org/ArchLL/HGPersonalCenterExtend)
+[![Version](https://img.shields.io/cocoapods/v/HGPersonalCenterExtend.svg?style=flat)](https://cocoapods.org/pods/HGPersonalCenterExtend)
+[![License](https://img.shields.io/cocoapods/l/HGPersonalCenterExtend.svg?style=flat)](https://cocoapods.org/pods/HGPersonalCenterExtend)
+[![Platform](https://img.shields.io/cocoapods/p/HGPersonalCenterExtend.svg?style=flat)](https://github.com/ArchLL/HGPersonalCenterExtend)
 
-#### 关于头部背景视图放大的效果可移步：[HGPersonalCenter](https://github.com/ArchLL/HGPersonalCenter)
+## Example
 
-#### 博客地址：[简书](https://www.jianshu.com/p/8b87837d9e3a)
-如有疑问或者建议可在Issues下评论或者给我发简信
+To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
-#### 主要内容： 
-1.使用Masonry方式布局；  
-2.解决外层和内层滚动视图的上下滑动冲突问题；  
-3.解决内层的HGSegmentedPageViewController的scrollView左右滚动和外层tableView上下滑动不能互斥的问题；  
-4.代码已经重构，更容易理解并移植到自己的项目中；  
-5.后期计划：扩展新的功能(如：支持pageViewController刷新)、支持pod引入；  
+## Requirements
 
-![image](https://github.com/ArchLL/HGPersonalCenterExtend/blob/master/show.gif)
+## Installation
+
+HGPersonalCenterExtend is available through [CocoaPods](https://cocoapods.org). To install
+it, simply add the following line to your Podfile:
+
+```ruby
+pod 'HGPersonalCenterExtend'
+```
+
+## Author
+
+Arch, mint_bin@163.com
+
+## License
+
+HGPersonalCenterExtend is available under the MIT license. See the LICENSE file for more info.
