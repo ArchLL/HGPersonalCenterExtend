@@ -32,14 +32,14 @@ pod 'HGPersonalCenterExtend', '~> 0.1.1'
 1.使用Masonry方式布局；  
 2.解决外层和内层滚动视图的上下滑动冲突问题；  
 3.解决内层的HGSegmentedPageViewController的scrollView左右滚动和外层tableView上下滑动不能互斥的问题；    
-5.后期计划：扩展新的功能(如：支持pageViewController刷新，扩展categoryView)；  
+5.计划：扩展新的功能(如：支持pageViewController刷新，扩展categoryView)；  
 
 ![image](https://github.com/ArchLL/HGPersonalCenterExtend/blob/master/show.gif)
 
 ## Usage
 Example: HGPersonalCenterExtend / Example
 
-例如你的CenterViewController是`HGPersonalCenterViewController`
+假如你要将CenterViewController作为个人主页，你需要做如下操作（参考Example下的`HGPersonalCenterViewController`）
 ```Objc
 在 HGPersonalCenterViewController 下进行如下操作：
 
@@ -55,61 +55,62 @@ Example: HGPersonalCenterExtend / Example
 @end
 
 - (void)viewDidLoad {
-[super viewDidLoad];
-self.navigationController.interactivePopGestureRecognizer.delegate = self;
+  [super viewDidLoad];
+  self.navigationController.interactivePopGestureRecognizer.delegate = self;
 
-//将segmentedPageViewController.view添加在footerView上
-[self addChildViewController:self.segmentedPageViewController]; 
-[self.footerView addSubview:self.segmentedPageViewController.view];
-[self.segmentedPageViewController didMoveToParentViewController:self];
-[self.segmentedPageViewController.view mas_makeConstraints:^(MASConstraintMaker *make) {
-make.edges.equalTo(self.footerView);
-}];
+  //将segmentedPageViewController.view添加在footerView上
+  [self addChildViewController:self.segmentedPageViewController]; 
+  [self.footerView addSubview:self.segmentedPageViewController.view];
+  [self.segmentedPageViewController didMoveToParentViewController:self];
+  [self.segmentedPageViewController.view mas_makeConstraints:^(MASConstraintMaker *make) {
+    make.edges.equalTo(self.footerView);
+  }];
 }
+
 /**
 * 处理联动，Example里有详细注释
 */
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-CGFloat contentOffsetY = scrollView.contentOffset.y;
-CGFloat criticalPointOffsetY = scrollView.contentSize.height - SCREEN_HEIGHT;
-if (contentOffsetY >= criticalPointOffsetY) {
-self.cannotScroll = YES;
-scrollView.contentOffset = CGPointMake(0, criticalPointOffsetY);
-[self.segmentedPageViewController.currentPageViewController makePageViewControllerScroll:YES];
-} else {
-if (self.cannotScroll) {
-scrollView.contentOffset = CGPointMake(0, criticalPointOffsetY);
-}
-}
+  CGFloat contentOffsetY = scrollView.contentOffset.y;
+  CGFloat criticalPointOffsetY = scrollView.contentSize.height - SCREEN_HEIGHT;
+  if (contentOffsetY >= criticalPointOffsetY) {
+    self.cannotScroll = YES;
+    scrollView.contentOffset = CGPointMake(0, criticalPointOffsetY);
+    [self.segmentedPageViewController.currentPageViewController makePageViewControllerScroll:YES];
+  } else {
+    if (self.cannotScroll) {
+      scrollView.contentOffset = CGPointMake(0, criticalPointOffsetY);
+    }
+  }
 }
 
 #pragma mark - HGSegmentedPageViewControllerDelegate
 - (void)segmentedPageViewControllerWillBeginDragging {
-self.tableView.scrollEnabled = NO;
+  self.tableView.scrollEnabled = NO;
 }
 
 - (void)segmentedPageViewControllerDidEndDragging {
-self.tableView.scrollEnabled = YES;
+  self.tableView.scrollEnabled = YES;
 }
 
 #pragma mark - HGPageViewControllerDelegate
 - (void)pageViewControllerLeaveTop {
-self.cannotScroll = NO;
+  self.cannotScroll = NO;
 }
 
 #pragma mark - Lazy
 - (UITableView *)tableView {
-if (!_tableView) {
-_tableView = [[HGCenterBaseTableView alloc] init];
-_tableView.delegate = self;
-_tableView.dataSource = self;
-_tableView.tableHeaderView = self.headerImageView;
-_tableView.tableFooterView = self.footerView;
-_tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-_tableView.showsVerticalScrollIndicator = NO;
-[_tableView registerNib:[UINib nibWithNibName:NSStringFromClass([HGDoraemonCell class]) bundle:nil] forCellReuseIdentifier:NSStringFromClass([HGDoraemonCell class])];
-}
-return _tableView;
+  if (!_tableView) {
+    _tableView = [[HGCenterBaseTableView alloc] init];
+    _tableView.delegate = self;
+    _tableView.dataSource = self;
+    _tableView.tableHeaderView = self.headerImageView;
+    _tableView.tableFooterView = self.footerView;
+    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    _tableView.showsVerticalScrollIndicator = NO;
+    [_tableView registerNib:[UINib nibWithNibName:NSStringFromClass([HGDoraemonCell class]) bundle:nil] forCellReuseIdentifier:NSStringFromClass([HGDoraemonCell class])];
+  }
+  return _tableView;
 }
 
 /*设置segmentedPageViewController的categoryView以及pageViewControllers
@@ -117,36 +118,36 @@ return _tableView;
 *这里用到的pageViewController需要继承自HGPageViewController
 */
 - (HGSegmentedPageViewController *)segmentedPageViewController {
-if (!_segmentedPageViewController) {
-NSMutableArray *controllers = [NSMutableArray array];
-NSArray *titles = @[@"华盛顿", @"夏威夷", @"拉斯维加斯", @"纽约", @"西雅图", @"底特律", @"费城", @"旧金山", @"芝加哥"];
-for (int i = 0; i < titles.count; i ++) {
-HGPageViewController *controller;
-if (i % 3 == 0) {
-controller = [[HGThirdViewController alloc] init];
-} else if (i % 2 == 0) {
-controller = [[HGSecondViewController alloc] init];
-} else {
-controller = [[HGFirstViewController alloc] init];
-}
-controller.delegate = self;
-[controllers addObject:controller];
-}
-_segmentedPageViewController = [[HGSegmentedPageViewController alloc] init];
-_segmentedPageViewController.pageViewControllers = controllers.copy;
-_segmentedPageViewController.categoryView.titles = titles;
-_segmentedPageViewController.categoryView.originalIndex = self.selectedIndex;
-_segmentedPageViewController.delegate = self;
-}
-return _segmentedPageViewController;
+  if (!_segmentedPageViewController) {
+    NSMutableArray *controllers = [NSMutableArray array];
+    NSArray *titles = @[@"华盛顿", @"夏威夷", @"拉斯维加斯", @"纽约", @"西雅图", @"底特律", @"费城", @"旧金山", @"芝加哥"];
+    for (int i = 0; i < titles.count; i ++) {
+      HGPageViewController *controller;
+      if (i % 3 == 0) {
+        controller = [[HGThirdViewController alloc] init];
+      } else if (i % 2 == 0) {
+        controller = [[HGSecondViewController alloc] init];
+      } else {
+        controller = [[HGFirstViewController alloc] init];
+      }
+      controller.delegate = self;
+      [controllers addObject:controller];
+    }
+    _segmentedPageViewController = [[HGSegmentedPageViewController alloc] init];
+    _segmentedPageViewController.pageViewControllers = controllers.copy;
+    _segmentedPageViewController.categoryView.titles = titles;
+    _segmentedPageViewController.categoryView.originalIndex = self.selectedIndex;
+    _segmentedPageViewController.delegate = self;
+  }
+  return _segmentedPageViewController;
 }
 
 - (UIView *)footerView {
-if (!_footerView) {
-_footerView = [[UIView alloc] init];
-_footerView.frame = CGRectMake(0, 0, self.tableView.frame.size.width, SCREEN_HEIGHT - NAVIGATION_BAR_HEIGHT);
-}
-return _footerView;
+  if (!_footerView) {
+    _footerView = [[UIView alloc] init];
+    _footerView.frame = CGRectMake(0, 0, self.tableView.frame.size.width, SCREEN_HEIGHT - NAVIGATION_BAR_HEIGHT);
+  }
+  return _footerView;
 }
 
 ```
