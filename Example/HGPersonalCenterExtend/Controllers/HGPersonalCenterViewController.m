@@ -26,6 +26,7 @@ static CGFloat const HeaderImageViewHeight = 240;
 @property (nonatomic, strong) UILabel *nickNameLabel;
 @property (nonatomic, strong) HGSegmentedPageViewController *segmentedPageViewController;
 @property (nonatomic) BOOL cannotScroll;
+
 @end
 
 @implementation HGPersonalCenterViewController
@@ -35,7 +36,7 @@ static CGFloat const HeaderImageViewHeight = 240;
     [super viewDidLoad];
     if (@available(iOS 11.0, *)) {
         [[UIScrollView appearance] setContentInsetAdjustmentBehavior:UIScrollViewContentInsetAdjustmentNever];
-    }else {
+    } else {
         self.automaticallyAdjustsScrollViewInsets = NO;
     }
     //如果使用自定义的按钮去替换系统默认返回按钮，会出现滑动返回手势失效的情况
@@ -143,14 +144,6 @@ static CGFloat const HeaderImageViewHeight = 240;
 }
 
 #pragma mark - UITableViewDelegate
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 180;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 40;
-}
-
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     UIView *headerView = [[UIView alloc] init];
     headerView.backgroundColor = [UIColor yellowColor];
@@ -163,6 +156,22 @@ static CGFloat const HeaderImageViewHeight = 240;
         make.edges.mas_equalTo(UIEdgeInsetsMake(15, 15, 15, 15));
     }];
     return headerView;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    return nil;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 180;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 40;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return CGFLOAT_MIN;
 }
 
 #pragma mark - HGSegmentedPageViewControllerDelegate
@@ -182,7 +191,7 @@ static CGFloat const HeaderImageViewHeight = 240;
 #pragma mark - Lazy
 - (UITableView *)tableView {
     if (!_tableView) {
-        _tableView = [[HGCenterBaseTableView alloc] init];
+        _tableView = [[HGCenterBaseTableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.tableHeaderView = self.headerImageView;
@@ -230,14 +239,14 @@ static CGFloat const HeaderImageViewHeight = 240;
     if (!_segmentedPageViewController) {
         NSMutableArray *controllers = [NSMutableArray array];
         NSArray *titles = @[@"华盛顿", @"夏威夷", @"拉斯维加斯", @"纽约", @"西雅图", @"底特律", @"费城", @"旧金山", @"芝加哥"];
-        for (int i = 0; i < titles.count; i ++) {
+        for (int i = 0; i < titles.count; i++) {
             HGPageViewController *controller;
             if (i % 3 == 0) {
-                 controller = [[HGThirdViewController alloc] init];
+                controller = [[HGThirdViewController alloc] init];
             } else if (i % 2 == 0) {
-                 controller = [[HGSecondViewController alloc] init];
+                controller = [[HGSecondViewController alloc] init];
             } else {
-                 controller = [[HGFirstViewController alloc] init];
+                controller = [[HGFirstViewController alloc] init];
             }
             controller.delegate = self;
             [controllers addObject:controller];

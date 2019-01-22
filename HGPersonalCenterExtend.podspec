@@ -18,10 +18,9 @@ Pod::Spec.new do |s|
   s.homepage         = 'https://github.com/ArchLL/HGPersonalCenterExtend'
   s.author           = { 'Arch' => 'mint_bin@163.com' }
   s.source           = { :git => 'https://github.com/ArchLL/HGPersonalCenterExtend.git', :tag => s.version.to_s }
-  s.source_files = 'HGPersonalCenterExtend/*.{h,m}'
+  s.source_files = 'HGPersonalCenterExtend/Classes/*.{h,m}'
   s.ios.frameworks = 'Foundation', 'UIKit'
   s.ios.deployment_target = '8.0'
-  s.source_files = 'HGPersonalCenterExtend/Classes/**/*'
   s.dependency 'Masonry', '~> 1.1.0'
   s.requires_arc = true
 end
