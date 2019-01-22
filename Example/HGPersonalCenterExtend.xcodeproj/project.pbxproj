@@ -201,8 +201,8 @@
 			children = (
 				A98C56B421F5823200054CC1 /* BaseViewControllers */,
 				A98C56AA21F5823200054CC1 /* PageViewControllers */,
-				A98C56A921F5823200054CC1 /* HGPersonalCenterViewController.m */,
 				A98C56B221F5823200054CC1 /* HGPersonalCenterViewController.h */,
+				A98C56A921F5823200054CC1 /* HGPersonalCenterViewController.m */,
 				A98C56B321F5823200054CC1 /* HGHomeViewController.h */,
 				A98C56B121F5823200054CC1 /* HGHomeViewController.m */,
 			);
