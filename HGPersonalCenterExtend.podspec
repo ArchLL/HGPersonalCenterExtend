@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
   }                       
   s.homepage         = 'https://github.com/ArchLL/HGPersonalCenterExtend'
   s.author           = { 'Arch' => 'mint_bin@163.com' }
-  s.source           = { :git => 'https://github.com/ArchLL/HGPersonalCenterExtend.git', :tag => "v#{s.version}" }
+  s.source           = { :git => 'https://github.com/ArchLL/HGPersonalCenterExtend.git', :tag => s.version.to_s }
   s.source_files = 'HGPersonalCenterExtend/*.{h,m}'
   s.ios.frameworks = 'Foundation', 'UIKit'
   s.ios.deployment_target = '8.0'
