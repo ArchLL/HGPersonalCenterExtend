@@ -87,7 +87,6 @@
 		A98C56CE21F5936E00054CC1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A98C56D021F5936E00054CC1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A98C56D321F5947700054CC1 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = HGPersonalCenterExtend/main.m; sourceTree = SOURCE_ROOT; };
-		A98C56DD21F59B4200054CC1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AC2E6F965B1601CD639093EB /* Pods-HGPersonalCenterExtend.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HGPersonalCenterExtend.release.xcconfig"; path = "Pods/Target Support Files/Pods-HGPersonalCenterExtend/Pods-HGPersonalCenterExtend.release.xcconfig"; sourceTree = "<group>"; };
 		D49D25751B63C1A23D633DC3 /* Pods-HGPersonalCenterExtend_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HGPersonalCenterExtend_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-HGPersonalCenterExtend_Tests/Pods-HGPersonalCenterExtend_Tests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -187,7 +186,6 @@
 				A98C56A821F5823200054CC1 /* Controllers */,
 				A98C56B821F5823200054CC1 /* Views */,
 				A98C56D321F5947700054CC1 /* main.m */,
-				A98C56DD21F59B4200054CC1 /* Info.plist */,
 				A98C56A521F5823200054CC1 /* AppDelegate.h */,
 				A98C56A721F5823200054CC1 /* AppDelegate.m */,
 				A98C56CF21F5936E00054CC1 /* LaunchScreen.storyboard */,
@@ -590,7 +588,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/HGPersonalCenterExtend/PrefixHeader.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/HGPersonalCenterExtend/Info.plist";
-				MODULE_NAME = ExampleApp;
+				MODULE_NAME = HGPersonalCenterExtend;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -609,7 +607,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/HGPersonalCenterExtend/PrefixHeader.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/HGPersonalCenterExtend/Info.plist";
-				MODULE_NAME = ExampleApp;
+				MODULE_NAME = HGPersonalCenterExtend;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";

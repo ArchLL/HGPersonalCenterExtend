@@ -2,7 +2,7 @@
 //  HGPersonalCenterMacro.h
 //  HGPersonalCenterExtend
 //
-//  Created by 黑色幽默 on 2019/1/20.
+//  Created by Arch on 2019/1/20.
 //  Copyright © 2019 mint_bin. All rights reserved.
 //
 

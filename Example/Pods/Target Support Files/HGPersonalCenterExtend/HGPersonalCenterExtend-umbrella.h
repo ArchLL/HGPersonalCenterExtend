@@ -10,11 +10,11 @@
 #endif
 #endif
 
-#import "HGPageViewController.h"
-#import "HGSegmentedPageViewController.h"
-#import "HGPersonalCenterMacro.h"
 #import "HGCategoryView.h"
 #import "HGCenterBaseTableView.h"
+#import "HGPageViewController.h"
+#import "HGPersonalCenterMacro.h"
+#import "HGSegmentedPageViewController.h"
 
 FOUNDATION_EXPORT double HGPersonalCenterExtendVersionNumber;
 FOUNDATION_EXPORT const unsigned char HGPersonalCenterExtendVersionString[];

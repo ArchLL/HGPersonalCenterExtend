@@ -1,8 +1,7 @@
 # HGPersonalCenterExtend
-
-[![CI Status](https://img.shields.io/travis/ArchLL/HGPersonalCenterExtend.svg?style=flat)](https://travis-ci.org/ArchLL/HGPersonalCenterExtend)
-[![Version](https://img.shields.io/cocoapods/v/HGPersonalCenterExtend.svg?style=flat)](https://cocoapods.org/pods/HGPersonalCenterExtend)
-[![License](https://img.shields.io/cocoapods/l/HGPersonalCenterExtend.svg?style=flat)](https://cocoapods.org/pods/HGPersonalCenterExtend)
+![Build Status](https://travis-ci.org/HGPersonalCenterExtend/HGPersonalCenterExtend.svg)
+![License MIT](https://img.shields.io/dub/l/vibe-d.svg)
+![version](https://img.shields.io/cocoapods/v/HGPersonalCenterExtend.svg?style=flat)
 [![Platform](https://img.shields.io/cocoapods/p/HGPersonalCenterExtend.svg?style=flat)](https://github.com/ArchLL/HGPersonalCenterExtend)
 
 ## Example
