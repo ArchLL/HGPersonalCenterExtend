@@ -1,6 +1,6 @@
 {
   "name": "HGPersonalCenterExtend",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "license": "MIT",
   "summary": "Resolve scrollView nested sliding conflicts.",
   "description": "Resolve scrollView nested sliding conflicts.\nHGPersonalCenterExtend supports iOS.",
@@ -10,9 +10,9 @@
   },
   "source": {
     "git": "https://github.com/ArchLL/HGPersonalCenterExtend.git",
-    "tag": "v0.1.0"
+    "tag": "0.1.1"
   },
-  "source_files": "HGPersonalCenterExtend/Classes/**/*",
+  "source_files": "HGPersonalCenterExtend/Classes/*.{h,m}",
   "ios": {
     "frameworks": [
       "Foundation",

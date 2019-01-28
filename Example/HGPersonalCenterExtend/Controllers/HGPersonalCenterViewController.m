@@ -150,7 +150,7 @@ static CGFloat const HeaderImageViewHeight = 240;
     UILabel *label = [[UILabel alloc] init];
     label.font = [UIFont systemFontOfSize:18];
     label.text = @"哆啦A梦";
-    label.textColor = [UIColor orangeColor];
+    label.textColor = [UIColor redColor];
     [headerView addSubview:label];
     [label mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(UIEdgeInsetsMake(15, 15, 15, 15));
@@ -255,6 +255,7 @@ static CGFloat const HeaderImageViewHeight = 240;
         _segmentedPageViewController.pageViewControllers = controllers.copy;
         _segmentedPageViewController.categoryView.titles = titles;
         _segmentedPageViewController.categoryView.originalIndex = self.selectedIndex;
+        _segmentedPageViewController.categoryView.collectionView.backgroundColor = [UIColor yellowColor];
         _segmentedPageViewController.delegate = self;
     }
     return _segmentedPageViewController;

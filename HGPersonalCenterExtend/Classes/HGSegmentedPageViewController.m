@@ -7,8 +7,6 @@
 //
 
 #import "HGSegmentedPageViewController.h"
-#import "HGCategoryView.h"
-#import "HGPageViewController.h"
 #import "Masonry.h"
 
 #define kWidth self.view.frame.size.width
@@ -83,6 +81,9 @@
     [self.categoryView changeItemWithTargetIndex:index];
     self.currentPageViewController = self.pageViewControllers[index];
     self.selectedIndex = index;
+    if (self.delegate && [self.delegate respondsToSelector:@selector(segmentedPageViewControllerDidEndDeceleratingWithPageIndex:)]) {
+        [self.delegate segmentedPageViewControllerDidEndDeceleratingWithPageIndex:index];
+    }
 }
 
 #pragma mark - Getters

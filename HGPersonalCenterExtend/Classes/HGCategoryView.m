@@ -46,7 +46,6 @@
 @end
 
 static NSString * const SegmentHeaderViewCollectionViewCellIdentifier = @"SegmentHeaderViewCollectionViewCell";
-static CGFloat const SeparatorHeight = 0.5;
 
 @implementation HGCategoryView
 
@@ -54,11 +53,12 @@ static CGFloat const SeparatorHeight = 0.5;
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         _selectedIndex = self.originalIndex;
-        self.height = 41;
-        self.cellSpacing = 10;
-        self.underlineHeight = 2;
+        _height = HGCategoryViewDefaultHeight;
+        _underlineHeight = 1.8;
+        _cellSpacing = 10;
+        _leftAndRightMargin = _cellSpacing;
         self.titleNormalColor = [UIColor grayColor];
-        self.titleSelectedColor = [UIColor orangeColor];
+        self.titleSelectedColor = [UIColor redColor];
         self.titleNomalFont = [UIFont systemFontOfSize:18];
         self.titleSelectedFont = [UIFont systemFontOfSize:20];
         [self setupSubViews];
@@ -103,16 +103,16 @@ static CGFloat const SeparatorHeight = 0.5;
     
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.mas_equalTo(0);
-        make.height.mas_equalTo(self.height - SeparatorHeight);
+        make.height.mas_equalTo(self.height - HG_ONE_PIXEL);
     }];
     [self.underline mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.height - SeparatorHeight - self.underlineHeight);
+        make.top.mas_equalTo(self.height - self.underlineHeight - HG_ONE_PIXEL);
         make.height.mas_equalTo(self.underlineHeight);
     }];
     [self.separator mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.collectionView.mas_bottom);
+        make.bottom.equalTo(self);
         make.left.right.mas_equalTo(0);
-        make.height.mas_equalTo(SeparatorHeight);
+        make.height.mas_equalTo(HG_ONE_PIXEL);
     }];
 }
 
@@ -142,10 +142,10 @@ static CGFloat const SeparatorHeight = 0.5;
 }
 
 - (void)setupMoveLineDefaultLocation {
-    CGFloat firstCellWidth = [self getWidthWithContent:self.titles[0]];
+    CGFloat cellWidth = [self getWidthWithContent:self.titles[0]];
     [self.underline mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.width.mas_equalTo(firstCellWidth);
-        make.left.mas_equalTo(self.cellSpacing);
+        make.width.mas_equalTo(cellWidth);
+        make.left.mas_equalTo(self.leftAndRightMargin);
     }];
 }
 
@@ -153,7 +153,7 @@ static CGFloat const SeparatorHeight = 0.5;
     HGCategoryViewCollectionViewCell *cell = [self getCell:self.selectedIndex];
     [UIView animateWithDuration:0.15 animations:^{
         [self.underline mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.height - SeparatorHeight - self.underlineHeight);
+            make.top.mas_equalTo(self.height - self.underlineHeight - HG_ONE_PIXEL);
             make.height.mas_equalTo(self.underlineHeight);
             make.width.centerX.equalTo(cell.titleLabel);
         }];
@@ -163,7 +163,7 @@ static CGFloat const SeparatorHeight = 0.5;
 }
 
 - (CGFloat)getWidthWithContent:(NSString *)content {
-    CGRect rect = [content boundingRectWithSize:CGSizeMake(MAXFLOAT, self.height - SeparatorHeight)
+    CGRect rect = [content boundingRectWithSize:CGSizeMake(MAXFLOAT, self.height - HG_ONE_PIXEL)
                                         options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading
                                      attributes:@{NSFontAttributeName:self.titleSelectedFont}
                                         context:nil
@@ -174,7 +174,19 @@ static CGFloat const SeparatorHeight = 0.5;
 #pragma mark - UICollectionViewDelegateFlowLayout
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     CGFloat itemWidth = [self getWidthWithContent:self.titles[indexPath.row]];
-    return CGSizeMake(itemWidth, self.height - 1);
+    return CGSizeMake(itemWidth, self.height - HG_ONE_PIXEL);
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
+    return 0;
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
+    return self.cellSpacing;
+}
+
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
+    return UIEdgeInsetsMake(0, self.leftAndRightMargin, 0, self.leftAndRightMargin);
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -220,18 +232,42 @@ static CGFloat const SeparatorHeight = 0.5;
     _titles = titles.copy;
 }
 
+- (void)setHeight:(CGFloat)categoryViewHeight {
+    _height = categoryViewHeight;
+    [self.collectionView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_equalTo(self.height - HG_ONE_PIXEL);
+    }];
+    [self.underline mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.height - self.underlineHeight - HG_ONE_PIXEL);
+    }];
+}
+
+- (void)setUnderlineHeight:(CGFloat)underlineHeight {
+    _underlineHeight = underlineHeight;
+    [self.underline mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.height - self.underlineHeight - HG_ONE_PIXEL);
+    }];
+}
+
+- (void)setCellSpacing:(CGFloat)cellSpacing {
+    _cellSpacing = cellSpacing;
+    [self.collectionView.collectionViewLayout invalidateLayout];
+}
+
+- (void)setLeftAndRightMargin:(CGFloat)leftAndRightMargin {
+    _leftAndRightMargin = leftAndRightMargin;
+    [self.collectionView.collectionViewLayout invalidateLayout];
+}
+
 #pragma mark - Getter
 - (UICollectionView *)collectionView {
     if (!_collectionView) {
         UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
         flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-        flowLayout.minimumLineSpacing = 0;
-        flowLayout.minimumInteritemSpacing = self.cellSpacing;
-        flowLayout.sectionInset = UIEdgeInsetsMake(0, self.cellSpacing, 0, self.cellSpacing);
         
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flowLayout];
         _collectionView.showsHorizontalScrollIndicator = NO;
-        _collectionView.backgroundColor = [UIColor yellowColor];
+        _collectionView.backgroundColor = [UIColor whiteColor];
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         _collectionView.bounces = NO;
@@ -253,10 +289,6 @@ static CGFloat const SeparatorHeight = 0.5;
         _separator.backgroundColor = [UIColor lightGrayColor];
     }
     return _separator;
-}
-
-- (CGFloat)height {
-    return _height ?: HGCategoryViewDefaultHeight;
 }
 
 @end

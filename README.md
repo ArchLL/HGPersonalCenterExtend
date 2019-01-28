@@ -20,7 +20,7 @@ HGPersonalCenterExtend is available through [CocoaPods](https://cocoapods.org). 
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod 'HGPersonalCenterExtend', '~> 0.1.1'
+pod 'HGPersonalCenterExtend', '~> 0.1.2'
 ```
 
 ## Blog
@@ -124,7 +124,7 @@ Example: HGPersonalCenterExtend/Example
 }
 
 /*设置segmentedPageViewController的categoryView以及pageViewControllers
-*这里可以对categoryView进行自定义，包括高度、背景颜色，字体颜色和大小等
+*这里可以对categoryView进行自定义，包括高度、背景颜色、字体颜色、字体大小、下划线高度和颜色等
 *这里用到的pageViewController需要继承自HGPageViewController
 */
 - (HGSegmentedPageViewController *)segmentedPageViewController {
@@ -147,6 +147,7 @@ Example: HGPersonalCenterExtend/Example
     _segmentedPageViewController.pageViewControllers = controllers.copy;
     _segmentedPageViewController.categoryView.titles = titles;
     _segmentedPageViewController.categoryView.originalIndex = self.selectedIndex;
+    _segmentedPageViewController.categoryView.collectionView.backgroundColor = [UIColor yellowColor];
     _segmentedPageViewController.delegate = self;
   }
   return _segmentedPageViewController;
