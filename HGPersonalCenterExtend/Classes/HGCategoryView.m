@@ -21,7 +21,7 @@
         self.frame = frame;
         [self.contentView addSubview:self.titleLabel];
         [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.edges.mas_equalTo(self);
+            make.center.equalTo(self);
         }];
     }
     return self;
@@ -39,10 +39,14 @@
 
 @interface HGCategoryView () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 @property (nonatomic, strong) UICollectionView *collectionView;
-@property (nonatomic, strong) UIView *underline;
-@property (nonatomic, strong) UIView *separator;
+@property (nonatomic, strong) UIView *vernier;
+@property (nonatomic, strong) UIView *topBorder;
+@property (nonatomic, strong) UIView *bottomBorder;
 @property (nonatomic) NSInteger selectedIndex;
 @property (nonatomic) BOOL selectedCellExist;
+@property (nonatomic) CGFloat fontPointSizeScale;
+@property (nonatomic, strong) MASConstraint *underlineCenterXConstraint;
+@property (nonatomic, strong) MASConstraint *underlineWidthConstraint;
 @end
 
 static NSString * const SegmentHeaderViewCollectionViewCellIdentifier = @"SegmentHeaderViewCollectionViewCell";
@@ -52,17 +56,18 @@ static NSString * const SegmentHeaderViewCollectionViewCellIdentifier = @"Segmen
 #pragma mark - Life Cycle
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
-        _selectedIndex = self.originalIndex;
+        _selectedIndex = 0;
         _height = HGCategoryViewDefaultHeight;
-        _underlineHeight = 1.8;
-        _cellSpacing = 10;
-        _leftAndRightMargin = _cellSpacing;
+        _vernierHeight = 1.8;
+        _itemSpacing = 15;
+        _leftAndRightMargin = 10;
+        self.titleNomalFont = [UIFont systemFontOfSize:16];
+        self.titleSelectedFont = [UIFont systemFontOfSize:17];
         self.titleNormalColor = [UIColor grayColor];
         self.titleSelectedColor = [UIColor redColor];
-        self.titleNomalFont = [UIFont systemFontOfSize:18];
-        self.titleSelectedFont = [UIFont systemFontOfSize:20];
+        self.vernier.backgroundColor = self.titleSelectedColor;
+        self.backgroundColor = [UIColor whiteColor];
         [self setupSubViews];
-        self.underline.backgroundColor = self.titleSelectedColor;
     }
     return self;
 }
@@ -73,45 +78,53 @@ static NSString * const SegmentHeaderViewCollectionViewCellIdentifier = @"Segmen
         self.selectedIndex = self.originalIndex;
     } else {
         _selectedIndex = 0;
-        [self setupMoveLineDefaultLocation];
+        [self setupUnderlineDefaultLocation];
     }
 }
 
 #pragma mark - Public Method
-- (void)changeItemWithTargetIndex:(NSUInteger)targetIndex {
+- (void)changeItemToTargetIndex:(NSUInteger)targetIndex {
     if (self.selectedIndex == targetIndex) {
         return;
     }
     HGCategoryViewCollectionViewCell *selectedCell = [self getCell:self.selectedIndex];
-    if (selectedCell) {
-        selectedCell.titleLabel.textColor = self.titleNormalColor;
-        selectedCell.titleLabel.font = self.titleNomalFont;
-    }
     HGCategoryViewCollectionViewCell *targetCell = [self getCell:targetIndex];
-    if (targetCell) {
-        targetCell.titleLabel.textColor = self.titleSelectedColor;
-        targetCell.titleLabel.font = self.titleSelectedFont;
-    }
+    if (selectedCell) selectedCell.titleLabel.textColor = self.titleNormalColor;
+    if (targetCell) targetCell.titleLabel.textColor = self.titleSelectedColor;
+    CGFloat scale = self.titleSelectedFont.pointSize / self.titleNomalFont.pointSize;
+    [UIView animateWithDuration:0.15 animations:^{
+        if (selectedCell) selectedCell.titleLabel.transform = CGAffineTransformIdentity;
+        if (targetCell) targetCell.titleLabel.transform = CGAffineTransformMakeScale(scale, scale);
+    } completion:^(BOOL finished) {
+        if (selectedCell) selectedCell.titleLabel.font = self.titleNomalFont;
+        if (targetCell) targetCell.titleLabel.font = self.titleSelectedFont;
+    }];
     self.selectedIndex = targetIndex;
 }
 
 #pragma mark - Private Method
 - (void)setupSubViews {
+    [self addSubview:self.topBorder];
     [self addSubview:self.collectionView];
-    [self.collectionView addSubview:self.underline];
-    [self addSubview:self.separator];
+    [self.collectionView addSubview:self.vernier];
+    [self addSubview:self.bottomBorder];
     
+    [self.topBorder mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.top.equalTo(self);
+        make.height.mas_equalTo(HG_ONE_PIXEL);
+    }];
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.mas_equalTo(0);
+        make.top.equalTo(self.topBorder.mas_bottom);
+        make.width.equalTo(self);
         make.height.mas_equalTo(self.height - HG_ONE_PIXEL);
     }];
-    [self.underline mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.height - self.underlineHeight - HG_ONE_PIXEL);
-        make.height.mas_equalTo(self.underlineHeight);
+    [self.vernier mas_makeConstraints:^(MASConstraintMaker *make) {
+        CGFloat collectionViewHeight = self.height - HG_ONE_PIXEL * 2;
+        make.top.mas_equalTo(collectionViewHeight - self.vernierHeight);
+        make.height.mas_equalTo(self.vernierHeight);
     }];
-    [self.separator mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self);
-        make.left.right.mas_equalTo(0);
+    [self.bottomBorder mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.equalTo(self);
         make.height.mas_equalTo(HG_ONE_PIXEL);
     }];
 }
@@ -120,11 +133,7 @@ static NSString * const SegmentHeaderViewCollectionViewCellIdentifier = @"Segmen
     return (HGCategoryViewCollectionViewCell *)[self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
 }
 
-- (void)layoutAndScrollToSelectedItem {
-    [self.collectionView.collectionViewLayout invalidateLayout];
-    [self.collectionView setNeedsLayout];
-    [self.collectionView layoutIfNeeded];
-    
+- (void)layoutAndScrollToSelectedItem {    
     [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:self.selectedIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
 
     if (self.selectedItemHelper) {
@@ -134,32 +143,58 @@ static NSString * const SegmentHeaderViewCollectionViewCellIdentifier = @"Segmen
     HGCategoryViewCollectionViewCell *selectedCell = [self getCell:self.selectedIndex];
     if (selectedCell) {
         self.selectedCellExist = YES;
-        [self updateMoveLineLocation];
+        [self updateUnderlineLocation];
     } else {
         self.selectedCellExist = NO;
-        //这种情况下updateMoveLineLocation将在self.collectionView滚动结束后执行（代理方法scrollViewDidEndScrollingAnimation）
+        //这种情况下updateUnderlineLocation将在self.collectionView滚动结束后执行（代理方法scrollViewDidEndScrollingAnimation）
     }
 }
 
-- (void)setupMoveLineDefaultLocation {
-    CGFloat cellWidth = [self getWidthWithContent:self.titles[0]];
-    [self.underline mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.width.mas_equalTo(cellWidth);
-        make.left.mas_equalTo(self.leftAndRightMargin);
+- (void)setupUnderlineDefaultLocation {
+    [self.collectionView layoutIfNeeded];
+    HGCategoryViewCollectionViewCell *cell = [self getCell:self.selectedIndex];
+    [self.vernier mas_updateConstraints:^(MASConstraintMaker *make) {
+        self.underlineCenterXConstraint = make.centerX.mas_equalTo(cell);
+        self.underlineWidthConstraint = make.width.mas_equalTo(cell.titleLabel);
     }];
 }
 
-- (void)updateMoveLineLocation {
+- (void)updateUnderlineLocation {
+    [self.collectionView layoutIfNeeded];
     HGCategoryViewCollectionViewCell *cell = [self getCell:self.selectedIndex];
+    [self.underlineCenterXConstraint uninstall];
+    [self.underlineWidthConstraint uninstall];
+    [self.vernier mas_updateConstraints:^(MASConstraintMaker *make) {
+        self.underlineCenterXConstraint = make.centerX.mas_equalTo(cell);
+        self.underlineWidthConstraint = make.width.mas_equalTo(cell.titleLabel);
+    }];
     [UIView animateWithDuration:0.15 animations:^{
-        [self.underline mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.height - self.underlineHeight - HG_ONE_PIXEL);
-            make.height.mas_equalTo(self.underlineHeight);
-            make.width.centerX.equalTo(cell.titleLabel);
-        }];
-        [self.collectionView setNeedsLayout];
         [self.collectionView layoutIfNeeded];
     }];
+}
+
+- (void)updateCollectionViewContentInset {
+    [self.collectionView layoutIfNeeded];
+    CGFloat width = self.collectionView.contentSize.width;
+    CGFloat margin;
+    if (width > HG_SCREEN_WIDTH) {
+        width = HG_SCREEN_WIDTH;
+        margin = 0;
+    } else {
+        margin = (HG_SCREEN_WIDTH - width) / 2.0;
+    }
+    
+    switch (self.alignment) {
+        case HGCategoryViewAlignmentLeft:
+            self.collectionView.contentInset = UIEdgeInsetsZero;
+            break;
+        case HGCategoryViewAlignmentCenter:
+            self.collectionView.contentInset = UIEdgeInsetsMake(0, margin, 0, margin);
+            break;
+        case HGCategoryViewAlignmentRight:
+            self.collectionView.contentInset = UIEdgeInsetsMake(0, margin * 2, 0, 0);
+            break;
+    }
 }
 
 - (CGFloat)getWidthWithContent:(NSString *)content {
@@ -173,16 +208,13 @@ static NSString * const SegmentHeaderViewCollectionViewCellIdentifier = @"Segmen
 
 #pragma mark - UICollectionViewDelegateFlowLayout
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    CGFloat itemWidth = [self getWidthWithContent:self.titles[indexPath.row]];
-    return CGSizeMake(itemWidth, self.height - HG_ONE_PIXEL);
+    CGFloat width = [self getWidthWithContent:self.titles[indexPath.row]];
+    CGFloat height = self.height - HG_ONE_PIXEL * 2;
+    return CGSizeMake(self.itemWidth > 0 ? self.itemWidth : width, height);
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
-    return 0;
-}
-
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
-    return self.cellSpacing;
+    return self.itemSpacing;
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
@@ -198,20 +230,26 @@ static NSString * const SegmentHeaderViewCollectionViewCellIdentifier = @"Segmen
     HGCategoryViewCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:SegmentHeaderViewCollectionViewCellIdentifier forIndexPath:indexPath];
     cell.titleLabel.text = self.titles[indexPath.row];
     cell.titleLabel.textColor = self.selectedIndex == indexPath.row ? self.titleSelectedColor : self.titleNormalColor;
-    cell.titleLabel.font = self.selectedIndex == indexPath.row ? self.titleSelectedFont : self.titleNomalFont;
+    if (self.selectedIndex == indexPath.row) {
+        cell.titleLabel.transform = CGAffineTransformMakeScale(self.fontPointSizeScale, self.fontPointSizeScale);
+        cell.titleLabel.font = self.titleSelectedFont;
+    } else {
+        cell.titleLabel.transform = CGAffineTransformIdentity;
+        cell.titleLabel.font = self.titleNomalFont;
+    }
     return cell;
 }
 
 #pragma mark - UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
-    [self changeItemWithTargetIndex:indexPath.row];
+    [self changeItemToTargetIndex:indexPath.row];
 }
 
 #pragma mark - UIScrollViewDelegate
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
     if (!self.selectedCellExist) {
-        [self updateMoveLineLocation];
+        [self updateUnderlineLocation];
     }
 }
 
@@ -230,6 +268,11 @@ static NSString * const SegmentHeaderViewCollectionViewCellIdentifier = @"Segmen
 
 - (void)setTitles:(NSArray<NSString *> *)titles {
     _titles = titles.copy;
+    [self updateCollectionViewContentInset];
+}
+
+- (void)setAlignment:(HGCategoryViewAlignment)alignment {
+    _alignment = alignment;
 }
 
 - (void)setHeight:(CGFloat)categoryViewHeight {
@@ -237,26 +280,41 @@ static NSString * const SegmentHeaderViewCollectionViewCellIdentifier = @"Segmen
     [self.collectionView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(self.height - HG_ONE_PIXEL);
     }];
-    [self.underline mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.height - self.underlineHeight - HG_ONE_PIXEL);
+    [self.vernier mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.height - self.vernierHeight - HG_ONE_PIXEL);
     }];
 }
 
 - (void)setUnderlineHeight:(CGFloat)underlineHeight {
-    _underlineHeight = underlineHeight;
-    [self.underline mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.height - self.underlineHeight - HG_ONE_PIXEL);
+    _vernierHeight = underlineHeight;
+    [self.vernier mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.height - self.vernierHeight - HG_ONE_PIXEL);
     }];
 }
 
-- (void)setCellSpacing:(CGFloat)cellSpacing {
-    _cellSpacing = cellSpacing;
+- (void)setItemWidth:(CGFloat)itemWidth {
+    _itemWidth = itemWidth;
     [self.collectionView.collectionViewLayout invalidateLayout];
+    [self updateCollectionViewContentInset];
+}
+
+- (void)setItemSpacing:(CGFloat)cellSpacing {
+    _itemSpacing = cellSpacing;
+    [self.collectionView.collectionViewLayout invalidateLayout];
+    [self updateCollectionViewContentInset];
 }
 
 - (void)setLeftAndRightMargin:(CGFloat)leftAndRightMargin {
     _leftAndRightMargin = leftAndRightMargin;
     [self.collectionView.collectionViewLayout invalidateLayout];
+    [self updateCollectionViewContentInset];
+}
+
+- (void)setIsEqualParts:(CGFloat)isEqualParts {
+    _isEqualParts = isEqualParts;
+    if (self.isEqualParts && self.titles.count > 0) {
+        self.itemWidth = (HG_SCREEN_WIDTH - self.leftAndRightMargin * 2 - self.itemSpacing * (self.titles.count - 1)) / self.titles.count;
+    }
 }
 
 #pragma mark - Getter
@@ -267,7 +325,7 @@ static NSString * const SegmentHeaderViewCollectionViewCellIdentifier = @"Segmen
         
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flowLayout];
         _collectionView.showsHorizontalScrollIndicator = NO;
-        _collectionView.backgroundColor = [UIColor whiteColor];
+        _collectionView.backgroundColor = [UIColor clearColor];
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         _collectionView.bounces = NO;
@@ -276,19 +334,31 @@ static NSString * const SegmentHeaderViewCollectionViewCellIdentifier = @"Segmen
     return _collectionView;
 }
 
-- (UIView *)underline {
-    if (!_underline) {
-        _underline = [[UIView alloc] init];
+- (UIView *)vernier {
+    if (!_vernier) {
+        _vernier = [[UIView alloc] init];
     }
-    return _underline;
+    return _vernier;
 }
 
-- (UIView *)separator {
-    if (!_separator) {
-        _separator = [[UIView alloc] init];
-        _separator.backgroundColor = [UIColor lightGrayColor];
+- (UIView *)topBorder {
+    if (!_topBorder) {
+        _topBorder = [[UIView alloc] init];
+        _topBorder.backgroundColor = [UIColor lightGrayColor];
     }
-    return _separator;
+    return _topBorder;
+}
+
+- (UIView *)bottomBorder {
+    if (!_bottomBorder) {
+        _bottomBorder = [[UIView alloc] init];
+        _bottomBorder.backgroundColor = [UIColor lightGrayColor];
+    }
+    return _bottomBorder;
+}
+
+- (CGFloat)fontPointSizeScale {
+    return self.titleSelectedFont.pointSize / self.titleNomalFont.pointSize;
 }
 
 @end

@@ -9,14 +9,26 @@
 #import "HGPersonalCenterMacro.h"
 
 @implementation HGCenterBaseTableView
-//是否让手势透传到子视图
+
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
-    CGFloat segmentViewContentScrollViewHeight = HG_SCREEN_HEIGHT - HG_NAVIGATION_BAR_HEIGHT - self.categoryViewHeight ?: HGCategoryViewDefaultHeight;
     CGPoint currentPoint = [gestureRecognizer locationInView:self];
-    if (CGRectContainsPoint(CGRectMake(0, self.contentSize.height - segmentViewContentScrollViewHeight, HG_SCREEN_WIDTH, segmentViewContentScrollViewHeight), currentPoint)) {
+    CGFloat segmentViewContentScrollViewHeight = HG_SCREEN_HEIGHT - HG_NAVIGATION_BAR_HEIGHT - self.categoryViewHeight ?: HGCategoryViewDefaultHeight;
+    
+    BOOL isContainsPoint = CGRectContainsPoint(CGRectMake(0, self.contentSize.height - segmentViewContentScrollViewHeight, HG_SCREEN_WIDTH, segmentViewContentScrollViewHeight), currentPoint);
+    BOOL isPop = [otherGestureRecognizer.view isKindOfClass:NSClassFromString(@"UILayoutContainerView")];
+    
+    if (isPop && isContainsPoint) {
         return YES;
+    } else {
+        if (isContainsPoint) {
+            return YES;
+        } else {
+            if (isPop) {
+                gestureRecognizer.state = UIGestureRecognizerStateCancelled;
+            }
+            return NO;
+        }
     }
-    return NO;
 }
 
 @end

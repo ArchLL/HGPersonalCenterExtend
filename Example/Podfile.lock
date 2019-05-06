@@ -1,5 +1,5 @@
 PODS:
-  - HGPersonalCenterExtend (0.1.1):
+  - HGPersonalCenterExtend (0.1.2):
     - Masonry (~> 1.1.0)
   - Masonry (1.1.0)
 
@@ -15,9 +15,9 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  HGPersonalCenterExtend: cd07c649da9090b5c883088c0c32e11fbd96319b
+  HGPersonalCenterExtend: 9c382eb64ff8fc3264b5bda53982256e513b162f
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
 
 PODFILE CHECKSUM: 7e1003b32d8792b4a0173a80219ce60730742077
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.6.1

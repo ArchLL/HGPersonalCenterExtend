@@ -20,7 +20,7 @@ HGPersonalCenterExtend is available through [CocoaPods](https://cocoapods.org). 
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod 'HGPersonalCenterExtend', '~> 0.1.2'
+pod 'HGPersonalCenterExtend', '~> 0.1.3'
 ```
 
 ## Blog
@@ -29,8 +29,9 @@ pod 'HGPersonalCenterExtend', '~> 0.1.2'
 ## Main 
 1.使用Masonry方式布局；  
 2.解决外层和内层滚动视图的上下滑动冲突问题；  
-3.解决segmentedPageViewController的scrollView左右滚动和外层scrollView上下滑动不能互斥的问题； 
-4.计划：如：优化体验、HGPageViewController支持刷新、扩展HGCategoryView更多样式)； 
+3.解决segmentedPageViewController的scrollView左右滚动和外层scrollView上下滑动不能互斥的问题等；
+4.优化侧滑返回；
+5.计划：优化操作体验、支持刷新、HGCategoryView支持更多样式)； 
 
 #### 如果想实现头部背景视图放大的效果，可关注我另一个库：[HGPersonalCenter](https://github.com/ArchLL/HGPersonalCenter)  
 
@@ -41,12 +42,14 @@ Example: HGPersonalCenterExtend/Example
 
 假如你要将CenterViewController作为个人主页，你需要做如下操作（参考Example下的`HGPersonalCenterViewController`）
 ```Objc
-
 #import "HGSegmentedPageViewController.h"
 #import "HGCenterBaseTableView.h"
 
+static CGFloat const headerViewHeight = 240;
+
 @interface HGPersonalCenterViewController () <UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate, HGSegmentedPageViewControllerDelegate, HGPageViewControllerDelegate>
 @property (nonatomic, strong) HGCenterBaseTableView *tableView;
+@property (nonatomic, strong) HGPersonalCenterHeaderView *headerView;
 @property (nonatomic, strong) UIView *footerView;
 @property (nonatomic, strong) HGSegmentedPageViewController *segmentedPageViewController;
 @property (nonatomic) BOOL cannotScroll;
@@ -55,20 +58,29 @@ Example: HGPersonalCenterExtend/Example
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-  if (@available(iOS 11.0, *)) {
-      [[UIScrollView appearance] setContentInsetAdjustmentBehavior:UIScrollViewContentInsetAdjustmentNever];
-  } else {
-      self.automaticallyAdjustsScrollViewInsets = NO;
-  }
-  self.navigationController.interactivePopGestureRecognizer.delegate = self;
+    if (@available(iOS 11.0, *)) {
+        [[UIScrollView appearance] setContentInsetAdjustmentBehavior:UIScrollViewContentInsetAdjustmentNever];
+    } else {
+        self.automaticallyAdjustsScrollViewInsets = NO;
+    }
+    self.navigationController.interactivePopGestureRecognizer.delegate = self;
 
-  //将segmentedPageViewController.view添加在footerView上
-  [self addChildViewController:self.segmentedPageViewController]; 
-  [self.footerView addSubview:self.segmentedPageViewController.view];
-  [self.segmentedPageViewController didMoveToParentViewController:self];
-  [self.segmentedPageViewController.view mas_makeConstraints:^(MASConstraintMaker *make) {
-      make.edges.equalTo(self.footerView);
-  }];
+    [self setupSubViews];
+}
+
+#pragma mark - Private Methods
+- (void)setupSubViews {
+    [self.view insertSubview:self.tableView belowSubview:self.navigationBar];
+    [self addChildViewController:self.segmentedPageViewController];
+    [self.footerView addSubview:self.segmentedPageViewController.view];
+    [self.segmentedPageViewController didMoveToParentViewController:self];
+    
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.view);
+    }];
+    [self.segmentedPageViewController.view mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.footerView);
+    }];
 }
 
 #pragma mark - UIScrollViewDelegate
@@ -124,13 +136,13 @@ Example: HGPersonalCenterExtend/Example
 }
 
 /*设置segmentedPageViewController的categoryView以及pageViewControllers
-*这里可以对categoryView进行自定义，包括高度、背景颜色、字体颜色、字体大小、下划线高度和颜色等
+*这里可以对categoryView进行自定义，包括分布方式(左、中、右)、高度、背景颜色、字体颜色、字体大小、下划线高度和颜色等
 *这里用到的pageViewController需要继承自HGPageViewController
 */
 - (HGSegmentedPageViewController *)segmentedPageViewController {
     if (!_segmentedPageViewController) {
         NSMutableArray *controllers = [NSMutableArray array];
-        NSArray *titles = @[@"华盛顿", @"夏威夷", @"拉斯维加斯", @"纽约", @"西雅图", @"底特律", @"费城", @"旧金山", @"芝加哥"];
+        NSArray *titles = @[@"主页", @"动态", @"关注", @"粉丝"];
         for (int i = 0; i < titles.count; i++) {
             HGPageViewController *controller;
             if (i % 3 == 0) {
@@ -144,13 +156,22 @@ Example: HGPersonalCenterExtend/Example
         [controllers addObject:controller];
     }
     _segmentedPageViewController = [[HGSegmentedPageViewController alloc] init];
-    _segmentedPageViewController.pageViewControllers = controllers.copy;
+    _segmentedPageViewController.pageViewControllers = controllers;
     _segmentedPageViewController.categoryView.titles = titles;
+    _segmentedPageViewController.categoryView.alignment = HGCategoryViewAlignmentLeft;
     _segmentedPageViewController.categoryView.originalIndex = self.selectedIndex;
-    _segmentedPageViewController.categoryView.collectionView.backgroundColor = [UIColor yellowColor];
+    _segmentedPageViewController.categoryView.itemSpacing = 25;
+    _segmentedPageViewController.categoryView.backgroundColor = [UIColor yellowColor];
     _segmentedPageViewController.delegate = self;
   }
   return _segmentedPageViewController;
+}
+
+- (HGPersonalCenterHeaderView *)headerView {
+    if (!_headerView) {
+        _headerView = [[HGPersonalCenterHeaderView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, headerViewHeight)];
+    }
+    return _headerView;
 }
 
 - (UIView *)footerView {
@@ -160,7 +181,6 @@ Example: HGPersonalCenterExtend/Example
     }
     return _footerView;
 }
-
 ```
 
 ⚠️ 如果你的pageViewController下的scrollView是UICollectionView类型，需要进行如下设置：

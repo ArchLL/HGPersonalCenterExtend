@@ -16,6 +16,7 @@
 		6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
+		A923C2C722563E45000A4214 /* HGPersonalCenterHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = A923C2C622563E45000A4214 /* HGPersonalCenterHeaderView.m */; };
 		A943909B1D753E8B99FE3509 /* Pods_HGPersonalCenterExtend_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BE01FCC8716CD23BDAFAFB5 /* Pods_HGPersonalCenterExtend_Tests.framework */; };
 		A98C56C021F5823200054CC1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A98C56A621F5823200054CC1 /* Assets.xcassets */; };
 		A98C56C121F5823200054CC1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A98C56A721F5823200054CC1 /* AppDelegate.m */; };
@@ -62,6 +63,8 @@
 		8FCEE29EF88EA15405CD3BB7 /* HGPersonalCenterExtend.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = HGPersonalCenterExtend.podspec; path = ../HGPersonalCenterExtend.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		983F620334BF34058F7800C3 /* Pods-HGPersonalCenterExtend.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HGPersonalCenterExtend.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HGPersonalCenterExtend/Pods-HGPersonalCenterExtend.debug.xcconfig"; sourceTree = "<group>"; };
 		A4E2A39544C61A47069231DE /* Pods-HGPersonalCenterExtend_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HGPersonalCenterExtend_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HGPersonalCenterExtend_Tests/Pods-HGPersonalCenterExtend_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		A923C2C522563E45000A4214 /* HGPersonalCenterHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HGPersonalCenterHeaderView.h; sourceTree = "<group>"; };
+		A923C2C622563E45000A4214 /* HGPersonalCenterHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HGPersonalCenterHeaderView.m; sourceTree = "<group>"; };
 		A98C56A521F5823200054CC1 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		A98C56A621F5823200054CC1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A98C56A721F5823200054CC1 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -240,6 +243,8 @@
 				A98C56BE21F5823200054CC1 /* HGDoraemonCollectionViewCell.h */,
 				A98C56BB21F5823200054CC1 /* HGDoraemonCollectionViewCell.m */,
 				A98C56BD21F5823200054CC1 /* HGDoraemonCollectionViewCell.xib */,
+				A923C2C522563E45000A4214 /* HGPersonalCenterHeaderView.h */,
+				A923C2C622563E45000A4214 /* HGPersonalCenterHeaderView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -319,6 +324,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -363,7 +369,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-HGPersonalCenterExtend/Pods-HGPersonalCenterExtend-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-HGPersonalCenterExtend/Pods-HGPersonalCenterExtend-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/HGPersonalCenterExtend/HGPersonalCenterExtend.framework",
 				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
 			);
@@ -374,7 +380,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HGPersonalCenterExtend/Pods-HGPersonalCenterExtend-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HGPersonalCenterExtend/Pods-HGPersonalCenterExtend-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		A4AAC0A106506ACABEDB0C08 /* [CP] Check Pods Manifest.lock */ = {
@@ -420,6 +426,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A923C2C722563E45000A4214 /* HGPersonalCenterHeaderView.m in Sources */,
 				A98C56D421F5947700054CC1 /* main.m in Sources */,
 				A98C56CA21F5823200054CC1 /* HGDoraemonCell.m in Sources */,
 				A98C56C221F5823200054CC1 /* HGPersonalCenterViewController.m in Sources */,

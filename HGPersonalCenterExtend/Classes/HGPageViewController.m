@@ -15,7 +15,7 @@
 
 @implementation HGPageViewController
 
-#pragma mark - Private Methods
+#pragma mark - Public Methods
 - (void)makePageViewControllerScroll:(BOOL)canScroll {
     self.canScroll = canScroll;
     self.scrollView.showsVerticalScrollIndicator = canScroll;
@@ -31,7 +31,6 @@
 #pragma mark - UIScrollViewDelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     self.scrollView = scrollView;
-    
     if (self.canScroll) {
         CGFloat offsetY = scrollView.contentOffset.y;
         if (offsetY <= 0) {

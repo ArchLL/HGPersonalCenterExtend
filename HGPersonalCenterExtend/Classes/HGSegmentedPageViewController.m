@@ -24,28 +24,7 @@
     [super viewDidLoad];
     self.currentPageViewController = self.pageViewControllers[self.categoryView.originalIndex];
     self.selectedIndex = self.categoryView.originalIndex;
-    
-    [self.view addSubview:self.categoryView];
-    [self.view addSubview:self.scrollView];
-    
-    [self.categoryView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.equalTo(self.view);
-        make.height.mas_equalTo(self->_categoryView.height);
-    }];
-    [self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.categoryView.mas_bottom);
-        make.left.right.bottom.mas_equalTo(self.view);
-    }];
-    [self.pageViewControllers enumerateObjectsUsingBlock:^(id _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        UIViewController *controller = obj;
-        [self addChildViewController:controller];
-        [self.scrollView addSubview:controller.view];
-        [controller didMoveToParentViewController:self];
-        [controller.view mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(idx * kWidth);
-            make.top.width.height.equalTo(self.scrollView);
-        }];
-    }];
+    [self setupViews];
     
     __weak typeof(self) weakSelf = self;
     weakSelf.categoryView.selectedItemHelper = ^(NSUInteger index) {
@@ -63,6 +42,29 @@
     }
 }
 
+- (void)setupViews {
+    [self.view addSubview:self.categoryView];
+    [self.view addSubview:self.scrollView];
+    
+    [self.categoryView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.right.equalTo(self.view);
+        make.height.mas_equalTo(self->_categoryView.height);
+    }];
+    [self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.categoryView.mas_bottom);
+        make.left.right.bottom.mas_equalTo(self.view);
+    }];
+    [self.pageViewControllers enumerateObjectsUsingBlock:^(UIViewController * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [self addChildViewController:obj];
+        [self.scrollView addSubview:obj.view];
+        [obj didMoveToParentViewController:self];
+        [obj.view mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(idx * kWidth);
+            make.top.width.height.equalTo(self.scrollView);
+        }];
+    }];
+}
+
 #pragma mark - UIScrollViewDelegate
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     if (self.delegate && [self.delegate respondsToSelector:@selector(segmentedPageViewControllerWillBeginDragging)]) {
@@ -78,7 +80,7 @@
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     NSUInteger index = (NSUInteger)(self.scrollView.contentOffset.x / kWidth);
-    [self.categoryView changeItemWithTargetIndex:index];
+    [self.categoryView changeItemToTargetIndex:index];
     self.currentPageViewController = self.pageViewControllers[index];
     self.selectedIndex = index;
     if (self.delegate && [self.delegate respondsToSelector:@selector(segmentedPageViewControllerDidEndDeceleratingWithPageIndex:)]) {

@@ -7,6 +7,7 @@
 //
 
 #import "HGPersonalCenterViewController.h"
+#import "HGPersonalCenterHeaderView.h"
 #import "HGDoraemonCell.h"
 #import "HGFirstViewController.h"
 #import "HGSecondViewController.h"
@@ -16,14 +17,12 @@
 #import "HGSegmentedPageViewController.h"
 #import "HGCenterBaseTableView.h"
 
-static CGFloat const HeaderImageViewHeight = 240;
+static CGFloat const headerViewHeight = 240;
 
 @interface HGPersonalCenterViewController () <UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate, HGSegmentedPageViewControllerDelegate, HGPageViewControllerDelegate>
 @property (nonatomic, strong) HGCenterBaseTableView *tableView;
+@property (nonatomic, strong) HGPersonalCenterHeaderView *headerView;
 @property (nonatomic, strong) UIView *footerView;
-@property (nonatomic, strong) UIImageView *headerImageView;
-@property (nonatomic, strong) UIImageView *avatarImageView;
-@property (nonatomic, strong) UILabel *nickNameLabel;
 @property (nonatomic, strong) HGSegmentedPageViewController *segmentedPageViewController;
 @property (nonatomic) BOOL cannotScroll;
 
@@ -53,24 +52,12 @@ static CGFloat const HeaderImageViewHeight = 240;
 #pragma mark - Private Methods
 - (void)setupSubViews {
     [self.view insertSubview:self.tableView belowSubview:self.navigationBar];
-    [self.headerImageView addSubview:self.avatarImageView];
-    [self.headerImageView addSubview:self.nickNameLabel];
     [self addChildViewController:self.segmentedPageViewController];
     [self.footerView addSubview:self.segmentedPageViewController.view];
     [self.segmentedPageViewController didMoveToParentViewController:self];
     
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
-    }];
-    [self.avatarImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.headerImageView);
-        make.size.mas_equalTo(CGSizeMake(80, 80));
-        make.bottom.mas_equalTo(-70);
-    }];
-    [self.nickNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.headerImageView);
-        make.width.mas_lessThanOrEqualTo(200);
-        make.bottom.mas_equalTo(-40);
     }];
     [self.segmentedPageViewController.view mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.footerView);
@@ -79,8 +66,8 @@ static CGFloat const HeaderImageViewHeight = 240;
 
 - (void)updateNavigationBarBackgroundColor {
     CGFloat alpha = 0;
-    if (self.tableView.contentOffset.y < HeaderImageViewHeight - NAVIGATION_BAR_HEIGHT) {
-        alpha = self.tableView.contentOffset.y / (HeaderImageViewHeight - NAVIGATION_BAR_HEIGHT);
+    if (self.tableView.contentOffset.y < headerViewHeight - NAVIGATION_BAR_HEIGHT) {
+        alpha = self.tableView.contentOffset.y / (headerViewHeight - NAVIGATION_BAR_HEIGHT);
     }else {
         alpha = 1;
     }
@@ -153,7 +140,7 @@ static CGFloat const HeaderImageViewHeight = 240;
     label.textColor = [UIColor redColor];
     [headerView addSubview:label];
     [label mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(UIEdgeInsetsMake(15, 15, 15, 15));
+        make.edges.mas_equalTo(UIEdgeInsetsMake(15, 10, 15, 10));
     }];
     return headerView;
 }
@@ -189,12 +176,26 @@ static CGFloat const HeaderImageViewHeight = 240;
 }
 
 #pragma mark - Lazy
+- (HGPersonalCenterHeaderView *)headerView {
+    if (!_headerView) {
+        _headerView = [[HGPersonalCenterHeaderView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, headerViewHeight)];
+    }
+    return _headerView;
+}
+
+- (UIView *)footerView {
+    if (!_footerView) {
+        _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, SCREEN_HEIGHT - NAVIGATION_BAR_HEIGHT)];
+    }
+    return _footerView;
+}
+
 - (UITableView *)tableView {
     if (!_tableView) {
         _tableView = [[HGCenterBaseTableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
         _tableView.delegate = self;
         _tableView.dataSource = self;
-        _tableView.tableHeaderView = self.headerImageView;
+        _tableView.tableHeaderView = self.headerView;
         _tableView.tableFooterView = self.footerView;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.showsVerticalScrollIndicator = NO;
@@ -203,42 +204,10 @@ static CGFloat const HeaderImageViewHeight = 240;
     return _tableView;
 }
 
-- (UIImageView *)avatarImageView {
-    if (!_avatarImageView) {
-        _avatarImageView = [[UIImageView alloc] init];
-        _avatarImageView.image = [UIImage imageNamed:@"center_avatar.jpeg"];
-        _avatarImageView.userInteractionEnabled = YES;
-        _avatarImageView.layer.masksToBounds = YES;
-        _avatarImageView.layer.borderWidth = 1;
-        _avatarImageView.layer.borderColor = kRGBA(255, 253, 253, 1).CGColor;
-        _avatarImageView.layer.cornerRadius = 40;
-    }
-    return _avatarImageView;
-}
-
-- (UILabel *)nickNameLabel {
-    if (!_nickNameLabel) {
-        _nickNameLabel = [[UILabel alloc] init];
-        _nickNameLabel.font = [UIFont systemFontOfSize:16];
-        _nickNameLabel.textColor = [UIColor whiteColor];
-        _nickNameLabel.textAlignment = NSTextAlignmentCenter;
-        _nickNameLabel.text = @"下雪天";
-    }
-    return _nickNameLabel;
-}
-
-- (UIImageView *)headerImageView {
-    if (!_headerImageView) {
-        _headerImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, HeaderImageViewHeight)];
-        _headerImageView.image = [UIImage imageNamed:@"center_bg.jpg"];
-    }
-    return _headerImageView;
-}
-
 - (HGSegmentedPageViewController *)segmentedPageViewController {
     if (!_segmentedPageViewController) {
         NSMutableArray *controllers = [NSMutableArray array];
-        NSArray *titles = @[@"华盛顿", @"夏威夷", @"拉斯维加斯", @"纽约", @"西雅图", @"底特律", @"费城", @"旧金山", @"芝加哥"];
+        NSArray *titles = @[@"主页", @"动态", @"关注", @"粉丝"];
         for (int i = 0; i < titles.count; i++) {
             HGPageViewController *controller;
             if (i % 3 == 0) {
@@ -252,21 +221,15 @@ static CGFloat const HeaderImageViewHeight = 240;
             [controllers addObject:controller];
         }
         _segmentedPageViewController = [[HGSegmentedPageViewController alloc] init];
-        _segmentedPageViewController.pageViewControllers = controllers.copy;
+        _segmentedPageViewController.pageViewControllers = controllers;
         _segmentedPageViewController.categoryView.titles = titles;
+        _segmentedPageViewController.categoryView.alignment = HGCategoryViewAlignmentLeft;
         _segmentedPageViewController.categoryView.originalIndex = self.selectedIndex;
-        _segmentedPageViewController.categoryView.collectionView.backgroundColor = [UIColor yellowColor];
+        _segmentedPageViewController.categoryView.itemSpacing = 25;
+        _segmentedPageViewController.categoryView.backgroundColor = [UIColor yellowColor];
         _segmentedPageViewController.delegate = self;
     }
     return _segmentedPageViewController;
-}
-
-- (UIView *)footerView {
-    if (!_footerView) {
-        _footerView = [[UIView alloc] init];
-        _footerView.frame = CGRectMake(0, 0, self.tableView.frame.size.width, SCREEN_HEIGHT - NAVIGATION_BAR_HEIGHT);
-    }
-    return _footerView;
 }
 
 @end
