@@ -1,23 +1,29 @@
 PODS:
-  - HGPersonalCenterExtend (0.1.2):
+  - HGPersonalCenterExtend (0.1.3):
     - Masonry (~> 1.1.0)
   - Masonry (1.1.0)
+  - RTRootNavigationController (0.7.1):
+    - RTRootNavigationController/Core (= 0.7.1)
+  - RTRootNavigationController/Core (0.7.1)
 
 DEPENDENCIES:
   - HGPersonalCenterExtend (from `../`)
+  - RTRootNavigationController (~> 0.7.1)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Masonry
+    - RTRootNavigationController
 
 EXTERNAL SOURCES:
   HGPersonalCenterExtend:
     :path: "../"
 
 SPEC CHECKSUMS:
-  HGPersonalCenterExtend: 9c382eb64ff8fc3264b5bda53982256e513b162f
+  HGPersonalCenterExtend: 5d83701f9655ba0fc1a45436938a39c0787f2232
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
+  RTRootNavigationController: afa6913402be26f8326f7f37fc1550aa67baddcc
 
-PODFILE CHECKSUM: 7e1003b32d8792b4a0173a80219ce60730742077
+PODFILE CHECKSUM: 197382d389fb6bfd0113572f387f7944166c17a6
 
 COCOAPODS: 1.6.1

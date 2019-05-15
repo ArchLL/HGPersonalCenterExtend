@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "HGHomeViewController.h"
 
 @interface AppDelegate ()
 
@@ -16,7 +17,12 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    HGHomeViewController *homeViewController = [[HGHomeViewController alloc] init];
+    RTRootNavigationController *rootNavigationController = [[RTRootNavigationController alloc] initWithRootViewController:homeViewController];
+    self.window.rootViewController = rootNavigationController;
+    [self.window makeKeyAndVisible];
+    self.window.backgroundColor = [UIColor whiteColor];
     return YES;
 }
 

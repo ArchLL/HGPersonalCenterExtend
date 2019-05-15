@@ -20,7 +20,7 @@ HGPersonalCenterExtend is available through [CocoaPods](https://cocoapods.org). 
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod 'HGPersonalCenterExtend', '~> 0.1.3'
+pod 'HGPersonalCenterExtend', '~> 0.1.4'
 ```
 
 ## Blog
@@ -42,10 +42,7 @@ Example: HGPersonalCenterExtend/Example
 
 假如你要将CenterViewController作为个人主页，你需要做如下操作（参考Example下的`HGPersonalCenterViewController`）
 ```Objc
-#import "HGSegmentedPageViewController.h"
-#import "HGCenterBaseTableView.h"
-
-static CGFloat const headerViewHeight = 240;
+#import "HGPersonalCenterExtend.h"
 
 @interface HGPersonalCenterViewController () <UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate, HGSegmentedPageViewControllerDelegate, HGPageViewControllerDelegate>
 @property (nonatomic, strong) HGCenterBaseTableView *tableView;
@@ -56,21 +53,23 @@ static CGFloat const headerViewHeight = 240;
 
 @end
 
+#pragma mark - Life Cycles
 - (void)viewDidLoad {
-  [super viewDidLoad];
+    [super viewDidLoad];
     if (@available(iOS 11.0, *)) {
         [[UIScrollView appearance] setContentInsetAdjustmentBehavior:UIScrollViewContentInsetAdjustmentNever];
     } else {
         self.automaticallyAdjustsScrollViewInsets = NO;
     }
-    self.navigationController.interactivePopGestureRecognizer.delegate = self;
+    //解决pop手势中断后tableView偏移问题
+    self.extendedLayoutIncludesOpaqueBars = YES;
 
     [self setupSubViews];
 }
 
 #pragma mark - Private Methods
 - (void)setupSubViews {
-    [self.view insertSubview:self.tableView belowSubview:self.navigationBar];
+    [self.view addSubview:self.tableView];
     [self addChildViewController:self.segmentedPageViewController];
     [self.footerView addSubview:self.segmentedPageViewController.view];
     [self.segmentedPageViewController didMoveToParentViewController:self];
@@ -120,19 +119,33 @@ static CGFloat const headerViewHeight = 240;
     self.cannotScroll = NO;
 }
 
-#pragma mark - Lazy
+#pragma mark - Getters
 - (UITableView *)tableView {
     if (!_tableView) {
         _tableView = [[HGCenterBaseTableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
         _tableView.delegate = self;
         _tableView.dataSource = self;
-        _tableView.tableHeaderView = self.headerImageView;
+        _tableView.tableHeaderView = self.headerView;
         _tableView.tableFooterView = self.footerView;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.showsVerticalScrollIndicator = NO;
         [_tableView registerNib:[UINib nibWithNibName:NSStringFromClass([HGDoraemonCell class]) bundle:nil] forCellReuseIdentifier:NSStringFromClass([HGDoraemonCell class])];
     }
     return _tableView;
+}
+
+- (HGPersonalCenterHeaderView *)headerView {
+    if (!_headerView) {
+        _headerView = [[HGPersonalCenterHeaderView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, headerViewHeight)];
+    }
+    return _headerView;
+}
+
+- (UIView *)footerView {
+    if (!_footerView) {
+        _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - TOP_BAR_HEIGHT)];
+    }
+    return _footerView;
 }
 
 /*设置segmentedPageViewController的categoryView以及pageViewControllers
@@ -165,21 +178,6 @@ static CGFloat const headerViewHeight = 240;
     _segmentedPageViewController.delegate = self;
   }
   return _segmentedPageViewController;
-}
-
-- (HGPersonalCenterHeaderView *)headerView {
-    if (!_headerView) {
-        _headerView = [[HGPersonalCenterHeaderView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, headerViewHeight)];
-    }
-    return _headerView;
-}
-
-- (UIView *)footerView {
-    if (!_footerView) {
-        _footerView = [[UIView alloc] init];
-        _footerView.frame = CGRectMake(0, 0, self.tableView.frame.size.width, SCREEN_HEIGHT - NAVIGATION_BAR_HEIGHT);
-    }
-    return _footerView;
 }
 ```
 

@@ -13,7 +13,7 @@
 #import "HGCategoryView.h"
 #import "HGCenterBaseTableView.h"
 #import "HGPageViewController.h"
-#import "HGPersonalCenterMacro.h"
+#import "HGPersonalCenter.h"
 #import "HGSegmentedPageViewController.h"
 
 FOUNDATION_EXPORT double HGPersonalCenterExtendVersionNumber;

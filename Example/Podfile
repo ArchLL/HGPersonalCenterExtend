@@ -4,10 +4,10 @@ platform :ios, '8.0'
 
 target 'HGPersonalCenterExtend' do
   pod 'HGPersonalCenterExtend', :path => '../'
-
+  pod 'RTRootNavigationController', '~> 0.7.1'
+  
   target 'HGPersonalCenterExtend_Tests' do
     inherit! :search_paths
-
     
   end
 end

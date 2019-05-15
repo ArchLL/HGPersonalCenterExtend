@@ -7,7 +7,8 @@
 //
 
 #import "HGSegmentedPageViewController.h"
-#import "Masonry.h"
+#import "masonry.h"
+#import "HGPersonalCenterExtendMacro.h"
 
 #define kWidth self.view.frame.size.width
 
@@ -33,13 +34,6 @@
         strongSelf.currentPageViewController = strongSelf.pageViewControllers[index];
         self.selectedIndex = index;
     };
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
-        self.navigationController.interactivePopGestureRecognizer.delegate = self;
-    }
 }
 
 - (void)setupViews {
@@ -106,14 +100,6 @@
         _scrollView.bounces = NO;
     }
     return _scrollView;
-}
-
-#pragma mark - UIGestureRecognizerDelegate
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
-    if (self.selectedIndex == 0) {
-        return YES;
-    }
-    return NO;
 }
 
 @end

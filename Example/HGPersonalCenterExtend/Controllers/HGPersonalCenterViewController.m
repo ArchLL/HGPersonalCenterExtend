@@ -12,14 +12,13 @@
 #import "HGFirstViewController.h"
 #import "HGSecondViewController.h"
 #import "HGThirdViewController.h"
-
-//HGPersonalCenterExtend
-#import "HGSegmentedPageViewController.h"
-#import "HGCenterBaseTableView.h"
+#import "HGMessageViewController.h"
+#import "HGPersonalCenterExtend.h"
 
 static CGFloat const headerViewHeight = 240;
 
 @interface HGPersonalCenterViewController () <UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate, HGSegmentedPageViewControllerDelegate, HGPageViewControllerDelegate>
+@property (nonatomic, strong) HGAlignmentAdjustButton *messageButton;
 @property (nonatomic, strong) HGCenterBaseTableView *tableView;
 @property (nonatomic, strong) HGPersonalCenterHeaderView *headerView;
 @property (nonatomic, strong) UIView *footerView;
@@ -30,7 +29,7 @@ static CGFloat const headerViewHeight = 240;
 
 @implementation HGPersonalCenterViewController
 
-#pragma mark - Life Cycle
+#pragma mark - Life Cycles
 - (void)viewDidLoad {
     [super viewDidLoad];
     if (@available(iOS 11.0, *)) {
@@ -38,20 +37,24 @@ static CGFloat const headerViewHeight = 240;
     } else {
         self.automaticallyAdjustsScrollViewInsets = NO;
     }
-    //如果使用自定义的按钮去替换系统默认返回按钮，会出现滑动返回手势失效的情况
-    self.navigationController.interactivePopGestureRecognizer.delegate = self;
+    //解决pop手势中断后tableView偏移问题
+    self.extendedLayoutIncludesOpaqueBars = YES;
     
+    [self setupNavigationBar];
     [self setupSubViews];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [self updateNavigationBarBackgroundColor];
+#pragma mark - Private Methods
+- (void)setupNavigationBar {
+    self.isHiddenBottomBorder = YES;
+    [self setNavigationBarAlpha:0];
+    
+    UIBarButtonItem *messageItem = [[UIBarButtonItem alloc] initWithCustomView:self.messageButton];
+    self.navigationItem.rightBarButtonItem = messageItem;
 }
 
-#pragma mark - Private Methods
 - (void)setupSubViews {
-    [self.view insertSubview:self.tableView belowSubview:self.navigationBar];
+    [self.view addSubview:self.tableView];
     [self addChildViewController:self.segmentedPageViewController];
     [self.footerView addSubview:self.segmentedPageViewController.view];
     [self.segmentedPageViewController didMoveToParentViewController:self];
@@ -64,14 +67,19 @@ static CGFloat const headerViewHeight = 240;
     }];
 }
 
-- (void)updateNavigationBarBackgroundColor {
+- (void)changeNavigationBarAlpha {
     CGFloat alpha = 0;
-    if (self.tableView.contentOffset.y < headerViewHeight - NAVIGATION_BAR_HEIGHT) {
-        alpha = self.tableView.contentOffset.y / (headerViewHeight - NAVIGATION_BAR_HEIGHT);
-    }else {
+    if (self.tableView.contentOffset.y < headerViewHeight - TOP_BAR_HEIGHT) {
+        alpha = self.tableView.contentOffset.y / (headerViewHeight - TOP_BAR_HEIGHT);
+    } else {
         alpha = 1;
     }
-    self.navigationBar.backgroundColor = kRGBA(28, 162, 223, alpha);
+    [self setNavigationBarAlpha:alpha];
+}
+
+- (void)viewMessage {
+    HGMessageViewController *vc = [[HGMessageViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - UIScrollViewDelegate
@@ -85,11 +93,12 @@ static CGFloat const headerViewHeight = 240;
  */
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     //第一部分：更改导航栏颜色
-    [self updateNavigationBarBackgroundColor];
+    [self changeNavigationBarAlpha];
     
     //第二部分：处理scrollView滑动冲突
     CGFloat contentOffsetY = scrollView.contentOffset.y;
     //吸顶临界点(此时的临界点不是视觉感官上导航栏的底部，而是当前屏幕的顶部相对scrollViewContentView的位置)
+    //如果底部存在TabBar/ToolBar, 还需要减去TabBarHeight/ToolBarHeight和SAFE_AREA_INSERTS_BOTTOM
     CGFloat criticalPointOffsetY = scrollView.contentSize.height - SCREEN_HEIGHT;
     
     //利用contentOffset处理内外层scrollView的滑动冲突问题
@@ -176,16 +185,29 @@ static CGFloat const headerViewHeight = 240;
 }
 
 #pragma mark - Lazy
+- (HGAlignmentAdjustButton *)messageButton {
+    if (!_messageButton) {
+        _messageButton = [HGAlignmentAdjustButton buttonWithType:UIButtonTypeCustom];
+        [_messageButton setTitle:@"消息" forState:UIControlStateNormal];
+        [_messageButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        _messageButton.titleLabel.font = [UIFont systemFontOfSize:17];
+        [_messageButton addTarget:self action:@selector(viewMessage) forControlEvents:UIControlEventTouchUpInside];
+        [_messageButton sizeToFit];
+    }
+    return _messageButton;
+}
+
 - (HGPersonalCenterHeaderView *)headerView {
     if (!_headerView) {
-        _headerView = [[HGPersonalCenterHeaderView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, headerViewHeight)];
+        _headerView = [[HGPersonalCenterHeaderView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, headerViewHeight)];
     }
     return _headerView;
 }
 
 - (UIView *)footerView {
     if (!_footerView) {
-        _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, SCREEN_HEIGHT - NAVIGATION_BAR_HEIGHT)];
+        //如果当前控制器存在TabBar/ToolBar, 还需要减去TabBarHeight/ToolBarHeight和SAFE_AREA_INSERTS_BOTTOM
+        _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - TOP_BAR_HEIGHT)];
     }
     return _footerView;
 }

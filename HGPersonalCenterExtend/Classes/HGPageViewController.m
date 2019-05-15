@@ -7,6 +7,7 @@
 //
 
 #import "HGPageViewController.h"
+#import "HGCategoryView.h"
 
 @interface HGPageViewController () <UIScrollViewDelegate>
 @property (nonatomic, strong) UIScrollView *scrollView;

@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "HGCategoryView.h"
 
 @protocol HGPageViewControllerDelegate <NSObject>
 - (void)pageViewControllerLeaveTop;

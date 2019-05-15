@@ -25,7 +25,6 @@
 		A98C56C421F5823200054CC1 /* HGThirdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A98C56AD21F5823200054CC1 /* HGThirdViewController.m */; };
 		A98C56C521F5823200054CC1 /* HGSecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A98C56AE21F5823200054CC1 /* HGSecondViewController.m */; };
 		A98C56C621F5823200054CC1 /* HGHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A98C56B121F5823200054CC1 /* HGHomeViewController.m */; };
-		A98C56C721F5823200054CC1 /* HGBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A98C56B521F5823200054CC1 /* HGBaseViewController.m */; };
 		A98C56C821F5823200054CC1 /* HGDoraemonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A98C56B921F5823200054CC1 /* HGDoraemonCell.xib */; };
 		A98C56C921F5823200054CC1 /* HGDoraemonCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A98C56BB21F5823200054CC1 /* HGDoraemonCollectionViewCell.m */; };
 		A98C56CA21F5823200054CC1 /* HGDoraemonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A98C56BC21F5823200054CC1 /* HGDoraemonCell.m */; };
@@ -33,6 +32,10 @@
 		A98C56D121F5936F00054CC1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A98C56CD21F5936E00054CC1 /* Main.storyboard */; };
 		A98C56D221F5936F00054CC1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A98C56CF21F5936E00054CC1 /* LaunchScreen.storyboard */; };
 		A98C56D421F5947700054CC1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A98C56D321F5947700054CC1 /* main.m */; };
+		A9FB4EF4228BAB9200525B36 /* HGBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9FB4EF3228BAB9200525B36 /* HGBaseViewController.m */; };
+		A9FB4EFD228BFCEE00525B36 /* HGAlignmentAdjustButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A9FB4EFC228BFCEE00525B36 /* HGAlignmentAdjustButton.m */; };
+		A9FB4F03228C05D900525B36 /* HGMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9FB4F02228C05D900525B36 /* HGMessageViewController.m */; };
+		A9FB4F07228C11E700525B36 /* HGDeviceHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A9FB4F06228C11E700525B36 /* HGDeviceHelper.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,8 +81,6 @@
 		A98C56B121F5823200054CC1 /* HGHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HGHomeViewController.m; sourceTree = "<group>"; };
 		A98C56B221F5823200054CC1 /* HGPersonalCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HGPersonalCenterViewController.h; sourceTree = "<group>"; };
 		A98C56B321F5823200054CC1 /* HGHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HGHomeViewController.h; sourceTree = "<group>"; };
-		A98C56B521F5823200054CC1 /* HGBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HGBaseViewController.m; sourceTree = "<group>"; };
-		A98C56B621F5823200054CC1 /* HGBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HGBaseViewController.h; sourceTree = "<group>"; };
 		A98C56B721F5823200054CC1 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		A98C56B921F5823200054CC1 /* HGDoraemonCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HGDoraemonCell.xib; sourceTree = "<group>"; };
 		A98C56BA21F5823200054CC1 /* HGDoraemonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HGDoraemonCell.h; sourceTree = "<group>"; };
@@ -89,7 +90,16 @@
 		A98C56BE21F5823200054CC1 /* HGDoraemonCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HGDoraemonCollectionViewCell.h; sourceTree = "<group>"; };
 		A98C56CE21F5936E00054CC1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A98C56D021F5936E00054CC1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		A98C56D321F5947700054CC1 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = HGPersonalCenterExtend/main.m; sourceTree = SOURCE_ROOT; };
+		A98C56D321F5947700054CC1 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = HGPersonalCenterExtend/SupportFiles/main.m; sourceTree = SOURCE_ROOT; };
+		A9FB4EF2228BAB9200525B36 /* HGBaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HGBaseViewController.h; sourceTree = "<group>"; };
+		A9FB4EF3228BAB9200525B36 /* HGBaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HGBaseViewController.m; sourceTree = "<group>"; };
+		A9FB4EFB228BFCEE00525B36 /* HGAlignmentAdjustButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HGAlignmentAdjustButton.h; sourceTree = "<group>"; };
+		A9FB4EFC228BFCEE00525B36 /* HGAlignmentAdjustButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HGAlignmentAdjustButton.m; sourceTree = "<group>"; };
+		A9FB4F01228C05D900525B36 /* HGMessageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HGMessageViewController.h; sourceTree = "<group>"; };
+		A9FB4F02228C05D900525B36 /* HGMessageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HGMessageViewController.m; sourceTree = "<group>"; };
+		A9FB4F05228C11E700525B36 /* HGDeviceHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HGDeviceHelper.h; sourceTree = "<group>"; };
+		A9FB4F06228C11E700525B36 /* HGDeviceHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HGDeviceHelper.m; sourceTree = "<group>"; };
+		A9FB4F08228C14F600525B36 /* HGMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HGMacro.h; sourceTree = "<group>"; };
 		AC2E6F965B1601CD639093EB /* Pods-HGPersonalCenterExtend.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HGPersonalCenterExtend.release.xcconfig"; path = "Pods/Target Support Files/Pods-HGPersonalCenterExtend/Pods-HGPersonalCenterExtend.release.xcconfig"; sourceTree = "<group>"; };
 		D49D25751B63C1A23D633DC3 /* Pods-HGPersonalCenterExtend_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HGPersonalCenterExtend_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-HGPersonalCenterExtend_Tests/Pods-HGPersonalCenterExtend_Tests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -186,14 +196,11 @@
 		A98C56A421F5823200054CC1 /* HGPersonalCenterExtend */ = {
 			isa = PBXGroup;
 			children = (
+				A9FB4EF5228BBE2800525B36 /* SupportFiles */,
+				A9FB4F04228C11D200525B36 /* Tools */,
+				A9FB4EF9228BFCA500525B36 /* Modules */,
 				A98C56A821F5823200054CC1 /* Controllers */,
 				A98C56B821F5823200054CC1 /* Views */,
-				A98C56D321F5947700054CC1 /* main.m */,
-				A98C56A521F5823200054CC1 /* AppDelegate.h */,
-				A98C56A721F5823200054CC1 /* AppDelegate.m */,
-				A98C56CF21F5936E00054CC1 /* LaunchScreen.storyboard */,
-				A98C56CD21F5936E00054CC1 /* Main.storyboard */,
-				A98C56B721F5823200054CC1 /* PrefixHeader.pch */,
 				A98C56A621F5823200054CC1 /* Assets.xcassets */,
 			);
 			path = HGPersonalCenterExtend;
@@ -202,12 +209,14 @@
 		A98C56A821F5823200054CC1 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				A98C56B421F5823200054CC1 /* BaseViewControllers */,
+				A9FB4EE3228A870E00525B36 /* BaseControllers */,
 				A98C56AA21F5823200054CC1 /* PageViewControllers */,
-				A98C56B221F5823200054CC1 /* HGPersonalCenterViewController.h */,
-				A98C56A921F5823200054CC1 /* HGPersonalCenterViewController.m */,
 				A98C56B321F5823200054CC1 /* HGHomeViewController.h */,
 				A98C56B121F5823200054CC1 /* HGHomeViewController.m */,
+				A98C56B221F5823200054CC1 /* HGPersonalCenterViewController.h */,
+				A98C56A921F5823200054CC1 /* HGPersonalCenterViewController.m */,
+				A9FB4F01228C05D900525B36 /* HGMessageViewController.h */,
+				A9FB4F02228C05D900525B36 /* HGMessageViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -225,15 +234,6 @@
 			path = PageViewControllers;
 			sourceTree = "<group>";
 		};
-		A98C56B421F5823200054CC1 /* BaseViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-				A98C56B621F5823200054CC1 /* HGBaseViewController.h */,
-				A98C56B521F5823200054CC1 /* HGBaseViewController.m */,
-			);
-			path = BaseViewControllers;
-			sourceTree = "<group>";
-		};
 		A98C56B821F5823200054CC1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -247,6 +247,47 @@
 				A923C2C622563E45000A4214 /* HGPersonalCenterHeaderView.m */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		A9FB4EE3228A870E00525B36 /* BaseControllers */ = {
+			isa = PBXGroup;
+			children = (
+				A9FB4EF2228BAB9200525B36 /* HGBaseViewController.h */,
+				A9FB4EF3228BAB9200525B36 /* HGBaseViewController.m */,
+			);
+			path = BaseControllers;
+			sourceTree = "<group>";
+		};
+		A9FB4EF5228BBE2800525B36 /* SupportFiles */ = {
+			isa = PBXGroup;
+			children = (
+				A98C56D321F5947700054CC1 /* main.m */,
+				A98C56A521F5823200054CC1 /* AppDelegate.h */,
+				A98C56A721F5823200054CC1 /* AppDelegate.m */,
+				A98C56CF21F5936E00054CC1 /* LaunchScreen.storyboard */,
+				A98C56CD21F5936E00054CC1 /* Main.storyboard */,
+				A9FB4F08228C14F600525B36 /* HGMacro.h */,
+				A98C56B721F5823200054CC1 /* PrefixHeader.pch */,
+			);
+			path = SupportFiles;
+			sourceTree = "<group>";
+		};
+		A9FB4EF9228BFCA500525B36 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				A9FB4EFB228BFCEE00525B36 /* HGAlignmentAdjustButton.h */,
+				A9FB4EFC228BFCEE00525B36 /* HGAlignmentAdjustButton.m */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		A9FB4F04228C11D200525B36 /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				A9FB4F05228C11E700525B36 /* HGDeviceHelper.h */,
+				A9FB4F06228C11E700525B36 /* HGDeviceHelper.m */,
+			);
+			path = Tools;
 			sourceTree = "<group>";
 		};
 		CEC26B8DAA490C93F2F45B8A /* Pods */ = {
@@ -372,11 +413,13 @@
 				"${PODS_ROOT}/Target Support Files/Pods-HGPersonalCenterExtend/Pods-HGPersonalCenterExtend-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/HGPersonalCenterExtend/HGPersonalCenterExtend.framework",
 				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
+				"${BUILT_PRODUCTS_DIR}/RTRootNavigationController/RTRootNavigationController.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HGPersonalCenterExtend.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RTRootNavigationController.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -427,16 +470,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				A923C2C722563E45000A4214 /* HGPersonalCenterHeaderView.m in Sources */,
+				A9FB4F03228C05D900525B36 /* HGMessageViewController.m in Sources */,
+				A9FB4EFD228BFCEE00525B36 /* HGAlignmentAdjustButton.m in Sources */,
 				A98C56D421F5947700054CC1 /* main.m in Sources */,
 				A98C56CA21F5823200054CC1 /* HGDoraemonCell.m in Sources */,
 				A98C56C221F5823200054CC1 /* HGPersonalCenterViewController.m in Sources */,
 				A98C56C121F5823200054CC1 /* AppDelegate.m in Sources */,
-				A98C56C721F5823200054CC1 /* HGBaseViewController.m in Sources */,
 				A98C56C621F5823200054CC1 /* HGHomeViewController.m in Sources */,
 				A98C56C921F5823200054CC1 /* HGDoraemonCollectionViewCell.m in Sources */,
 				A98C56C321F5823200054CC1 /* HGFirstViewController.m in Sources */,
 				A98C56C421F5823200054CC1 /* HGThirdViewController.m in Sources */,
+				A9FB4EF4228BAB9200525B36 /* HGBaseViewController.m in Sources */,
 				A98C56C521F5823200054CC1 /* HGSecondViewController.m in Sources */,
+				A9FB4F07228C11E700525B36 /* HGDeviceHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -593,7 +639,7 @@
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SRCROOT)/HGPersonalCenterExtend/PrefixHeader.pch";
+				GCC_PREFIX_HEADER = "$(SRCROOT)/HGPersonalCenterExtend/SupportFiles/PrefixHeader.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/HGPersonalCenterExtend/Info.plist";
 				MODULE_NAME = HGPersonalCenterExtend;
 				ONLY_ACTIVE_ARCH = YES;
@@ -612,7 +658,7 @@
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SRCROOT)/HGPersonalCenterExtend/PrefixHeader.pch";
+				GCC_PREFIX_HEADER = "$(SRCROOT)/HGPersonalCenterExtend/SupportFiles/PrefixHeader.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/HGPersonalCenterExtend/Info.plist";
 				MODULE_NAME = HGPersonalCenterExtend;
 				ONLY_ACTIVE_ARCH = NO;

@@ -2,7 +2,7 @@
 //  HGPersonalCenterHeaderView.m
 //  HGPersonalCenterExtend
 //
-//  Created by 黑色幽默 on 2019/4/4.
+//  Created by Arch on 2019/4/4.
 //  Copyright © 2019 mint_bin@163.com. All rights reserved.
 //
 

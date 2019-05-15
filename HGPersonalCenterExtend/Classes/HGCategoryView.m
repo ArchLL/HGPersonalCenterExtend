@@ -7,8 +7,8 @@
 //
 
 #import "HGCategoryView.h"
-#import "HGPersonalCenterMacro.h"
-#import "Masonry.h"
+#import "masonry.h"
+#import "HGPersonalCenterExtendMacro.h"
 
 @interface HGCategoryViewCollectionViewCell ()
 @property (nonatomic, strong) UILabel *titleLabel;
