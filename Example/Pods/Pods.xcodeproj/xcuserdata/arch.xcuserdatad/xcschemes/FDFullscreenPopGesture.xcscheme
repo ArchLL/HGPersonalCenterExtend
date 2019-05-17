@@ -14,9 +14,9 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "CEB9A1473A390E05B04265415D9749D0"
-               BuildableName = "Masonry.framework"
-               BlueprintName = "Masonry"
+               BlueprintIdentifier = "B2CE8477AA9E2B0AD6296B46ADE7EF99"
+               BuildableName = "FDFullscreenPopGesture.framework"
+               BlueprintName = "FDFullscreenPopGesture"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

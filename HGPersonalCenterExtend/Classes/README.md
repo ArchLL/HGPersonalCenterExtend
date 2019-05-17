@@ -20,7 +20,7 @@ HGPersonalCenterExtend is available through [CocoaPods](https://cocoapods.org). 
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod 'HGPersonalCenterExtend', '~> 0.1.4'
+pod 'HGPersonalCenterExtend', '~> 0.1.5'
 ```
 
 ## Blog
@@ -31,7 +31,8 @@ pod 'HGPersonalCenterExtend', '~> 0.1.4'
 2.解决外层和内层滚动视图的上下滑动冲突问题；  
 3.解决segmentedPageViewController的scrollView左右滚动和外层scrollView上下滑动不能互斥的问题等；
 4.优化侧滑返回；
-5.计划：优化操作体验、支持刷新、HGCategoryView支持更多样式)； 
+5.支持全屏返回；
+6.计划：优化操作体验、支持刷新、HGCategoryView支持更多样式)； 
 
 #### 如果想实现头部背景视图放大的效果，可关注我另一个库：[HGPersonalCenter](https://github.com/ArchLL/HGPersonalCenter)  
 

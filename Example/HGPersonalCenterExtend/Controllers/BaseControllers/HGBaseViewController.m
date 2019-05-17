@@ -52,7 +52,6 @@
         self.navigationBarOriginShadowImage = self.navigationController.navigationBar.shadowImage;
         self.navigationController.navigationBar.titleTextAttributes = @{NSFontAttributeName:[UIFont systemFontOfSize:18], NSForegroundColorAttributeName:[UIColor whiteColor]};
         self.navigationController.navigationBar.barTintColor = kRGBA(28, 162, 223, 1.0);
-        self.rt_navigationController.transferNavigationBarAttributes = YES;
         self.rt_navigationController.useSystemBackBarButtonItem = NO;
     }
 }
@@ -64,7 +63,7 @@
 }
 
 - (UIImage *)drawPngImageWithAlpha:(CGFloat)alpha {
-    UIColor *color = kRGBA(28, 162, 223, alpha);;
+    UIColor *color = kRGBA(28, 162, 223, alpha);
     CGSize size = CGSizeMake(1, 1);
     UIGraphicsBeginImageContext(size);
     CGContextRef content = UIGraphicsGetCurrentContext();

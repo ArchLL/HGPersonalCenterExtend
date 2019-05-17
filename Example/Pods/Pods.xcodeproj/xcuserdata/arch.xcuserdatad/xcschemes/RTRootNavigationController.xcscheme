@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "E0532EF9C467F4FEE3E88DF28150B361"
+               BlueprintIdentifier = "7645B4A7EDAB6C8CDF157EBEFD236A4A"
                BuildableName = "RTRootNavigationController.framework"
                BlueprintName = "RTRootNavigationController"
                ReferencedContainer = "container:Pods.xcodeproj">

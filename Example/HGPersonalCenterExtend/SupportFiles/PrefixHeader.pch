@@ -15,11 +15,13 @@
 // 第三方
 #import "Masonry.h"
 #import "RTRootNavigationController.h"
+#import "UINavigationController+FDFullscreenPopGesture.h"
 
 // 工程
 #import "HGBaseViewController.h"
 #import "HGAlignmentAdjustButton.h"
 #import "HGDeviceHelper.h"
 #import "HGMacro.h"
+#import "HGPopGestureCompatibleCollectionView.h"
 
 #endif /* PrefixHeader_pch */

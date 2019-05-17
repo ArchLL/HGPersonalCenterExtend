@@ -9,12 +9,13 @@
 #import "HGSegmentedPageViewController.h"
 #import "masonry.h"
 #import "HGPersonalCenterExtendMacro.h"
+#import "HGPopGestureCompatibleScrollView.h"
 
 #define kWidth self.view.frame.size.width
 
 @interface HGSegmentedPageViewController () <UIScrollViewDelegate, UIGestureRecognizerDelegate>
 @property (nonatomic, strong) HGCategoryView *categoryView;
-@property (nonatomic, strong) UIScrollView *scrollView;
+@property (nonatomic, strong) HGPopGestureCompatibleScrollView *scrollView;
 @property (nonatomic, strong) HGPageViewController *currentPageViewController;
 @property (nonatomic) NSInteger selectedIndex;
 @end
@@ -90,9 +91,9 @@
     return _categoryView;
 }
 
-- (UIScrollView *)scrollView {
+- (HGPopGestureCompatibleScrollView *)scrollView {
     if (!_scrollView) {
-        _scrollView = [[UIScrollView alloc] init];
+        _scrollView = [[HGPopGestureCompatibleScrollView alloc] init];
         _scrollView.contentSize = CGSizeMake(kWidth * self.pageViewControllers.count, 0);
         _scrollView.delegate = self;
         _scrollView.showsHorizontalScrollIndicator = NO;

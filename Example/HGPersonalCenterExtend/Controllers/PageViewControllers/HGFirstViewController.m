@@ -7,8 +7,9 @@
 //
 
 #import "HGFirstViewController.h"
+#import "HGMessageViewController.h"
 
-@interface HGFirstViewController () < UITableViewDelegate, UITableViewDataSource>
+@interface HGFirstViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
 @end
 
@@ -24,7 +25,7 @@
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 30;
+    return 50;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -33,8 +34,15 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:FirstViewControllerTableViewCellIdentifier];
     }
-    cell.textLabel.text = @"我要这天，再遮不住我眼";
+    cell.textLabel.text = [NSString stringWithFormat:@"点击查看消息 %@", @(indexPath.row)];
     return cell;
+}
+
+#pragma mark - UITableViewDelegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    HGMessageViewController *vc = [[HGMessageViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - Getters

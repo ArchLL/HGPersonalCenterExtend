@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "2C6C1750A84816C0F45062F05E6B6A15"
+               BlueprintIdentifier = "838384BE5D38E8603488659D63969C38"
                BuildableName = "HGPersonalCenterExtend.framework"
                BlueprintName = "HGPersonalCenterExtend"
                ReferencedContainer = "container:Pods.xcodeproj">
