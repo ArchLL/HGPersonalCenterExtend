@@ -13,7 +13,7 @@
 
 #define kWidth self.view.frame.size.width
 
-@interface HGSegmentedPageViewController () <UIScrollViewDelegate, UIGestureRecognizerDelegate>
+@interface HGSegmentedPageViewController () <UIScrollViewDelegate>
 @property (nonatomic, strong) HGCategoryView *categoryView;
 @property (nonatomic, strong) HGPopGestureCompatibleScrollView *scrollView;
 @property (nonatomic, strong) HGPageViewController *currentPageViewController;
@@ -27,14 +27,6 @@
     self.currentPageViewController = self.pageViewControllers[self.categoryView.originalIndex];
     self.selectedIndex = self.categoryView.originalIndex;
     [self setupViews];
-    
-    __weak typeof(self) weakSelf = self;
-    weakSelf.categoryView.selectedItemHelper = ^(NSUInteger index) {
-        __strong typeof(weakSelf) strongSelf = weakSelf;
-        [strongSelf.scrollView setContentOffset:CGPointMake(index * kWidth, 0) animated:NO];
-        strongSelf.currentPageViewController = strongSelf.pageViewControllers[index];
-        self.selectedIndex = index;
-    };
 }
 
 - (void)setupViews {
@@ -62,13 +54,13 @@
 
 #pragma mark - UIScrollViewDelegate
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(segmentedPageViewControllerWillBeginDragging)]) {
+    if ([self.delegate respondsToSelector:@selector(segmentedPageViewControllerWillBeginDragging)]) {
         [self.delegate segmentedPageViewControllerWillBeginDragging];
     }
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(segmentedPageViewControllerDidEndDragging)]) {
+    if ([self.delegate respondsToSelector:@selector(segmentedPageViewControllerDidEndDragging)]) {
         [self.delegate segmentedPageViewControllerDidEndDragging];
     }
 }
@@ -78,7 +70,7 @@
     [self.categoryView changeItemToTargetIndex:index];
     self.currentPageViewController = self.pageViewControllers[index];
     self.selectedIndex = index;
-    if (self.delegate && [self.delegate respondsToSelector:@selector(segmentedPageViewControllerDidEndDeceleratingWithPageIndex:)]) {
+    if ([self.delegate respondsToSelector:@selector(segmentedPageViewControllerDidEndDeceleratingWithPageIndex:)]) {
         [self.delegate segmentedPageViewControllerDidEndDeceleratingWithPageIndex:index];
     }
 }
@@ -87,6 +79,13 @@
 - (HGCategoryView *)categoryView {
     if (!_categoryView) {
         _categoryView = [[HGCategoryView alloc] init];
+        @weakify(self)
+        _categoryView.selectedItemHelper = ^(NSUInteger index) {
+            @strongify(self)
+            [self.scrollView setContentOffset:CGPointMake(index * kWidth, 0) animated:NO];
+            self.currentPageViewController = self.pageViewControllers[index];
+            self.selectedIndex = index;
+        };
     }
     return _categoryView;
 }

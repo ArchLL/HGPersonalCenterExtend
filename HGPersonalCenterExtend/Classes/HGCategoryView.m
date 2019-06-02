@@ -115,7 +115,7 @@ static NSString * const SegmentHeaderViewCollectionViewCellIdentifier = @"Segmen
     }];
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.topBorder.mas_bottom);
-        make.width.equalTo(self);
+        make.left.right.equalTo(self);
         make.height.mas_equalTo(self.height - HG_ONE_PIXEL);
     }];
     [self.vernier mas_makeConstraints:^(MASConstraintMaker *make) {
