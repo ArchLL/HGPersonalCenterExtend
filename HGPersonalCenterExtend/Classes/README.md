@@ -20,7 +20,7 @@ HGPersonalCenterExtend is available through [CocoaPods](https://cocoapods.org). 
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod 'HGPersonalCenterExtend', '~> 0.1.6'
+pod 'HGPersonalCenterExtend', '~> 0.1.7'
 ```
 
 ## Blog
@@ -95,10 +95,10 @@ Example: HGPersonalCenterExtend/Example
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     CGFloat contentOffsetY = scrollView.contentOffset.y;
     CGFloat criticalPointOffsetY = scrollView.contentSize.height - SCREEN_HEIGHT;
-    if (contentOffsetY >= criticalPointOffsetY) {
+    if (contentOffsetY - criticalPointOffsetY >= FLT_EPSILON) {
         self.cannotScroll = YES;
         scrollView.contentOffset = CGPointMake(0, criticalPointOffsetY);
-        [self.segmentedPageViewController.currentPageViewController makePageViewControllerScroll:YES];
+        [self.segmentedPageViewController makePageViewControllersScrollState:true];
     } else {
         if (self.cannotScroll) {
             scrollView.contentOffset = CGPointMake(0, criticalPointOffsetY);
@@ -117,6 +117,7 @@ Example: HGPersonalCenterExtend/Example
 
 #pragma mark - HGPageViewControllerDelegate
 - (void)pageViewControllerLeaveTop {
+    [self.segmentedPageViewController makePageViewControllersScrollToTop];
     self.cannotScroll = NO;
 }
 

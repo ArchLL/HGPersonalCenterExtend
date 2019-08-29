@@ -11,37 +11,36 @@
 
 @interface HGPageViewController () <UIScrollViewDelegate>
 @property (nonatomic, strong) UIScrollView *scrollView;
-@property (nonatomic) BOOL canScroll;
 @end
 
 @implementation HGPageViewController
 
 #pragma mark - Public Methods
-- (void)makePageViewControllerScroll:(BOOL)canScroll {
-    self.canScroll = canScroll;
+- (void)scrollToTop {
+    [self.scrollView setContentOffset:CGPointZero];
+}
+
+#pragma mark - Setters
+- (void)setCanScroll:(BOOL)canScroll {
+    _canScroll = canScroll;
     self.scrollView.showsVerticalScrollIndicator = canScroll;
     if (!canScroll) {
         self.scrollView.contentOffset = CGPointZero;
     }
 }
 
-- (void)makePageViewControllerScrollToTop{
-    [self.scrollView setContentOffset:CGPointZero];
-}
-
 #pragma mark - UIScrollViewDelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     self.scrollView = scrollView;
     if (self.canScroll) {
-        CGFloat offsetY = scrollView.contentOffset.y;
-        if (offsetY <= 0) {
-            [self makePageViewControllerScroll:NO];
-            if (self.delegate && [self.delegate respondsToSelector:@selector(pageViewControllerLeaveTop)]) {
+        if (scrollView.contentOffset.y <= 0) {
+            self.canScroll = NO;
+            if ([self.delegate respondsToSelector:@selector(pageViewControllerLeaveTop)]) {
                 [self.delegate pageViewControllerLeaveTop];
             }
         }
     } else {
-        [self makePageViewControllerScroll:NO];
+        self.canScroll = NO;
     }
 }
 

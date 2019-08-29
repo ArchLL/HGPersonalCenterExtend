@@ -17,15 +17,14 @@
 @property (nonatomic, strong) HGCategoryView *categoryView;
 @property (nonatomic, strong) HGPopGestureCompatibleScrollView *scrollView;
 @property (nonatomic, strong) HGPageViewController *currentPageViewController;
-@property (nonatomic) NSInteger selectedIndex;
+@property (nonatomic) NSInteger currentPageIndex;
 @end
 
 @implementation HGSegmentedPageViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.currentPageViewController = self.pageViewControllers[self.categoryView.originalIndex];
-    self.selectedIndex = self.categoryView.originalIndex;
+    self.currentPageIndex = self.categoryView.originalIndex;
     [self setupViews];
 }
 
@@ -41,7 +40,7 @@
         make.top.equalTo(self.categoryView.mas_bottom);
         make.left.right.bottom.mas_equalTo(self.view);
     }];
-    [self.pageViewControllers enumerateObjectsUsingBlock:^(UIViewController * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    [self.pageViewControllers enumerateObjectsUsingBlock:^(HGPageViewController * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         [self addChildViewController:obj];
         [self.scrollView addSubview:obj.view];
         [obj didMoveToParentViewController:self];
@@ -49,6 +48,19 @@
             make.left.mas_equalTo(idx * kWidth);
             make.top.width.height.equalTo(self.scrollView);
         }];
+    }];
+}
+
+#pragma mark - Public Methods
+- (void)makePageViewControllersScrollToTop {
+    [self.pageViewControllers enumerateObjectsUsingBlock:^(HGPageViewController * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [obj scrollToTop];
+    }];
+}
+
+- (void)makePageViewControllersScrollState:(BOOL)canScroll {
+    [self.pageViewControllers enumerateObjectsUsingBlock:^(HGPageViewController * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        obj.canScroll = canScroll;
     }];
 }
 
@@ -68,11 +80,15 @@
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     NSUInteger index = (NSUInteger)(self.scrollView.contentOffset.x / kWidth);
     [self.categoryView changeItemToTargetIndex:index];
-    self.currentPageViewController = self.pageViewControllers[index];
-    self.selectedIndex = index;
+    self.currentPageIndex = index;
     if ([self.delegate respondsToSelector:@selector(segmentedPageViewControllerDidEndDeceleratingWithPageIndex:)]) {
         [self.delegate segmentedPageViewControllerDidEndDeceleratingWithPageIndex:index];
     }
+}
+
+#pragma mark - Setters
+- (void)setCurrentPageIndex:(NSInteger)currentPageIndex {
+    self.currentPageViewController = self.pageViewControllers[self.categoryView.originalIndex];
 }
 
 #pragma mark - Getters
@@ -83,8 +99,7 @@
         _categoryView.selectedItemHelper = ^(NSUInteger index) {
             @strongify(self)
             [self.scrollView setContentOffset:CGPointMake(index * kWidth, 0) animated:NO];
-            self.currentPageViewController = self.pageViewControllers[index];
-            self.selectedIndex = index;
+            self.currentPageIndex = index;
         };
     }
     return _categoryView;

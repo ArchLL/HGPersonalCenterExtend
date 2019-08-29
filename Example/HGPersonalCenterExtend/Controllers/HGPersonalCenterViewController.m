@@ -69,7 +69,7 @@ static CGFloat const headerViewHeight = 240;
 
 - (void)changeNavigationBarAlpha {
     CGFloat alpha = 0;
-    if (self.tableView.contentOffset.y < headerViewHeight - TOP_BAR_HEIGHT) {
+    if (self.tableView.contentOffset.y - (headerViewHeight - TOP_BAR_HEIGHT) < FLT_EPSILON) {
         alpha = self.tableView.contentOffset.y / (headerViewHeight - TOP_BAR_HEIGHT);
     } else {
         alpha = 1;
@@ -84,7 +84,7 @@ static CGFloat const headerViewHeight = 240;
 
 #pragma mark - UIScrollViewDelegate
 - (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView {
-    [self.segmentedPageViewController.currentPageViewController makePageViewControllerScrollToTop];
+    [self.segmentedPageViewController makePageViewControllersScrollToTop];
     return YES;
 }
 
@@ -102,7 +102,7 @@ static CGFloat const headerViewHeight = 240;
     CGFloat criticalPointOffsetY = scrollView.contentSize.height - SCREEN_HEIGHT;
     
     //利用contentOffset处理内外层scrollView的滑动冲突问题
-    if (contentOffsetY >= criticalPointOffsetY) {
+    if (contentOffsetY - criticalPointOffsetY >= FLT_EPSILON) {
         /*
          * 到达临界点：
          * 1.未吸顶状态 -> 吸顶状态
@@ -111,7 +111,7 @@ static CGFloat const headerViewHeight = 240;
         //“进入吸顶状态”以及“维持吸顶状态”
         self.cannotScroll = YES;
         scrollView.contentOffset = CGPointMake(0, criticalPointOffsetY);
-        [self.segmentedPageViewController.currentPageViewController makePageViewControllerScroll:YES];
+        [self.segmentedPageViewController makePageViewControllersScrollState:true];
     } else {
         /*
          * 未达到临界点：
@@ -181,6 +181,7 @@ static CGFloat const headerViewHeight = 240;
 
 #pragma mark - HGPageViewControllerDelegate
 - (void)pageViewControllerLeaveTop {
+    [self.segmentedPageViewController makePageViewControllersScrollToTop];
     self.cannotScroll = NO;
 }
 
