@@ -18,6 +18,7 @@
 @property (nonatomic, strong) HGPopGestureCompatibleScrollView *scrollView;
 @property (nonatomic, strong) HGPageViewController *currentPageViewController;
 @property (nonatomic) NSInteger currentPageIndex;
+@property (nonatomic) CGFloat whenBeginDraggingContentOffsetX;
 @end
 
 @implementation HGSegmentedPageViewController
@@ -66,8 +67,31 @@
 
 #pragma mark - UIScrollViewDelegate
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    self.whenBeginDraggingContentOffsetX = scrollView.contentOffset.x;
     if ([self.delegate respondsToSelector:@selector(segmentedPageViewControllerWillBeginDragging)]) {
         [self.delegate segmentedPageViewControllerWillBeginDragging];
+    }
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    CGFloat scale = scrollView.contentOffset.x / kWidth;
+    NSInteger leftPage = floor(scale);
+    NSInteger rightPage = ceil(scale);
+    
+    if (scrollView.contentOffset.x > self.whenBeginDraggingContentOffsetX) { //向右切换
+        if (leftPage == rightPage) {
+            leftPage = rightPage - 1;
+        }
+        if (rightPage < self.pageViewControllers.count) {
+            [self.categoryView scrollToTargetIndex:rightPage sourceIndex:leftPage percent:scale - leftPage];
+        }
+    } else { //向左切换
+        if (leftPage == rightPage) {
+            rightPage = leftPage + 1;
+        }
+        if (rightPage < self.pageViewControllers.count) {
+            [self.categoryView scrollToTargetIndex:leftPage sourceIndex:rightPage percent:1 - (scale - leftPage)];
+        }
     }
 }
 
@@ -79,7 +103,6 @@
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     NSUInteger index = (NSUInteger)(self.scrollView.contentOffset.x / kWidth);
-    [self.categoryView changeItemToTargetIndex:index];
     self.currentPageIndex = index;
     if ([self.delegate respondsToSelector:@selector(segmentedPageViewControllerDidEndDeceleratingWithPageIndex:)]) {
         [self.delegate segmentedPageViewControllerDidEndDeceleratingWithPageIndex:index];

@@ -14,7 +14,7 @@ typedef NS_ENUM(NSUInteger, HGCategoryViewAlignment) {
     HGCategoryViewAlignmentRight
 };
 
-@interface HGCategoryViewCollectionViewCell : UICollectionViewCell
+@interface HGCategoryViewCell : UICollectionViewCell
 @property (nonatomic, readonly, strong) UILabel *titleLabel;
 @end;
 
@@ -59,6 +59,9 @@ typedef NS_ENUM(NSUInteger, HGCategoryViewAlignment) {
 /// 游标的高度
 @property (nonatomic) CGFloat vernierHeight;
 
+/// 固定游标的宽度，默认是不固定的
+@property (nonatomic) CGFloat vernierWidth;
+
 /// item间距
 @property (nonatomic) CGFloat itemSpacing;
 
@@ -76,10 +79,12 @@ typedef NS_ENUM(NSUInteger, HGCategoryViewAlignment) {
 
 
 /**
- 使collectionViewd滚动到指定的cell
+ 使collectionView滚动到指定的cell
 
  @param targetIndex 目标cell的index
+ @param sourceIndex 当前cell的index
+ @param percent 滑动距离/(sourceIndex与targetIndex的距离)
  */
-- (void)changeItemToTargetIndex:(NSUInteger)targetIndex;
+- (void)scrollToTargetIndex:(NSUInteger)targetIndex sourceIndex:(NSUInteger)sourceIndex percent:(CGFloat)percent;
 
 @end
