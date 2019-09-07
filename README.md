@@ -20,7 +20,7 @@ HGPersonalCenterExtend is available through [CocoaPods](https://cocoapods.org). 
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod 'HGPersonalCenterExtend', '~> 0.1.8'
+pod 'HGPersonalCenterExtend', '~> 0.1.9'
 ```
 
 ## Blog
@@ -32,7 +32,7 @@ pod 'HGPersonalCenterExtend', '~> 0.1.8'
 3.解决segmentedPageViewController的scrollView左右滚动和外层scrollView上下滑动不能互斥的问题等；  
 4.优化侧滑返回；  
 5.支持全屏返回；  
-6.计划：支持刷新、HGCategoryView支持更多样式)； 
+6.计划：支持刷新、将HGPersonalCenterViewController抽离(方便大家使用)、HGCategoryView支持更多样式)； 
 
 #### 如果想实现头部背景视图放大的效果，可关注我另一个库：[HGPersonalCenter](https://github.com/ArchLL/HGPersonalCenter)  
 
@@ -114,7 +114,7 @@ Example: HGPersonalCenterExtend/Example
 
 #pragma mark - UIScrollViewDelegate
 - (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView {
-    [self.segmentedPageViewController.currentPageViewController makePageViewControllerScrollToTop];
+    [self.segmentedPageViewController makePageViewControllerScrollToTop];
     return YES;
 }
 
@@ -127,7 +127,7 @@ Example: HGPersonalCenterExtend/Example
     if (contentOffsetY - criticalPointOffsetY >= FLT_EPSILON) {
         self.cannotScroll = YES;
         scrollView.contentOffset = CGPointMake(0, criticalPointOffsetY);
-        [self.segmentedPageViewController makePageViewControllersScrollState:true];
+        [self.segmentedPageViewController makePageViewControllersScrollState:YES];
     } else {
         if (self.cannotScroll) {
             scrollView.contentOffset = CGPointMake(0, criticalPointOffsetY);
@@ -180,11 +180,11 @@ Example: HGPersonalCenterExtend/Example
 }
 
 - (HGSegmentedPageViewController *)segmentedPageViewController {
-  if (!_segmentedPageViewController) {
-    _segmentedPageViewController = [[HGSegmentedPageViewController alloc] init];
-    _segmentedPageViewController.delegate = self;
-  }
-  return _segmentedPageViewController;
+    if (!_segmentedPageViewController) {
+        _segmentedPageViewController = [[HGSegmentedPageViewController alloc] init];
+        _segmentedPageViewController.delegate = self;
+    }
+    return _segmentedPageViewController;
 }
 ```
 

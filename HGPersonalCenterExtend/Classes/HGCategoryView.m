@@ -21,7 +21,7 @@
         self.clipsToBounds = YES;
         [self.contentView addSubview:self.titleLabel];
         [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.edges.equalTo(self);
+            make.center.equalTo(self);
         }];
     }
     return self;
@@ -79,14 +79,14 @@
         self.selectedIndex = self.originalIndex;
     } else {
         _selectedIndex = 0;
-        [self setupUnderlineDefaultLocation];
+        [self setupVernierDefaultLocation];
     }
 }
 
 #pragma mark - Public Method
 - (void)scrollToTargetIndex:(NSUInteger)targetIndex sourceIndex:(NSUInteger)sourceIndex percent:(CGFloat)percent {
-    CGRect sourceVernierFrame = [self vernierFrameAtIndexPath:[NSIndexPath indexPathForItem:sourceIndex inSection:0]];
-    CGRect targetVernierFrame = [self vernierFrameAtIndexPath:[NSIndexPath indexPathForItem:targetIndex inSection:0]];
+    CGRect sourceVernierFrame = [self vernierFrameWithIndex:sourceIndex];
+    CGRect targetVernierFrame = [self vernierFrameWithIndex:targetIndex];
     self.vernier.frame = CGRectMake(sourceVernierFrame.origin.x + (targetVernierFrame.origin.x - sourceVernierFrame.origin.x) * percent,
                                  targetVernierFrame.origin.y,
                                  targetVernierFrame.size.width,
@@ -104,9 +104,9 @@
             if (sourceCell) sourceCell.titleLabel.transform = CGAffineTransformIdentity;
             if (targetCell) targetCell.titleLabel.transform = CGAffineTransformMakeScale(scale, scale);
         } completion:nil];
+        
+        _selectedIndex = targetIndex;
     }
-    
-    _selectedIndex = targetIndex;
 }
 
 #pragma mark - Private Method
@@ -150,40 +150,40 @@
     HGCategoryViewCell *selectedCell = [self getCell:self.selectedIndex];
     if (selectedCell) {
         self.selectedCellExist = YES;
-        [self updateUnderlineLocation];
+        [self updateVernierLocation];
     } else {
         self.selectedCellExist = NO;
         //这种情况下updateUnderlineLocation将在self.collectionView滚动结束后执行（代理方法scrollViewDidEndScrollingAnimation）
     }
 }
 
-- (void)setupUnderlineDefaultLocation {
+- (void)setupVernierDefaultLocation {
     [self.collectionView layoutIfNeeded];
     HGCategoryViewCell *cell = [self getCell:self.selectedIndex];
     [self.vernier mas_updateConstraints:^(MASConstraintMaker *make) {
-        self.vernierCenterXConstraint = make.centerX.equalTo(cell);
+        self.vernierCenterXConstraint = make.centerX.equalTo(cell.titleLabel);
         if (self.isFixedVernierWidth) {
             make.width.mas_equalTo(self.vernierWidth);
         } else {
-            self.vernierWidthConstraint = make.width.equalTo(cell);
+            self.vernierWidthConstraint = make.width.equalTo(cell.titleLabel);
             self->_vernierWidth = cell.titleLabel.frame.size.width;
         }
     }];
 }
 
-- (void)updateUnderlineLocation {
+- (void)updateVernierLocation {
     [self.collectionView layoutIfNeeded];
     HGCategoryViewCell *cell = [self getCell:self.selectedIndex];
     [self.vernierCenterXConstraint uninstall];
     if (self.isFixedVernierWidth) {
         [self.vernier mas_updateConstraints:^(MASConstraintMaker *make) {
-            self.vernierCenterXConstraint = make.centerX.equalTo(cell);
+            self.vernierCenterXConstraint = make.centerX.equalTo(cell.titleLabel);
         }];
     } else {
         [self.vernierWidthConstraint uninstall];
         [self.vernier mas_updateConstraints:^(MASConstraintMaker *make) {
-            self.vernierCenterXConstraint = make.centerX.equalTo(cell);
-            self.vernierWidthConstraint = make.width.equalTo(cell);
+            self.vernierCenterXConstraint = make.centerX.equalTo(cell.titleLabel);
+            self.vernierWidthConstraint = make.width.equalTo(cell.titleLabel);
             self->_vernierWidth = cell.titleLabel.frame.size.width;
         }];
     }
@@ -225,18 +225,18 @@
     return ceilf(rect.size.width);
 }
 
-- (CGRect)vernierFrameAtIndexPath:(NSIndexPath *)indexPath {
-    UICollectionViewLayoutAttributes *layout = [self.collectionView.collectionViewLayout layoutAttributesForItemAtIndexPath:indexPath];
-    CGRect cellFrame = layout.frame;
+- (CGRect)vernierFrameWithIndex:(NSUInteger)index {
+    HGCategoryViewCell *cell = [self getCell:index];
+    CGRect titleLabelFrame = [cell convertRect:cell.titleLabel.frame toView:self.collectionView];
     if (self.isFixedVernierWidth) {
-        return CGRectMake(cellFrame.origin.x + (cellFrame.size.width - self.vernierWidth) / 2,
+        return CGRectMake(titleLabelFrame.origin.x + (titleLabelFrame.size.width - self.vernierWidth) / 2,
                           self.collectionView.frame.size.height - self.vernierHeight,
                           self.vernierWidth,
                           self.vernierHeight);
     } else {
-        return CGRectMake(cellFrame.origin.x,
+        return CGRectMake(titleLabelFrame.origin.x,
                           self.collectionView.frame.size.height - self.vernierHeight,
-                          cellFrame.size.width,
+                          cell.titleLabel.frame.size.width,
                           self.vernierHeight);
     }
 }
@@ -305,7 +305,7 @@
 #pragma mark - UIScrollViewDelegate
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
     if (!self.selectedCellExist) {
-        [self updateUnderlineLocation];
+        [self updateVernierLocation];
     }
 }
 

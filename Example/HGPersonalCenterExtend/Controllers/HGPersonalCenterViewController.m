@@ -140,7 +140,7 @@ static CGFloat const headerViewHeight = 240;
         //“进入吸顶状态”以及“维持吸顶状态”
         self.cannotScroll = YES;
         scrollView.contentOffset = CGPointMake(0, criticalPointOffsetY);
-        [self.segmentedPageViewController makePageViewControllersScrollState:true];
+        [self.segmentedPageViewController makePageViewControllersScrollState:YES];
     } else {
         /*
          * 未达到临界点：
