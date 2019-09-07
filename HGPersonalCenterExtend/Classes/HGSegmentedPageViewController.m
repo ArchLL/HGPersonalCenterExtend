@@ -25,11 +25,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.currentPageIndex = self.categoryView.originalIndex;
-    [self setupViews];
-}
-
-- (void)setupViews {
     [self.view addSubview:self.categoryView];
     [self.view addSubview:self.scrollView];
     
@@ -40,15 +35,6 @@
     [self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.categoryView.mas_bottom);
         make.left.right.bottom.mas_equalTo(self.view);
-    }];
-    [self.pageViewControllers enumerateObjectsUsingBlock:^(HGPageViewController * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        [self addChildViewController:obj];
-        [self.scrollView addSubview:obj.view];
-        [obj didMoveToParentViewController:self];
-        [obj.view mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(idx * kWidth);
-            make.top.width.height.equalTo(self.scrollView);
-        }];
     }];
 }
 
@@ -114,10 +100,39 @@
     self.currentPageViewController = self.pageViewControllers[self.categoryView.originalIndex];
 }
 
+- (void)setPageViewControllers:(NSArray<HGPageViewController *> *)pageViewControllers {
+    if (self.pageViewControllers.count > 0) {
+        //remove pageViewControllers
+        [self.pageViewControllers enumerateObjectsUsingBlock:^(HGPageViewController * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            [obj willMoveToParentViewController:nil];
+            [obj.view removeFromSuperview];
+            [obj removeFromParentViewController];
+        }];
+    }
+    
+    _pageViewControllers = pageViewControllers;
+    
+    //add pageViewControllers
+    [self.pageViewControllers enumerateObjectsUsingBlock:^(HGPageViewController * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [self addChildViewController:obj];
+        [self.scrollView addSubview:obj.view];
+        [obj didMoveToParentViewController:self];
+        [obj.view mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(idx * kWidth);
+            make.top.width.height.equalTo(self.scrollView);
+        }];
+    }];
+    
+    self.scrollView.contentSize = CGSizeMake(kWidth * self.pageViewControllers.count, 0);
+    self.categoryView.userInteractionEnabled = YES;
+    self.currentPageIndex = self.categoryView.originalIndex;
+}
+
 #pragma mark - Getters
 - (HGCategoryView *)categoryView {
     if (!_categoryView) {
         _categoryView = [[HGCategoryView alloc] init];
+        _categoryView.userInteractionEnabled = NO;
         @weakify(self)
         _categoryView.selectedItemHelper = ^(NSUInteger index) {
             @strongify(self)
@@ -131,7 +146,6 @@
 - (HGPopGestureCompatibleScrollView *)scrollView {
     if (!_scrollView) {
         _scrollView = [[HGPopGestureCompatibleScrollView alloc] init];
-        _scrollView.contentSize = CGSizeMake(kWidth * self.pageViewControllers.count, 0);
         _scrollView.delegate = self;
         _scrollView.showsHorizontalScrollIndicator = NO;
         _scrollView.pagingEnabled = YES;

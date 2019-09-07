@@ -42,6 +42,8 @@ static CGFloat const headerViewHeight = 240;
     
     [self setupNavigationBar];
     [self setupSubViews];
+    //可以在请求数据成功后设置/改变pageViewControllers, 但是要保证titles.count=pageViewControllers.count
+    [self setupPageViewControllers];
 }
 
 #pragma mark - Private Methods
@@ -65,6 +67,33 @@ static CGFloat const headerViewHeight = 240;
     [self.segmentedPageViewController.view mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.footerView);
     }];
+}
+
+/**设置segmentedPageViewController的pageViewControllers和categoryView
+ * 这里可以对categoryView进行自定义，包括分布方式(左、中、右)、高度、背景颜色、字体颜色、字体大小、下划线高度和颜色等
+ * 这里用到的pageViewController需要继承自HGPageViewController
+ */
+- (void)setupPageViewControllers {
+    NSMutableArray *controllers = [NSMutableArray array];
+    NSArray *titles = @[@"主页", @"动态", @"关注", @"粉丝"];
+    for (int i = 0; i < titles.count; i++) {
+        HGPageViewController *controller;
+        if (i % 3 == 0) {
+            controller = [[HGThirdViewController alloc] init];
+        } else if (i % 2 == 0) {
+            controller = [[HGSecondViewController alloc] init];
+        } else {
+            controller = [[HGFirstViewController alloc] init];
+        }
+        controller.delegate = self;
+        [controllers addObject:controller];
+    }
+    _segmentedPageViewController.pageViewControllers = controllers;
+    _segmentedPageViewController.categoryView.titles = titles;
+    _segmentedPageViewController.categoryView.alignment = HGCategoryViewAlignmentLeft;
+    _segmentedPageViewController.categoryView.originalIndex = self.selectedIndex;
+    _segmentedPageViewController.categoryView.itemSpacing = 25;
+    _segmentedPageViewController.categoryView.backgroundColor = [UIColor yellowColor];
 }
 
 - (void)changeNavigationBarAlpha {
@@ -229,27 +258,7 @@ static CGFloat const headerViewHeight = 240;
 
 - (HGSegmentedPageViewController *)segmentedPageViewController {
     if (!_segmentedPageViewController) {
-        NSMutableArray *controllers = [NSMutableArray array];
-        NSArray *titles = @[@"主页", @"动态", @"关注", @"粉丝"];
-        for (int i = 0; i < titles.count; i++) {
-            HGPageViewController *controller;
-            if (i % 3 == 0) {
-                controller = [[HGThirdViewController alloc] init];
-            } else if (i % 2 == 0) {
-                controller = [[HGSecondViewController alloc] init];
-            } else {
-                controller = [[HGFirstViewController alloc] init];
-            }
-            controller.delegate = self;
-            [controllers addObject:controller];
-        }
         _segmentedPageViewController = [[HGSegmentedPageViewController alloc] init];
-        _segmentedPageViewController.pageViewControllers = controllers;
-        _segmentedPageViewController.categoryView.titles = titles;
-        _segmentedPageViewController.categoryView.alignment = HGCategoryViewAlignmentLeft;
-        _segmentedPageViewController.categoryView.originalIndex = self.selectedIndex;
-        _segmentedPageViewController.categoryView.itemSpacing = 25;
-        _segmentedPageViewController.categoryView.backgroundColor = [UIColor yellowColor];
         _segmentedPageViewController.delegate = self;
     }
     return _segmentedPageViewController;
