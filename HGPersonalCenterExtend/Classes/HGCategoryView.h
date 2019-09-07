@@ -74,6 +74,9 @@ typedef NS_ENUM(NSUInteger, HGCategoryViewAlignment) {
 /// item是否等分(在titles、itemSpacing、itemWidth、leftAndRightMargin设置之后设置)，Default：NO
 @property (nonatomic) CGFloat isEqualParts;
 
+/// 字体变大、vernier位置切换动画，default：0.1
+@property (nonatomic) CGFloat animateDuration;
+
 /// item点击事件的回调
 @property (nonatomic, copy) void (^selectedItemHelper)(NSUInteger index);
 

@@ -45,7 +45,6 @@
 @property (nonatomic) NSInteger selectedIndex;
 @property (nonatomic) BOOL selectedCellExist;
 @property (nonatomic) CGFloat fontPointSizeScale;
-@property (nonatomic) CGFloat animateDuration;
 @property (nonatomic) BOOL isFixedVernierWidth;
 @property (nonatomic, strong) MASConstraint *vernierCenterXConstraint;
 @property (nonatomic, strong) MASConstraint *vernierWidthConstraint;
@@ -87,9 +86,11 @@
 - (void)scrollToTargetIndex:(NSUInteger)targetIndex sourceIndex:(NSUInteger)sourceIndex percent:(CGFloat)percent {
     CGRect sourceVernierFrame = [self vernierFrameWithIndex:sourceIndex];
     CGRect targetVernierFrame = [self vernierFrameWithIndex:targetIndex];
+    
+    CGFloat tempVernierWidth = sourceVernierFrame.size.width + (targetVernierFrame.size.width - sourceVernierFrame.size.width) * percent;
     self.vernier.frame = CGRectMake(sourceVernierFrame.origin.x + (targetVernierFrame.origin.x - sourceVernierFrame.origin.x) * percent,
                                  targetVernierFrame.origin.y,
-                                 targetVernierFrame.size.width,
+                                 tempVernierWidth,
                                  targetVernierFrame.size.height);
     
     HGCategoryViewCell *sourceCell = [self getCell:sourceIndex];
@@ -329,6 +330,7 @@
 
 - (void)setAlignment:(HGCategoryViewAlignment)alignment {
     _alignment = alignment;
+    [self updateCollectionViewContentInset];
 }
 
 - (void)setHeight:(CGFloat)categoryViewHeight {

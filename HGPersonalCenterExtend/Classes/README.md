@@ -20,7 +20,7 @@ HGPersonalCenterExtend is available through [CocoaPods](https://cocoapods.org). 
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod 'HGPersonalCenterExtend', '~> 0.1.9'
+pod 'HGPersonalCenterExtend', '~> 1.0.0'
 ```
 
 ## Blog
