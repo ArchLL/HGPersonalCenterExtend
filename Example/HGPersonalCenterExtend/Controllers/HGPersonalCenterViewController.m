@@ -91,6 +91,7 @@ static CGFloat const headerViewHeight = 240;
     _segmentedPageViewController.pageViewControllers = controllers;
     _segmentedPageViewController.categoryView.titles = titles;
     _segmentedPageViewController.categoryView.alignment = HGCategoryViewAlignmentLeft;
+    _segmentedPageViewController.categoryView.isEqualParts = YES;
     _segmentedPageViewController.categoryView.originalIndex = self.selectedIndex;
     _segmentedPageViewController.categoryView.itemSpacing = 25;
     _segmentedPageViewController.categoryView.backgroundColor = [UIColor yellowColor];
@@ -259,6 +260,7 @@ static CGFloat const headerViewHeight = 240;
 - (HGSegmentedPageViewController *)segmentedPageViewController {
     if (!_segmentedPageViewController) {
         _segmentedPageViewController = [[HGSegmentedPageViewController alloc] init];
+        _segmentedPageViewController.categoryView.titles = @[@"关注dfa", @"粉丝"];
         _segmentedPageViewController.delegate = self;
     }
     return _segmentedPageViewController;

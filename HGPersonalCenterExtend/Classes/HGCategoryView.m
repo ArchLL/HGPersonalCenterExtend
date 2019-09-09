@@ -61,10 +61,10 @@
         _vernierHeight = 1.8;
         _itemSpacing = 15;
         _leftAndRightMargin = 10;
-        self.titleNomalFont = [UIFont systemFontOfSize:16];
-        self.titleSelectedFont = [UIFont systemFontOfSize:17];
-        self.titleNormalColor = [UIColor grayColor];
-        self.titleSelectedColor = [UIColor redColor];
+        _titleNomalFont = [UIFont systemFontOfSize:16];
+        _titleSelectedFont = [UIFont systemFontOfSize:17];
+        _titleNormalColor = [UIColor grayColor];
+        _titleSelectedColor = [UIColor redColor];
         self.vernier.backgroundColor = self.titleSelectedColor;
         self.animateDuration = 0.1;
         [self setupSubViews];
@@ -194,6 +194,7 @@
 }
 
 - (void)updateCollectionViewContentInset {
+    [self.collectionView.collectionViewLayout invalidateLayout];
     [self.collectionView layoutIfNeeded];
     CGFloat width = self.collectionView.contentSize.width;
     CGFloat margin;
@@ -325,6 +326,7 @@
 
 - (void)setTitles:(NSArray<NSString *> *)titles {
     _titles = titles.copy;
+    [self.collectionView reloadData];
     [self updateCollectionViewContentInset];
 }
 
@@ -352,19 +354,16 @@
 
 - (void)setItemWidth:(CGFloat)itemWidth {
     _itemWidth = itemWidth;
-    [self.collectionView.collectionViewLayout invalidateLayout];
     [self updateCollectionViewContentInset];
 }
 
 - (void)setItemSpacing:(CGFloat)cellSpacing {
     _itemSpacing = cellSpacing;
-    [self.collectionView.collectionViewLayout invalidateLayout];
     [self updateCollectionViewContentInset];
 }
 
 - (void)setLeftAndRightMargin:(CGFloat)leftAndRightMargin {
     _leftAndRightMargin = leftAndRightMargin;
-    [self.collectionView.collectionViewLayout invalidateLayout];
     [self updateCollectionViewContentInset];
 }
 
@@ -378,6 +377,26 @@
 - (void)setVernierWidth:(CGFloat)vernierWidth {
     _vernierWidth = vernierWidth;
     self.isFixedVernierWidth = YES;
+}
+
+- (void)setTitleNomalFont:(UIFont *)titleNomalFont {
+    _titleNomalFont = titleNomalFont;
+    [self updateCollectionViewContentInset];
+}
+
+- (void)setTitleSelectedFont:(UIFont *)titleSelectedFont {
+    _titleSelectedFont = titleSelectedFont;
+    [self updateCollectionViewContentInset];
+}
+
+- (void)setTitleNormalColor:(UIColor *)titleNormalColor {
+    _titleNormalColor = titleNormalColor;
+    [self.collectionView reloadData];
+}
+
+- (void)setTitleSelectedColor:(UIColor *)titleSelectedColor {
+    _titleSelectedColor = titleSelectedColor;
+    [self.collectionView reloadData];
 }
 
 #pragma mark - Getter
