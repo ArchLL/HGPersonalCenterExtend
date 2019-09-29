@@ -46,7 +46,7 @@
 @property (nonatomic) BOOL selectedCellExist;
 @property (nonatomic) CGFloat fontPointSizeScale;
 @property (nonatomic) BOOL isFixedVernierWidth;
-@property (nonatomic, strong) MASConstraint *vernierCenterXConstraint;
+@property (nonatomic, strong) MASConstraint *vernierLeftConstraint;
 @property (nonatomic, strong) MASConstraint *vernierWidthConstraint;
 @end
 
@@ -78,7 +78,7 @@
         self.selectedIndex = self.originalIndex;
     } else {
         _selectedIndex = 0;
-        [self setupVernierDefaultLocation];
+        [self updateVernierLocation];
     }
 }
 
@@ -87,16 +87,24 @@
     CGRect sourceVernierFrame = [self vernierFrameWithIndex:sourceIndex];
     CGRect targetVernierFrame = [self vernierFrameWithIndex:targetIndex];
     
+    CGFloat tempVernierX = sourceVernierFrame.origin.x + (targetVernierFrame.origin.x - sourceVernierFrame.origin.x) * percent;
     CGFloat tempVernierWidth = sourceVernierFrame.size.width + (targetVernierFrame.size.width - sourceVernierFrame.size.width) * percent;
-    self.vernier.frame = CGRectMake(sourceVernierFrame.origin.x + (targetVernierFrame.origin.x - sourceVernierFrame.origin.x) * percent,
-                                 targetVernierFrame.origin.y,
-                                 tempVernierWidth,
-                                 targetVernierFrame.size.height);
     
-    HGCategoryViewCell *sourceCell = [self getCell:sourceIndex];
-    HGCategoryViewCell *targetCell = [self getCell:targetIndex];
+    [self.vernierLeftConstraint uninstall];
+    [self.vernierWidthConstraint uninstall];
+    [self.vernierWidthConstraint uninstall];
+    [self.vernier mas_updateConstraints:^(MASConstraintMaker *make) {
+        self.vernierLeftConstraint = make.left.mas_equalTo(tempVernierX);
+        self.vernierWidthConstraint = make.width.mas_equalTo(tempVernierWidth);
+        if (!self.isFixedVernierWidth) {
+            self->_vernierWidth = tempVernierWidth;
+        }
+    }];
     
     if (percent > 0.5) {
+        HGCategoryViewCell *sourceCell = [self getCell:sourceIndex];
+        HGCategoryViewCell *targetCell = [self getCell:targetIndex];
+        
         if (sourceCell) sourceCell.titleLabel.textColor = self.titleNormalColor;
         if (targetCell) targetCell.titleLabel.textColor = self.titleSelectedColor;
         
@@ -143,7 +151,7 @@
 
 - (void)layoutAndScrollToSelectedItem {    
     [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:self.selectedIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
-
+    
     if (self.selectedItemHelper) {
         self.selectedItemHelper(self.selectedIndex);
     }
@@ -158,36 +166,23 @@
     }
 }
 
-- (void)setupVernierDefaultLocation {
+- (void)updateVernierLocation {
     [self.collectionView layoutIfNeeded];
     HGCategoryViewCell *cell = [self getCell:self.selectedIndex];
+    
+    [self.vernierLeftConstraint uninstall];
+    [self.vernierWidthConstraint uninstall];
     [self.vernier mas_updateConstraints:^(MASConstraintMaker *make) {
-        self.vernierCenterXConstraint = make.centerX.equalTo(cell.titleLabel);
         if (self.isFixedVernierWidth) {
-            make.width.mas_equalTo(self.vernierWidth);
+            self.vernierLeftConstraint = make.left.equalTo(cell.titleLabel.mas_centerX).offset(-self.vernierWidth / 2);
+            self.vernierWidthConstraint = make.width.mas_equalTo(self.vernierWidth);
         } else {
+            self.vernierLeftConstraint = make.left.equalTo(cell.titleLabel);
             self.vernierWidthConstraint = make.width.equalTo(cell.titleLabel);
             self->_vernierWidth = cell.titleLabel.frame.size.width;
         }
     }];
-}
-
-- (void)updateVernierLocation {
-    [self.collectionView layoutIfNeeded];
-    HGCategoryViewCell *cell = [self getCell:self.selectedIndex];
-    [self.vernierCenterXConstraint uninstall];
-    if (self.isFixedVernierWidth) {
-        [self.vernier mas_updateConstraints:^(MASConstraintMaker *make) {
-            self.vernierCenterXConstraint = make.centerX.equalTo(cell.titleLabel);
-        }];
-    } else {
-        [self.vernierWidthConstraint uninstall];
-        [self.vernier mas_updateConstraints:^(MASConstraintMaker *make) {
-            self.vernierCenterXConstraint = make.centerX.equalTo(cell.titleLabel);
-            self.vernierWidthConstraint = make.width.equalTo(cell.titleLabel);
-            self->_vernierWidth = cell.titleLabel.frame.size.width;
-        }];
-    }
+    
     [UIView animateWithDuration:self.animateDuration animations:^{
         [self.collectionView layoutIfNeeded];
     }];
@@ -269,6 +264,10 @@
     CGFloat width = [self getWidthWithContent:self.titles[indexPath.row]];
     CGFloat height = self.height - HG_ONE_PIXEL * 2;
     return CGSizeMake(self.itemWidth > 0 ? self.itemWidth : width, height);
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
+    return self.itemSpacing;
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {

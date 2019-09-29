@@ -71,7 +71,7 @@ typedef NS_ENUM(NSUInteger, HGCategoryViewAlignment) {
 /// collectionView左右的margin
 @property (nonatomic) CGFloat leftAndRightMargin;
 
-/// item是否等分(实质上改变的是itemWidth，建议在titles、itemSpacing、itemWidth、leftAndRightMargin设置之后设置)，Default：NO
+/// item是否等分(实质上改变的是itemWidth)，Default：NO
 @property (nonatomic) CGFloat isEqualParts;
 
 /// 字体变大、vernier位置切换动画时长，default：0.1

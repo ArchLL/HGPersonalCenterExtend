@@ -15,7 +15,7 @@
 #import "HGMessageViewController.h"
 #import "HGPersonalCenterExtend.h"
 
-static CGFloat const headerViewHeight = 240;
+CGFloat const headerViewHeight = 240;
 
 @interface HGPersonalCenterViewController () <UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate, HGSegmentedPageViewControllerDelegate, HGPageViewControllerDelegate>
 @property (nonatomic, strong) HGAlignmentAdjustButton *messageButton;
@@ -89,12 +89,11 @@ static CGFloat const headerViewHeight = 240;
         [controllers addObject:controller];
     }
     _segmentedPageViewController.pageViewControllers = controllers;
-    _segmentedPageViewController.categoryView.titles = titles;
-    _segmentedPageViewController.categoryView.alignment = HGCategoryViewAlignmentLeft;
-    _segmentedPageViewController.categoryView.isEqualParts = YES;
-    _segmentedPageViewController.categoryView.originalIndex = self.selectedIndex;
-    _segmentedPageViewController.categoryView.itemSpacing = 25;
     _segmentedPageViewController.categoryView.backgroundColor = [UIColor yellowColor];
+    _segmentedPageViewController.categoryView.titles = titles;
+    _segmentedPageViewController.categoryView.alignment = HGCategoryViewAlignmentCenter;
+    _segmentedPageViewController.categoryView.originalIndex = self.selectedIndex;
+    _segmentedPageViewController.categoryView.itemSpacing = 50;
 }
 
 - (void)changeNavigationBarAlpha {
@@ -128,10 +127,10 @@ static CGFloat const headerViewHeight = 240;
     //第二部分：处理scrollView滑动冲突
     CGFloat contentOffsetY = scrollView.contentOffset.y;
     //吸顶临界点(此时的临界点不是视觉感官上导航栏的底部，而是当前屏幕的顶部相对scrollViewContentView的位置)
-    //如果底部存在TabBar/ToolBar, 还需要减去TabBarHeight/ToolBarHeight和SAFE_AREA_INSERTS_BOTTOM
+    //如果底部存在TabBar/ToolBar, 还需要减去TabBarHeight/ToolBarHeight(自定义的Bar)和SAFE_AREA_INSERTS_BOTTOM
     CGFloat criticalPointOffsetY = scrollView.contentSize.height - SCREEN_HEIGHT;
     
-    //利用contentOffset处理内外层scrollView的滑动冲突问题
+    // 利用contentOffset处理内外层scrollView的滑动冲突问题
     if (contentOffsetY - criticalPointOffsetY >= FLT_EPSILON) {
         /*
          * 到达临界点：
@@ -237,7 +236,7 @@ static CGFloat const headerViewHeight = 240;
 
 - (UIView *)footerView {
     if (!_footerView) {
-        //如果当前控制器存在TabBar/ToolBar, 还需要减去TabBarHeight/ToolBarHeight和SAFE_AREA_INSERTS_BOTTOM
+        //如果当前控制器存在TabBar/ToolBar, 还需要减去TabBarHeight/ToolBarHeight(自定义的Bar)和SAFE_AREA_INSERTS_BOTTOM
         _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - TOP_BAR_HEIGHT)];
     }
     return _footerView;
@@ -260,7 +259,6 @@ static CGFloat const headerViewHeight = 240;
 - (HGSegmentedPageViewController *)segmentedPageViewController {
     if (!_segmentedPageViewController) {
         _segmentedPageViewController = [[HGSegmentedPageViewController alloc] init];
-        _segmentedPageViewController.categoryView.titles = @[@"关注dfa", @"粉丝"];
         _segmentedPageViewController.delegate = self;
     }
     return _segmentedPageViewController;
