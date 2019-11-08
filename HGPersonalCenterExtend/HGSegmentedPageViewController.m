@@ -8,7 +8,6 @@
 
 #import "HGSegmentedPageViewController.h"
 #import "masonry.h"
-#import "HGPersonalCenterExtendMacro.h"
 #import "HGPopGestureCompatibleScrollView.h"
 
 #define kWidth self.view.frame.size.width
@@ -16,43 +15,53 @@
 @interface HGSegmentedPageViewController () <UIScrollViewDelegate>
 @property (nonatomic, strong) HGCategoryView *categoryView;
 @property (nonatomic, strong) HGPopGestureCompatibleScrollView *scrollView;
-@property (nonatomic, strong) HGPageViewController *currentPageViewController;
-@property (nonatomic) NSInteger currentPageIndex;
 @property (nonatomic) CGFloat whenBeginDraggingContentOffsetX;
+@property (nonatomic) BOOL isDragging;
 @end
 
 @implementation HGSegmentedPageViewController
 
+#pragma mark - Life Cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     [self.view addSubview:self.categoryView];
     [self.view addSubview:self.scrollView];
     
     [self.categoryView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.equalTo(self.view);
-        make.height.mas_equalTo(self->_categoryView.height);
+        make.height.mas_equalTo(self.categoryView.height);
     }];
     [self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.categoryView.mas_bottom);
         make.left.right.bottom.mas_equalTo(self.view);
     }];
+    
+    __weak typeof(self) weakSelf = self;
+    _categoryView.selectedItemHandler = ^(NSUInteger index) {
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        strongSelf.isDragging = NO;
+        [strongSelf.scrollView setContentOffset:CGPointMake(index * kWidth, 0) animated:NO];
+        strongSelf.isDragging = YES;
+    };
 }
 
 #pragma mark - Public Methods
 - (void)makePageViewControllersScrollToTop {
-    [self.pageViewControllers enumerateObjectsUsingBlock:^(HGPageViewController * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        [obj scrollToTop];
+    [self.pageViewControllers enumerateObjectsUsingBlock:^(HGPageViewController * _Nonnull controller, NSUInteger index, BOOL * _Nonnull stop) {
+        [controller scrollToTop];
     }];
 }
 
 - (void)makePageViewControllersScrollState:(BOOL)canScroll {
-    [self.pageViewControllers enumerateObjectsUsingBlock:^(HGPageViewController * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        obj.canScroll = canScroll;
+    [self.pageViewControllers enumerateObjectsUsingBlock:^(HGPageViewController * _Nonnull controller, NSUInteger index, BOOL * _Nonnull stop) {
+        controller.canScroll = canScroll;
     }];
 }
 
 #pragma mark - UIScrollViewDelegate
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    scrollView.userInteractionEnabled = NO;
     self.whenBeginDraggingContentOffsetX = scrollView.contentOffset.x;
     if ([self.delegate respondsToSelector:@selector(segmentedPageViewControllerWillBeginDragging)]) {
         [self.delegate segmentedPageViewControllerWillBeginDragging];
@@ -60,18 +69,22 @@
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if (!self.isDragging) {
+        return;
+    }
+    
     CGFloat scale = scrollView.contentOffset.x / kWidth;
     NSInteger leftPage = floor(scale);
     NSInteger rightPage = ceil(scale);
     
-    if (scrollView.contentOffset.x > self.whenBeginDraggingContentOffsetX) { //向右切换
+    if (scrollView.contentOffset.x > self.whenBeginDraggingContentOffsetX) { // 向右切换
         if (leftPage == rightPage) {
             leftPage = rightPage - 1;
         }
         if (rightPage < self.pageViewControllers.count) {
             [self.categoryView scrollToTargetIndex:rightPage sourceIndex:leftPage percent:scale - leftPage];
         }
-    } else { //向左切换
+    } else { // 向左切换
         if (leftPage == rightPage) {
             rightPage = leftPage + 1;
         }
@@ -82,6 +95,9 @@
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    if (decelerate) {
+        scrollView.userInteractionEnabled = YES;
+    }
     if ([self.delegate respondsToSelector:@selector(segmentedPageViewControllerDidEndDragging)]) {
         [self.delegate segmentedPageViewControllerDidEndDragging];
     }
@@ -89,20 +105,15 @@
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     NSUInteger index = (NSUInteger)(self.scrollView.contentOffset.x / kWidth);
-    self.currentPageIndex = index;
     if ([self.delegate respondsToSelector:@selector(segmentedPageViewControllerDidEndDeceleratingWithPageIndex:)]) {
         [self.delegate segmentedPageViewControllerDidEndDeceleratingWithPageIndex:index];
     }
 }
 
 #pragma mark - Setters
-- (void)setCurrentPageIndex:(NSInteger)currentPageIndex {
-    self.currentPageViewController = self.pageViewControllers[self.categoryView.originalIndex];
-}
-
 - (void)setPageViewControllers:(NSArray<HGPageViewController *> *)pageViewControllers {
     if (self.pageViewControllers.count > 0) {
-        //remove pageViewControllers
+        // remove pageViewControllers
         [self.pageViewControllers enumerateObjectsUsingBlock:^(HGPageViewController * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             [obj willMoveToParentViewController:nil];
             [obj.view removeFromSuperview];
@@ -112,7 +123,7 @@
     
     _pageViewControllers = pageViewControllers;
     
-    //add pageViewControllers
+    // add pageViewControllers
     [self.pageViewControllers enumerateObjectsUsingBlock:^(HGPageViewController * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         [self addChildViewController:obj];
         [self.scrollView addSubview:obj.view];
@@ -125,7 +136,6 @@
     
     self.scrollView.contentSize = CGSizeMake(kWidth * self.pageViewControllers.count, 0);
     self.categoryView.userInteractionEnabled = YES;
-    self.currentPageIndex = self.categoryView.originalIndex;
 }
 
 #pragma mark - Getters
@@ -133,12 +143,6 @@
     if (!_categoryView) {
         _categoryView = [[HGCategoryView alloc] init];
         _categoryView.userInteractionEnabled = NO;
-        @weakify(self)
-        _categoryView.selectedItemHelper = ^(NSUInteger index) {
-            @strongify(self)
-            [self.scrollView setContentOffset:CGPointMake(index * kWidth, 0) animated:NO];
-            self.currentPageIndex = index;
-        };
     }
     return _categoryView;
 }
@@ -152,6 +156,14 @@
         _scrollView.bounces = NO;
     }
     return _scrollView;
+}
+
+- (NSInteger)currentPageIndex {
+    return self.categoryView.selectedIndex;
+}
+
+- (UIViewController *)currentPageViewController {
+    return self.pageViewControllers[self.categoryView.selectedIndex];
 }
 
 @end

@@ -20,7 +20,7 @@ HGPersonalCenterExtend is available through [CocoaPods](https://cocoapods.org). 
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod 'HGPersonalCenterExtend', '~> 1.0.2'
+pod 'HGPersonalCenterExtend', '~> 1.1.0'
 ```
 
 ## Blog
@@ -109,7 +109,7 @@ Example: HGPersonalCenterExtend/Example
     _segmentedPageViewController.categoryView.titles = titles;
     _segmentedPageViewController.categoryView.alignment = HGCategoryViewAlignmentLeft;
     _segmentedPageViewController.categoryView.originalIndex = self.selectedIndex;
-    _segmentedPageViewController.categoryView.itemSpacing = 25;
+    _segmentedPageViewController.categoryView.itemSpacing = 30;
 }
 
 #pragma mark - UIScrollViewDelegate

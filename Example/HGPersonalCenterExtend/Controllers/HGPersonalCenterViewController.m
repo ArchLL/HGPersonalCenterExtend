@@ -91,9 +91,9 @@ CGFloat const headerViewHeight = 240;
     _segmentedPageViewController.pageViewControllers = controllers;
     _segmentedPageViewController.categoryView.backgroundColor = [UIColor yellowColor];
     _segmentedPageViewController.categoryView.titles = titles;
-    _segmentedPageViewController.categoryView.alignment = HGCategoryViewAlignmentCenter;
+    _segmentedPageViewController.categoryView.alignment = HGCategoryViewAlignmentLeft;
     _segmentedPageViewController.categoryView.originalIndex = self.selectedIndex;
-    _segmentedPageViewController.categoryView.itemSpacing = 50;
+    _segmentedPageViewController.categoryView.itemSpacing = 30;
 }
 
 - (void)changeNavigationBarAlpha {

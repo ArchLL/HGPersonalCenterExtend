@@ -10,7 +10,6 @@
 #endif
 #endif
 
-#import "HGCategoryView.h"
 #import "HGCenterBaseTableView.h"
 #import "HGPageViewController.h"
 #import "HGPersonalCenterExtend.h"
