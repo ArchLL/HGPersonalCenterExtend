@@ -13,7 +13,6 @@
 #import "HGCenterBaseTableView.h"
 #import "HGPageViewController.h"
 #import "HGPersonalCenterExtend.h"
-#import "HGPersonalCenterExtendMacro.h"
 #import "HGPopGestureCompatibleScrollView.h"
 #import "HGSegmentedPageViewController.h"
 

@@ -4,8 +4,8 @@ platform :ios, '8.0'
 
 target 'HGPersonalCenterExtend' do
   pod 'HGPersonalCenterExtend', :path => '../'
-  pod 'RTRootNavigationController', '~> 0.7.1'
-  pod 'FDFullscreenPopGesture', '1.1'
+  pod 'RTRootNavigationController', '~> 0.7.2'
+  pod 'FDFullscreenPopGesture', '~> 1.1'
   
   target 'HGPersonalCenterExtend_Tests' do
     inherit! :search_paths

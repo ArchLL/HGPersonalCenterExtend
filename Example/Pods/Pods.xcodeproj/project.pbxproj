@@ -9,10 +9,11 @@
 /* Begin PBXBuildFile section */
 		0034887DFEE224C9A0CA5C8AAD74493C /* MASCompositeConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 0345411DBB1BDF5AFC7240F17E9D9A35 /* MASCompositeConstraint.m */; };
 		00EE0C97C6203BBE4158DA2BCB34D957 /* FDFullscreenPopGesture-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DBAC6ED79383CD31BA2845DC79D6105 /* FDFullscreenPopGesture-dummy.m */; };
-		010C0112EB0C4AC1BC27B05DE634A47E /* HGCenterBaseTableView.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E0B33530E9CD655394FC7DF26914A31 /* HGCenterBaseTableView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		078FD3D287CDCD9EF1953F598CA1B567 /* MASConstraintMaker.h in Headers */ = {isa = PBXBuildFile; fileRef = 1D8C487812ABDBD788671FEF03AC3140 /* MASConstraintMaker.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0DB7B044AF115EC40AF200A6B089D8E9 /* MASConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = E5705BF3DA5DA72FBAC41EEC1DE50D95 /* MASConstraint.m */; };
-		12582879769ABF118181EAB13D0FE814 /* Masonry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07C0816365E98E9F622B5A363532C3D7 /* Masonry.framework */; };
+		0DD27CFE307F7E8559CA31F3F51EEC83 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37BA897897F6FFD812CBC56CD099EB80 /* UIKit.framework */; };
+		0E660D3F2AE3E7F4FE375B8E9838EFD4 /* HGPersonalCenterExtend-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = D11840B84D5CF8E01D15CB15985A992B /* HGPersonalCenterExtend-dummy.m */; };
+		12A3D62DD6CD9F601C27015858C7DD67 /* HGPersonalCenterExtend.h in Headers */ = {isa = PBXBuildFile; fileRef = D7528363D9E2C4EB5A2E71F4F66963B2 /* HGPersonalCenterExtend.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1772DFCAAFE4E6E14A444764E6E394C3 /* MASLayoutConstraint.h in Headers */ = {isa = PBXBuildFile; fileRef = C8D8962696738B7058C9426EB68E7D41 /* MASLayoutConstraint.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		198D89C1938D81FD3CB0397A5E66F583 /* UINavigationController+FDFullscreenPopGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F5A3A69F1A95661B4DF8FA59DE0637 /* UINavigationController+FDFullscreenPopGesture.m */; };
 		1EF0F6E276BD7B8F9E6E8A84BC683AB6 /* MASConstraint+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AC84221F8BD167402F582FCA2769CCA /* MASConstraint+Private.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -21,39 +22,35 @@
 		287FAA95C89151A93E968CBF1676DFBA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9118B4AFA67C95A9521C6B6E3C3E47DE /* Foundation.framework */; };
 		28C4B891ACBECD45FF2689FFF1B12C8C /* MASLayoutConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 2271ED9171C23410BE5D565A8184C10E /* MASLayoutConstraint.m */; };
 		2D7DDD7783A310A43F9ECEEEA9C67F87 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9118B4AFA67C95A9521C6B6E3C3E47DE /* Foundation.framework */; };
+		2D807302FEF3BABA32C75E0120F707DA /* HGCenterBaseTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24F0213BF8629BCB7368C32D85AC011A /* HGCenterBaseTableView.m */; };
 		2DA102C8507A8C9398A2BEE9D0EADA4E /* View+MASShorthandAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F7A362224A40E2064FDF7C481FF2CB5 /* View+MASShorthandAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		36586A012386DFB23CC1B7EF9B663379 /* HGPersonalCenterExtend-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = E5E69BAD77335D250957790E7E863810 /* HGPersonalCenterExtend-dummy.m */; };
+		30E157B5FB72E76A4AAB5E08632A7011 /* HGCenterBaseTableView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B7C703F5666A675302C26908737D8DF /* HGCenterBaseTableView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3894BE14D11C7A8806C113E437566573 /* ViewController+MASAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 8A6796C267526A47FFE39A6AC104D7E4 /* ViewController+MASAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		38DF4D9EE0D4A424A88FF97154E97089 /* Pods-HGPersonalCenterExtend_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C46A099C8B3893897AAE9F1466D89486 /* Pods-HGPersonalCenterExtend_Tests-dummy.m */; };
 		413ED384B4F62B7FC8C22DB90AE4E651 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = ADF61492CAA73BAE749025470E7A72AC /* NSLayoutConstraint+MASDebugAdditions.m */; };
 		43820123CFECDCC0E5CA85CDA24BD779 /* Masonry.h in Headers */ = {isa = PBXBuildFile; fileRef = A93AD21103FFF9EEBDB944333A7EBC70 /* Masonry.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		44C0C8FAB6C7E7A4AA2309414C0A8D71 /* Masonry-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = ED1FE16AB48F6B670EF6EC6ED6BB22E9 /* Masonry-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		49493859D46369361F9470BDCD5A811D /* HGPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 719837A66FAD541CC805D8977B1FC27F /* HGPageViewController.m */; };
-		4BD328153D7DD1BA460492FE545C9489 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9118B4AFA67C95A9521C6B6E3C3E47DE /* Foundation.framework */; };
-		54886D8692FFC5341036B1027589226C /* HGSegmentedPageViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BA1D28552B03A4EDCB2B442E9E87F51 /* HGSegmentedPageViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5524BFA17CDD35114B76721BE1C9AF69 /* HGCategoryView.h in Headers */ = {isa = PBXBuildFile; fileRef = 0467C1AFF1F0C41F2BC281B36B620D0E /* HGCategoryView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		55DBF9095E91F937F88E4F770B17A80B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37BA897897F6FFD812CBC56CD099EB80 /* UIKit.framework */; };
 		567033AC24D9F455D06C6B3B3BFE8441 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37BA897897F6FFD812CBC56CD099EB80 /* UIKit.framework */; };
-		5F2C05B436018735CA299CD17BF12D65 /* HGPersonalCenterExtend.h in Headers */ = {isa = PBXBuildFile; fileRef = D2EF94C814381115C28FF84E5466F60B /* HGPersonalCenterExtend.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		61A152B117D41B23430E07680BB8ED23 /* HGPopGestureCompatibleScrollView.h in Headers */ = {isa = PBXBuildFile; fileRef = C0CD1E30D5322892F8D3861320B4FC58 /* HGPopGestureCompatibleScrollView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		595C249FCFA66605173426C7B77A819D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9118B4AFA67C95A9521C6B6E3C3E47DE /* Foundation.framework */; };
+		5DB9CD8C97F9D02159340620381236C8 /* HGPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E857D429B45954667E81C5DF717493E /* HGPageViewController.m */; };
 		625DF2223E60F627F264B6ED7A9D981B /* RTRootNavigationController-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 18DC74641E429B8B77B9013043539FB8 /* RTRootNavigationController-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6438D0D08464BC1591F23347E17B6D5E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9118B4AFA67C95A9521C6B6E3C3E47DE /* Foundation.framework */; };
 		64F7668E05EA6C96607CC37068489AC1 /* UIViewController+RTRootNavigationController.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A1B822B76A5E03B64F7C1E961D134AE /* UIViewController+RTRootNavigationController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6649140A4D74CC027CA56BA9CFF999EA /* HGPersonalCenterExtend-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = A578F56AE2BDDFBB614509B794BF10AC /* HGPersonalCenterExtend-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6FF59EAAE2E2AD40B93B7D0F6D783281 /* Pods-HGPersonalCenterExtend-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = E11523B01E7E0BE917979B92C7BA8E1E /* Pods-HGPersonalCenterExtend-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		772D0E6265CFBD3BB54923AE73E4FBAF /* UINavigationController+FDFullscreenPopGesture.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C55DA520AD232C02D4E3B86D1602818 /* UINavigationController+FDFullscreenPopGesture.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7E9FBC82184014248EA0982AD8E1D2C8 /* RTRootNavigationController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B73B8FEABA43477907EA5967C65E2E2 /* RTRootNavigationController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		81B4764E7962542EA83772A6C9DE2639 /* HGPopGestureCompatibleScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E7570BDB845DCB47F8B8DE49BAAFF70 /* HGPopGestureCompatibleScrollView.m */; };
 		826CEFCA835CFBC27766CC8B18AB6242 /* FDFullscreenPopGesture-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = A54B018F319E6D580B18F67911D0E6EA /* FDFullscreenPopGesture-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84559534A5C185DA07DD65EF6D0483F7 /* NSArray+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = C871534804BF354F938A6BD1512DA80E /* NSArray+MASAdditions.m */; };
+		8A580CABD213E83478C8ECB2B11039CE /* HGPopGestureCompatibleScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 61F1F380E9FFFF098D8F3CAA6FCBA42A /* HGPopGestureCompatibleScrollView.m */; };
 		8B4DE332A35D11E32EFAE08BA9343F15 /* MASViewAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 269EB824255076FB9933DBB70D5AA2CC /* MASViewAttribute.m */; };
 		8CBC530061675BF18B2040A627F663EC /* Pods-HGPersonalCenterExtend-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 33D47350EB5EE9714A7CDF0E3A39E17F /* Pods-HGPersonalCenterExtend-dummy.m */; };
 		8CC97F635EFF02CBD59D67FE36FD0A84 /* MASUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 8120FE49000404E0394CFDC97322FDE6 /* MASUtilities.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8EFCA8B30312CDF63B0519E819122A0F /* View+MASAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 99E8A6D11429C557DB0F7852A4B5B7DD /* View+MASAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9B4DAC6856FC4042752E0420F093B0C5 /* HGPageViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = FA70D60313F81BFDF56A690DBC99E2C2 /* HGPageViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		95FD71041416BFA6434EAC8863E5EE52 /* HGCategoryView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC8610FA1CBE39E22EBF699BE37E0666 /* HGCategoryView.framework */; };
 		9B716D26FD5C8DEE39DDF609B1A9F1AC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37BA897897F6FFD812CBC56CD099EB80 /* UIKit.framework */; };
-		9C94C259E2E7AC46FC4D66D7E9036A23 /* HGCategoryView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC8610FA1CBE39E22EBF699BE37E0666 /* HGCategoryView.framework */; };
 		9E2ED22C3313958D0BEC67AE62173C03 /* Pods-HGPersonalCenterExtend_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 182F43FA0CF69017C2BA61E2BA09D635 /* Pods-HGPersonalCenterExtend_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A125AC08934E6B5E8C55668DC0A4B50E /* HGSegmentedPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA827219A5B90BD3BC73044DE4546116 /* HGSegmentedPageViewController.m */; };
 		A1B0B80FC553123D1AF478C7A431D9D4 /* UIViewController+RTRootNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = F0AAB4FD15ED51E41F59E8E5D3BE21D2 /* UIViewController+RTRootNavigationController.m */; };
 		A269DB9DEF4D80DED764A3CA8C6740A5 /* MASConstraint.h in Headers */ = {isa = PBXBuildFile; fileRef = B12919368D150A472A1A5E9397B64B6F /* MASConstraint.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A28A5945AC453B208F8F38995E85664F /* MASViewAttribute.h in Headers */ = {isa = PBXBuildFile; fileRef = FCD06D85E8AF8270CD01628718B95E34 /* MASViewAttribute.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -61,6 +58,7 @@
 		A37E60F40205B595B851DBFD0A87CE48 /* MASConstraintMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ABE29082D2C52C92CC81FB5A8163F92 /* MASConstraintMaker.m */; };
 		AABAB089EFD6A5F729ADE31DF26392D9 /* Masonry-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B4BFF4DD788D309A5DE905F9058D6FE /* Masonry-dummy.m */; };
 		AACFE01045D9E87C7A1ED24F9EF04E95 /* ViewController+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = D8428F971272BCF83EEC088DBEAEEDB8 /* ViewController+MASAdditions.m */; };
+		AD29D24C88EEC9716A1E1CA92563507B /* HGSegmentedPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 59CB36CBBB34A7E56FE8E243F58D0687 /* HGSegmentedPageViewController.m */; };
 		AE6DE2096CEB71D1FFDEACA66B326A1D /* HGCategoryView-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = CA9F982070441F0197ED850C95B6E284 /* HGCategoryView-dummy.m */; };
 		B15060866DAA818F64AF8FADA299DD34 /* NSArray+MASAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = B3B8090A364649F9FC511772DDAB6638 /* NSArray+MASAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B3639AB8C28A80CC9F9D1DCA61DF413D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37BA897897F6FFD812CBC56CD099EB80 /* UIKit.framework */; };
@@ -73,13 +71,22 @@
 		CC2136B586BEFB71E6DB4CDBA91623D9 /* View+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B1DA6711841D68193CF74D97155321 /* View+MASAdditions.m */; };
 		D0661463C3C6D803FB3E698FD0B97A73 /* HGCategoryView-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B90354D63A5FE18513BBF356D33023A /* HGCategoryView-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E1B329FCD0671F658CE10510E1EC0538 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9118B4AFA67C95A9521C6B6E3C3E47DE /* Foundation.framework */; };
-		EB2B4E0E95E76F1C38924D25AF4D25D3 /* HGPersonalCenterExtend-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = CAC2F07F35BDCA04C65D002AD92703AB /* HGPersonalCenterExtend-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F102D5259A80AF71AA50F777A7093FFD /* HGPageViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6C2A77267AE8E84F32C7116423D5886A /* HGPageViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F3E2761A259FBEF4F1F5FA1878CE5DAF /* HGPopGestureCompatibleScrollView.h in Headers */ = {isa = PBXBuildFile; fileRef = BF7C6023A89776FC5BD08252EBFF5EAF /* HGPopGestureCompatibleScrollView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F6F0A8831A7FC92C4C57DD59F0287D07 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9118B4AFA67C95A9521C6B6E3C3E47DE /* Foundation.framework */; };
 		F7BA624C3FA0F2CFF9CBF56551728C5A /* MASCompositeConstraint.h in Headers */ = {isa = PBXBuildFile; fileRef = D8F63A0D4A858A9E649D1FC648FF279A /* MASCompositeConstraint.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F806539376FD046CA80B096F933DCC3A /* HGCenterBaseTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A300797AEBB7ADB9E2E9954A6EEEAD4 /* HGCenterBaseTableView.m */; };
+		F8AC4C8518C3226CF09ED5D17E735FCF /* Masonry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07C0816365E98E9F622B5A363532C3D7 /* Masonry.framework */; };
+		FFFB0EEB3EBD12434B6FCF2FC1DF858C /* HGSegmentedPageViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 21A73637F22733FD3B15F7085F28C7FA /* HGSegmentedPageViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		3064886D459BD17AAE04C06A3B4E7A3C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FF2AA169A94910901058A8AADDAF9835;
+			remoteInfo = HGCategoryView;
+		};
 		3278A64D2D7C4023BAD52A8DD9F0F383 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
@@ -108,19 +115,19 @@
 			remoteGlobalIDString = FF2AA169A94910901058A8AADDAF9835;
 			remoteInfo = HGCategoryView;
 		};
+		8282F2C60E15250D4EE9BC7C7DA00FCE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 55AF53E6C77A10ED4985E04D74A8878E;
+			remoteInfo = Masonry;
+		};
 		97361A3F3FC0417DD83D7C55FF7B42E2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 5B0707E5858CB5DDBD97688FA8A8F719;
 			remoteInfo = "Pods-HGPersonalCenterExtend";
-		};
-		A89FA4A922E20456958355B174E7B02C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 55AF53E6C77A10ED4985E04D74A8878E;
-			remoteInfo = Masonry;
 		};
 		B6D453B18E1ADB03408858F6AC53EE2B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -136,13 +143,6 @@
 			remoteGlobalIDString = 55AF53E6C77A10ED4985E04D74A8878E;
 			remoteInfo = Masonry;
 		};
-		FF3647062EFDC080346456A34C4E8C1D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = FF2AA169A94910901058A8AADDAF9835;
-			remoteInfo = HGCategoryView;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -152,104 +152,104 @@
 		182F43FA0CF69017C2BA61E2BA09D635 /* Pods-HGPersonalCenterExtend_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-HGPersonalCenterExtend_Tests-umbrella.h"; sourceTree = "<group>"; };
 		18DC74641E429B8B77B9013043539FB8 /* RTRootNavigationController-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "RTRootNavigationController-umbrella.h"; sourceTree = "<group>"; };
 		18F5A3A69F1A95661B4DF8FA59DE0637 /* UINavigationController+FDFullscreenPopGesture.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UINavigationController+FDFullscreenPopGesture.m"; path = "FDFullscreenPopGesture/UINavigationController+FDFullscreenPopGesture.m"; sourceTree = "<group>"; };
-		19072A7223D2645B3C1C202D8BC61C4A /* HGPersonalCenterExtend.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = HGPersonalCenterExtend.xcconfig; sourceTree = "<group>"; };
+		1A0E655B328F695DF40CBE0612D777E2 /* HGPersonalCenterExtend-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "HGPersonalCenterExtend-Info.plist"; sourceTree = "<group>"; };
 		1D2E082D39E60A81FF496569AD7C142F /* Pods-HGPersonalCenterExtend_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-HGPersonalCenterExtend_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
 		1D8C487812ABDBD788671FEF03AC3140 /* MASConstraintMaker.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASConstraintMaker.h; path = Masonry/MASConstraintMaker.h; sourceTree = "<group>"; };
-		1FFED36A657123030ABB700256D73F15 /* Masonry.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Masonry.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1E0A9977DD33C3DA567CD9CF8CD030B2 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
+		1FFED36A657123030ABB700256D73F15 /* Masonry.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Masonry.framework; path = Masonry.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		21A73637F22733FD3B15F7085F28C7FA /* HGSegmentedPageViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = HGSegmentedPageViewController.h; path = HGPersonalCenterExtend/HGSegmentedPageViewController.h; sourceTree = "<group>"; };
 		2271ED9171C23410BE5D565A8184C10E /* MASLayoutConstraint.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASLayoutConstraint.m; path = Masonry/MASLayoutConstraint.m; sourceTree = "<group>"; };
+		24F0213BF8629BCB7368C32D85AC011A /* HGCenterBaseTableView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = HGCenterBaseTableView.m; path = HGPersonalCenterExtend/HGCenterBaseTableView.m; sourceTree = "<group>"; };
+		261CEB87B1ACE6A15EA4234479597F5D /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
 		269EB824255076FB9933DBB70D5AA2CC /* MASViewAttribute.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASViewAttribute.m; path = Masonry/MASViewAttribute.m; sourceTree = "<group>"; };
 		27BF393634565AE549EF3B2B1D64B756 /* Masonry.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Masonry.modulemap; sourceTree = "<group>"; };
-		27FECD4474FDCCEFE44CC264982EF5BA /* Pods_HGPersonalCenterExtend.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HGPersonalCenterExtend.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		27FECD4474FDCCEFE44CC264982EF5BA /* Pods_HGPersonalCenterExtend.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_HGPersonalCenterExtend.framework; path = "Pods-HGPersonalCenterExtend.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A4166ED54098A0038DE7D89D3128B6E /* Pods-HGPersonalCenterExtend_Tests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-HGPersonalCenterExtend_Tests-Info.plist"; sourceTree = "<group>"; };
 		2E3D539A5B74621778B0191DF4F77778 /* Pods-HGPersonalCenterExtend-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-HGPersonalCenterExtend-Info.plist"; sourceTree = "<group>"; };
 		2E918FCF94744E075ED59BB78E56B5A3 /* RTRootNavigationController.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = RTRootNavigationController.xcconfig; sourceTree = "<group>"; };
 		3284F2F5CFF2A7F3E5DFDC44647C56C2 /* HGCategoryView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = HGCategoryView.m; path = HGCategoryView/HGCategoryView.m; sourceTree = "<group>"; };
-		33CD60D73BAD3C5D4DFE61FAB86C121F /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		33D47350EB5EE9714A7CDF0E3A39E17F /* Pods-HGPersonalCenterExtend-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-HGPersonalCenterExtend-dummy.m"; sourceTree = "<group>"; };
 		3591148AC328FDABAF65BB09F677064F /* Pods-HGPersonalCenterExtend_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-HGPersonalCenterExtend_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		367008A75EC32C3E32863FD7EAA26349 /* HGCategoryView-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "HGCategoryView-Info.plist"; sourceTree = "<group>"; };
 		37BA897897F6FFD812CBC56CD099EB80 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
-		3A300797AEBB7ADB9E2E9954A6EEEAD4 /* HGCenterBaseTableView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = HGCenterBaseTableView.m; path = HGPersonalCenterExtend/HGCenterBaseTableView.m; sourceTree = "<group>"; };
 		3ABE29082D2C52C92CC81FB5A8163F92 /* MASConstraintMaker.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASConstraintMaker.m; path = Masonry/MASConstraintMaker.m; sourceTree = "<group>"; };
 		3AC84221F8BD167402F582FCA2769CCA /* MASConstraint+Private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "MASConstraint+Private.h"; path = "Masonry/MASConstraint+Private.h"; sourceTree = "<group>"; };
 		3B73B8FEABA43477907EA5967C65E2E2 /* RTRootNavigationController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RTRootNavigationController.h; path = RTRootNavigationController/Classes/RTRootNavigationController.h; sourceTree = "<group>"; };
+		3B7C703F5666A675302C26908737D8DF /* HGCenterBaseTableView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = HGCenterBaseTableView.h; path = HGPersonalCenterExtend/HGCenterBaseTableView.h; sourceTree = "<group>"; };
+		3E885B7E8401125223BDF7BF29147FAB /* HGPersonalCenterExtend.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = HGPersonalCenterExtend.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		4A970041F81B08D97F6168CD01C0826F /* Masonry-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Masonry-Info.plist"; sourceTree = "<group>"; };
 		4B2AB80A510B13829B7CE17EB9AEC4B4 /* NSLayoutConstraint+MASDebugAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSLayoutConstraint+MASDebugAdditions.h"; path = "Masonry/NSLayoutConstraint+MASDebugAdditions.h"; sourceTree = "<group>"; };
 		4C55DA520AD232C02D4E3B86D1602818 /* UINavigationController+FDFullscreenPopGesture.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UINavigationController+FDFullscreenPopGesture.h"; path = "FDFullscreenPopGesture/UINavigationController+FDFullscreenPopGesture.h"; sourceTree = "<group>"; };
 		4C7CECADB140F6E9BBD23613D6400AD7 /* HGCategoryView.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = HGCategoryView.xcconfig; sourceTree = "<group>"; };
 		4F7A362224A40E2064FDF7C481FF2CB5 /* View+MASShorthandAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "View+MASShorthandAdditions.h"; path = "Masonry/View+MASShorthandAdditions.h"; sourceTree = "<group>"; };
-		539318005DA9529ECAD0449EE2DAA44B /* HGPersonalCenterExtend.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = HGPersonalCenterExtend.modulemap; sourceTree = "<group>"; };
 		54031977A9709F0B7C23BA027D5A5DA3 /* NSArray+MASShorthandAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSArray+MASShorthandAdditions.h"; path = "Masonry/NSArray+MASShorthandAdditions.h"; sourceTree = "<group>"; };
 		5542B4072ABE3ECFF5FB03022C574822 /* RTRootNavigationController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = RTRootNavigationController.m; path = RTRootNavigationController/Classes/RTRootNavigationController.m; sourceTree = "<group>"; };
 		56B79E049D961F57361303283209CFAD /* Pods-HGPersonalCenterExtend-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-HGPersonalCenterExtend-acknowledgements.markdown"; sourceTree = "<group>"; };
+		59CB36CBBB34A7E56FE8E243F58D0687 /* HGSegmentedPageViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = HGSegmentedPageViewController.m; path = HGPersonalCenterExtend/HGSegmentedPageViewController.m; sourceTree = "<group>"; };
 		5DBAC6ED79383CD31BA2845DC79D6105 /* FDFullscreenPopGesture-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "FDFullscreenPopGesture-dummy.m"; sourceTree = "<group>"; };
-		5E7570BDB845DCB47F8B8DE49BAAFF70 /* HGPopGestureCompatibleScrollView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = HGPopGestureCompatibleScrollView.m; path = HGPersonalCenterExtend/HGPopGestureCompatibleScrollView.m; sourceTree = "<group>"; };
 		6173C511EC0F2AF2FC00DE0128B47515 /* FDFullscreenPopGesture-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FDFullscreenPopGesture-prefix.pch"; sourceTree = "<group>"; };
-		617EE344D9ECAE4CA826D14CFB3C9980 /* Pods_HGPersonalCenterExtend_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HGPersonalCenterExtend_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		617EE344D9ECAE4CA826D14CFB3C9980 /* Pods_HGPersonalCenterExtend_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_HGPersonalCenterExtend_Tests.framework; path = "Pods-HGPersonalCenterExtend_Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		61F1F380E9FFFF098D8F3CAA6FCBA42A /* HGPopGestureCompatibleScrollView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = HGPopGestureCompatibleScrollView.m; path = HGPersonalCenterExtend/HGPopGestureCompatibleScrollView.m; sourceTree = "<group>"; };
 		6805C8DD3C913D84E18CE6AD80D6A007 /* RTRootNavigationController.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = RTRootNavigationController.modulemap; sourceTree = "<group>"; };
-		6DE5A8B5B8D5AF6D329380977CF2ACD1 /* RTRootNavigationController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RTRootNavigationController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6C2A77267AE8E84F32C7116423D5886A /* HGPageViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = HGPageViewController.h; path = HGPersonalCenterExtend/HGPageViewController.h; sourceTree = "<group>"; };
+		6CD93C852436A660E4454F09F758DA5D /* HGPersonalCenterExtend.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = HGPersonalCenterExtend.xcconfig; sourceTree = "<group>"; };
+		6DE5A8B5B8D5AF6D329380977CF2ACD1 /* RTRootNavigationController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = RTRootNavigationController.framework; path = RTRootNavigationController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		70C5D86D28BC05FBADE9969AE68A9030 /* Pods-HGPersonalCenterExtend.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-HGPersonalCenterExtend.modulemap"; sourceTree = "<group>"; };
-		719837A66FAD541CC805D8977B1FC27F /* HGPageViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = HGPageViewController.m; path = HGPersonalCenterExtend/HGPageViewController.m; sourceTree = "<group>"; };
 		7D58FBF1E8716016946C32CC7FFBDF69 /* FDFullscreenPopGesture.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = FDFullscreenPopGesture.xcconfig; sourceTree = "<group>"; };
 		7E62ADF96BDA59ADE3EAAFFA98546799 /* RTRootNavigationController-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "RTRootNavigationController-Info.plist"; sourceTree = "<group>"; };
 		7EF1F11739B377F76921AD5578EFC192 /* Pods-HGPersonalCenterExtend.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-HGPersonalCenterExtend.release.xcconfig"; sourceTree = "<group>"; };
 		8120FE49000404E0394CFDC97322FDE6 /* MASUtilities.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASUtilities.h; path = Masonry/MASUtilities.h; sourceTree = "<group>"; };
 		844DE936AB26B730F801580761C6188A /* Pods-HGPersonalCenterExtend.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-HGPersonalCenterExtend.debug.xcconfig"; sourceTree = "<group>"; };
-		85D03BEC2CA9B2DB28398618379E7744 /* FDFullscreenPopGesture.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FDFullscreenPopGesture.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		85D03BEC2CA9B2DB28398618379E7744 /* FDFullscreenPopGesture.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = FDFullscreenPopGesture.framework; path = FDFullscreenPopGesture.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A6796C267526A47FFE39A6AC104D7E4 /* ViewController+MASAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "ViewController+MASAdditions.h"; path = "Masonry/ViewController+MASAdditions.h"; sourceTree = "<group>"; };
 		8A6EE68314061500605D626D83D7D020 /* Pods-HGPersonalCenterExtend_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-HGPersonalCenterExtend_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		8B90354D63A5FE18513BBF356D33023A /* HGCategoryView-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "HGCategoryView-umbrella.h"; sourceTree = "<group>"; };
-		8BA1D28552B03A4EDCB2B442E9E87F51 /* HGSegmentedPageViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = HGSegmentedPageViewController.h; path = HGPersonalCenterExtend/HGSegmentedPageViewController.h; sourceTree = "<group>"; };
-		8E0B33530E9CD655394FC7DF26914A31 /* HGCenterBaseTableView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = HGCenterBaseTableView.h; path = HGPersonalCenterExtend/HGCenterBaseTableView.h; sourceTree = "<group>"; };
-		8FEA37914A593CA651287A927971D355 /* HGPersonalCenterExtend-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "HGPersonalCenterExtend-prefix.pch"; sourceTree = "<group>"; };
 		9118B4AFA67C95A9521C6B6E3C3E47DE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		96B1DA6711841D68193CF74D97155321 /* View+MASAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "View+MASAdditions.m"; path = "Masonry/View+MASAdditions.m"; sourceTree = "<group>"; };
 		99E8A6D11429C557DB0F7852A4B5B7DD /* View+MASAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "View+MASAdditions.h"; path = "Masonry/View+MASAdditions.h"; sourceTree = "<group>"; };
 		9A1B822B76A5E03B64F7C1E961D134AE /* UIViewController+RTRootNavigationController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIViewController+RTRootNavigationController.h"; path = "RTRootNavigationController/Classes/UIViewController+RTRootNavigationController.h"; sourceTree = "<group>"; };
 		9B4BFF4DD788D309A5DE905F9058D6FE /* Masonry-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Masonry-dummy.m"; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9E857D429B45954667E81C5DF717493E /* HGPageViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = HGPageViewController.m; path = HGPersonalCenterExtend/HGPageViewController.m; sourceTree = "<group>"; };
 		A54B018F319E6D580B18F67911D0E6EA /* FDFullscreenPopGesture-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FDFullscreenPopGesture-umbrella.h"; sourceTree = "<group>"; };
+		A578F56AE2BDDFBB614509B794BF10AC /* HGPersonalCenterExtend-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "HGPersonalCenterExtend-umbrella.h"; sourceTree = "<group>"; };
 		A93AD21103FFF9EEBDB944333A7EBC70 /* Masonry.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Masonry.h; path = Masonry/Masonry.h; sourceTree = "<group>"; };
-		AA827219A5B90BD3BC73044DE4546116 /* HGSegmentedPageViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = HGSegmentedPageViewController.m; path = HGPersonalCenterExtend/HGSegmentedPageViewController.m; sourceTree = "<group>"; };
 		AAD688D7099CAA1F0D0C35A10E23E7BC /* RTRootNavigationController-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "RTRootNavigationController-prefix.pch"; sourceTree = "<group>"; };
 		ADF61492CAA73BAE749025470E7A72AC /* NSLayoutConstraint+MASDebugAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSLayoutConstraint+MASDebugAdditions.m"; path = "Masonry/NSLayoutConstraint+MASDebugAdditions.m"; sourceTree = "<group>"; };
 		B12919368D150A472A1A5E9397B64B6F /* MASConstraint.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASConstraint.h; path = Masonry/MASConstraint.h; sourceTree = "<group>"; };
+		B155F7C1F3DA68A810AC2F441F7E0DCF /* HGPersonalCenterExtend-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "HGPersonalCenterExtend-prefix.pch"; sourceTree = "<group>"; };
 		B3B8090A364649F9FC511772DDAB6638 /* NSArray+MASAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSArray+MASAdditions.h"; path = "Masonry/NSArray+MASAdditions.h"; sourceTree = "<group>"; };
 		B5EA53B3DF60F0C72A3608BD3CEA0FC1 /* Masonry-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Masonry-prefix.pch"; sourceTree = "<group>"; };
 		B795B5EA721EA6A8EE905BAF5DBFD618 /* HGCategoryView.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = HGCategoryView.modulemap; sourceTree = "<group>"; };
 		BC8610FA1CBE39E22EBF699BE37E0666 /* HGCategoryView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HGCategoryView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF07B63121C08462405E9B46AAE6825D /* MASViewConstraint.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASViewConstraint.h; path = Masonry/MASViewConstraint.h; sourceTree = "<group>"; };
-		C0CD1E30D5322892F8D3861320B4FC58 /* HGPopGestureCompatibleScrollView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = HGPopGestureCompatibleScrollView.h; path = HGPersonalCenterExtend/HGPopGestureCompatibleScrollView.h; sourceTree = "<group>"; };
+		BF7C6023A89776FC5BD08252EBFF5EAF /* HGPopGestureCompatibleScrollView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = HGPopGestureCompatibleScrollView.h; path = HGPersonalCenterExtend/HGPopGestureCompatibleScrollView.h; sourceTree = "<group>"; };
 		C46A099C8B3893897AAE9F1466D89486 /* Pods-HGPersonalCenterExtend_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-HGPersonalCenterExtend_Tests-dummy.m"; sourceTree = "<group>"; };
 		C7562B3DA7131F44C8454698C277DDD3 /* FDFullscreenPopGesture.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = FDFullscreenPopGesture.modulemap; sourceTree = "<group>"; };
 		C871534804BF354F938A6BD1512DA80E /* NSArray+MASAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSArray+MASAdditions.m"; path = "Masonry/NSArray+MASAdditions.m"; sourceTree = "<group>"; };
 		C8D8962696738B7058C9426EB68E7D41 /* MASLayoutConstraint.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASLayoutConstraint.h; path = Masonry/MASLayoutConstraint.h; sourceTree = "<group>"; };
 		CA9F982070441F0197ED850C95B6E284 /* HGCategoryView-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "HGCategoryView-dummy.m"; sourceTree = "<group>"; };
-		CAA8EFC39DA34A573C16B8D5589A5523 /* HGPersonalCenterExtend.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = HGPersonalCenterExtend.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		CAC2F07F35BDCA04C65D002AD92703AB /* HGPersonalCenterExtend-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "HGPersonalCenterExtend-umbrella.h"; sourceTree = "<group>"; };
-		D2EF94C814381115C28FF84E5466F60B /* HGPersonalCenterExtend.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = HGPersonalCenterExtend.h; path = HGPersonalCenterExtend/HGPersonalCenterExtend.h; sourceTree = "<group>"; };
+		D11840B84D5CF8E01D15CB15985A992B /* HGPersonalCenterExtend-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "HGPersonalCenterExtend-dummy.m"; sourceTree = "<group>"; };
 		D52D1EE7B947CA73609ADAA8FA07F15C /* Pods-HGPersonalCenterExtend_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-HGPersonalCenterExtend_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		D704C7BB40B5E7A4C5A87BFC2260E5AA /* Masonry.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Masonry.xcconfig; sourceTree = "<group>"; };
+		D7528363D9E2C4EB5A2E71F4F66963B2 /* HGPersonalCenterExtend.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = HGPersonalCenterExtend.h; path = HGPersonalCenterExtend/HGPersonalCenterExtend.h; sourceTree = "<group>"; };
 		D8428F971272BCF83EEC088DBEAEEDB8 /* ViewController+MASAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "ViewController+MASAdditions.m"; path = "Masonry/ViewController+MASAdditions.m"; sourceTree = "<group>"; };
 		D8F63A0D4A858A9E649D1FC648FF279A /* MASCompositeConstraint.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASCompositeConstraint.h; path = Masonry/MASCompositeConstraint.h; sourceTree = "<group>"; };
-		DBD1E8B4F9ADA87FB58B34711778A742 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		DC05F2B0D94EBA4C7A167600D528E95F /* Pods-HGPersonalCenterExtend_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-HGPersonalCenterExtend_Tests.modulemap"; sourceTree = "<group>"; };
 		E11523B01E7E0BE917979B92C7BA8E1E /* Pods-HGPersonalCenterExtend-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-HGPersonalCenterExtend-umbrella.h"; sourceTree = "<group>"; };
-		E52333369785719DCB518D594ED89352 /* HGPersonalCenterExtend.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HGPersonalCenterExtend.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E52333369785719DCB518D594ED89352 /* HGPersonalCenterExtend.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = HGPersonalCenterExtend.framework; path = HGPersonalCenterExtend.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5705BF3DA5DA72FBAC41EEC1DE50D95 /* MASConstraint.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASConstraint.m; path = Masonry/MASConstraint.m; sourceTree = "<group>"; };
-		E5E69BAD77335D250957790E7E863810 /* HGPersonalCenterExtend-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "HGPersonalCenterExtend-dummy.m"; sourceTree = "<group>"; };
-		EA446B25CBCA771EDC9D65A7080C3D21 /* HGCategoryView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HGCategoryView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA446B25CBCA771EDC9D65A7080C3D21 /* HGCategoryView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = HGCategoryView.framework; path = HGCategoryView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED1FE16AB48F6B670EF6EC6ED6BB22E9 /* Masonry-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Masonry-umbrella.h"; sourceTree = "<group>"; };
 		F0AAB4FD15ED51E41F59E8E5D3BE21D2 /* UIViewController+RTRootNavigationController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+RTRootNavigationController.m"; path = "RTRootNavigationController/Classes/UIViewController+RTRootNavigationController.m"; sourceTree = "<group>"; };
 		F21E38E1C2495A380564A92C313B65D6 /* Pods-HGPersonalCenterExtend-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-HGPersonalCenterExtend-acknowledgements.plist"; sourceTree = "<group>"; };
 		F24C1C3016DF1156A5A955CC145B7FA3 /* RTRootNavigationController-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "RTRootNavigationController-dummy.m"; sourceTree = "<group>"; };
-		F6674A9A217BAE35829B1AF153C8D7FF /* HGPersonalCenterExtend-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "HGPersonalCenterExtend-Info.plist"; sourceTree = "<group>"; };
 		FA2D5EFF410AC3BB9CE9D1005B2891C5 /* FDFullscreenPopGesture-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "FDFullscreenPopGesture-Info.plist"; sourceTree = "<group>"; };
-		FA70D60313F81BFDF56A690DBC99E2C2 /* HGPageViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = HGPageViewController.h; path = HGPersonalCenterExtend/HGPageViewController.h; sourceTree = "<group>"; };
 		FAF76FA27E4A9EEB7DA638AA216A61C0 /* Pods-HGPersonalCenterExtend-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-HGPersonalCenterExtend-frameworks.sh"; sourceTree = "<group>"; };
 		FCD06D85E8AF8270CD01628718B95E34 /* MASViewAttribute.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASViewAttribute.h; path = Masonry/MASViewAttribute.h; sourceTree = "<group>"; };
 		FD2EC1A12B9DB95983C8CD52FBCFC684 /* MASViewConstraint.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASViewConstraint.m; path = Masonry/MASViewConstraint.m; sourceTree = "<group>"; };
 		FD8B6F9CA7B5D84B7ACCF54B34976A37 /* HGCategoryView-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "HGCategoryView-prefix.pch"; sourceTree = "<group>"; };
+		FE59A67F63AB2A1D1D8194BF9D164AA4 /* HGPersonalCenterExtend.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = HGPersonalCenterExtend.modulemap; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -269,14 +269,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		4E01D19F1EE50F434C2BF11C8FD6C1FB /* Frameworks */ = {
+		64C53D903C0CFAE6A7626AB30F445C15 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4BD328153D7DD1BA460492FE545C9489 /* Foundation.framework in Frameworks */,
-				9C94C259E2E7AC46FC4D66D7E9036A23 /* HGCategoryView.framework in Frameworks */,
-				12582879769ABF118181EAB13D0FE814 /* Masonry.framework in Frameworks */,
-				55DBF9095E91F937F88E4F770B17A80B /* UIKit.framework in Frameworks */,
+				595C249FCFA66605173426C7B77A819D /* Foundation.framework in Frameworks */,
+				95FD71041416BFA6434EAC8863E5EE52 /* HGCategoryView.framework in Frameworks */,
+				F8AC4C8518C3226CF09ED5D17E735FCF /* Masonry.framework in Frameworks */,
+				0DD27CFE307F7E8559CA31F3F51EEC83 /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -326,6 +326,7 @@
 				3284F2F5CFF2A7F3E5DFDC44647C56C2 /* HGCategoryView.m */,
 				D78A9C5DBE099F31692263A2E589D495 /* Support Files */,
 			);
+			name = HGCategoryView;
 			path = HGCategoryView;
 			sourceTree = "<group>";
 		};
@@ -359,6 +360,7 @@
 				D8428F971272BCF83EEC088DBEAEEDB8 /* ViewController+MASAdditions.m */,
 				52DC4AC5FA99E531BFE70438AEC40655 /* Support Files */,
 			);
+			name = Masonry;
 			path = Masonry;
 			sourceTree = "<group>";
 		};
@@ -369,6 +371,7 @@
 				18F5A3A69F1A95661B4DF8FA59DE0637 /* UINavigationController+FDFullscreenPopGesture.m */,
 				746B4401C09D31902BB19B358A1160C6 /* Support Files */,
 			);
+			name = FDFullscreenPopGesture;
 			path = FDFullscreenPopGesture;
 			sourceTree = "<group>";
 		};
@@ -381,16 +384,6 @@
 				D110625224F60D3B52DE8B76C346C953 /* RTRootNavigationController */,
 			);
 			name = Pods;
-			sourceTree = "<group>";
-		};
-		27198086A6CE219AC25EF03F99F3E62D /* Pod */ = {
-			isa = PBXGroup;
-			children = (
-				CAA8EFC39DA34A573C16B8D5589A5523 /* HGPersonalCenterExtend.podspec */,
-				DBD1E8B4F9ADA87FB58B34711778A742 /* LICENSE */,
-				33CD60D73BAD3C5D4DFE61FAB86C121F /* README.md */,
-			);
-			name = Pod;
 			sourceTree = "<group>";
 		};
 		287B91E2C9334B65884A7BB483A4DBB4 /* Pods-HGPersonalCenterExtend_Tests */ = {
@@ -409,20 +402,6 @@
 			path = "Target Support Files/Pods-HGPersonalCenterExtend_Tests";
 			sourceTree = "<group>";
 		};
-		4510BD8C4E1D638724BEDE2BEF1B7B79 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				539318005DA9529ECAD0449EE2DAA44B /* HGPersonalCenterExtend.modulemap */,
-				19072A7223D2645B3C1C202D8BC61C4A /* HGPersonalCenterExtend.xcconfig */,
-				E5E69BAD77335D250957790E7E863810 /* HGPersonalCenterExtend-dummy.m */,
-				F6674A9A217BAE35829B1AF153C8D7FF /* HGPersonalCenterExtend-Info.plist */,
-				8FEA37914A593CA651287A927971D355 /* HGPersonalCenterExtend-prefix.pch */,
-				CAC2F07F35BDCA04C65D002AD92703AB /* HGPersonalCenterExtend-umbrella.h */,
-			);
-			name = "Support Files";
-			path = "Example/Pods/Target Support Files/HGPersonalCenterExtend";
-			sourceTree = "<group>";
-		};
 		52DC4AC5FA99E531BFE70438AEC40655 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -435,6 +414,14 @@
 			);
 			name = "Support Files";
 			path = "../Target Support Files/Masonry";
+			sourceTree = "<group>";
+		};
+		68EFB4EF271FED8CA08A983350FB44DC /* Development Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C279FC36A3802BD8C74966D9BA94878A /* HGPersonalCenterExtend */,
+			);
+			name = "Development Pods";
 			sourceTree = "<group>";
 		};
 		746B4401C09D31902BB19B358A1160C6 /* Support Files */ = {
@@ -474,25 +461,6 @@
 			name = iOS;
 			sourceTree = "<group>";
 		};
-		A79B2BA0FFA30292FB71F94732508A47 /* HGPersonalCenterExtend */ = {
-			isa = PBXGroup;
-			children = (
-				8E0B33530E9CD655394FC7DF26914A31 /* HGCenterBaseTableView.h */,
-				3A300797AEBB7ADB9E2E9954A6EEEAD4 /* HGCenterBaseTableView.m */,
-				FA70D60313F81BFDF56A690DBC99E2C2 /* HGPageViewController.h */,
-				719837A66FAD541CC805D8977B1FC27F /* HGPageViewController.m */,
-				D2EF94C814381115C28FF84E5466F60B /* HGPersonalCenterExtend.h */,
-				C0CD1E30D5322892F8D3861320B4FC58 /* HGPopGestureCompatibleScrollView.h */,
-				5E7570BDB845DCB47F8B8DE49BAAFF70 /* HGPopGestureCompatibleScrollView.m */,
-				8BA1D28552B03A4EDCB2B442E9E87F51 /* HGSegmentedPageViewController.h */,
-				AA827219A5B90BD3BC73044DE4546116 /* HGSegmentedPageViewController.m */,
-				27198086A6CE219AC25EF03F99F3E62D /* Pod */,
-				4510BD8C4E1D638724BEDE2BEF1B7B79 /* Support Files */,
-			);
-			name = HGPersonalCenterExtend;
-			path = ../..;
-			sourceTree = "<group>";
-		};
 		AF49D7CEC36753C684E6B2C7676DB109 /* Core */ = {
 			isa = PBXGroup;
 			children = (
@@ -521,6 +489,25 @@
 			path = "Target Support Files/Pods-HGPersonalCenterExtend";
 			sourceTree = "<group>";
 		};
+		C279FC36A3802BD8C74966D9BA94878A /* HGPersonalCenterExtend */ = {
+			isa = PBXGroup;
+			children = (
+				3B7C703F5666A675302C26908737D8DF /* HGCenterBaseTableView.h */,
+				24F0213BF8629BCB7368C32D85AC011A /* HGCenterBaseTableView.m */,
+				6C2A77267AE8E84F32C7116423D5886A /* HGPageViewController.h */,
+				9E857D429B45954667E81C5DF717493E /* HGPageViewController.m */,
+				D7528363D9E2C4EB5A2E71F4F66963B2 /* HGPersonalCenterExtend.h */,
+				BF7C6023A89776FC5BD08252EBFF5EAF /* HGPopGestureCompatibleScrollView.h */,
+				61F1F380E9FFFF098D8F3CAA6FCBA42A /* HGPopGestureCompatibleScrollView.m */,
+				21A73637F22733FD3B15F7085F28C7FA /* HGSegmentedPageViewController.h */,
+				59CB36CBBB34A7E56FE8E243F58D0687 /* HGSegmentedPageViewController.m */,
+				D55106E5EEBF6F254CBB65280A5CE71C /* Pod */,
+				E6B4DA07A6324705946FE68519149CE2 /* Support Files */,
+			);
+			name = HGPersonalCenterExtend;
+			path = ../..;
+			sourceTree = "<group>";
+		};
 		CD36CF1028913F30A4A0D3BA3F85D298 /* Targets Support Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -534,20 +521,12 @@
 			isa = PBXGroup;
 			children = (
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
-				D0954E7F53577AF42C68685282F96B33 /* Development Pods */,
+				68EFB4EF271FED8CA08A983350FB44DC /* Development Pods */,
 				F00FF0B2E54AC1B790B4045706129182 /* Frameworks */,
 				1F28C03AB697EF25AE304A05183D23BF /* Pods */,
 				D5E12B180F4DADA00787814D7C684EA3 /* Products */,
 				CD36CF1028913F30A4A0D3BA3F85D298 /* Targets Support Files */,
 			);
-			sourceTree = "<group>";
-		};
-		D0954E7F53577AF42C68685282F96B33 /* Development Pods */ = {
-			isa = PBXGroup;
-			children = (
-				A79B2BA0FFA30292FB71F94732508A47 /* HGPersonalCenterExtend */,
-			);
-			name = "Development Pods";
 			sourceTree = "<group>";
 		};
 		D110625224F60D3B52DE8B76C346C953 /* RTRootNavigationController */ = {
@@ -556,7 +535,18 @@
 				AF49D7CEC36753C684E6B2C7676DB109 /* Core */,
 				8B7BF9A38756BA95C4F75D2A8C40C34F /* Support Files */,
 			);
+			name = RTRootNavigationController;
 			path = RTRootNavigationController;
+			sourceTree = "<group>";
+		};
+		D55106E5EEBF6F254CBB65280A5CE71C /* Pod */ = {
+			isa = PBXGroup;
+			children = (
+				3E885B7E8401125223BDF7BF29147FAB /* HGPersonalCenterExtend.podspec */,
+				1E0A9977DD33C3DA567CD9CF8CD030B2 /* LICENSE */,
+				261CEB87B1ACE6A15EA4234479597F5D /* README.md */,
+			);
+			name = Pod;
 			sourceTree = "<group>";
 		};
 		D5E12B180F4DADA00787814D7C684EA3 /* Products */ = {
@@ -587,6 +577,20 @@
 			path = "../Target Support Files/HGCategoryView";
 			sourceTree = "<group>";
 		};
+		E6B4DA07A6324705946FE68519149CE2 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				FE59A67F63AB2A1D1D8194BF9D164AA4 /* HGPersonalCenterExtend.modulemap */,
+				6CD93C852436A660E4454F09F758DA5D /* HGPersonalCenterExtend.xcconfig */,
+				D11840B84D5CF8E01D15CB15985A992B /* HGPersonalCenterExtend-dummy.m */,
+				1A0E655B328F695DF40CBE0612D777E2 /* HGPersonalCenterExtend-Info.plist */,
+				B155F7C1F3DA68A810AC2F441F7E0DCF /* HGPersonalCenterExtend-prefix.pch */,
+				A578F56AE2BDDFBB614509B794BF10AC /* HGPersonalCenterExtend-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "Example/Pods/Target Support Files/HGPersonalCenterExtend";
+			sourceTree = "<group>";
+		};
 		F00FF0B2E54AC1B790B4045706129182 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -600,19 +604,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		39A99C66AF800F87DEE6C2884E576987 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				010C0112EB0C4AC1BC27B05DE634A47E /* HGCenterBaseTableView.h in Headers */,
-				9B4DAC6856FC4042752E0420F093B0C5 /* HGPageViewController.h in Headers */,
-				EB2B4E0E95E76F1C38924D25AF4D25D3 /* HGPersonalCenterExtend-umbrella.h in Headers */,
-				5F2C05B436018735CA299CD17BF12D65 /* HGPersonalCenterExtend.h in Headers */,
-				61A152B117D41B23430E07680BB8ED23 /* HGPopGestureCompatibleScrollView.h in Headers */,
-				54886D8692FFC5341036B1027589226C /* HGSegmentedPageViewController.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		3DB62C32F23098E065ED90D6175D3FEC /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -669,6 +660,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				9E2ED22C3313958D0BEC67AE62173C03 /* Pods-HGPersonalCenterExtend_Tests-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EA0ABC369A7675C1121F0DCEBE8B6B43 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				30E157B5FB72E76A4AAB5E08632A7011 /* HGCenterBaseTableView.h in Headers */,
+				F102D5259A80AF71AA50F777A7093FFD /* HGPageViewController.h in Headers */,
+				6649140A4D74CC027CA56BA9CFF999EA /* HGPersonalCenterExtend-umbrella.h in Headers */,
+				12A3D62DD6CD9F601C27015858C7DD67 /* HGPersonalCenterExtend.h in Headers */,
+				F3E2761A259FBEF4F1F5FA1878CE5DAF /* HGPopGestureCompatibleScrollView.h in Headers */,
+				FFFB0EEB3EBD12434B6FCF2FC1DF858C /* HGSegmentedPageViewController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -781,18 +785,18 @@
 		};
 		BEA6A7C5A8B97B93098D507B7B04D84A /* HGPersonalCenterExtend */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 28376F8DD243398CB55ECAF3073061F0 /* Build configuration list for PBXNativeTarget "HGPersonalCenterExtend" */;
+			buildConfigurationList = 355F12E0F684FFA67DA2F5E8793E3BCE /* Build configuration list for PBXNativeTarget "HGPersonalCenterExtend" */;
 			buildPhases = (
-				39A99C66AF800F87DEE6C2884E576987 /* Headers */,
-				73674D952D33E17FAFD2E18E1B224D2D /* Sources */,
-				4E01D19F1EE50F434C2BF11C8FD6C1FB /* Frameworks */,
-				1359C9F7BF7497DDA1546B7293A35248 /* Resources */,
+				EA0ABC369A7675C1121F0DCEBE8B6B43 /* Headers */,
+				68A886F94E22116CE2A6CC72AFF238D8 /* Sources */,
+				64C53D903C0CFAE6A7626AB30F445C15 /* Frameworks */,
+				B04699D3576236A541C31E8149CABC01 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				9DEC8882A37A9312F2D21E067B016840 /* PBXTargetDependency */,
-				99F6AAA0C6E48AECCB834613D24A0675 /* PBXTargetDependency */,
+				877F4218772C63BC5A31AF111E674C7B /* PBXTargetDependency */,
+				2BDA733084559885645550781BD1A687 /* PBXTargetDependency */,
 			);
 			name = HGPersonalCenterExtend;
 			productName = HGPersonalCenterExtend;
@@ -858,13 +862,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1359C9F7BF7497DDA1546B7293A35248 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		1BA8ADBE364FC17DBA51E5537C21CDE7 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -900,6 +897,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B04699D3576236A541C31E8149CABC01 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -929,23 +933,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		68A886F94E22116CE2A6CC72AFF238D8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2D807302FEF3BABA32C75E0120F707DA /* HGCenterBaseTableView.m in Sources */,
+				5DB9CD8C97F9D02159340620381236C8 /* HGPageViewController.m in Sources */,
+				0E660D3F2AE3E7F4FE375B8E9838EFD4 /* HGPersonalCenterExtend-dummy.m in Sources */,
+				8A580CABD213E83478C8ECB2B11039CE /* HGPopGestureCompatibleScrollView.m in Sources */,
+				AD29D24C88EEC9716A1E1CA92563507B /* HGSegmentedPageViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		707478BFD3049D94A1C9204BDEBFA7D5 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				38DF4D9EE0D4A424A88FF97154E97089 /* Pods-HGPersonalCenterExtend_Tests-dummy.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		73674D952D33E17FAFD2E18E1B224D2D /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				F806539376FD046CA80B096F933DCC3A /* HGCenterBaseTableView.m in Sources */,
-				49493859D46369361F9470BDCD5A811D /* HGPageViewController.m in Sources */,
-				36586A012386DFB23CC1B7EF9B663379 /* HGPersonalCenterExtend-dummy.m in Sources */,
-				81B4764E7962542EA83772A6C9DE2639 /* HGPopGestureCompatibleScrollView.m in Sources */,
-				A125AC08934E6B5E8C55668DC0A4B50E /* HGSegmentedPageViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -986,6 +990,12 @@
 			target = FF2AA169A94910901058A8AADDAF9835 /* HGCategoryView */;
 			targetProxy = 71491E6299048D6D48C9EBF72F6DB975 /* PBXContainerItemProxy */;
 		};
+		2BDA733084559885645550781BD1A687 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Masonry;
+			target = 55AF53E6C77A10ED4985E04D74A8878E /* Masonry */;
+			targetProxy = 8282F2C60E15250D4EE9BC7C7DA00FCE /* PBXContainerItemProxy */;
+		};
 		301C4700DA08CA4D4BCB9BEA5812BD2D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = FDFullscreenPopGesture;
@@ -1010,17 +1020,11 @@
 			target = BEA6A7C5A8B97B93098D507B7B04D84A /* HGPersonalCenterExtend */;
 			targetProxy = B6D453B18E1ADB03408858F6AC53EE2B /* PBXContainerItemProxy */;
 		};
-		99F6AAA0C6E48AECCB834613D24A0675 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = Masonry;
-			target = 55AF53E6C77A10ED4985E04D74A8878E /* Masonry */;
-			targetProxy = A89FA4A922E20456958355B174E7B02C /* PBXContainerItemProxy */;
-		};
-		9DEC8882A37A9312F2D21E067B016840 /* PBXTargetDependency */ = {
+		877F4218772C63BC5A31AF111E674C7B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = HGCategoryView;
 			target = FF2AA169A94910901058A8AADDAF9835 /* HGCategoryView */;
-			targetProxy = FF3647062EFDC080346456A34C4E8C1D /* PBXContainerItemProxy */;
+			targetProxy = 3064886D459BD17AAE04C06A3B4E7A3C /* PBXContainerItemProxy */;
 		};
 		E6F348C2BC8B7FD6C10A222699048FF7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1132,6 +1136,37 @@
 			};
 			name = Release;
 		};
+		41FA4F6752526BAFEF7057AFB8AEA582 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6CD93C852436A660E4454F09F758DA5D /* HGPersonalCenterExtend.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/HGPersonalCenterExtend/HGPersonalCenterExtend-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/HGPersonalCenterExtend/HGPersonalCenterExtend-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/HGPersonalCenterExtend/HGPersonalCenterExtend.modulemap";
+				PRODUCT_MODULE_NAME = HGPersonalCenterExtend;
+				PRODUCT_NAME = HGPersonalCenterExtend;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		4BE66A09A74FD25164AAB3C2645B9B93 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1185,7 +1220,8 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				SYMROOT = "${SRCROOT}/../build";
 			};
@@ -1273,36 +1309,6 @@
 				MODULEMAP_FILE = "Target Support Files/HGCategoryView/HGCategoryView.modulemap";
 				PRODUCT_MODULE_NAME = HGCategoryView;
 				PRODUCT_NAME = HGCategoryView;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		70C6486EDA60F5D1EDBDA5C06789DC1D /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 19072A7223D2645B3C1C202D8BC61C4A /* HGPersonalCenterExtend.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/HGPersonalCenterExtend/HGPersonalCenterExtend-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/HGPersonalCenterExtend/HGPersonalCenterExtend-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/HGPersonalCenterExtend/HGPersonalCenterExtend.modulemap";
-				PRODUCT_MODULE_NAME = HGPersonalCenterExtend;
-				PRODUCT_NAME = HGPersonalCenterExtend;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
@@ -1501,9 +1507,9 @@
 			};
 			name = Release;
 		};
-		D6CE941B67C8A32F54D237451B889BC6 /* Release */ = {
+		CDEC118A3FD60D3B5793FE4A2C24A18C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 19072A7223D2645B3C1C202D8BC61C4A /* HGPersonalCenterExtend.xcconfig */;
+			baseConfigurationReference = 6CD93C852436A660E4454F09F758DA5D /* HGPersonalCenterExtend.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -1526,11 +1532,10 @@
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Release;
+			name = Debug;
 		};
 		DF0A49BB9F5B12B6ECC4DDC8B43A7DC7 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -1602,20 +1607,20 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		28376F8DD243398CB55ECAF3073061F0 /* Build configuration list for PBXNativeTarget "HGPersonalCenterExtend" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				70C6486EDA60F5D1EDBDA5C06789DC1D /* Debug */,
-				D6CE941B67C8A32F54D237451B889BC6 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		28CA1533D2586BA4137DFBDEFDD17D11 /* Build configuration list for PBXNativeTarget "FDFullscreenPopGesture" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5DB1C4BF1F08ED36FEDEEA2164BCC4D8 /* Debug */,
 				A6DFB58FD3673EBD38959B2A4BEC73EF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		355F12E0F684FFA67DA2F5E8793E3BCE /* Build configuration list for PBXNativeTarget "HGPersonalCenterExtend" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CDEC118A3FD60D3B5793FE4A2C24A18C /* Debug */,
+				41FA4F6752526BAFEF7057AFB8AEA582 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
