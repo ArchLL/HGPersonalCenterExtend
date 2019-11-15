@@ -1,13 +1,13 @@
 //
-//  HGPopGestureCompatibleScrollView.m
+//  HGPopGestureCompatibleCollectionView.m
 //  HGPersonalCenterExtend
 //
-//  Created by Arch on 2019/5/16.
+//  Created by Arch on 2019/11/14.
 //
 
-#import "HGPopGestureCompatibleScrollView.h"
+#import "HGPopGestureCompatibleCollectionView.h"
 
-@implementation HGPopGestureCompatibleScrollView
+@implementation HGPopGestureCompatibleCollectionView
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
     if (self.contentOffset.x <= 0) {

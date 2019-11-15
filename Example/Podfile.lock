@@ -1,9 +1,9 @@
 PODS:
   - FDFullscreenPopGesture (1.1)
-  - HGCategoryView (1.1.0):
+  - HGCategoryView (1.1.1):
     - Masonry (~> 1.1.0)
-  - HGPersonalCenterExtend (1.2.0):
-    - HGCategoryView (~> 1.1.0)
+  - HGPersonalCenterExtend (1.2.1):
+    - HGCategoryView (~> 1.1.1)
     - Masonry (~> 1.1.0)
   - Masonry (1.1.0)
   - RTRootNavigationController (0.7.2):
@@ -28,8 +28,8 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   FDFullscreenPopGesture: a8a620179e3d9c40e8e00256dcee1c1a27c6d0f0
-  HGCategoryView: 6e6efd5c3bdde72e29125d7dced5395ccd374c6f
-  HGPersonalCenterExtend: 7a8978a8dc5526993955a4d45381fdaec4efb22c
+  HGCategoryView: 4f334149d198e256bd764d4c860eb79982061dc1
+  HGPersonalCenterExtend: 104a0bc715e50e613eb22f4e31f63742b025c6e1
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   RTRootNavigationController: 8344c2352d6d40fa370d0366efae2c84a945213f
 

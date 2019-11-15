@@ -12,6 +12,7 @@
 #import "HGCenterBaseTableView.h"
 #import "HGCategoryView.h"
 #import "HGPageViewController.h"
+#import "HGPagesViewController.h"
 #import "HGSegmentedPageViewController.h"
 
 #endif /* HGPersonalCenterExtend_h */

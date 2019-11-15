@@ -11,9 +11,10 @@
 #endif
 
 #import "HGCenterBaseTableView.h"
+#import "HGPagesViewController.h"
 #import "HGPageViewController.h"
 #import "HGPersonalCenterExtend.h"
-#import "HGPopGestureCompatibleScrollView.h"
+#import "HGPopGestureCompatibleCollectionView.h"
 #import "HGSegmentedPageViewController.h"
 
 FOUNDATION_EXPORT double HGPersonalCenterExtendVersionNumber;
