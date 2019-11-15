@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'HGPersonalCenterExtend'
-  s.version          = '1.2.1'
+  s.version          = '1.2.2'
   s.license          = 'MIT'
   s.summary          = 'Resolve scrollView nested sliding conflicts.'
   s.description      = %{

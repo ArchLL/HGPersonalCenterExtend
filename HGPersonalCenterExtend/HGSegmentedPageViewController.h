@@ -14,6 +14,7 @@
 @optional
 - (void)segmentedPageViewControllerWillBeginDragging;
 - (void)segmentedPageViewControllerDidEndDragging;
+- (void)segmentedPageViewControllerWillTransitionToPage:(NSInteger)page;
 - (void)segmentedPageViewControllerDidTransitionToPage:(NSInteger)page;
 @end
 

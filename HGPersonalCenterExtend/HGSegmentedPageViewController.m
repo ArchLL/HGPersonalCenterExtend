@@ -80,6 +80,12 @@
     [self.categoryView scrollToTargetIndex:targetPage sourceIndex:sourcePage percent:percent];
 }
 
+- (void)pagesViewControllerWillTransitionToPage:(NSInteger)page {
+    if ([self.delegate respondsToSelector:@selector(segmentedPageViewControllerWillTransitionToPage:)]) {
+        [self.delegate segmentedPageViewControllerWillTransitionToPage:page];
+    }
+}
+
 - (void)pagesViewControllerDidTransitionToPage:(NSInteger)page {
     if ([self.delegate respondsToSelector:@selector(segmentedPageViewControllerDidTransitionToPage:)]) {
         [self.delegate segmentedPageViewControllerDidTransitionToPage:page];
