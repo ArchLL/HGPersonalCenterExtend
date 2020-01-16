@@ -12,7 +12,6 @@ static NSString *const ThirdViewControllerCollectionViewCellIdentifier = @"Third
 
 @interface HGThirdViewController () <UICollectionViewDelegate, UICollectionViewDataSource>
 @property (nonatomic, strong) UICollectionView * collectionView;
-
 @end
 
 @implementation HGThirdViewController
@@ -54,7 +53,7 @@ static NSString *const ThirdViewControllerCollectionViewCellIdentifier = @"Third
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flowLayout];
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
-        //解决categoryView在吸顶状态下，且collectionView的显示内容不满屏时，出现竖直方向滑动失效的问题
+        // 解决categoryView在吸顶状态下，且collectionView的显示内容不满屏时，出现竖直方向滑动失效的问题
         _collectionView.alwaysBounceVertical = YES;
         _collectionView.backgroundColor = [UIColor whiteColor];
         [_collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:ThirdViewControllerCollectionViewCellIdentifier];

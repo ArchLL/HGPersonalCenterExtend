@@ -75,9 +75,9 @@
 }
 
 #pragma mark - Setters
-- (void)setIsHiddenBottomBorder:(BOOL)isHiddenBottomBorder {
-    _isHiddenBottomBorder = isHiddenBottomBorder;
-    if (self.isHiddenBottomBorder) {
+- (void)setIsHiddenNavigationBarBottomBorder:(BOOL)isHiddenNavigationBarBottomBorder {
+    _isHiddenNavigationBarBottomBorder = isHiddenNavigationBarBottomBorder;
+    if (self.isHiddenNavigationBarBottomBorder) {
         [self.navigationController.navigationBar setShadowImage:[UIImage new]];
     } else {
         [self.navigationController.navigationBar setShadowImage:self.navigationBarOriginShadowImage];

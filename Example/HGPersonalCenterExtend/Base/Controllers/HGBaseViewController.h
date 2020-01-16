@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface HGBaseViewController : UIViewController
 @property (nonatomic) BOOL isHideStatusBar;
-@property (nonatomic) BOOL isHiddenBottomBorder;
+@property (nonatomic) BOOL isHiddenNavigationBarBottomBorder;
 
 - (void)setNavigationBarAlpha:(CGFloat)alpha;
 @end

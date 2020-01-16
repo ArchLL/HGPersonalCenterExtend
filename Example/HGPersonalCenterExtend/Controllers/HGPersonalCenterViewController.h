@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HGNestedScrollViewController.h"
 
-@interface HGPersonalCenterViewController : HGBaseViewController
+@interface HGPersonalCenterViewController : HGNestedScrollViewController
 @property (nonatomic, assign) NSUInteger selectedIndex;
 @end

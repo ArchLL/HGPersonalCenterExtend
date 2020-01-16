@@ -13,18 +13,10 @@
 #import "HGSecondViewController.h"
 #import "HGThirdViewController.h"
 #import "HGMessageViewController.h"
-#import "HGPersonalCenterExtend.h"
 
-CGFloat const headerViewHeight = 240;
-
-@interface HGPersonalCenterViewController () <UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate, HGSegmentedPageViewControllerDelegate, HGPageViewControllerDelegate>
+@interface HGPersonalCenterViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) HGAlignmentAdjustButton *messageButton;
-@property (nonatomic, strong) HGCenterBaseTableView *tableView;
 @property (nonatomic, strong) HGPersonalCenterHeaderView *headerView;
-@property (nonatomic, strong) UIView *footerView;
-@property (nonatomic, strong) HGSegmentedPageViewController *segmentedPageViewController;
-@property (nonatomic) BOOL cannotScroll;
-
 @end
 
 @implementation HGPersonalCenterViewController
@@ -32,45 +24,35 @@ CGFloat const headerViewHeight = 240;
 #pragma mark - Life Cycles
 - (void)viewDidLoad {
     [super viewDidLoad];
-    if (@available(iOS 11.0, *)) {
-        [[UIScrollView appearance] setContentInsetAdjustmentBehavior:UIScrollViewContentInsetAdjustmentNever];
-    } else {
-        self.automaticallyAdjustsScrollViewInsets = NO;
-    }
-    //解决pop手势中断后tableView偏移问题
-    self.extendedLayoutIncludesOpaqueBars = YES;
-    
     [self setupNavigationBar];
-    [self setupSubViews];
-    //可以在请求数据成功后设置/改变pageViewControllers, 但是要保证titles.count=pageViewControllers.count
+    [self setupTableView];
+    // 也可以在请求数据成功后设置pageViewControllers
     [self setupPageViewControllers];
 }
 
 #pragma mark - Private Methods
 - (void)setupNavigationBar {
-    self.isHiddenBottomBorder = YES;
+    self.isHiddenNavigationBarBottomBorder = YES;
     [self setNavigationBarAlpha:0];
-    
     UIBarButtonItem *messageItem = [[UIBarButtonItem alloc] initWithCustomView:self.messageButton];
     self.navigationItem.rightBarButtonItem = messageItem;
 }
 
-- (void)setupSubViews {
-    [self.view addSubview:self.tableView];
-    [self addChildViewController:self.segmentedPageViewController];
-    [self.footerView addSubview:self.segmentedPageViewController.view];
-    [self.segmentedPageViewController didMoveToParentViewController:self];
-    
-    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.view);
-    }];
-    [self.segmentedPageViewController.view mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.footerView);
-    }];
+- (void)viewMessage {
+    HGMessageViewController *vc = [[HGMessageViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)setupTableView {
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    self.tableView.tableHeaderView = self.headerView;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.showsVerticalScrollIndicator = NO;
+    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([HGDoraemonCell class]) bundle:nil] forCellReuseIdentifier:NSStringFromClass([HGDoraemonCell class])];
 }
 
 /**设置segmentedPageViewController的pageViewControllers和categoryView
- * 这里可以对categoryView进行自定义，包括分布方式(左、中、右)、高度、背景颜色、字体颜色、字体大小、下划线高度和颜色等
  * 这里用到的pageViewController需要继承自HGPageViewController
  */
 - (void)setupPageViewControllers {
@@ -88,74 +70,13 @@ CGFloat const headerViewHeight = 240;
         controller.delegate = self;
         [controllers addObject:controller];
     }
-    _segmentedPageViewController.pageViewControllers = controllers;
-    _segmentedPageViewController.categoryView.backgroundColor = [UIColor yellowColor];
-    _segmentedPageViewController.categoryView.titles = titles;
-    _segmentedPageViewController.categoryView.alignment = HGCategoryViewAlignmentLeft;
-    _segmentedPageViewController.categoryView.originalIndex = self.selectedIndex;
-    _segmentedPageViewController.categoryView.itemSpacing = 30;
-}
-
-- (void)changeNavigationBarAlpha {
-    CGFloat alpha = 0;
-    if (self.tableView.contentOffset.y - (headerViewHeight - TOP_BAR_HEIGHT) < FLT_EPSILON) {
-        alpha = self.tableView.contentOffset.y / (headerViewHeight - TOP_BAR_HEIGHT);
-    } else {
-        alpha = 1;
-    }
-    [self setNavigationBarAlpha:alpha];
-}
-
-- (void)viewMessage {
-    HGMessageViewController *vc = [[HGMessageViewController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
-}
-
-#pragma mark - UIScrollViewDelegate
-- (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView {
-    [self.segmentedPageViewController makePageViewControllersScrollToTop];
-    return YES;
-}
-
-/**
- * 处理联动
- */
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    //第一部分：更改导航栏颜色
-    [self changeNavigationBarAlpha];
-    
-    //第二部分：处理scrollView滑动冲突
-    CGFloat contentOffsetY = scrollView.contentOffset.y;
-    //吸顶临界点(此时的临界点不是视觉感官上导航栏的底部，而是当前屏幕的顶部相对scrollViewContentView的位置)
-    //如果底部存在TabBar/ToolBar, 还需要减去TabBarHeight/ToolBarHeight(自定义的Bar)和SAFE_AREA_INSERTS_BOTTOM
-    CGFloat criticalPointOffsetY = scrollView.contentSize.height - SCREEN_HEIGHT;
-    
-    // 利用contentOffset处理内外层scrollView的滑动冲突问题
-    if (contentOffsetY - criticalPointOffsetY >= FLT_EPSILON) {
-        /*
-         * 到达临界点：
-         * 1.未吸顶状态 -> 吸顶状态
-         * 2.维持吸顶状态 (pageViewController.scrollView.contentOffsetY > 0)
-         */
-        //“进入吸顶状态”以及“维持吸顶状态”
-        self.cannotScroll = YES;
-        scrollView.contentOffset = CGPointMake(0, criticalPointOffsetY);
-        [self.segmentedPageViewController makePageViewControllersScrollState:YES];
-    } else {
-        /*
-         * 未达到临界点：
-         * 1.维持吸顶状态 (pageViewController.scrollView.contentOffsetY > 0)
-         * 2.吸顶状态 -> 不吸顶状态
-         */
-        if (self.cannotScroll) {
-            //“维持吸顶状态”
-            scrollView.contentOffset = CGPointMake(0, criticalPointOffsetY);
-        } else {
-            /* 吸顶状态 -> 不吸顶状态
-             * categoryView的子控制器的tableView或collectionView在竖直方向上的contentOffsetY小于等于0时，会通过代理的方式改变当前控制器self.canScroll的值；
-             */
-        }
-    }
+    self.segmentedPageViewController.pageViewControllers = controllers;
+    // 设置categoryView的样式，可以自定义分布方式(左、中、右)、高度、背景颜色、字体颜色、字体大小、下划线高度和颜色等
+    self.segmentedPageViewController.categoryView.backgroundColor = [UIColor yellowColor];
+    self.segmentedPageViewController.categoryView.titles = titles;
+    self.segmentedPageViewController.categoryView.alignment = HGCategoryViewAlignmentLeft;
+    self.segmentedPageViewController.categoryView.originalIndex = self.selectedIndex;
+    self.segmentedPageViewController.categoryView.itemSpacing = 30;
 }
 
 #pragma mark - UITableViewDataSource
@@ -199,22 +120,7 @@ CGFloat const headerViewHeight = 240;
     return CGFLOAT_MIN;
 }
 
-#pragma mark - HGSegmentedPageViewControllerDelegate
-- (void)segmentedPageViewControllerWillBeginDragging {
-    self.tableView.scrollEnabled = NO;
-}
-
-- (void)segmentedPageViewControllerDidEndDragging {
-    self.tableView.scrollEnabled = YES;
-}
-
-#pragma mark - HGPageViewControllerDelegate
-- (void)pageViewControllerLeaveTop {
-    [self.segmentedPageViewController makePageViewControllersScrollToTop];
-    self.cannotScroll = NO;
-}
-
-#pragma mark - Lazy
+#pragma mark - Getters
 - (HGAlignmentAdjustButton *)messageButton {
     if (!_messageButton) {
         _messageButton = [HGAlignmentAdjustButton buttonWithType:UIButtonTypeCustom];
@@ -229,39 +135,9 @@ CGFloat const headerViewHeight = 240;
 
 - (HGPersonalCenterHeaderView *)headerView {
     if (!_headerView) {
-        _headerView = [[HGPersonalCenterHeaderView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, headerViewHeight)];
+        _headerView = [[HGPersonalCenterHeaderView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 240)];
     }
     return _headerView;
-}
-
-- (UIView *)footerView {
-    if (!_footerView) {
-        //如果当前控制器存在TabBar/ToolBar, 还需要减去TabBarHeight/ToolBarHeight(自定义的Bar)和SAFE_AREA_INSERTS_BOTTOM
-        _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - TOP_BAR_HEIGHT)];
-    }
-    return _footerView;
-}
-
-- (UITableView *)tableView {
-    if (!_tableView) {
-        _tableView = [[HGCenterBaseTableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
-        _tableView.delegate = self;
-        _tableView.dataSource = self;
-        _tableView.tableHeaderView = self.headerView;
-        _tableView.tableFooterView = self.footerView;
-        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        _tableView.showsVerticalScrollIndicator = NO;
-        [_tableView registerNib:[UINib nibWithNibName:NSStringFromClass([HGDoraemonCell class]) bundle:nil] forCellReuseIdentifier:NSStringFromClass([HGDoraemonCell class])];
-    }
-    return _tableView;
-}
-
-- (HGSegmentedPageViewController *)segmentedPageViewController {
-    if (!_segmentedPageViewController) {
-        _segmentedPageViewController = [[HGSegmentedPageViewController alloc] init];
-        _segmentedPageViewController.delegate = self;
-    }
-    return _segmentedPageViewController;
 }
 
 @end

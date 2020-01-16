@@ -30,12 +30,12 @@
 		A98C56CB21F5823200054CC1 /* HGDoraemonCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A98C56BD21F5823200054CC1 /* HGDoraemonCollectionViewCell.xib */; };
 		A98C56D121F5936F00054CC1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A98C56CD21F5936E00054CC1 /* Main.storyboard */; };
 		A98C56D221F5936F00054CC1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A98C56CF21F5936E00054CC1 /* LaunchScreen.storyboard */; };
-		A98C56D421F5947700054CC1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A98C56D321F5947700054CC1 /* main.m */; };
+		A9D9AEB323D012DF000547FC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A9D9AEB223D012DF000547FC /* main.m */; };
+		A9D9AEBB23D01D85000547FC /* HGNestedScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9D9AEBA23D01D85000547FC /* HGNestedScrollViewController.m */; };
 		A9FB4EF4228BAB9200525B36 /* HGBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9FB4EF3228BAB9200525B36 /* HGBaseViewController.m */; };
 		A9FB4EFD228BFCEE00525B36 /* HGAlignmentAdjustButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A9FB4EFC228BFCEE00525B36 /* HGAlignmentAdjustButton.m */; };
 		A9FB4F03228C05D900525B36 /* HGMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9FB4F02228C05D900525B36 /* HGMessageViewController.m */; };
 		A9FB4F07228C11E700525B36 /* HGDeviceHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A9FB4F06228C11E700525B36 /* HGDeviceHelper.m */; };
-		A9FB4F22228DC9FA00525B36 /* HGPopGestureCompatibleCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = A9FB4F21228DC9FA00525B36 /* HGPopGestureCompatibleCollectionView.m */; };
 		E2B4BA8646B9B701839A1CD9 /* Pods_HGPersonalCenterExtend_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85FA8F708C833A0CDA1BBEB0 /* Pods_HGPersonalCenterExtend_Tests.framework */; };
 /* End PBXBuildFile section */
 
@@ -83,7 +83,6 @@
 		A98C56B121F5823200054CC1 /* HGHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HGHomeViewController.m; sourceTree = "<group>"; };
 		A98C56B221F5823200054CC1 /* HGPersonalCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HGPersonalCenterViewController.h; sourceTree = "<group>"; };
 		A98C56B321F5823200054CC1 /* HGHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HGHomeViewController.h; sourceTree = "<group>"; };
-		A98C56B721F5823200054CC1 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		A98C56B921F5823200054CC1 /* HGDoraemonCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HGDoraemonCell.xib; sourceTree = "<group>"; };
 		A98C56BA21F5823200054CC1 /* HGDoraemonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HGDoraemonCell.h; sourceTree = "<group>"; };
 		A98C56BB21F5823200054CC1 /* HGDoraemonCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HGDoraemonCollectionViewCell.m; sourceTree = "<group>"; };
@@ -92,7 +91,10 @@
 		A98C56BE21F5823200054CC1 /* HGDoraemonCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HGDoraemonCollectionViewCell.h; sourceTree = "<group>"; };
 		A98C56CE21F5936E00054CC1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A98C56D021F5936E00054CC1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		A98C56D321F5947700054CC1 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = HGPersonalCenterExtend/SupportFiles/main.m; sourceTree = SOURCE_ROOT; };
+		A9D9AEB223D012DF000547FC /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		A9D9AEB423D0130C000547FC /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		A9D9AEB923D01D85000547FC /* HGNestedScrollViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HGNestedScrollViewController.h; sourceTree = "<group>"; };
+		A9D9AEBA23D01D85000547FC /* HGNestedScrollViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HGNestedScrollViewController.m; sourceTree = "<group>"; };
 		A9FB4EF2228BAB9200525B36 /* HGBaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HGBaseViewController.h; sourceTree = "<group>"; };
 		A9FB4EF3228BAB9200525B36 /* HGBaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HGBaseViewController.m; sourceTree = "<group>"; };
 		A9FB4EFB228BFCEE00525B36 /* HGAlignmentAdjustButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HGAlignmentAdjustButton.h; sourceTree = "<group>"; };
@@ -102,8 +104,6 @@
 		A9FB4F05228C11E700525B36 /* HGDeviceHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HGDeviceHelper.h; sourceTree = "<group>"; };
 		A9FB4F06228C11E700525B36 /* HGDeviceHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HGDeviceHelper.m; sourceTree = "<group>"; };
 		A9FB4F08228C14F600525B36 /* HGMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HGMacro.h; sourceTree = "<group>"; };
-		A9FB4F20228DC9FA00525B36 /* HGPopGestureCompatibleCollectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HGPopGestureCompatibleCollectionView.h; sourceTree = "<group>"; };
-		A9FB4F21228DC9FA00525B36 /* HGPopGestureCompatibleCollectionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HGPopGestureCompatibleCollectionView.m; sourceTree = "<group>"; };
 		CA6EA587FD02BB827A39A92F /* Pods-HGPersonalCenterExtend.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HGPersonalCenterExtend.release.xcconfig"; path = "Target Support Files/Pods-HGPersonalCenterExtend/Pods-HGPersonalCenterExtend.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -141,7 +141,6 @@
 				0CE623185A757068060B60FF /* Pods-HGPersonalCenterExtend_Tests.debug.xcconfig */,
 				35E908C7796BD52633A9BF1A /* Pods-HGPersonalCenterExtend_Tests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -149,6 +148,7 @@
 			isa = PBXGroup;
 			children = (
 				A98C56A421F5823200054CC1 /* HGPersonalCenterExtend */,
+				A9FB4EF5228BBE2800525B36 /* SupportFiles */,
 				60FF7A9C1954A5C5007DD14C /* Podspec Metadata */,
 				6003F5B5195388D20070C39A /* Tests */,
 				6003F58C195388D20070C39A /* Frameworks */,
@@ -211,12 +211,11 @@
 		A98C56A421F5823200054CC1 /* HGPersonalCenterExtend */ = {
 			isa = PBXGroup;
 			children = (
-				A9FB4EF5228BBE2800525B36 /* SupportFiles */,
+				A9D9AEAA23D00E2F000547FC /* Base */,
 				A9FB4F04228C11D200525B36 /* Tools */,
 				A9FB4EF9228BFCA500525B36 /* Modules */,
 				A98C56A821F5823200054CC1 /* Controllers */,
 				A98C56B821F5823200054CC1 /* Views */,
-				A98C56A621F5823200054CC1 /* Assets.xcassets */,
 			);
 			path = HGPersonalCenterExtend;
 			sourceTree = "<group>";
@@ -224,14 +223,13 @@
 		A98C56A821F5823200054CC1 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				A9FB4EE3228A870E00525B36 /* BaseControllers */,
-				A98C56AA21F5823200054CC1 /* PageViewControllers */,
 				A98C56B321F5823200054CC1 /* HGHomeViewController.h */,
 				A98C56B121F5823200054CC1 /* HGHomeViewController.m */,
 				A98C56B221F5823200054CC1 /* HGPersonalCenterViewController.h */,
 				A98C56A921F5823200054CC1 /* HGPersonalCenterViewController.m */,
 				A9FB4F01228C05D900525B36 /* HGMessageViewController.h */,
 				A9FB4F02228C05D900525B36 /* HGMessageViewController.m */,
+				A98C56AA21F5823200054CC1 /* PageViewControllers */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -264,25 +262,36 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		A9FB4EE3228A870E00525B36 /* BaseControllers */ = {
+		A9D9AEAA23D00E2F000547FC /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				A9D9AEAB23D00E40000547FC /* Controllers */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		A9D9AEAB23D00E40000547FC /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				A9FB4EF2228BAB9200525B36 /* HGBaseViewController.h */,
 				A9FB4EF3228BAB9200525B36 /* HGBaseViewController.m */,
+				A9D9AEB923D01D85000547FC /* HGNestedScrollViewController.h */,
+				A9D9AEBA23D01D85000547FC /* HGNestedScrollViewController.m */,
 			);
-			path = BaseControllers;
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 		A9FB4EF5228BBE2800525B36 /* SupportFiles */ = {
 			isa = PBXGroup;
 			children = (
-				A98C56D321F5947700054CC1 /* main.m */,
+				A9D9AEB223D012DF000547FC /* main.m */,
+				A98C56A621F5823200054CC1 /* Assets.xcassets */,
 				A98C56A521F5823200054CC1 /* AppDelegate.h */,
 				A98C56A721F5823200054CC1 /* AppDelegate.m */,
 				A98C56CF21F5936E00054CC1 /* LaunchScreen.storyboard */,
 				A98C56CD21F5936E00054CC1 /* Main.storyboard */,
 				A9FB4F08228C14F600525B36 /* HGMacro.h */,
-				A98C56B721F5823200054CC1 /* PrefixHeader.pch */,
+				A9D9AEB423D0130C000547FC /* PrefixHeader.pch */,
 			);
 			path = SupportFiles;
 			sourceTree = "<group>";
@@ -292,8 +301,6 @@
 			children = (
 				A9FB4EFB228BFCEE00525B36 /* HGAlignmentAdjustButton.h */,
 				A9FB4EFC228BFCEE00525B36 /* HGAlignmentAdjustButton.m */,
-				A9FB4F20228DC9FA00525B36 /* HGPopGestureCompatibleCollectionView.h */,
-				A9FB4F21228DC9FA00525B36 /* HGPopGestureCompatibleCollectionView.m */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -368,10 +375,9 @@
 			};
 			buildConfigurationList = 6003F585195388D10070C39A /* Build configuration list for PBXProject "HGPersonalCenterExtend" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
 				Base,
 			);
@@ -490,12 +496,12 @@
 				A923C2C722563E45000A4214 /* HGPersonalCenterHeaderView.m in Sources */,
 				A9FB4F03228C05D900525B36 /* HGMessageViewController.m in Sources */,
 				A9FB4EFD228BFCEE00525B36 /* HGAlignmentAdjustButton.m in Sources */,
-				A98C56D421F5947700054CC1 /* main.m in Sources */,
 				A98C56CA21F5823200054CC1 /* HGDoraemonCell.m in Sources */,
 				A98C56C221F5823200054CC1 /* HGPersonalCenterViewController.m in Sources */,
 				A98C56C121F5823200054CC1 /* AppDelegate.m in Sources */,
+				A9D9AEB323D012DF000547FC /* main.m in Sources */,
 				A98C56C621F5823200054CC1 /* HGHomeViewController.m in Sources */,
-				A9FB4F22228DC9FA00525B36 /* HGPopGestureCompatibleCollectionView.m in Sources */,
+				A9D9AEBB23D01D85000547FC /* HGNestedScrollViewController.m in Sources */,
 				A98C56C921F5823200054CC1 /* HGDoraemonCollectionViewCell.m in Sources */,
 				A98C56C321F5823200054CC1 /* HGFirstViewController.m in Sources */,
 				A98C56C421F5823200054CC1 /* HGThirdViewController.m in Sources */,
@@ -660,7 +666,7 @@
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SRCROOT)/HGPersonalCenterExtend/SupportFiles/PrefixHeader.pch";
+				GCC_PREFIX_HEADER = "$(SRCROOT)/SupportFiles/PrefixHeader.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/HGPersonalCenterExtend/Info.plist";
 				MODULE_NAME = HGPersonalCenterExtend;
 				ONLY_ACTIVE_ARCH = YES;
@@ -679,7 +685,7 @@
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SRCROOT)/HGPersonalCenterExtend/SupportFiles/PrefixHeader.pch";
+				GCC_PREFIX_HEADER = "$(SRCROOT)/SupportFiles/PrefixHeader.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/HGPersonalCenterExtend/Info.plist";
 				MODULE_NAME = HGPersonalCenterExtend;
 				ONLY_ACTIVE_ARCH = NO;
