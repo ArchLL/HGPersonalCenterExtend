@@ -30,9 +30,8 @@ pod 'HGPersonalCenterExtend', '~> 1.2.3'
 4.支持全屏返回；  
 
 ## Plan
-1.支持动态调整`headerView`的高度；  
-2.支持刷新；  
-3.`HGCategoryView`支持更多样式 ；
+1.支持刷新；  
+2.`HGCategoryView`支持更多样式 ；
 
 ## Show
 ![image](https://github.com/ArchLL/HGPersonalCenterExtend/blob/master/show.gif)  
@@ -44,7 +43,7 @@ pod 'HGPersonalCenterExtend', '~> 1.2.3'
    为什么这个控制器不直接放进`HGPersonalCenterExtend`库中呢？  
    这是为了方便大家`DIY`，你们可以将其`copy`到自己的项目中，稍加改动即可使用；
    
-2.在`Example`中，`HGPersonalCenterViewController`继承自`HGNestedScrollViewController`快速实现了复杂的`ScrollView`嵌套页面，在这里你只需要设置`PageViewControllers`，不会污染你正常的业务代码；
+2.在`Example`中，`HGPersonalCenterViewController`继承自`HGNestedScrollViewController`快速实现了复杂的`ScrollView`嵌套页面，在这里你只需要设置`pageViewControllers`，不会污染你正常的业务代码；
 
 3.如果你的`pageViewController`下的`scrollView`是`UICollectionView`类型，需要额外进行如下设置：
 ```Objc

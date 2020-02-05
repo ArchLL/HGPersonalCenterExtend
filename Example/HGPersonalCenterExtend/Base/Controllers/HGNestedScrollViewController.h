@@ -12,6 +12,7 @@
 /// ScrollView嵌套控制器
 @interface HGNestedScrollViewController : HGBaseViewController
 @property (nonatomic, strong, readonly) HGCenterBaseTableView *tableView;
+@property (nonatomic, strong) UIView *headerView;
 @property (nonatomic, strong, readonly) UIView *footerView;
 @property (nonatomic, strong, readonly) HGSegmentedPageViewController *segmentedPageViewController;
 @end

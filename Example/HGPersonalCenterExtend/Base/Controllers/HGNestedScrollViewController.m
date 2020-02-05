@@ -7,7 +7,6 @@
 //
 
 #import "HGNestedScrollViewController.h"
-static CGFloat const headerViewHeight = 240;
 
 @interface HGNestedScrollViewController () <HGSegmentedPageViewControllerDelegate>
 @property (nonatomic, strong) HGCenterBaseTableView *tableView;
@@ -17,6 +16,8 @@ static CGFloat const headerViewHeight = 240;
 @end
 
 @implementation HGNestedScrollViewController
+@synthesize headerView = _headerView;
+
 #pragma mark - Life Cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -47,10 +48,15 @@ static CGFloat const headerViewHeight = 240;
 
 - (void)changeNavigationBarAlpha {
     CGFloat alpha = 0;
-    if (self.tableView.contentOffset.y - (headerViewHeight - TOP_BAR_HEIGHT) < FLT_EPSILON) {
-        alpha = self.tableView.contentOffset.y / (headerViewHeight - TOP_BAR_HEIGHT);
-    } else {
+    CGFloat topBarHeight = HGDeviceHelper.safeAreaInsetsTop + HGDeviceHelper.navigationBarHeight;
+    if (self.tableView.contentOffset.y - (self.headerView.frame.size.height - topBarHeight) >= FLT_EPSILON) {
         alpha = 1;
+    } else {
+        if ((self.headerView.frame.size.height == topBarHeight)) {
+            alpha = 0;
+        } else {
+            alpha = self.tableView.contentOffset.y / (self.headerView.frame.size.height - topBarHeight);
+        }
     }
     [self setNavigationBarAlpha:alpha];
 }
@@ -109,19 +115,22 @@ static CGFloat const headerViewHeight = 240;
     self.tableView.scrollEnabled = YES;
 }
 
-#pragma mark - HGPageViewControllerDelegate
-- (void)pageViewControllerLeaveTop {
-    [self.segmentedPageViewController makePageViewControllersScrollToTop];
-    self.cannotScroll = NO;
-}
-
 #pragma mark - Getters
 - (UITableView *)tableView {
     if (!_tableView) {
         _tableView = [[HGCenterBaseTableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
         _tableView.tableFooterView = self.footerView;
+        _tableView.tableHeaderView = self.headerView;
     }
     return _tableView;
+}
+
+- (UIView *)headerView {
+    if (!_headerView) {
+        // 设置默认的headerView
+        _headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, HGDeviceHelper.safeAreaInsetsTop + HGDeviceHelper.navigationBarHeight)];
+    }
+    return _headerView;
 }
 
 - (UIView *)footerView {
@@ -138,6 +147,13 @@ static CGFloat const headerViewHeight = 240;
         _segmentedPageViewController.delegate = self;
     }
     return _segmentedPageViewController;
+}
+
+#pragma mark - Setters
+- (void)setHeaderView:(UIView *)headerView {
+    _headerView = headerView;
+    _tableView.tableHeaderView = self.headerView;
+    
 }
 
 @end

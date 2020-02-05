@@ -16,7 +16,6 @@
 
 @interface HGPersonalCenterViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) HGAlignmentAdjustButton *messageButton;
-@property (nonatomic, strong) HGPersonalCenterHeaderView *headerView;
 @end
 
 @implementation HGPersonalCenterViewController
@@ -25,6 +24,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupNavigationBar];
+    [self setupHeaderView];
     [self setupTableView];
     // 也可以在请求数据成功后设置pageViewControllers
     [self setupPageViewControllers];
@@ -43,10 +43,13 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+- (void)setupHeaderView {
+    self.headerView = [[HGPersonalCenterHeaderView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 240)];
+}
+
 - (void)setupTableView {
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    self.tableView.tableHeaderView = self.headerView;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.showsVerticalScrollIndicator = NO;
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([HGDoraemonCell class]) bundle:nil] forCellReuseIdentifier:NSStringFromClass([HGDoraemonCell class])];
@@ -130,13 +133,6 @@
         [_messageButton sizeToFit];
     }
     return _messageButton;
-}
-
-- (HGPersonalCenterHeaderView *)headerView {
-    if (!_headerView) {
-        _headerView = [[HGPersonalCenterHeaderView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 240)];
-    }
-    return _headerView;
 }
 
 @end

@@ -10,6 +10,10 @@
 
 @implementation HGDeviceHelper
 
++ (BOOL)isIpad {
+    return [UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad;
+}
+
 + (BOOL)isExistFringe {
     BOOL isExistFringe = NO;
     if (@available(iOS 11.0, *)) {
@@ -48,6 +52,15 @@
     } else {
         return 20;
     }
+}
+
++ (CGFloat)navigationBarHeight {
+    if (@available(iOS 12.0, *)) {
+        if ([self isIpad]) {
+            return 50;
+        }
+    }
+    return 44;
 }
 
 @end

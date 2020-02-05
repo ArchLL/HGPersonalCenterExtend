@@ -2,6 +2,8 @@ use_frameworks!
 
 platform :ios, '8.0'
 
+inhibit_all_warnings!
+
 target 'HGPersonalCenterExtend' do
   pod 'HGPersonalCenterExtend', :path => '../'
   pod 'RTRootNavigationController', '~> 0.7.2'
