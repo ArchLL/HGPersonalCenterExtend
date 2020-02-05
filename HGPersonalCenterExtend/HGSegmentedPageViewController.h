@@ -11,9 +11,10 @@
 #import "HGPageViewController.h"
 
 @protocol HGSegmentedPageViewControllerDelegate <NSObject>
-@optional
+- (void)segmentedPageViewControllerLeaveTop;
 - (void)segmentedPageViewControllerWillBeginDragging;
 - (void)segmentedPageViewControllerDidEndDragging;
+@optional
 - (void)segmentedPageViewControllerWillTransitionToPage:(NSInteger)page;
 - (void)segmentedPageViewControllerDidTransitionToPage:(NSInteger)page;
 @end

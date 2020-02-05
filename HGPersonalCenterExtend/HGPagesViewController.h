@@ -10,13 +10,13 @@
 @class HGPopGestureCompatibleCollectionView;
 
 @protocol HGPagesViewControllerDelegate <NSObject>
-@optional
+- (void)pagesViewControllerLeaveTop;
 - (void)pagesViewControllerWillBeginDragging;
 - (void)pagesViewControllerDidEndDragging;
 - (void)pagesViewControllerScrollingToTargetPage:(NSInteger)targetPage sourcePage:(NSInteger)sourcePage percent:(CGFloat)percent;
+@optional
 - (void)pagesViewControllerWillTransitionToPage:(NSInteger)page;
 - (void)pagesViewControllerDidTransitionToPage:(NSInteger)page;
-
 @end
 
 @interface HGPagesViewController : UIViewController
@@ -27,7 +27,7 @@
 @property (nonatomic, strong, readonly) HGPageViewController *selectedPageViewController;
 @property(nonatomic, weak) id<HGPagesViewControllerDelegate> delegate;
 
+- (void)makeViewControllersScrollToTop;
 - (void)setSelectedPage:(NSInteger)selectedPage animated:(BOOL)animated;
-
 @end
 

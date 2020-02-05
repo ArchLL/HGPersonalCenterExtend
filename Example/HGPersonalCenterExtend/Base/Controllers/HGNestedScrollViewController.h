@@ -10,7 +10,7 @@
 #import "HGPersonalCenterExtend.h"
 
 /// ScrollView嵌套控制器
-@interface HGNestedScrollViewController : HGBaseViewController <HGSegmentedPageViewControllerDelegate, HGPageViewControllerDelegate>
+@interface HGNestedScrollViewController : HGBaseViewController
 @property (nonatomic, strong, readonly) HGCenterBaseTableView *tableView;
 @property (nonatomic, strong, readonly) UIView *footerView;
 @property (nonatomic, strong, readonly) HGSegmentedPageViewController *segmentedPageViewController;

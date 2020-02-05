@@ -67,7 +67,6 @@
         } else {
             controller = [[HGFirstViewController alloc] init];
         }
-        controller.delegate = self;
         [controllers addObject:controller];
     }
     self.segmentedPageViewController.pageViewControllers = controllers;

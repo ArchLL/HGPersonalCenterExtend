@@ -42,9 +42,7 @@
 
 #pragma mark - Public Methods
 - (void)makePageViewControllersScrollToTop {
-    [self.pageViewControllers enumerateObjectsUsingBlock:^(HGPageViewController * _Nonnull controller, NSUInteger index, BOOL * _Nonnull stop) {
-        [controller scrollToTop];
-    }];
+    [self.pagesViewController makeViewControllersScrollToTop];
 }
 
 - (void)makePageViewControllersScrollState:(BOOL)canScroll {
@@ -60,6 +58,12 @@
 }
 
 #pragma mark - HGPagesViewControllerDelegate
+- (void)pagesViewControllerLeaveTop {
+    if ([self.delegate respondsToSelector:@selector(segmentedPageViewControllerLeaveTop)]) {
+        [self.delegate segmentedPageViewControllerLeaveTop];
+    }
+}
+
 - (void)pagesViewControllerWillBeginDragging {
     self.isDragging = YES;
     if ([self.delegate respondsToSelector:@selector(segmentedPageViewControllerWillBeginDragging)]) {

@@ -14,7 +14,7 @@
 
 static NSString * const HGPagesViewControllerCellIdentifier = @"HGPagesViewControllerCell";
 
-@interface HGPagesViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
+@interface HGPagesViewController () <UICollectionViewDataSource, UICollectionViewDelegate, HGPageViewControllerDelegate>
 @property (nonatomic, strong) HGPopGestureCompatibleCollectionView *collectionView;
 @property (nonatomic) BOOL isInitialScroll;
 @property (nonatomic) CGFloat contentOffsetXWhenBeginDragging;
@@ -47,6 +47,32 @@ static NSString * const HGPagesViewControllerCellIdentifier = @"HGPagesViewContr
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     self.isInitialScroll = YES;
+}
+
+#pragma mark - Public Methods
+- (void)makeViewControllersScrollToTop {
+    [self.viewControllers enumerateObjectsUsingBlock:^(HGPageViewController * _Nonnull controller, NSUInteger index, BOOL * _Nonnull stop) {
+        [controller scrollToTop];
+    }];
+}
+
+- (void)setSelectedPage:(NSInteger)selectedPage animated:(BOOL)animated {
+    _selectedPage = [self getRightPage:selectedPage];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:_selectedPage inSection:0];
+    [self.collectionView scrollToItemAtIndexPath:indexPath
+                                    atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally
+                                            animated:animated];
+}
+
+#pragma mark - Private Methods
+- (NSInteger)getRightPage:(NSInteger)page {
+    if (page <= 0) {
+        return 0;
+    } else if (page >= self.viewControllers.count) {
+        return self.viewControllers.count - 1;
+    } else {
+        return page;
+    }
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -139,14 +165,11 @@ static NSString * const HGPagesViewControllerCellIdentifier = @"HGPagesViewContr
     }
 }
 
-#pragma mark - Private Methods
-- (NSInteger)getRightPage:(NSInteger)page {
-    if (page <= 0) {
-        return 0;
-    } else if (page >= self.viewControllers.count) {
-        return self.viewControllers.count - 1;
-    } else {
-        return page;
+#pragma mark - HGPageViewControllerDelegate
+- (void)pageViewControllerLeaveTop {
+    [self makeViewControllersScrollToTop];
+    if ([self.delegate respondsToSelector:@selector(pagesViewControllerLeaveTop)]) {
+        [self.delegate pagesViewControllerLeaveTop];
     }
 }
 
@@ -178,6 +201,9 @@ static NSString * const HGPagesViewControllerCellIdentifier = @"HGPagesViewContr
 #pragma mark - Setters
 - (void)setViewControllers:(NSArray<HGPageViewController *> *)viewControllers {
     _viewControllers = viewControllers;
+    [self.viewControllers enumerateObjectsUsingBlock:^(HGPageViewController * _Nonnull pageViewController, NSUInteger idx, BOOL * _Nonnull stop) {
+        pageViewController.delegate = self;
+    }];
     [self.collectionView reloadData];
 }
 
@@ -188,15 +214,6 @@ static NSString * const HGPagesViewControllerCellIdentifier = @"HGPagesViewContr
 - (void)setSelectedPage:(NSInteger)selectedPage {
     [self setSelectedPage:selectedPage animated:self.isInitialScroll && (labs(_selectedPage - selectedPage) == 1)];
 }
-
-- (void)setSelectedPage:(NSInteger)selectedPage animated:(BOOL)animated {
-    _selectedPage = [self getRightPage:selectedPage];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:_selectedPage inSection:0];
-    [self.collectionView scrollToItemAtIndexPath:indexPath
-                                    atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally
-                                            animated:animated];
-}
-
 
 - (HGPageViewController *)selectedPageViewController {
     return self.viewControllers[self.selectedPage];
