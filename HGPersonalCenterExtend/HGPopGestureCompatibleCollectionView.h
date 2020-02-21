@@ -2,7 +2,8 @@
 //  HGPopGestureCompatibleCollectionView.h
 //  HGPersonalCenterExtend
 //
-//  Created by 黑色幽默 on 2019/11/14.
+//  Created by Arch on 2019/11/14.
+//  Copyright © 2019 mint_bin. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

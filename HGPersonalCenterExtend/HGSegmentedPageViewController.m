@@ -102,9 +102,9 @@
     self.pagesViewController.viewControllers = pageViewControllers;
 }
 
-- (void)setOriginalPage:(NSInteger)originalPageIndex {
-    _originalPage = originalPageIndex;
-    self.categoryView.originalIndex = originalPageIndex;
+- (void)setOriginalPage:(NSInteger)originalPage {
+    _originalPage = originalPage;
+    self.categoryView.originalIndex = originalPage;
 }
 
 #pragma mark - Getters

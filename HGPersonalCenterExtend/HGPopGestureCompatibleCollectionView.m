@@ -3,6 +3,7 @@
 //  HGPersonalCenterExtend
 //
 //  Created by Arch on 2019/11/14.
+//  Copyright © 2019 mint_bin. All rights reserved.
 //
 
 #import "HGPopGestureCompatibleCollectionView.h"

@@ -3,6 +3,7 @@
 //  HGPersonalCenterExtend
 //
 //  Created by Arch on 2019/11/13.
+//  Copyright © 2019 mint_bin. All rights reserved.
 //
 
 #import "HGPagesViewController.h"
