@@ -17,7 +17,7 @@ static NSString * const HGPagesViewControllerCellIdentifier = @"HGPagesViewContr
 
 @interface HGPagesViewController () <UICollectionViewDataSource, UICollectionViewDelegate, HGPageViewControllerDelegate>
 @property (nonatomic, strong) HGPopGestureCompatibleCollectionView *collectionView;
-@property (nonatomic) BOOL isInitialScroll;
+@property (nonatomic) BOOL isManualScroll; // 是否是手动滚动，区别于刚进入时滚动到指定的controller
 @property (nonatomic) CGFloat contentOffsetXWhenBeginDragging;
 @end
 
@@ -40,14 +40,10 @@ static NSString * const HGPagesViewControllerCellIdentifier = @"HGPagesViewContr
 
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
-    if (!self.isInitialScroll) {
+    if (!self.isManualScroll) {
         self.selectedPage = self.originalPage;
+        self.isManualScroll = YES;
     }
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    self.isInitialScroll = YES;
 }
 
 #pragma mark - Public Methods
@@ -59,10 +55,16 @@ static NSString * const HGPagesViewControllerCellIdentifier = @"HGPagesViewContr
 
 - (void)setSelectedPage:(NSInteger)selectedPage animated:(BOOL)animated {
     _selectedPage = [self getRightPage:selectedPage];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:_selectedPage inSection:0];
-    [self.collectionView scrollToItemAtIndexPath:indexPath
-                                    atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally
-                                            animated:animated];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:selectedPage inSection:0];
+    UICollectionViewCell *cell = [self.collectionView cellForItemAtIndexPath:indexPath];
+    if (cell) {
+        [self.collectionView scrollToItemAtIndexPath:indexPath
+        atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally
+                animated:animated];
+    } else {
+        [self.collectionView layoutIfNeeded];
+        [self.collectionView setContentOffset:CGPointMake(kWidth * selectedPage, 0) animated:false];
+    }
 }
 
 #pragma mark - Private Methods
@@ -213,7 +215,7 @@ static NSString * const HGPagesViewControllerCellIdentifier = @"HGPagesViewContr
 }
 
 - (void)setSelectedPage:(NSInteger)selectedPage {
-    [self setSelectedPage:selectedPage animated:self.isInitialScroll && (labs(_selectedPage - selectedPage) == 1)];
+    [self setSelectedPage:selectedPage animated:self.isManualScroll && (labs(_selectedPage - selectedPage) == 1)];
 }
 
 - (HGPageViewController *)selectedPageViewController {

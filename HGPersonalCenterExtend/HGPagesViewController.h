@@ -24,7 +24,7 @@
 @property (nonatomic, strong, readonly) HGPopGestureCompatibleCollectionView *collectionView;
 @property (nonatomic, copy) NSArray<HGPageViewController *> *viewControllers;
 @property (nonatomic) NSInteger originalPage;
-@property (nonatomic) NSInteger selectedPage;
+@property (nonatomic, readonly) NSInteger selectedPage;
 @property (nonatomic, strong, readonly) HGPageViewController *selectedPageViewController;
 @property(nonatomic, weak) id<HGPagesViewControllerDelegate> delegate;
 
