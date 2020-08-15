@@ -1,0 +1,6 @@
+framework module HGCategoryView {
+  umbrella header "HGCategoryView-umbrella.h"
+
+  export *
+  module * { export * }
+}
