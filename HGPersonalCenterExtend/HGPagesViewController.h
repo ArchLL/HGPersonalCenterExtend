@@ -15,6 +15,7 @@
 - (void)pagesViewControllerWillBeginDragging;
 - (void)pagesViewControllerDidEndDragging;
 - (void)pagesViewControllerScrollingToTargetPage:(NSInteger)targetPage sourcePage:(NSInteger)sourcePage percent:(CGFloat)percent;
+
 @optional
 - (void)pagesViewControllerWillTransitionToPage:(NSInteger)page;
 - (void)pagesViewControllerDidTransitionToPage:(NSInteger)page;
@@ -26,7 +27,7 @@
 @property (nonatomic) NSInteger originalPage;
 @property (nonatomic, readonly) NSInteger selectedPage;
 @property (nonatomic, strong, readonly) HGPageViewController *selectedPageViewController;
-@property(nonatomic, weak) id<HGPagesViewControllerDelegate> delegate;
+@property(nonatomic, weak) id <HGPagesViewControllerDelegate> delegate;
 
 - (void)makeViewControllersScrollToTop;
 - (void)setSelectedPage:(NSInteger)selectedPage animated:(BOOL)animated;
