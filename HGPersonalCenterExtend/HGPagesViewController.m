@@ -85,9 +85,10 @@ static NSString * const HGPagesViewControllerCellIdentifier = @"HGPagesViewContr
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:HGPagesViewControllerCellIdentifier forIndexPath:indexPath];
+    cell.clipsToBounds = YES;
     HGPageViewController *viewController = self.viewControllers[indexPath.item];
     [self addChildViewController:viewController];
-    [cell addSubview:viewController.view];
+    [cell.contentView addSubview:viewController.view];
     [viewController didMoveToParentViewController:self];
     [viewController.view mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.equalTo(cell.contentView);

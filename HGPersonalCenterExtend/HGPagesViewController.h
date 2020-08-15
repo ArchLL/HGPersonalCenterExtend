@@ -27,7 +27,7 @@
 @property (nonatomic) NSInteger originalPage;
 @property (nonatomic, readonly) NSInteger selectedPage;
 @property (nonatomic, strong, readonly) HGPageViewController *selectedPageViewController;
-@property(nonatomic, weak) id <HGPagesViewControllerDelegate> delegate;
+@property (nonatomic, weak) id <HGPagesViewControllerDelegate> delegate;
 
 - (void)makeViewControllersScrollToTop;
 - (void)setSelectedPage:(NSInteger)selectedPage animated:(BOOL)animated;
