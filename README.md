@@ -50,7 +50,7 @@ pod 'HGPersonalCenterExtend', '~> 1.2.7'
 4.如果你的`pageViewController`下的`scrollView`是`UICollectionView`类型，需要额外进行如下设置：  
 
 ```Objc
-// 为了解决categoryView在吸顶状态下且collectionView的显示内容不满屏时，会出现竖直方向滑动失效的问题
+// 因为当collectionView的内容不满一屏时，会导致竖直方向滑动失效，所以需要设置alwaysBounceVertical为YES
 _collectionView.alwaysBounceVertical = YES;
 ```
 

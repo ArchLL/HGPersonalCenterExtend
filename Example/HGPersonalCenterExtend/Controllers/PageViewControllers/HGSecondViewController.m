@@ -25,7 +25,7 @@ static NSString *const SecondViewControllerTableVIewCellIdentifier = @"SecondVie
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 30;
+    return 10;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -33,6 +33,14 @@ static NSString *const SecondViewControllerTableVIewCellIdentifier = @"SecondVie
     cell.textLabel.text = [NSString stringWithFormat:@"爱晚起，也爱工作到深夜 Row: %@", @(indexPath.row)];
     cell.imageView.image = [UIImage imageNamed:@"cartoon.jpg"];
     return cell;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    return nil;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return CGFLOAT_MIN;
 }
 
 #pragma mark - UITableViewDelegate
@@ -48,6 +56,7 @@ static NSString *const SecondViewControllerTableVIewCellIdentifier = @"SecondVie
         _tableView.dataSource = self;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
         _tableView.rowHeight = 50;
+        _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
         [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:SecondViewControllerTableVIewCellIdentifier];
     }
     return _tableView;

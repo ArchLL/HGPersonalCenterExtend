@@ -101,7 +101,8 @@
     label.textColor = [UIColor redColor];
     [headerView addSubview:label];
     [label mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(UIEdgeInsetsMake(15, 10, 15, 10));
+        make.centerY.equalTo(headerView);
+        make.left.mas_equalTo(15);
     }];
     return headerView;
 }
