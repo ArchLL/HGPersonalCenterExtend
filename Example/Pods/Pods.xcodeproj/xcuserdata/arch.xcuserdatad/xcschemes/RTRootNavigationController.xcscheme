@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "4E0A478BA545855D88DD3EEB827121FB"
-               BuildableName = "RTRootNavigationController.framework"
+               BuildableName = "libRTRootNavigationController.a"
                BlueprintName = "RTRootNavigationController"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>

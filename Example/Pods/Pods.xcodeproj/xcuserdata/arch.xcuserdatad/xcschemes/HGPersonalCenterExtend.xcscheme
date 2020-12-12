@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "BEA6A7C5A8B97B93098D507B7B04D84A"
-               BuildableName = "HGPersonalCenterExtend.framework"
+               BuildableName = "libHGPersonalCenterExtend.a"
                BlueprintName = "HGPersonalCenterExtend"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>

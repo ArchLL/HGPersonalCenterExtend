@@ -14,6 +14,7 @@
 - (void)segmentedPageViewControllerLeaveTop;
 - (void)segmentedPageViewControllerWillBeginDragging;
 - (void)segmentedPageViewControllerDidEndDragging;
+
 @optional
 - (void)segmentedPageViewControllerWillTransitionToPage:(NSInteger)page;
 - (void)segmentedPageViewControllerDidTransitionToPage:(NSInteger)page;
@@ -23,9 +24,10 @@
 @property (nonatomic, strong, readonly) HGCategoryView *categoryView;
 @property (nonatomic, copy) NSArray<HGPageViewController *> *pageViewControllers;
 @property (nonatomic) NSInteger originalPage;
-@property (nonatomic, readonly) NSInteger selectedPage;
+@property (nonatomic) NSInteger selectedPage;
 @property (nonatomic, strong, readonly) HGPageViewController *selectedPageViewController;
 @property (nonatomic, weak) id<HGSegmentedPageViewControllerDelegate> delegate;
+@property (nonatomic) BOOL scrollEnabled; // 是否允许pageViewControllers被拖动. default is YES
 
 - (void)makePageViewControllersScrollToTop;
 - (void)makePageViewControllersScrollState:(BOOL)canScroll;

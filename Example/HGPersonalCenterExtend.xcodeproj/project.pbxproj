@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		272C010BD386F2B5A3EDA868 /* libPods-HGPersonalCenterExtend.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D19F03DB8398D6E81DA7D398 /* libPods-HGPersonalCenterExtend.a */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
 		6003F592195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
@@ -15,7 +16,6 @@
 		6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
-		7538CA1C3C98EF733D398DF3 /* Pods_HGPersonalCenterExtend.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 423A21332CD06AF2D272682C /* Pods_HGPersonalCenterExtend.framework */; };
 		A923C2C722563E45000A4214 /* HGPersonalCenterHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = A923C2C622563E45000A4214 /* HGPersonalCenterHeaderView.m */; };
 		A98C56C021F5823200054CC1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A98C56A621F5823200054CC1 /* Assets.xcassets */; };
 		A98C56C121F5823200054CC1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A98C56A721F5823200054CC1 /* AppDelegate.m */; };
@@ -36,7 +36,7 @@
 		A9FB4EFD228BFCEE00525B36 /* HGAlignmentAdjustButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A9FB4EFC228BFCEE00525B36 /* HGAlignmentAdjustButton.m */; };
 		A9FB4F03228C05D900525B36 /* HGMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9FB4F02228C05D900525B36 /* HGMessageViewController.m */; };
 		A9FB4F07228C11E700525B36 /* HGDeviceHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A9FB4F06228C11E700525B36 /* HGDeviceHelper.m */; };
-		E2B4BA8646B9B701839A1CD9 /* Pods_HGPersonalCenterExtend_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85FA8F708C833A0CDA1BBEB0 /* Pods_HGPersonalCenterExtend_Tests.framework */; };
+		BE0FAEC939E54B67DAC0AB87 /* libPods-HGPersonalCenterExtend_Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E6A463CF9A3BFADB3C000C0D /* libPods-HGPersonalCenterExtend_Tests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,7 +52,6 @@
 /* Begin PBXFileReference section */
 		0CE623185A757068060B60FF /* Pods-HGPersonalCenterExtend_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HGPersonalCenterExtend_Tests.debug.xcconfig"; path = "Target Support Files/Pods-HGPersonalCenterExtend_Tests/Pods-HGPersonalCenterExtend_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		35E908C7796BD52633A9BF1A /* Pods-HGPersonalCenterExtend_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HGPersonalCenterExtend_Tests.release.xcconfig"; path = "Target Support Files/Pods-HGPersonalCenterExtend_Tests/Pods-HGPersonalCenterExtend_Tests.release.xcconfig"; sourceTree = "<group>"; };
-		423A21332CD06AF2D272682C /* Pods_HGPersonalCenterExtend.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HGPersonalCenterExtend.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		552227C370523A1F00282F65 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		58CCBD363896DDCFE2756F8B /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		6003F58A195388D20070C39A /* HGPersonalCenterExtend.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HGPersonalCenterExtend.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -65,7 +64,6 @@
 		6003F5B9195388D20070C39A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6003F5BB195388D20070C39A /* Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tests.m; sourceTree = "<group>"; };
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
-		85FA8F708C833A0CDA1BBEB0 /* Pods_HGPersonalCenterExtend_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HGPersonalCenterExtend_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BE4CEF3DB6F1266DF6DBCC4 /* Pods-HGPersonalCenterExtend.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HGPersonalCenterExtend.debug.xcconfig"; path = "Target Support Files/Pods-HGPersonalCenterExtend/Pods-HGPersonalCenterExtend.debug.xcconfig"; sourceTree = "<group>"; };
 		8FCEE29EF88EA15405CD3BB7 /* HGPersonalCenterExtend.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = HGPersonalCenterExtend.podspec; path = ../HGPersonalCenterExtend.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		A923C2C522563E45000A4214 /* HGPersonalCenterHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HGPersonalCenterHeaderView.h; sourceTree = "<group>"; };
@@ -105,6 +103,8 @@
 		A9FB4F06228C11E700525B36 /* HGDeviceHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HGDeviceHelper.m; sourceTree = "<group>"; };
 		A9FB4F08228C14F600525B36 /* HGMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HGMacro.h; sourceTree = "<group>"; };
 		CA6EA587FD02BB827A39A92F /* Pods-HGPersonalCenterExtend.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HGPersonalCenterExtend.release.xcconfig"; path = "Target Support Files/Pods-HGPersonalCenterExtend/Pods-HGPersonalCenterExtend.release.xcconfig"; sourceTree = "<group>"; };
+		D19F03DB8398D6E81DA7D398 /* libPods-HGPersonalCenterExtend.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HGPersonalCenterExtend.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E6A463CF9A3BFADB3C000C0D /* libPods-HGPersonalCenterExtend_Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HGPersonalCenterExtend_Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,7 +115,7 @@
 				6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */,
 				6003F592195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F58E195388D20070C39A /* Foundation.framework in Frameworks */,
-				7538CA1C3C98EF733D398DF3 /* Pods_HGPersonalCenterExtend.framework in Frameworks */,
+				272C010BD386F2B5A3EDA868 /* libPods-HGPersonalCenterExtend.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -126,7 +126,7 @@
 				6003F5B0195388D20070C39A /* XCTest.framework in Frameworks */,
 				6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */,
-				E2B4BA8646B9B701839A1CD9 /* Pods_HGPersonalCenterExtend_Tests.framework in Frameworks */,
+				BE0FAEC939E54B67DAC0AB87 /* libPods-HGPersonalCenterExtend_Tests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -173,8 +173,8 @@
 				6003F58F195388D20070C39A /* CoreGraphics.framework */,
 				6003F591195388D20070C39A /* UIKit.framework */,
 				6003F5AF195388D20070C39A /* XCTest.framework */,
-				423A21332CD06AF2D272682C /* Pods_HGPersonalCenterExtend.framework */,
-				85FA8F708C833A0CDA1BBEB0 /* Pods_HGPersonalCenterExtend_Tests.framework */,
+				D19F03DB8398D6E81DA7D398 /* libPods-HGPersonalCenterExtend.a */,
+				E6A463CF9A3BFADB3C000C0D /* libPods-HGPersonalCenterExtend_Tests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -325,7 +325,6 @@
 				6003F586195388D20070C39A /* Sources */,
 				6003F587195388D20070C39A /* Frameworks */,
 				6003F588195388D20070C39A /* Resources */,
-				1409E0E9C08B0C865A72EBAB /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -416,32 +415,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1409E0E9C08B0C865A72EBAB /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-HGPersonalCenterExtend/Pods-HGPersonalCenterExtend-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/FDFullscreenPopGesture/FDFullscreenPopGesture.framework",
-				"${BUILT_PRODUCTS_DIR}/HGCategoryView/HGCategoryView.framework",
-				"${BUILT_PRODUCTS_DIR}/HGPersonalCenterExtend/HGPersonalCenterExtend.framework",
-				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
-				"${BUILT_PRODUCTS_DIR}/RTRootNavigationController/RTRootNavigationController.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FDFullscreenPopGesture.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HGCategoryView.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HGPersonalCenterExtend.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RTRootNavigationController.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HGPersonalCenterExtend/Pods-HGPersonalCenterExtend-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		3111B21CACB6D8ECF7E4919D /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -604,7 +577,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -651,7 +624,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;

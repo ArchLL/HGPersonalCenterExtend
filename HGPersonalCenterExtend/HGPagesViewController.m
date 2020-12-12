@@ -8,22 +8,26 @@
 
 #import "HGPagesViewController.h"
 #import "HGPageViewController.h"
-#import "HGPopGestureCompatibleCollectionView.h"
 #import "Masonry.h"
 
 #define kWidth self.view.frame.size.width
-
 static NSString * const HGPagesViewControllerCellIdentifier = @"HGPagesViewControllerCell";
 
 @interface HGPagesViewController () <UICollectionViewDataSource, UICollectionViewDelegate, HGPageViewControllerDelegate>
 @property (nonatomic, strong) HGPopGestureCompatibleCollectionView *collectionView;
-@property (nonatomic) BOOL isManualScroll; // 是否是手动滚动，区别于刚进入时滚动到指定的controller
 @property (nonatomic) CGFloat contentOffsetXWhenBeginDragging;
+@property (nonatomic) BOOL hasInitialScroll;
+@property (nonatomic) BOOL isByDrag;
 @end
 
 @implementation HGPagesViewController
 
 #pragma mark - Life Cycle
+- (void)dealloc {
+    _collectionView.dataSource = nil;
+    _collectionView.delegate = nil;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     if (@available(iOS 11.0, *)) {
@@ -40,10 +44,16 @@ static NSString * const HGPagesViewControllerCellIdentifier = @"HGPagesViewContr
 
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
-    if (!self.isManualScroll) {
+    if (!self.hasInitialScroll) {
+        [self.collectionView reloadData];
+        [self.collectionView layoutIfNeeded];
         self.selectedPage = self.originalPage;
-        self.isManualScroll = YES;
     }
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    self.hasInitialScroll = YES;
 }
 
 #pragma mark - Public Methods
@@ -53,22 +63,8 @@ static NSString * const HGPagesViewControllerCellIdentifier = @"HGPagesViewContr
     }];
 }
 
-- (void)setSelectedPage:(NSInteger)selectedPage animated:(BOOL)animated {
-    _selectedPage = [self getRightPage:selectedPage];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:selectedPage inSection:0];
-    UICollectionViewCell *cell = [self.collectionView cellForItemAtIndexPath:indexPath];
-    if (cell) {
-        [self.collectionView scrollToItemAtIndexPath:indexPath
-        atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally
-                animated:animated];
-    } else {
-        [self.collectionView layoutIfNeeded];
-        [self.collectionView setContentOffset:CGPointMake(kWidth * selectedPage, 0) animated:false];
-    }
-}
-
 #pragma mark - Private Methods
-- (NSInteger)getRightPage:(NSInteger)page {
+- (NSInteger)gainRealPage:(NSInteger)page {
     if (page <= 0) {
         return 0;
     } else if (page >= self.viewControllers.count) {
@@ -118,6 +114,7 @@ static NSString * const HGPagesViewControllerCellIdentifier = @"HGPagesViewContr
 
 #pragma mark - UIScrollViewDelegate
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    self.isByDrag = YES;
     self.contentOffsetXWhenBeginDragging = scrollView.contentOffset.x;
     if ([self.delegate respondsToSelector:@selector(pagesViewControllerWillBeginDragging)]) {
         [self.delegate pagesViewControllerWillBeginDragging];
@@ -131,8 +128,7 @@ static NSString * const HGPagesViewControllerCellIdentifier = @"HGPagesViewContr
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    if ([self.delegate respondsToSelector:@selector(pagesViewControllerScrollingToTargetPage:sourcePage:percent:)]) {
-        
+    if (self.isByDrag && [self.delegate respondsToSelector:@selector(pagesViewControllerScrollingToTargetPage:sourcePage:percent:)]) {
         CGFloat scale = scrollView.contentOffset.x / scrollView.frame.size.width;
         NSInteger leftPage = floor(scale);
         NSInteger rightPage = ceil(scale);
@@ -161,8 +157,7 @@ static NSString * const HGPagesViewControllerCellIdentifier = @"HGPagesViewContr
 
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(scrollViewDidEndScrollingAnimation:) object:nil];
-    
-    if ([self.collectionView indexPathsForVisibleItems].count == 1) {
+    if (self.isByDrag && [self.collectionView indexPathsForVisibleItems].count == 1) {
         _selectedPage = [[self.collectionView indexPathsForVisibleItems] firstObject].item;
         if ([self.delegate respondsToSelector:@selector(pagesViewControllerDidTransitionToPage:)]) {
             [self.delegate pagesViewControllerDidTransitionToPage: self.selectedPage];
@@ -208,11 +203,22 @@ static NSString * const HGPagesViewControllerCellIdentifier = @"HGPagesViewContr
 }
 
 - (void)setOriginalPage:(NSInteger)originalPage {
-    _originalPage = [self getRightPage:originalPage];
+    _originalPage = [self gainRealPage:originalPage];
 }
 
 - (void)setSelectedPage:(NSInteger)selectedPage {
-    [self setSelectedPage:selectedPage animated:self.isManualScroll && (labs(_selectedPage - selectedPage) == 1)];
+    [self setSelectedPage:selectedPage animated:self.hasInitialScroll && (labs(_selectedPage - selectedPage) == 1)];
+}
+
+- (void)setSelectedPage:(NSInteger)selectedPage animated:(BOOL)animated {
+    _selectedPage = [self gainRealPage:selectedPage];
+    self.isByDrag = NO;
+    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:selectedPage inSection:0];
+    if (indexPath.item < [self.collectionView numberOfItemsInSection:0]) {
+        [self.collectionView scrollToItemAtIndexPath:indexPath
+                                    atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally
+                                            animated:animated];
+    }
 }
 
 - (HGPageViewController *)selectedPageViewController {

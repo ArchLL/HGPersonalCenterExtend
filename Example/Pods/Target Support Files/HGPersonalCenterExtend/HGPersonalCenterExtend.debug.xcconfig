@@ -1,7 +1,6 @@
 CONFIGURATION_BUILD_DIR = ${PODS_CONFIGURATION_BUILD_DIR}/HGPersonalCenterExtend
-FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/HGCategoryView" "${PODS_CONFIGURATION_BUILD_DIR}/Masonry"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-OTHER_LDFLAGS = $(inherited) -framework "Foundation" -framework "UIKit"
+HEADER_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Headers/Private" "${PODS_ROOT}/Headers/Private/HGPersonalCenterExtend" "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/HGCategoryView" "${PODS_ROOT}/Headers/Public/HGPersonalCenterExtend" "${PODS_ROOT}/Headers/Public/Masonry"
 PODS_BUILD_DIR = ${BUILD_DIR}
 PODS_CONFIGURATION_BUILD_DIR = ${PODS_BUILD_DIR}/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
 PODS_ROOT = ${SRCROOT}

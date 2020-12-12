@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "HGPageViewController.h"
-@class HGPopGestureCompatibleCollectionView;
+#import "HGPopGestureCompatibleCollectionView.h"
 
 @protocol HGPagesViewControllerDelegate <NSObject>
 - (void)pagesViewControllerLeaveTop;
@@ -25,7 +25,7 @@
 @property (nonatomic, strong, readonly) HGPopGestureCompatibleCollectionView *collectionView;
 @property (nonatomic, copy) NSArray<HGPageViewController *> *viewControllers;
 @property (nonatomic) NSInteger originalPage;
-@property (nonatomic, readonly) NSInteger selectedPage;
+@property (nonatomic) NSInteger selectedPage;
 @property (nonatomic, strong, readonly) HGPageViewController *selectedPageViewController;
 @property (nonatomic, weak) id <HGPagesViewControllerDelegate> delegate;
 
