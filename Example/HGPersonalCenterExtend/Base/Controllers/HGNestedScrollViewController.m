@@ -145,6 +145,10 @@
     if (!_segmentedPageViewController) {
         _segmentedPageViewController = [[HGSegmentedPageViewController alloc] init];
         _segmentedPageViewController.delegate = self;
+        // 设置categoryView的样式，可以自定义分布方式(左、中、右)、高度、背景颜色、字体颜色、字体大小、下划线高度和颜色等
+        _segmentedPageViewController.categoryView.backgroundColor = [UIColor yellowColor];
+        _segmentedPageViewController.categoryView.alignment = HGCategoryViewAlignmentLeft;
+        _segmentedPageViewController.categoryView.itemSpacing = 30;
     }
     return _segmentedPageViewController;
 }

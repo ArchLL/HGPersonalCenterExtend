@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'HGPersonalCenterExtend'
-  s.version          = '1.2.8'
+  s.version          = '1.2.9'
   s.license          = 'MIT'
   s.summary          = 'Resolve scrollView nested sliding conflicts.'
   s.description      = %{
@@ -22,6 +22,6 @@ Pod::Spec.new do |s|
   s.ios.frameworks = 'Foundation', 'UIKit'
   s.ios.deployment_target = '9.0'
   s.dependency 'Masonry', '~> 1.1.0'
-  s.dependency 'HGCategoryView', '~> 1.1.3'
+  s.dependency 'HGCategoryView', '~> 1.1.7'
   s.requires_arc = true
 end

@@ -69,9 +69,8 @@ const CGFloat HGCategoryViewDefaultHeight = 41;
 @property (nonatomic, strong) UIView *vernier;
 @property (nonatomic, strong) UIView *topBorder;
 @property (nonatomic, strong) UIView *bottomBorder;
-@property (nonatomic) NSUInteger selectedIndex;
 @property (nonatomic) BOOL fixedVernierWidth;
-@property (nonatomic) BOOL onceAgainUpdateVernierLocation;
+@property (nonatomic) BOOL fistTimeUpdateVernierLocation;
 @property (nonatomic) BOOL needDelayUpdateVernierLocation;
 @property (nonatomic, strong) MASConstraint *vernierLeftConstraint;
 @property (nonatomic, strong) MASConstraint *vernierWidthConstraint;
@@ -83,6 +82,7 @@ const CGFloat HGCategoryViewDefaultHeight = 41;
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         self.backgroundColor = [UIColor whiteColor];
+        _fistTimeUpdateVernierLocation = YES;
         _selectedIndex = 0;
         _height = HGCategoryViewDefaultHeight;
         _vernierHeight = 1.8;
@@ -103,8 +103,11 @@ const CGFloat HGCategoryViewDefaultHeight = 41;
 - (void)layoutSubviews {
     [super layoutSubviews];
     // 解决self显示出来后vernierLocation没有更新的问题
-    if (!self.onceAgainUpdateVernierLocation) {
-        self.selectedIndex = self.originalIndex;
+    if (self.fistTimeUpdateVernierLocation) {
+        [self.collectionView reloadData];
+        [self.collectionView layoutIfNeeded];
+        [self setSelectedIndex:self.selectedIndex];
+        self.fistTimeUpdateVernierLocation = NO;
     }
 }
 
@@ -178,31 +181,23 @@ const CGFloat HGCategoryViewDefaultHeight = 41;
 }
 
 - (void)layoutAndScrollToSelectedItem {    
-    [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:self.selectedIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:self.onceAgainUpdateVernierLocation];
+    [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:self.selectedIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:!self.fistTimeUpdateVernierLocation];
     
-    if (self.onceAgainUpdateVernierLocation) {
-        HGCategoryViewCell *selectedCell = [self getCell:self.selectedIndex];
+    HGCategoryViewCell *selectedCell = [self getCell:self.selectedIndex];
+    selectedCell.selected = YES;
+    
+    if (self.fistTimeUpdateVernierLocation) {
+        [self updateVernierLocation];
+    } else {
         if (selectedCell) {
             [self updateVernierLocation];
         } else { // 快速滑动
             self.needDelayUpdateVernierLocation = YES;
         }
-    } else {
-        [self updateVernierLocation];
     }
-    
-    if ([self.delegate respondsToSelector:@selector(categoryViewDidSelectedItemAtIndex:)]) {
-        [self.delegate categoryViewDidSelectedItemAtIndex:self.selectedIndex];
-    }
-}
-
-- (void)resetVernierLocation {
-    self.onceAgainUpdateVernierLocation = NO;
-    [self updateVernierLocation];
 }
 
 - (void)updateVernierLocation {
-    [self.collectionView layoutIfNeeded];
     HGCategoryViewCell *cell = [self getCell:self.selectedIndex];
     if (cell) {
         [self.vernierLeftConstraint uninstall];
@@ -220,9 +215,7 @@ const CGFloat HGCategoryViewDefaultHeight = 41;
         
         [UIView animateWithDuration:self.animateDuration animations:^{
             [self.collectionView layoutIfNeeded];
-        } completion:^(BOOL finished) {
-            self.onceAgainUpdateVernierLocation = YES;
-        }];
+        } completion:nil];
     }
 }
 
@@ -317,23 +310,16 @@ const CGFloat HGCategoryViewDefaultHeight = 41;
 
 #pragma mark - UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    if (self.selectedIndex == indexPath.item) {
-        return;
-    }
-    
     // 防止快速连续点击导致连续缩放动画
     collectionView.userInteractionEnabled = NO;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         collectionView.userInteractionEnabled = YES;
     });
     
-    HGCategoryViewCell *selectedCell = [self getCell:self.selectedIndex];
-    selectedCell.selected = NO;
-    
-    HGCategoryViewCell *targetCell = [self getCell:indexPath.item];
-    targetCell.selected = YES;
-    
     self.selectedIndex = indexPath.item;
+    if ([self.delegate respondsToSelector:@selector(categoryViewDidSelectedItemAtIndex:)]) {
+        [self.delegate categoryViewDidSelectedItemAtIndex:self.selectedIndex];
+    }
 }
 
 #pragma mark - UIScrollViewDelegate
@@ -346,24 +332,19 @@ const CGFloat HGCategoryViewDefaultHeight = 41;
 }
 
 #pragma mark - Setters
-- (void)setOriginalIndex:(NSUInteger)originalIndex {
-    _originalIndex = originalIndex;
-    self.selectedIndex = originalIndex;
-    [self resetVernierLocation];
-    [self.collectionView reloadData];
-}
-
 - (void)setSelectedIndex:(NSUInteger)selectedIndex {
-    if (self.titles.count == 0) {
-        return;
-    }
+    HGCategoryViewCell *lastSelectedCell = [self getCell:self.selectedIndex];
+    lastSelectedCell.selected = NO;
     
     if (selectedIndex > self.titles.count - 1) {
         _selectedIndex = self.titles.count - 1;
     } else {
         _selectedIndex = selectedIndex;
     }
-    [self layoutAndScrollToSelectedItem];
+    
+    if (self.titles.count > 0) {
+        [self layoutAndScrollToSelectedItem];
+    }
 }
 
 - (void)setTitles:(NSArray<NSString *> *)titles {
@@ -390,7 +371,7 @@ const CGFloat HGCategoryViewDefaultHeight = 41;
 - (void)setVernierWidth:(CGFloat)vernierWidth {
     _vernierWidth = vernierWidth;
     self.fixedVernierWidth = YES;
-    [self resetVernierLocation];
+    [self updateVernierLocation];
 }
 
 - (void)setVernierHeight:(CGFloat)vernierHeight {

@@ -18,7 +18,7 @@
 @end
 
 @implementation HGSegmentedPageViewController
-@synthesize originalPage = _originalPage;
+@synthesize selectedPage = _selectedPage;
 
 #pragma mark - Life Cycle
 - (void)viewDidLoad {
@@ -95,9 +95,10 @@
     self.pagesViewController.viewControllers = pageViewControllers;
 }
 
-- (void)setOriginalPage:(NSInteger)originalPage {
-    _originalPage = originalPage;
-    self.categoryView.originalIndex = originalPage;
+- (void)setSelectedPage:(NSInteger)selectedPage {
+    _selectedPage = selectedPage;
+    self.categoryView.selectedIndex = selectedPage;
+    self.pagesViewController.selectedPage = selectedPage;
 }
 
 - (void)setScrollEnabled:(BOOL)scrollEnabled {
@@ -120,10 +121,6 @@
         _pagesViewController.delegate = self;
     }
     return _pagesViewController;
-}
-
-- (NSInteger)originalPage {
-    return self.categoryView.originalIndex;
 }
 
 - (NSInteger)selectedPage {

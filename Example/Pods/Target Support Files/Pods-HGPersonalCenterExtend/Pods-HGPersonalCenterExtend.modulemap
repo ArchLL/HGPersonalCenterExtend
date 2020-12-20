@@ -1,6 +1,0 @@
-framework module Pods_HGPersonalCenterExtend {
-  umbrella header "Pods-HGPersonalCenterExtend-umbrella.h"
-
-  export *
-  module * { export * }
-}

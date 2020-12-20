@@ -47,7 +47,7 @@ static NSString * const HGPagesViewControllerCellIdentifier = @"HGPagesViewContr
     if (!self.hasInitialScroll) {
         [self.collectionView reloadData];
         [self.collectionView layoutIfNeeded];
-        self.selectedPage = self.originalPage;
+        [self setSelectedPage:self.selectedPage animated:NO];
     }
 }
 
@@ -202,10 +202,6 @@ static NSString * const HGPagesViewControllerCellIdentifier = @"HGPagesViewContr
     [self.collectionView reloadData];
 }
 
-- (void)setOriginalPage:(NSInteger)originalPage {
-    _originalPage = [self gainRealPage:originalPage];
-}
-
 - (void)setSelectedPage:(NSInteger)selectedPage {
     [self setSelectedPage:selectedPage animated:self.hasInitialScroll && (labs(_selectedPage - selectedPage) == 1)];
 }
@@ -226,4 +222,3 @@ static NSString * const HGPagesViewControllerCellIdentifier = @"HGPagesViewContr
 }
 
 @end
-

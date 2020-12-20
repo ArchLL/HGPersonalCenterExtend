@@ -73,12 +73,8 @@
         [controllers addObject:controller];
     }
     self.segmentedPageViewController.pageViewControllers = controllers;
-    // 设置categoryView的样式，可以自定义分布方式(左、中、右)、高度、背景颜色、字体颜色、字体大小、下划线高度和颜色等
-    self.segmentedPageViewController.categoryView.backgroundColor = [UIColor yellowColor];
+    self.segmentedPageViewController.selectedPage = 2;
     self.segmentedPageViewController.categoryView.titles = titles;
-    self.segmentedPageViewController.categoryView.alignment = HGCategoryViewAlignmentLeft;
-    self.segmentedPageViewController.categoryView.originalIndex = self.selectedIndex;
-    self.segmentedPageViewController.categoryView.itemSpacing = 30;
 }
 
 #pragma mark - UITableViewDataSource

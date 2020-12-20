@@ -28,11 +28,8 @@ typedef NS_ENUM(NSUInteger, HGCategoryViewAlignment) {
 /// titles
 @property (nonatomic, copy) NSArray<NSString *> *titles;
 
-/// 初始选中的下标，default：0
-@property (nonatomic) NSUInteger originalIndex;
-
-/// 当前选中的下标，default：originalIndex
-@property (nonatomic, readonly) NSUInteger selectedIndex;
+/// 当前选中的下标，default：0
+@property (nonatomic) NSUInteger selectedIndex;
 
 /// 自身高度，default：41
 @property (nonatomic) CGFloat height;
