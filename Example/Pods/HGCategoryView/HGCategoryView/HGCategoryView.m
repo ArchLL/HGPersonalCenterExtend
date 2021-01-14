@@ -13,8 +13,6 @@
 #define SCREEN_WIDTH [[UIScreen mainScreen] bounds].size.width
 #define ONE_PIXEL (1 / [UIScreen mainScreen].scale)
 
-const CGFloat HGCategoryViewDefaultHeight = 41;
-
 @interface HGCategoryViewCell : UICollectionViewCell
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UIFont *titleNomalFont;
@@ -30,7 +28,7 @@ const CGFloat HGCategoryViewDefaultHeight = 41;
     if (self) {
         [self.contentView addSubview:self.titleLabel];
         [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.center.equalTo(self);
+            make.edges.equalTo(self);
         }];
     }
     return self;
@@ -71,9 +69,8 @@ const CGFloat HGCategoryViewDefaultHeight = 41;
 @property (nonatomic, strong) UIView *bottomBorder;
 @property (nonatomic) BOOL fixedVernierWidth;
 @property (nonatomic) BOOL fistTimeUpdateVernierLocation;
-@property (nonatomic) BOOL needDelayUpdateVernierLocation;
-@property (nonatomic, strong) MASConstraint *vernierLeftConstraint;
-@property (nonatomic, strong) MASConstraint *vernierWidthConstraint;
+@property (nonatomic) CGFloat vernierY;
+@property (nonatomic) CGFloat collectionViewHeight;
 @end
 
 @implementation HGCategoryView
@@ -84,7 +81,7 @@ const CGFloat HGCategoryViewDefaultHeight = 41;
         self.backgroundColor = [UIColor whiteColor];
         _fistTimeUpdateVernierLocation = YES;
         _selectedIndex = 0;
-        _height = HGCategoryViewDefaultHeight;
+        _height = 41;
         _vernierHeight = 1.8;
         _itemSpacing = 15;
         _leftMargin = 10;
@@ -113,38 +110,20 @@ const CGFloat HGCategoryViewDefaultHeight = 41;
 
 #pragma mark - Public Method
 - (void)scrollToTargetIndex:(NSUInteger)targetIndex sourceIndex:(NSUInteger)sourceIndex percent:(CGFloat)percent {
-    HGCategoryViewCell *sourceCell = [self getCell:sourceIndex];
-    HGCategoryViewCell *targetCell = [self getCell:targetIndex];
-    
-    if (targetCell) {
-        CGRect sourceVernierFrame = [self vernierFrameWithIndex:sourceIndex];
-        CGRect targetVernierFrame = [self vernierFrameWithIndex:targetIndex];
-        CGFloat tempVernierX = sourceVernierFrame.origin.x + (targetVernierFrame.origin.x - sourceVernierFrame.origin.x) * percent;
-        CGFloat tempVernierWidth = sourceVernierFrame.size.width + (targetVernierFrame.size.width - sourceVernierFrame.size.width) * percent;
-        
-        [self.vernierLeftConstraint uninstall];
-        [self.vernierWidthConstraint uninstall];
-        [self.vernierWidthConstraint uninstall];
-        [self.vernier mas_updateConstraints:^(MASConstraintMaker *make) {
-            self.vernierLeftConstraint = make.left.mas_equalTo(tempVernierX);
-            self.vernierWidthConstraint = make.width.mas_equalTo(tempVernierWidth);
-            if (!self.fixedVernierWidth) {
-                _vernierWidth = tempVernierWidth;
-            }
-        }];
-    }
+    CGRect sourceVernierFrame = [self vernierFrameWithIndexPath:[NSIndexPath indexPathForItem:sourceIndex inSection:0]];
+    CGRect targetVernierFrame = [self vernierFrameWithIndexPath:[NSIndexPath indexPathForItem:targetIndex inSection:0]];
+    CGFloat tempVernierX = sourceVernierFrame.origin.x + (targetVernierFrame.origin.x - sourceVernierFrame.origin.x) * percent;
+    CGFloat tempVernierWidth = sourceVernierFrame.size.width + (targetVernierFrame.size.width - sourceVernierFrame.size.width) * percent;
+    self.vernier.frame = CGRectMake(tempVernierX, self.vernierY, tempVernierWidth, self.vernierHeight);
     
     if (percent > 0.5) {
+        HGCategoryViewCell *sourceCell = [self getCell:sourceIndex];
+        HGCategoryViewCell *targetCell = [self getCell:targetIndex];
         sourceCell.selected = NO;
         targetCell.selected = YES;
-        
         _selectedIndex = targetIndex;
-        
         if (percent == 1.0) {
             [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:self.selectedIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
-            if (!targetCell) {
-                self.needDelayUpdateVernierLocation = YES;
-            }
         }
     }
 }
@@ -163,12 +142,7 @@ const CGFloat HGCategoryViewDefaultHeight = 41;
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.topBorder.mas_bottom);
         make.left.right.equalTo(self);
-        make.height.mas_equalTo(self.height - ONE_PIXEL);
-    }];
-    [self.vernier mas_makeConstraints:^(MASConstraintMaker *make) {
-        CGFloat collectionViewHeight = self.height - ONE_PIXEL * 2;
-        make.top.mas_equalTo(collectionViewHeight - self.vernierHeight);
-        make.height.mas_equalTo(self.vernierHeight);
+        make.height.mas_equalTo(self.collectionViewHeight);
     }];
     [self.bottomBorder mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.equalTo(self);
@@ -185,37 +159,20 @@ const CGFloat HGCategoryViewDefaultHeight = 41;
     
     HGCategoryViewCell *selectedCell = [self getCell:self.selectedIndex];
     selectedCell.selected = YES;
-    
-    if (self.fistTimeUpdateVernierLocation) {
-        [self updateVernierLocation];
-    } else {
-        if (selectedCell) {
-            [self updateVernierLocation];
-        } else { // 快速滑动
-            self.needDelayUpdateVernierLocation = YES;
-        }
-    }
+    [self updateVernierLocationWithCell:selectedCell];
 }
 
-- (void)updateVernierLocation {
-    HGCategoryViewCell *cell = [self getCell:self.selectedIndex];
-    if (cell) {
-        [self.vernierLeftConstraint uninstall];
-        [self.vernierWidthConstraint uninstall];
-        [self.vernier mas_updateConstraints:^(MASConstraintMaker *make) {
-            if (self.fixedVernierWidth) {
-                self.vernierLeftConstraint = make.left.equalTo(cell.contentView.mas_centerX).offset(-self.vernierWidth / 2);
-                self.vernierWidthConstraint = make.width.mas_equalTo(self.vernierWidth);
-            } else {
-                self.vernierLeftConstraint = make.left.equalTo(cell.titleLabel);
-                self.vernierWidthConstraint = make.width.equalTo(cell.titleLabel);
-                _vernierWidth = cell.titleLabel.frame.size.width;
-            }
-        }];
-        
-        [UIView animateWithDuration:self.animateDuration animations:^{
-            [self.collectionView layoutIfNeeded];
-        } completion:nil];
+- (void)updateVernierLocationWithCell:(HGCategoryViewCell *)cell {
+    if (!cell) {
+        return;
+    }
+    
+    if (self.fixedVernierWidth) {
+        CGFloat x = cell.frame.origin.x + (cell.frame.size.width - self.vernierWidth) / 2;
+        self.vernier.frame = CGRectMake(x, self.vernierY, self.vernierWidth, self.vernierHeight);
+    } else {
+        _vernierWidth = cell.titleLabel.frame.size.width;
+        self.vernier.frame = CGRectMake(cell.frame.origin.x, self.vernierY, self.vernierWidth, self.vernierHeight);
     }
 }
 
@@ -228,7 +185,7 @@ const CGFloat HGCategoryViewDefaultHeight = 41;
         width = SCREEN_WIDTH;
         margin = 0;
     } else {
-        margin = (SCREEN_WIDTH - width) / 2.0;
+        margin = (SCREEN_WIDTH - width) / 2;
     }
     
     switch (self.alignment) {
@@ -253,27 +210,21 @@ const CGFloat HGCategoryViewDefaultHeight = 41;
     return ceilf(rect.size.width);
 }
 
-- (CGRect)vernierFrameWithIndex:(NSUInteger)index {
-    HGCategoryViewCell *cell = [self getCell:index];
-    CGRect titleLabelFrame = [cell convertRect:cell.titleLabel.frame toView:self.collectionView];
+- (CGRect)vernierFrameWithIndexPath:(NSIndexPath *)indexPath {
+    UICollectionViewLayoutAttributes *layout = [self.collectionView.collectionViewLayout layoutAttributesForItemAtIndexPath:indexPath];
+    CGRect cellFrame = layout.frame;
     if (self.fixedVernierWidth) {
-        return CGRectMake(titleLabelFrame.origin.x + (titleLabelFrame.size.width - self.vernierWidth) / 2,
-                          self.collectionView.frame.size.height - self.vernierHeight,
-                          self.vernierWidth,
-                          self.vernierHeight);
-    } else {
-        return CGRectMake(titleLabelFrame.origin.x,
-                          self.collectionView.frame.size.height - self.vernierHeight,
-                          cell.titleLabel.frame.size.width,
-                          self.vernierHeight);
+        CGFloat x = cellFrame.origin.x + (cellFrame.size.width - self.vernierWidth) / 2;
+        return CGRectMake(x, self.vernierY, self.vernierWidth, self.vernierHeight);
     }
+    _vernierWidth = cellFrame.size.width;
+    return CGRectMake(cellFrame.origin.x, self.vernierY, self.vernierWidth, self.vernierHeight);
 }
 
 #pragma mark - UICollectionViewDelegateFlowLayout
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     CGFloat width = [self getWidthWithContent:self.titles[indexPath.item]];
-    CGFloat height = self.height - ONE_PIXEL * 2;
-    return CGSizeMake(self.itemWidth > 0 ? self.itemWidth : width, height);
+    return CGSizeMake(self.itemWidth > 0 ? self.itemWidth : width, self.collectionViewHeight);
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
@@ -306,6 +257,9 @@ const CGFloat HGCategoryViewDefaultHeight = 41;
 
 - (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(HGCategoryViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
     cell.selected = self.selectedIndex == indexPath.item;
+    if (cell.isSelected) {
+        [self updateVernierLocationWithCell:cell];
+    }
 }
 
 #pragma mark - UICollectionViewDelegate
@@ -319,15 +273,6 @@ const CGFloat HGCategoryViewDefaultHeight = 41;
     self.selectedIndex = indexPath.item;
     if ([self.delegate respondsToSelector:@selector(categoryViewDidSelectedItemAtIndex:)]) {
         [self.delegate categoryViewDidSelectedItemAtIndex:self.selectedIndex];
-    }
-}
-
-#pragma mark - UIScrollViewDelegate
-- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
-    // 如果targetCell不存在，在scrollToItemAtIndexPath动画结束后updateVernierLocation
-    if (self.needDelayUpdateVernierLocation) {
-        self.needDelayUpdateVernierLocation = NO;
-        [self updateVernierLocation];
     }
 }
 
@@ -361,24 +306,20 @@ const CGFloat HGCategoryViewDefaultHeight = 41;
 - (void)setHeight:(CGFloat)height {
     _height = height;
     [self.collectionView mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.height.mas_equalTo(self.height - ONE_PIXEL);
+        make.height.mas_equalTo(self.collectionViewHeight);
     }];
-    [self.vernier mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.height - self.vernierHeight - ONE_PIXEL);
-    }];
+    [self updateVernierLocationWithCell:[self getCell:self.selectedIndex]];
 }
 
 - (void)setVernierWidth:(CGFloat)vernierWidth {
     _vernierWidth = vernierWidth;
     self.fixedVernierWidth = YES;
-    [self updateVernierLocation];
+    [self updateVernierLocationWithCell:[self getCell:self.selectedIndex]];
 }
 
 - (void)setVernierHeight:(CGFloat)vernierHeight {
     _vernierHeight = vernierHeight;
-    [self.vernier mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.height - self.vernierHeight - ONE_PIXEL);
-    }];
+    [self updateVernierLocationWithCell:[self getCell:self.selectedIndex]];
 }
 
 - (void)setItemWidth:(CGFloat)itemWidth {
@@ -468,4 +409,11 @@ const CGFloat HGCategoryViewDefaultHeight = 41;
     return _bottomBorder;
 }
 
+- (CGFloat)vernierY {
+    return self.collectionViewHeight - self.vernierHeight;
+}
+
+- (CGFloat)collectionViewHeight {
+    return self.height - ONE_PIXEL * 2;
+}
 @end

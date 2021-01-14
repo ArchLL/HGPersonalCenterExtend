@@ -13,12 +13,15 @@
 
 @implementation HGCenterBaseTableView
 
+// 允许otherGestureRecognizer纵向滚动与gestureRecognizer的纵向滚动共存
+// 解决otherGestureRecognizer横向滚动不能与gestureRecognizer纵向滚动互斥的问题
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
-    // 仅仅让pageViewController显示区域识别多个手势，是为了解决分页以上部分的"横向滑动"(如：嵌套UICollectionView)和scrollView的"纵向滑动"的手势同时作用的问题
-    CGPoint currentPoint = [gestureRecognizer locationInView:self];
-    CGFloat segmentViewContentScrollViewHeight = self.tableFooterView.frame.size.height - self.categoryViewHeight ?: HGCategoryViewDefaultHeight;
-    BOOL isContainsPoint = CGRectContainsPoint(CGRectMake(0, self.contentSize.height - segmentViewContentScrollViewHeight, SCREEN_WIDTH, segmentViewContentScrollViewHeight), currentPoint);
-    return isContainsPoint ? YES : NO;
+    if ([otherGestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]]) {
+        UIPanGestureRecognizer *panGestureRecognizer = (UIPanGestureRecognizer *)otherGestureRecognizer;
+        CGPoint velocity = [panGestureRecognizer velocityInView:self];
+        return abs(velocity.y) > abs(velocity.x);
+    }
+    return NO;
 }
 
 @end

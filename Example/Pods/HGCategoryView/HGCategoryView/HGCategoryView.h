@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-extern CGFloat const HGCategoryViewDefaultHeight;
-
 typedef NS_ENUM(NSUInteger, HGCategoryViewAlignment) {
     HGCategoryViewAlignmentLeft,
     HGCategoryViewAlignmentCenter,
