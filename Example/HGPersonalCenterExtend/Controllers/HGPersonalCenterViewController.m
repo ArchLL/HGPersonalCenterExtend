@@ -75,6 +75,7 @@
     self.segmentedPageViewController.pageViewControllers = controllers;
     self.segmentedPageViewController.selectedPage = 2;
     self.segmentedPageViewController.categoryView.titles = titles;
+    self.segmentedPageViewController.categoryView.alignment = HGCategoryViewAlignmentCenter;
 }
 
 #pragma mark - UITableViewDataSource
