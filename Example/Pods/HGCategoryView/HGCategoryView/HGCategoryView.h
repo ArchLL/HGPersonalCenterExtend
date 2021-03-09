@@ -77,7 +77,7 @@ typedef NS_ENUM(NSUInteger, HGCategoryViewAlignment) {
 /// item是否等分(实质上改变的是itemWidth)，default：NO
 @property (nonatomic) CGFloat isEqualParts;
 
-/// 字体变大、vernier位置切换动画时长，default：0.1
+/// 字体变大、vernier位置切换动画时长，default：0.25
 @property (nonatomic) CGFloat animateDuration;
 
 /**
@@ -88,5 +88,10 @@ typedef NS_ENUM(NSUInteger, HGCategoryViewAlignment) {
  @param percent 滑动距离/(sourceIndex与targetIndex的距离)
  */
 - (void)scrollToTargetIndex:(NSUInteger)targetIndex sourceIndex:(NSUInteger)sourceIndex percent:(CGFloat)percent;
+
+/// 修改当前选中的title
+- (void)updateSelectedTitle:(NSString *)title;
+/// 修改对应index的title
+- (void)updateTitle:(NSString *)title atIndex:(NSUInteger)index;
 
 @end

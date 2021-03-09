@@ -37,7 +37,8 @@
 - (void)setSelected:(BOOL)selected {
     [super setSelected:selected];
     self.titleLabel.textColor = selected ? self.titleSelectedColor : self.titleNormalColor;
-    [UIView animateWithDuration:self.animateDuration animations:^{
+    CGFloat duration = self.isSelected == selected ? 0 : self.animateDuration;
+    [UIView animateWithDuration:duration animations:^{
         if (selected) {
             self.titleLabel.transform = CGAffineTransformMakeScale(self.fontPointSizeScale, self.fontPointSizeScale);
         } else {
@@ -90,7 +91,7 @@
         _titleSelectedFont = [UIFont systemFontOfSize:17];
         _titleNormalColor = [UIColor grayColor];
         _titleSelectedColor = [UIColor redColor];
-        _animateDuration = 0.1;
+        _animateDuration = 0.25;
         self.vernier.backgroundColor = self.titleSelectedColor;
         [self setupSubViews];
     }
@@ -128,6 +129,19 @@
     }
 }
 
+- (void)updateSelectedTitle:(NSString *)title {
+    [self updateTitle:title atIndex:self.selectedIndex];
+}
+
+- (void)updateTitle:(NSString *)title atIndex:(NSUInteger)index {
+    if (index >= self.titles.count) return;
+    
+    NSMutableArray *array = [self.titles mutableCopy];
+    array[index] = title;
+    self.titles = array;
+    [self updateVernierLocationWithCell:[self getCell:index]];
+}
+
 #pragma mark - Private Method
 - (void)setupSubViews {
     [self addSubview:self.topBorder];
@@ -163,16 +177,14 @@
 }
 
 - (void)updateVernierLocationWithCell:(HGCategoryViewCell *)cell {
-    if (!cell) {
-        return;
-    }
+    if (!cell) return;
     
     if (self.fixedVernierWidth) {
-        CGFloat x = cell.frame.origin.x + (cell.frame.size.width - self.vernierWidth) / 2;
+        CGFloat x = cell.center.x - self.vernierWidth / 2;
         self.vernier.frame = CGRectMake(x, self.vernierY, self.vernierWidth, self.vernierHeight);
     } else {
-        _vernierWidth = cell.titleLabel.frame.size.width;
-        self.vernier.frame = CGRectMake(cell.frame.origin.x, self.vernierY, self.vernierWidth, self.vernierHeight);
+        CGRect frame = [cell convertRect:cell.titleLabel.frame toView:self.collectionView];
+        self.vernier.frame = CGRectMake(frame.origin.x, self.vernierY, frame.size.width, frame.size.height);
     }
 }
 
@@ -264,6 +276,8 @@
 
 #pragma mark - UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.selectedIndex == indexPath.item) return;
+    
     // 防止快速连续点击导致连续缩放动画
     collectionView.userInteractionEnabled = NO;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{

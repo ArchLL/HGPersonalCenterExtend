@@ -28,6 +28,10 @@
     [self setupTableView];
     // 也可以在请求数据成功后设置pageViewControllers
     [self setupPageViewControllers];
+    /// 支持修改单个title
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(6.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.segmentedPageViewController.categoryView updateSelectedTitle:@"哔哩哔哩"];
+    });
 }
 
 #pragma mark - Private Methods
